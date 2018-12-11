@@ -57,6 +57,7 @@
             android:padding="0dp"
             android:singleLine="false"
             android:clickable="true"
+            android:background="#00000000"
             android:textSize="14sp" />
     </LinearLayout>
 
