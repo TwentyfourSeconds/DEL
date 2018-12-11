@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--性別選択肢 spinner-->
+   <string-array name="gender">
+       <item>@string/man</item>
+       <item>@string/woman</item>
+       <item>@string/noSelect</item>
+   </string-array>
+    <!--性別選択肢 spinner-->
+    <string-array name="age">
+        <item>@string/age2024</item>
+        <item>@string/age2529</item>
+        <item>@string/age3034</item>
+        <item>@string/age3539</item>
+        <item>@string/age4044</item>
+        <item>@string/age4549</item>
+        <item>@string/age5054</item>
+        <item>@string/age5559</item>
+        <item>@string/age6064</item>
+        <item>@string/age6569</item>
+        <item>@string/noSelect</item>
+    </string-array>
+    <!--都道府県選択肢 spinner-->
+    <string-array name="region">
+        <item>@string/hokkaido</item>
+        <item>@string/aomori</item>
+        <item>@string/iwate</item>
+        <item>@string/miyagi</item>
+        <item>@string/akita</item>
+        <item>@string/yamagata</item>
+        <item>@string/fukushima</item>
+        <item>@string/ibaraki</item>
+        <item>@string/tochigi</item>
+        <item>@string/gumma</item>
+        <item>@string/saitama</item>
+        <item>@string/chiba</item>
+        <item>@string/tokyo</item>
+        <item>@string/kanagawa</item>
+        <item>@string/niigata</item>
+        <item>@string/toyama</item>
+        <item>@string/ishikawa</item>
+        <item>@string/fukui</item>
+        <item>@string/yamanashi</item>
+        <item>@string/nagano</item>
+        <item>@string/gifu</item>
+        <item>@string/shizuoka</item>
+        <item>@string/aichi</item>
+        <item>@string/mie</item>
+        <item>@string/shiga</item>
+        <item>@string/kyoto</item>
+        <item>@string/osaka</item>
+        <item>@string/hyogo</item>
+        <item>@string/nara</item>
+        <item>@string/wakayama</item>
+        <item>@string/tottori</item>
+        <item>@string/shimane</item>
+        <item>@string/okayama</item>
+        <item>@string/hiroshima</item>
+        <item>@string/yamaguchi</item>
+        <item>@string/tokushima</item>
+        <item>@string/kagawa</item>
+        <item>@string/ehime</item>
+        <item>@string/kochi</item>
+        <item>@string/fukuoka</item>
+        <item>@string/saga</item>
+        <item>@string/nagasaki</item>
+        <item>@string/kumamoto</item>
+        <item>@string/oita</item>
+        <item>@string/miyazaki</item>
+        <item>@string/kagoshima</item>
+        <item>@string/okinawa</item>
+        <item>@string/noSelect</item>
+    </string-array>
+</resources>
