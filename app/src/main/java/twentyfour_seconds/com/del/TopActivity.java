@@ -1,12 +1,20 @@
 package twentyfour_seconds.com.del;
 
+import android.content.Context;
 import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.Display;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class TopActivity extends AppCompatActivity {
 
@@ -42,4 +50,5 @@ public class TopActivity extends AppCompatActivity {
         img14.setLayoutParams(params14);
     }
 }
+
 
