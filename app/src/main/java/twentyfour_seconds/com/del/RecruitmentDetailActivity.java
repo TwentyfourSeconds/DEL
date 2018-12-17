@@ -1,7 +1,10 @@
 package twentyfour_seconds.com.del;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +26,9 @@ public class RecruitmentDetailActivity extends AppCompatActivity {
     private TextView deadline;
     private Button entry;
     private Button temporary;
+    private TextView chat;
+    private TextView newComment;
+    private Button chatButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,9 @@ public class RecruitmentDetailActivity extends AppCompatActivity {
         deadline = findViewById(R.id.deadline);
         entry = findViewById(R.id.entry);
         temporary = findViewById(R.id.temporary);
+        chat = findViewById(R.id.chat);
+        newComment = findViewById(R.id.newComment);
+        chatButton = findViewById(R.id.chatButton);
 
 
 //        icon.setImlocationResource(R.drawable.);
@@ -58,6 +67,30 @@ public class RecruitmentDetailActivity extends AppCompatActivity {
         gender.setText("男");
         ticket.setText("なし");
         deadline.setText("12/20");
+        chat.setFocusable(false);
+
+        chatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(RecruitmentDetailActivity.this);
+                alertDialog.setTitle("下記のコメントでよろしいですか？");
+                alertDialog.setMessage("テストメッセージ");
+                alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog.setNegativeButton("キャンセル", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog.create().show();
+            }
+        });
 
 //        Intent intent = getIntent();
 //        int iconId = getResources().getIdentifier(intent.getStringExtra("icon"), "drawable", getPacklocationdate());
