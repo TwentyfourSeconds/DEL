@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "341699040715",
+    "firebase_url": "https://delfirebaseproject-df223.firebaseio.com",
+    "project_id": "delfirebaseproject-df223",
+    "storage_bucket": "delfirebaseproject-df223.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:341699040715:android:7cb8c50d27e726ab",
+        "android_client_info": {
+          "package_name": "twentyfour_seconds.com.del"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "341699040715-ve2l8knvpr4s2o60hlc381m3mc1ljatb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "twentyfour_seconds.com.del",
+            "certificate_hash": "509b147bca56be9936716766afe977f0aed5b50d"
+          }
+        },
+        {
+          "client_id": "341699040715-p9no2bnimflemin0pflmjmtogrh9okk1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAeeMCnvRik6Eh_1bJSroVEeWRFjU-j9E"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "341699040715-p9no2bnimflemin0pflmjmtogrh9okk1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
