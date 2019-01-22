@@ -1,15 +1,8 @@
 package twentyfour_seconds.com.del;
 
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.EditText;
-import android.widget.ProgressBar;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,60 +17,32 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 
-public class DetectionDB extends AsyncTask<String, String, String> {
+public class TagDB extends AsyncTask<String, String, String> {
 
-    private int number = 0;
-    private String searchWord;
+    private int recruitment_id;
     private CountDownLatch latch;
     private ArrayList<JSONObject> data = new ArrayList<JSONObject>();
     private JSONObject json;
 
-    DetectionDB(int number, String searchWord, CountDownLatch latch) {
-        this.number = number;
-        this.searchWord = searchWord;
+    TagDB(int recruitment_id, CountDownLatch latch) {
+        this.recruitment_id = recruitment_id;
         this.latch = latch;
+        Common.chat.clear();
     }
 
-    DetectionDB(int number, CountDownLatch latch) {
-        this.number = number;
+
+    TagDB(CountDownLatch latch) {
         this.latch = latch;
     }
-
-    DetectionDB(String searchWord, CountDownLatch latch) {
-        this.searchWord = searchWord;
-        this.latch = latch;
-    }
-
-    DetectionDB(CountDownLatch latch) {
-        this.latch = latch;
-    }
-
-//    @Override
-//    protected void onPreExecute() {
-//        //ダイアログを表示させるなどのUIの準備
-//        myProgressDialog = new ProgressDialog(activity);
-//        myProgressDialog.setMessage("メッセージ");
-//        myProgressDialog.show();
-//    }
 
     @Override
     protected String doInBackground(String... string) {
-        String urlStr = "http://10.0.2.2:8000/recruitment_list";
+        String urlStr = "http://10.0.2.2:8000/recruitment_tag";
         String write = "";
         String result = "";
 
-        Common.idList.clear();
-        Common.imageList.clear();
-        Common.titleList.clear();
-        Common.areaList.clear();
-        Common.localList.clear();
-        Common.termList.clear();
-        Common.deadlineList.clear();
-        Common.memberList.clear();
-
         StringBuilder sb = new StringBuilder();
-        sb.append("number=" + number);
-        sb.append("&searchWord=" + searchWord);
+        sb.append("recruitment_id=" + recruitment_id);
         write = sb.toString();
 
         //http接続を行うHttpURLConnectionオブジェクトを宣言。finallyで確実に解放するためにtry外で宣言。
@@ -124,35 +89,20 @@ public class DetectionDB extends AsyncTask<String, String, String> {
             }
             //HttpURLConnectionオブジェクトからレスポンスデータを取得。
             is = con.getInputStream();
+
+            if(is == null) {
+                return "0";
+            }
 //                レスポンスデータであるInputStreamオブジェクトを文字列に変換。
             result = is2String(is);
-            Log.d("result", result);
+            Log.d("tag", result + "end");
             String[] databases = result.split(";");
-            json = new JSONObject(databases[0]);
-                Common.total = json.getInt("COUNT(id)");
-            for(int i = 1; i < databases.length; i++) {
+            for(int i = 0; i < databases.length; i++) {
 //                Log.d("databases", databases[i]);
                 json = new JSONObject(databases[i]);
                 data.add(json);
 //                Log.d("json", json.toString());
-                Common.idList.add(json.getString("id"));
-                Common.imageList.add(json.getString("image"));
-                Common.titleList.add(json.getString("title"));
-                Common.areaList.add(json.getString("area"));
-                Common.localList.add(json.getString("local"));
-                Common.termList.add(json.getString("term"));
-                Common.deadlineList.add(json.getString("deadline"));
-                Common.memberList.add(json.getInt("current_num") + "/" + json.getInt("sum"));
-//            Log.d("json", json.toString());
-//            Log.d("id", "" + json.getInt("id"));
-//            Log.d("image", json.getString("image"));
-//            Log.d("title", json.getString("title"));
-//            Log.d("area", json.getString("area"));
-//            Log.d("local", json.getString("local"));
-//            Log.d("term", json.getString("term"));
-//            Log.d("deadline", json.getString("deadline"));
-//            Log.d("current_num", "" + json.getInt("current_num"));
-//            Log.d("sum", "" + json.getInt("sum"));
+                Common.tagList.add(json.getString("tag_name"));
             }
         } catch (MalformedURLException ex) {
         } catch (IOException ex) {

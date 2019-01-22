@@ -5,9 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,21 +20,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
-public class RecruitmentListActivity extends AppCompatActivity {
+public class RecruitmentListActivity extends AppCompatActivity implements AbsListView.OnScrollListener {
 
+
+//    private Aleph0 adapter1 = new Aleph0();
+    private int count = 0;
     private ListView lsRecruitment;
     private List<Map<String, String>> list = new ArrayList<>();
+    private String[] from = {"image", "title", "area", "local", "term", "deadline", "member"};
+    private int[] to = new int[7];
+    private SimpleAdapter adapter;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        try {
-//            Class.forName("twentyfour_seconds.com.del.DetectionDB");
-//        } catch (ClassNotFoundException e) {
-//        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recruitment_list);
 
         lsRecruitment = findViewById(R.id.lsRecruitment);
+        progressBar = findViewById(R.id.progressBar);
 
 //        // インテントを取得
 //        Intent intent = getIntent();
@@ -48,8 +57,8 @@ public class RecruitmentListActivity extends AppCompatActivity {
 
 
         for(int i = 0; i < Common.titleList.size(); i++) {
-            Log.d("size", ""+Common.titleList.size());
-            Log.d("i", ""+i);
+//            Log.d("size", ""+Common.titleList.size());
+//            Log.d("i", ""+i);
             Map<String, String> menu = new HashMap<>();
             menu.put("id", Common.idList.get(i));
             menu.put("image", Common.imageList.get(i));
@@ -76,11 +85,16 @@ public class RecruitmentListActivity extends AppCompatActivity {
 //            list.add(menu);
 //        }
 
-        String[] from = {"image", "title", "area", "local", "term", "deadline", "member"};
 
-        int[] to = {R.id.image, R.id.title,R.id.area,R.id.local,R.id.term,R.id.deadline,R.id.member};
+        to[0] = R.id.image;
+        to[1] = R.id.title;
+        to[2] = R.id.area;
+        to[3] = R.id.local;
+        to[4] = R.id.term;
+        to[5] = R.id.deadline;
+        to[6] = R.id.member;
 
-        SimpleAdapter adapter = new SimpleAdapter(RecruitmentListActivity.this, list, R.layout.row, from, to);
+        adapter = new SimpleAdapter(RecruitmentListActivity.this, list, R.layout.row, from, to);
 
         lsRecruitment.setAdapter(adapter);
 
@@ -89,8 +103,59 @@ public class RecruitmentListActivity extends AppCompatActivity {
         //コンテキストメニューをリストビューに登録。
         registerForContextMenu(lsRecruitment);
 
+        lsRecruitment.setOnScrollListener(this);
+//        progressBar.setVisibility(View.INVISIBLE);
+
     }
 
+
+    public void onScroll(AbsListView view,
+                         int firstVisible, int visibleCount, int totalCount) {
+
+        boolean loadMore = firstVisible + visibleCount >= totalCount;
+        boolean countOver = totalCount < Common.total;
+
+        if(loadMore && countOver) {
+            Log.d("matusbi", "kitane");
+//            progressBar.setVisibility(View.VISIBLE);
+            count += visibleCount; // or any other amount
+
+            final CountDownLatch latch = new CountDownLatch(1);
+//        DetectionDB ddb = new DetectionDB(searchWord, latch);
+            DetectionDB ddb = new DetectionDB(count, latch);
+            ddb.execute();
+            try {
+                latch.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+//            try {
+//                Thread.sleep(5000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+
+            for(int i = 0; i < Common.titleList.size(); i++) {
+                Map<String, String> menu = new HashMap<>();
+                menu.put("id", Common.idList.get(i));
+                menu.put("image", Common.imageList.get(i));
+                menu.put("title", Common.titleList.get(i));
+                menu.put("area", Common.areaList.get(i));
+                menu.put("local", Common.localList.get(i));
+                menu.put("term", Common.termList.get(i));
+                menu.put("deadline", Common.deadlineList.get(i));
+                menu.put("member", Common.memberList.get(i));
+                list.add(menu);
+            }
+            adapter = new SimpleAdapter(RecruitmentListActivity.this, list, R.layout.row, from, to);
+            lsRecruitment.setAdapter(adapter);
+//            progressBar.setVisibility(View.INVISIBLE);
+//            adapter.notifyDataSetChanged();
+        }
+    }
+
+    public void onScrollStateChanged(AbsListView v, int s) { }
 
     /**
      * リストがタップされたときの処理が記述されたメンバクラス。
