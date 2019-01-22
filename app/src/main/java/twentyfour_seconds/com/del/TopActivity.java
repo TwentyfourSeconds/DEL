@@ -21,7 +21,7 @@ public class TopActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.kamoshidawork);
+        setContentView(R.layout.activity_top);
 
         //横スクロールに入るimageviewの横幅をプログラムより指定
         WindowManager wm = (WindowManager)getSystemService(WINDOW_SERVICE);
