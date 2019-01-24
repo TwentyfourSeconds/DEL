@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class TopActivity extends AppCompatActivity {
+public class TopActivity extends CustomActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,34 +65,34 @@ public class TopActivity extends AppCompatActivity {
 
     }
 
-    public class menuClickListener implements View.OnClickListener{
-        @Override
-        public void onClick(View view){
-            int id = view.getId();
-            switch(id){
-                case R.id.menu_bar_home:
-                    //home画面へと飛ぶ処理
-                    Intent intentHome = new Intent(TopActivity.this, TopActivity.class);
-                    startActivity(intentHome);
-                    break;
-                case R.id.menu_bar_event:
-                    //イベント作成画面へと飛ぶ処理
-                    Intent intentEvent = new Intent(TopActivity.this, tabcontrol_main.class);
-                    startActivity(intentEvent);
-                    break;
-                case R.id.menu_bar_chat:
-                    //チャット画面へと飛ぶ処理
-                    Intent intentchat = new Intent(TopActivity.this, ChatDB.class);
-                    startActivity(intentchat);
-                    break;
-                case R.id.menu_bar_mypage:
-                    //マイページ画面へと飛ぶ処理
-                    Intent intentMypage = new Intent(TopActivity.this, MyPageActivity.class);
-                    startActivity(intentMypage);
-                    break;
-            }
-        }
-    }
+//    public class menuClickListener implements View.OnClickListener{
+//        @Override
+//        public void onClick(View view){
+//            int id = view.getId();
+//            switch(id){
+//                case R.id.menu_bar_home:
+//                    //home画面へと飛ぶ処理
+//                    Intent intentHome = new Intent(TopActivity.this, TopActivity.class);
+//                    startActivity(intentHome);
+//                    break;
+//                case R.id.menu_bar_event:
+//                    //イベント作成画面へと飛ぶ処理
+//                    Intent intentEvent = new Intent(TopActivity.this, tabcontrol_main.class);
+//                    startActivity(intentEvent);
+//                    break;
+//                case R.id.menu_bar_chat:
+//                    //チャット画面へと飛ぶ処理
+//                    Intent intentchat = new Intent(TopActivity.this, ChatDB.class);
+//                    startActivity(intentchat);
+//                    break;
+//                case R.id.menu_bar_mypage:
+//                    //マイページ画面へと飛ぶ処理
+//                    Intent intentMypage = new Intent(TopActivity.this, MyPageActivity.class);
+//                    startActivity(intentMypage);
+//                    break;
+//            }
+//        }
+//    }
 
 
 

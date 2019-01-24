@@ -12,34 +12,30 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 
-public class TagDB extends AsyncTask<String, String, String> {
+public class PersonDB extends AsyncTask<String, String, String> {
 
-    private int recruitment_id;
+    private int id;
     private CountDownLatch latch;
     private ArrayList<JSONObject> data = new ArrayList<JSONObject>();
     private JSONObject json;
 
-    TagDB(int recruitment_id, CountDownLatch latch) {
-        this.recruitment_id = recruitment_id;
+    PersonDB(int id, CountDownLatch latch) {
+        this.id = id;
         this.latch = latch;
-        Common.chat.clear();
     }
 
     @Override
     protected String doInBackground(String... string) {
-        String urlStr = "http://10.0.2.2:8000/recruitment_tag";
+        String urlStr = "http://10.0.2.2:4000/person";
         String write = "";
         String result = "";
 
-        Common.tagList.clear();
-
         StringBuilder sb = new StringBuilder();
-        sb.append("recruitment_id=" + recruitment_id);
+        sb.append("id=" + id);
         write = sb.toString();
 
         //http接続を行うHttpURLConnectionオブジェクトを宣言。finallyで確実に解放するためにtry外で宣言。
@@ -86,21 +82,20 @@ public class TagDB extends AsyncTask<String, String, String> {
             }
             //HttpURLConnectionオブジェクトからレスポンスデータを取得。
             is = con.getInputStream();
-
-            if(is == null) {
-                return "0";
-            }
 //                レスポンスデータであるInputStreamオブジェクトを文字列に変換。
             result = is2String(is);
-            Log.d("tag", result + "end");
-            String[] databases = result.split(";");
-            for(int i = 0; i < databases.length; i++) {
-//                Log.d("databases", databases[i]);
-                json = new JSONObject(databases[i]);
-                data.add(json);
-//                Log.d("json", json.toString());
-                Common.tagList.add(json.getString("tag_name"));
-            }
+//            Log.d("result", result);
+            json = new JSONObject(result);
+            Common.personId = json.getString("id");
+            Common.personName = json.getString("name");
+            Common.personLocation = json.getString("location");
+            Common.personAge = Integer.valueOf(json.getInt("age"));
+            Common.personGender = Integer.valueOf(json.getInt("gender"));
+            Common.personSelfIntroduction = json.getString("selfIntroduction");
+//            Log.d("result", json.getString("location"));
+//            Log.d("result", "" + json.getInt("age"));
+//            Log.d("result", "" + Integer.valueOf(json.getInt("gender")));
+//            Log.d("result", json.getString("selfIntroduction"));
         } catch (IOException ex) {
         } catch (JSONException e) {
             e.printStackTrace();
