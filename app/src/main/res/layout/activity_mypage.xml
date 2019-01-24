@@ -265,7 +265,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <include layout="@layout/mainlayout" />
+        <include android:id="@+id/mypage_tab" layout="@layout/menu_bar" />
 
     </LinearLayout>
 

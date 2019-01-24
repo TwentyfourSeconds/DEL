@@ -222,7 +222,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/area" />
 
                 <TextView
-                    android:id="@+id/deadline "
+                    android:id="@+id/deadline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -238,7 +238,7 @@
                     android:layout_marginStart="8dp"
                     android:text="募集人数"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/deadline " />
+                    app:layout_constraintTop_toBottomOf="@+id/deadline" />
             </android.support.constraint.ConstraintLayout>
 
             <TextView
@@ -299,7 +299,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent">
 
-        <include layout="@layout/mainlayout" />
+        <include layout="@layout/menu_bar" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

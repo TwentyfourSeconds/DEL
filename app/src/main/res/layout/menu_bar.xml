@@ -10,28 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_chat_black_24dp"
-            tools:layout_editor_absoluteX="220dp"
-            tools:layout_editor_absoluteY="455dp" />
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_person_black_24dp"
-            tools:layout_editor_absoluteX="311dp"
-            tools:layout_editor_absoluteY="455dp" />
-
-        <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/menu_bar_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -40,13 +23,32 @@
             tools:layout_editor_absoluteY="455dp" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/menu_bar_event"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/ic_group_black_24dp"
             tools:layout_editor_absoluteX="114dp"
             tools:layout_editor_absoluteY="455dp" />
+
+        <ImageView
+            android:id="@+id/menu_bar_chat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_chat_black_24dp"
+            tools:layout_editor_absoluteX="220dp"
+            tools:layout_editor_absoluteY="455dp" />
+
+        <ImageView
+            android:id="@+id/menu_bar_mypage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_person_black_24dp"
+            tools:layout_editor_absoluteX="311dp"
+            tools:layout_editor_absoluteY="455dp" />
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
