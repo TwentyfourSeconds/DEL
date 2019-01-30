@@ -29,16 +29,16 @@ public class EventCreateflagment extends Fragment implements View.OnClickListene
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //下部メニューボタンを押下したときの処理を記載
-        ImageView menu_bar_home = view.findViewById(R.id.mypage_tab).findViewById(R.id.menu_bar_home);
-        ImageView menu_bar_event = view.findViewById(R.id.mypage_tab).findViewById(R.id.menu_bar_event);
-        ImageView menu_bar_chat = view.findViewById(R.id.mypage_tab).findViewById(R.id.menu_bar_chat);
-        ImageView menu_bar_mypage = view.findViewById(R.id.mypage_tab).findViewById(R.id.menu_bar_mypage);
-
-        menu_bar_home.setOnClickListener(this);
-        menu_bar_event.setOnClickListener(this);
-        menu_bar_chat.setOnClickListener(this);
-        menu_bar_mypage.setOnClickListener(this);
+//        //下部メニューボタンを押下したときの処理を記載
+//        ImageView menu_bar_home = view.findViewById(R.id.mypage_tab).findViewById(R.id.menu_bar_home);
+//        ImageView menu_bar_event = view.findViewById(R.id.mypage_tab).findViewById(R.id.menu_bar_event);
+//        ImageView menu_bar_chat = view.findViewById(R.id.mypage_tab).findViewById(R.id.menu_bar_chat);
+//        ImageView menu_bar_mypage = view.findViewById(R.id.mypage_tab).findViewById(R.id.menu_bar_mypage);
+//
+//        menu_bar_home.setOnClickListener(this);
+//        menu_bar_event.setOnClickListener(this);
+//        menu_bar_chat.setOnClickListener(this);
+//        menu_bar_mypage.setOnClickListener(this);
 
     }
 
