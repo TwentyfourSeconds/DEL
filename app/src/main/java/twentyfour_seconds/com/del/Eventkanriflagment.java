@@ -7,18 +7,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class flagment1 extends Fragment {
+public class Eventkanriflagment extends Fragment {
 
-    public flagment1() {
+    //コンストラクタ
+    public Eventkanriflagment() {
     }
 
     @Nullable
     @Override
+    // Fragmentで表示するViewを作成するメソッド
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.eventcreate, container, false);
+        // 先ほどのレイアウトをここでViewとして作成します
+        return inflater.inflate(R.layout.eventkanri, container, false);
     }
 
     @Override
+    // Viewが生成し終わった時に呼ばれるメソッド
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }

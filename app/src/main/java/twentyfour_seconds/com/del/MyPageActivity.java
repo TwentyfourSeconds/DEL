@@ -73,7 +73,7 @@ public class MyPageActivity extends AppCompatActivity {
                     break;
                 case R.id.menu_bar_event:
                     //イベント作成画面へと飛ぶ処理
-                    Intent intentEvent = new Intent(MyPageActivity.this, tabcontrol_main.class);
+                    Intent intentEvent = new Intent(MyPageActivity.this, EventTabcontrol_main.class);
                     startActivity(intentEvent);
                     break;
                 case R.id.menu_bar_chat:

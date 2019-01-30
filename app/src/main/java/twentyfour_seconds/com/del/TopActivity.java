@@ -1,25 +1,23 @@
 package twentyfour_seconds.com.del;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.Display;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class TopActivity extends AppCompatActivity {
 
     @Override
+//    //onSavedInstanceState：Activity破棄前にActivityの内部データを保存する
+//    Bundleインスタンスっていうのは、画面遷移をする際、次の画面（Activity）に渡したいデータを詰め込んでおく箱みたいなものです。
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top);
@@ -76,9 +74,17 @@ public class TopActivity extends AppCompatActivity {
                     startActivity(intentHome);
                     break;
                 case R.id.menu_bar_event:
-                    //イベント作成画面へと飛ぶ処理
-                    Intent intentEvent = new Intent(TopActivity.this, tabcontrol_main.class);
-                    startActivity(intentEvent);
+                    //イベント作成画面へと飛ぶ処理（イベント作成画面はフラグメントなため、ロジックが異なる）
+                    // Fragmentを作成します
+                    EventCreateflagment fragment = new EventCreateflagment();
+                    // Fragmentの追加や削除といった変更を行う際は、Transactionを利用します
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    // 新しく追加を行うのでaddを使用します
+                    // 他にも、よく使う操作で、replace removeといったメソッドがあります
+                    // メソッドの1つ目の引数は対象のViewGroupのID、2つ目の引数は追加するfragment
+                    transaction.add(R.id.ConstraintLayout, fragment);
+                    // 最後にcommitを使用することで変更を反映します
+                    transaction.commit();
                     break;
                 case R.id.menu_bar_chat:
                     //チャット画面へと飛ぶ処理
@@ -93,10 +99,6 @@ public class TopActivity extends AppCompatActivity {
             }
         }
     }
-
-
-
-
 }
 
 
