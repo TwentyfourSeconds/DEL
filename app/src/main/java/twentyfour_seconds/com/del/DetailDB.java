@@ -29,19 +29,6 @@ public class DetailDB extends AsyncTask<String, String, String> {
         this.latch = latch;
     }
 
-
-    DetailDB(CountDownLatch latch) {
-        this.latch = latch;
-    }
-
-//    @Override
-//    protected void onPreExecute() {
-//        //ダイアログを表示させるなどのUIの準備
-//        myProgressDialog = new ProgressDialog(activity);
-//        myProgressDialog.setMessage("メッセージ");
-//        myProgressDialog.show();
-//    }
-
     @Override
     protected String doInBackground(String... string) {
         String urlStr = "http://10.0.2.2:8000/recruitment_detail";
@@ -109,9 +96,8 @@ public class DetailDB extends AsyncTask<String, String, String> {
             Common.date = json.getString("date");
             Common.term = json.getString("term");
             Common.deadline = json.getString("deadline");
-            Common.member = json.getString("current_num") + json.getString("sum");
+            Common.member = json.getString("current_num") + "/" + json.getString("sum");
             Common.comment = json.getString("comment");
-        } catch (MalformedURLException ex) {
         } catch (IOException ex) {
         } catch (JSONException e) {
             e.printStackTrace();
@@ -143,44 +129,5 @@ public class DetailDB extends AsyncTask<String, String, String> {
         return sb.toString();
     }
 
-    private void paramSet(String result) {
-
-    }
-
-//    @Override
-//    public void onPostExecute(String result) {
-//        Log.d("3", "kita");
-//        MainActivity.result = result;
-//        latch.countDown();
-//        //データベースヘルパーオブジェクトを作成。
-//        DatabaseHelper helper = new DatabaseHelper(MainActivity.this);
-//        //データベースヘルパーオブジェクトからデータベース接続オブジェクトを取得。
-//        SQLiteDatabase db = helper.getWritableDatabase();
-//
-//        try {
-//            //インサート用SQL文字列の用意。
-//            String sqlInsert = "INSERT INTO sample2 (id) VALUES (?)";
-//            //SQL文字列を元にプリペアドステートメントを取得。
-//            SQLiteStatement stmt = db.compileStatement(sqlInsert);
-//            //SQL文字列を元にプリペアドステートメントを取得。
-//            stmt = db.compileStatement(sqlInsert);
-//            //変数のバイド。
-//            stmt.bindString(1, result);
-//            //インサートSQLの実行。
-//            stmt.executeInsert();
-//        }
-//        finally {
-//            //データベース接続オブジェクトの解放。
-//            db.close();
-//        }
-//    }
-
-//    public String getResult() {
-//        return result;
-//    }
-//
-//    public void setResult(String result) {
-//        this.result = result;
-//    }
 }
 
