@@ -19,7 +19,7 @@
         android:layout_marginBottom="8dp"
         android:orientation="horizontal">
 
-        <include android:id="@+id/tab2" layout="@layout/menu_bar" />
+        <include android:id="@+id/tab3" layout="@layout/menu_bar" />
     </LinearLayout>
 
 </LinearLayout>
