@@ -59,13 +59,13 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/button21"
+                android:id="@+id/searchbutton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:text="グループを検索"
-                app:layout_constraintStart_toEndOf="@+id/editText4"
-                app:layout_constraintTop_toTopOf="@+id/editText4" />
+                app:layout_constraintStart_toEndOf="@+id/searchword"
+                app:layout_constraintTop_toTopOf="@+id/searchword" />
 
             <TextView
                 android:id="@+id/textView12"
@@ -76,10 +76,10 @@
                 android:textColor="#000000"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText4" />
+                app:layout_constraintTop_toBottomOf="@+id/searchword" />
 
             <EditText
-                android:id="@+id/editText4"
+                android:id="@+id/searchword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"

@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -63,7 +64,26 @@ public class TopActivity extends CustomActivity {
         menu_bar_chat.setOnClickListener(menuClickListener);
         menu_bar_mypage.setOnClickListener(menuClickListener);
 
+        //グループを検索ボタンを押下時、リクルートメントリストに遷移後、データベースを読み込み、
+        //一覧に候補を出力する
+        Button searchbutton = findViewById(R.id.searchbutton);
+        View.OnClickListener buttonClick = new buttonClickListener();
+        searchbutton.setOnClickListener(buttonClick);
     }
+
+    //グループを検索ボタンを押下時の動き
+    public class buttonClickListener implements View.OnClickListener{
+        public void onClick(View view){
+            //home画面へと飛ぶ処理
+            TextView searchtext = findViewById(R.id.searchword);
+            String searchWord = searchtext.getText().toString();
+
+            Intent intentMypage = new Intent(getApplicationContext(), RecruitmentListActivity.class);
+            intentMypage.putExtra("searchWord", searchWord);
+            startActivity(intentMypage);
+        }
+    }
+
 
 //    public class menuClickListener implements View.OnClickListener{
 //        @Override

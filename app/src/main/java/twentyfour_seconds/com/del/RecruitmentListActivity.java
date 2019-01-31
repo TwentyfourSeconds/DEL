@@ -40,14 +40,14 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
         lsRecruitment = findViewById(R.id.lsRecruitment);
         progressBar = findViewById(R.id.progressBar);
 
-//        // インテントを取得
-//        Intent intent = getIntent();
-//        // インテントに保存されたデータを取得
-//        String searchWord = intent.getStringExtra("searchWord");
+        // インテントを取得
+        Intent intent = getIntent();
+        // インテントに保存されたデータを取得
+        String searchWord = intent.getStringExtra("searchWord");
 
         final CountDownLatch latch = new CountDownLatch(1);
 //        DetectionDB ddb = new DetectionDB(searchWord, latch);
-        DetectionDB ddb = new DetectionDB(latch);
+        DetectionDB ddb = new DetectionDB(searchWord, latch);
         ddb.execute();
         try {
             latch.await();
