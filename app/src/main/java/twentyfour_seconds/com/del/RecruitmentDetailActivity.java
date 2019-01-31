@@ -17,7 +17,7 @@ import android.widget.TextView;
 import java.util.concurrent.CountDownLatch;
 
 
-public class RecruitmentDetailActivity extends AppCompatActivity {
+public class RecruitmentDetailActivity extends CustomActivity {
 
     private ImageView icon;
     private TextView leader;
@@ -128,6 +128,29 @@ public class RecruitmentDetailActivity extends AppCompatActivity {
 //        deadline.setText("12/20");
 //        chat.setFocusable(false);
 
+        entry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(RecruitmentDetailActivity.this);
+                alertDialog.setTitle("確認");
+                alertDialog.setMessage("このグループ参加しますか？");
+                alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog.setNegativeButton("キャンセル", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog.create().show();
+            }
+        });
+
         chatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,6 +173,20 @@ public class RecruitmentDetailActivity extends AppCompatActivity {
                 alertDialog.create().show();
             }
         });
+
+
+        //下部メニューボタンを押下したときの処理を記載
+        ImageView menu_bar_home = findViewById(R.id.menu_bar).findViewById(R.id.menu_bar_home);
+        ImageView menu_bar_event = findViewById(R.id.menu_bar).findViewById(R.id.menu_bar_event);
+        ImageView menu_bar_chat = findViewById(R.id.menu_bar).findViewById(R.id.menu_bar_chat);
+        ImageView menu_bar_mypage = findViewById(R.id.menu_bar).findViewById(R.id.menu_bar_mypage);
+
+        MyPageActivity.menuClickListener menuClickListener = new MyPageActivity.menuClickListener();
+
+        menu_bar_home.setOnClickListener(menuClickListener);
+        menu_bar_event.setOnClickListener(menuClickListener);
+        menu_bar_chat.setOnClickListener(menuClickListener);
+        menu_bar_mypage.setOnClickListener(menuClickListener);
 
 //        Intent intent = getIntent();
 //        int iconId = getResources().getIdentifier(intent.getStringExtra("icon"), "drawable", getPacklocationdate());

@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 public class EventFragmentPagerAdapter extends FragmentPagerAdapter {
 
     //タブ名称を登録
-    private CharSequence[] tabTitles = {"イベント管理", "イベント作成"};
+    private CharSequence[] tabTitles = {"イベント管理", "イベント参加"};
 
     public EventFragmentPagerAdapter(FragmentManager fm) {
         super(fm);

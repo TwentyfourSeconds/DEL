@@ -299,7 +299,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent">
 
-        <include layout="@layout/menu_bar" />
+        <include android:id="@+id/menu_bar" layout="@layout/menu_bar" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
