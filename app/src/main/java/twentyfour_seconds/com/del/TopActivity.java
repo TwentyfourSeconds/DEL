@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.concurrent.CountDownLatch;
+
 public class TopActivity extends CustomActivity {
 
     @Override
@@ -64,11 +66,22 @@ public class TopActivity extends CustomActivity {
         menu_bar_chat.setOnClickListener(menuClickListener);
         menu_bar_mypage.setOnClickListener(menuClickListener);
 
-        //グループを検索ボタンを押下時、リクルートメントリストに遷移後、データベースを読み込み、
+        //グループを検索ボタンを押下時、リクルートメントリストに遷移、データベースを読み込み、
         //一覧に候補を出力する
         Button searchbutton = findViewById(R.id.searchbutton);
         View.OnClickListener buttonClick = new buttonClickListener();
         searchbutton.setOnClickListener(buttonClick);
+
+        //ジャンルボタンを押下時、リクルートメントリストに遷移、データベースを読み込み、
+        //一覧に候補を出力する（例として、机に座ってガッツリとを押下時の挙動を作成）
+        //Tag_mapを読み込み、tag_idを保持するrecruitment_list_idを取得。
+        //recruitment_list_idを所有するrecruitment_listを取得
+        ImageView hole_type = findViewById(R.id.hole_type);
+        View.OnClickListener EventTypeClick = new EventTypeClickListener();
+        hole_type.setOnClickListener(EventTypeClick);
+
+
+
     }
 
     //グループを検索ボタンを押下時の動き
@@ -83,6 +96,31 @@ public class TopActivity extends CustomActivity {
             startActivity(intentMypage);
         }
     }
+
+    // //ジャンルボタンを押下時
+    public class  EventTypeClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            int id = view.getId();
+            switch (id) {
+                case R.id.hole_type:
+                    //hole_typeのコード値を１とする
+                    final CountDownLatch latch = new CountDownLatch(1);
+                    TagMapDB TagMapDB = new TagMapDB(1, latch);
+                    break;
+//                case R.id.hole_type:
+//                    break;
+//                case R.id.hole_type:
+//                    break;
+            }
+        }
+    }
+
+
+
+
+
+
 
 
 //    public class menuClickListener implements View.OnClickListener{
