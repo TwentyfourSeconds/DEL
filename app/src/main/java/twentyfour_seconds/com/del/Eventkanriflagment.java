@@ -1,15 +1,24 @@
 package twentyfour_seconds.com.del;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Eventkanriflagment extends Fragment implements View.OnClickListener{
+
+    private List<String> resultList = new ArrayList<>();
+    private List<String> result = new ArrayList<>();
 
     //コンストラクタ
     public Eventkanriflagment() {
@@ -27,6 +36,31 @@ public class Eventkanriflagment extends Fragment implements View.OnClickListener
     // Viewが生成し終わった時に呼ばれるメソッド
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        //データベースヘルパーオブジェクトを作成。
+        EntryEventDB eeDB = new EntryEventDB(getContext());
+        //データベースヘルパーオブジェクトからデータベース接続オブジェクトを取得。
+        SQLiteDatabase db = eeDB.getWritableDatabase();
+        try {
+            //主キーによる検索SQL文字列の用意。
+            String sql = "SELECT * FROM entry_event";
+            //SQLの実行。
+            Cursor cursor = db.rawQuery(sql, null);
+            String result = "";
+            while (cursor.moveToNext()) {
+                //カラムのインデックス値を取得。
+                int idxNote = cursor.getColumnIndex("result");
+                //カラムのインデックス値を元に実際のデータを取得。
+                result = cursor.getString(idxNote);
+            }
+            //感想のEditTextの各画面部品を取得しデータベースの値を反映。
+//            EditText etNote = findViewById(R.id.etNote);
+//            etNote.setText(result);
+        }
+        finally {
+            //データベース接続オブジェクトの解放。
+            db.close();
+        }
 
         //        //下部メニューボタンを押下したときの処理を記載
         ImageView menu_bar_home = view.findViewById(R.id.tab3).findViewById(R.id.menu_bar_home);
