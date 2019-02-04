@@ -3,6 +3,7 @@ package twentyfour_seconds.com.del;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
 
 public class EntryEventDB extends SQLiteOpenHelper {
 	/**
@@ -12,7 +13,7 @@ public class EntryEventDB extends SQLiteOpenHelper {
 	/**
 	 * バージョン情報の定数フィールド。
 	 */
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 5;
 
 	/**
 	 * コンストラクタ。
@@ -44,6 +45,7 @@ public class EntryEventDB extends SQLiteOpenHelper {
 
 		//SQLの実行。
 		db.execSQL(sql);
+
 	}
 
 	@Override
