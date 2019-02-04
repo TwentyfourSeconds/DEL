@@ -55,7 +55,7 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
             e.printStackTrace();
         }
 
-
+//DB取得時、データをcommonクラスに格納するため、commonクラスより、データを取得
         for(int i = 0; i < Common.titleList.size(); i++) {
 //            Log.d("size", ""+Common.titleList.size());
 //            Log.d("i", ""+i);
