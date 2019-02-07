@@ -36,6 +36,7 @@ public class Common {
     public static String personLocation;
     public static int personAge;
     public static int personGender;
+    public static int currentRecordsetLength;
     public static String personSelfIntroduction;
 
 }

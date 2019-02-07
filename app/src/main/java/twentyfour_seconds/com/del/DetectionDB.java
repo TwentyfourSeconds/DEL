@@ -24,6 +24,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 
+import static twentyfour_seconds.com.del.Common.currentRecordsetLength;
+
 public class DetectionDB extends AsyncTask<String, String, String> {
 
     private int number = 0;
@@ -129,7 +131,10 @@ public class DetectionDB extends AsyncTask<String, String, String> {
             Log.d("result", result);
             String[] databases = result.split(";");
             json = new JSONObject(databases[0]);
-                Common.total = json.getInt("COUNT(id)");
+            //      totalカウントを最初にDBから読み込むのではなく、前回取得したデータベースの個数が
+            //      7件以下（最終レコードまで到達）であれば、スクロール時のデータベース読み込みを行わない。
+            Common.currentRecordsetLength = databases.length;
+//                Common.total = json.getInt("COUNT(id)");
             for(int i = 1; i < databases.length; i++) {
 //                Log.d("databases", databases[i]);
                 json = new JSONObject(databases[i]);

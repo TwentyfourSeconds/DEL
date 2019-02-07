@@ -33,6 +33,12 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
     private int[] to = new int[7];
     private SimpleAdapter adapter;
     private ProgressBar progressBar;
+    //処理の分岐を決める変数
+    private int value;
+    //文字列検索時の検索用語
+    private String searchWord;
+    //top画面より渡されたタグ情報
+    private int tag_type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +53,11 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
         // インテントを取得
         Intent intent = getIntent();
         // インテントに保存されたデータから、どの処理を動かすかを判断
-        int value = intent.getIntExtra("VALUE", 0);
+        value = intent.getIntExtra("VALUE", 0);
         switch (value) {
             case 1:
                 //サーチワードから検索する
-                String searchWord = intent.getStringExtra("searchWord");
+                searchWord = intent.getStringExtra("searchWord");
                 DetectionDB ddb = new DetectionDB(searchWord, latch);
                 ddb.execute();
                 try {
@@ -61,8 +67,8 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
                 }
             case 2:
                 //タグから検索する
-                int tag_type = intent.getIntExtra("tag_type",0);
-                Log.i("tag_type",""+tag_type);
+                tag_type = intent.getIntExtra("tag_type",0);
+                Log.i("tag_type","" + tag_type);
                 TagMapDB TagMapDB = new TagMapDB(tag_type, latch);
                 TagMapDB.execute();
                 try {
@@ -128,22 +134,40 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
     public void onScroll(AbsListView view,
                          int firstVisible, int visibleCount, int totalCount) {
 
+        //firstVisibleItem : 画面上での一番上のリストの番号
+        //visibleItemCount : 画面内に表示されているリストの個数（画面に隠れているリストはカウントしない）
+        //totalItemCount : ListViewが持つリストの総数
+
         boolean loadMore = firstVisible + visibleCount >= totalCount;
-        boolean countOver = totalCount < Common.total;
+//      totalカウントを最初にDBから読み込むのではなく、前回取得したデータベースの個数が
+//      7件以下（最終レコードまで到達）であれば、スクロール時のデータベース読み込みを行わない。
+//        boolean countOver = totalCount < Common.total;
+        boolean countOver = 7 <= Common.currentRecordsetLength;
 
         if(loadMore && countOver) {
             Log.d("matusbi", "kitane");
 //            progressBar.setVisibility(View.VISIBLE);
             count += visibleCount; // or any other amount
-
             final CountDownLatch latch = new CountDownLatch(1);
-//        DetectionDB ddb = new DetectionDB(searchWord, latch);
-            DetectionDB ddb = new DetectionDB(count, latch);
-            ddb.execute();
-            try {
-                latch.await();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            switch (value) {
+                case 1:
+                    //サーチワードから検索する
+                    DetectionDB ddb = new DetectionDB(count,searchWord, latch);
+                    ddb.execute();
+                    try {
+                        latch.await();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                case 2:
+                    //タグから検索する
+                    TagMapDB TagMapDB = new TagMapDB(count,tag_type, latch);
+                    TagMapDB.execute();
+                    try {
+                        latch.await();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
             }
 
 //            try {

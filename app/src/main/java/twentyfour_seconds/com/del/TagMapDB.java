@@ -20,6 +20,7 @@ public class TagMapDB extends AsyncTask<String, String, String> {
 
     private int Tag_id;
     private CountDownLatch latch;
+    private int number = 0;
     private ArrayList<JSONObject> data = new ArrayList<JSONObject>();
     private JSONObject json;
 
@@ -28,16 +29,34 @@ public class TagMapDB extends AsyncTask<String, String, String> {
         this.latch = latch;
     }
 
+    TagMapDB(int number, int Tag_id, CountDownLatch latch) {
+        this.number = number;
+        this.Tag_id = Tag_id;
+        this.latch = latch;
+    }
+
+
     @Override
     protected String doInBackground(String... string) {
         String urlStr = "http://10.0.2.2:8000/recruitment_tagMap";
         String write = "";
         String result = "";
 
+        //動作前にcommonの中身をクリアする
         Common.tagMapList.clear();
+        Common.idList.clear();
+        Common.imageList.clear();
+        Common.titleList.clear();
+        Common.areaList.clear();
+        Common.localList.clear();
+        Common.termList.clear();
+        Common.deadlineList.clear();
+        Common.memberList.clear();
+
 
         StringBuilder sb = new StringBuilder();
         sb.append("tag_id=" + Tag_id);
+        sb.append("number=" + number);
         write = sb.toString();
 
         //http接続を行うHttpURLConnectionオブジェクトを宣言。finallyで確実に解放するためにtry外で宣言。
@@ -92,6 +111,10 @@ public class TagMapDB extends AsyncTask<String, String, String> {
             result = is2String(is);
             Log.d("result", result + "end");
             String[] databases = result.split(";");
+            json = new JSONObject(databases[0]);
+            //      totalカウントを最初にDBから読み込むのではなく、前回取得したデータベースの個数が
+            //      7件以下（最終レコードまで到達）であれば、スクロール時のデータベース読み込みを行わない。
+            Common.currentRecordsetLength = databases.length;
             for(int i = 0; i < databases.length; i++) {
 //                Log.d("databases", databases[i]);
                 json = new JSONObject(databases[i]);
