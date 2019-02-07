@@ -26,7 +26,6 @@ public class TagMapDB extends AsyncTask<String, String, String> {
     TagMapDB(int Tag_id, CountDownLatch latch) {
         this.Tag_id = Tag_id;
         this.latch = latch;
-        Common.chat.clear();
     }
 
     @Override
@@ -35,10 +34,10 @@ public class TagMapDB extends AsyncTask<String, String, String> {
         String write = "";
         String result = "";
 
-        Common.tagList.clear();
+        Common.tagMapList.clear();
 
         StringBuilder sb = new StringBuilder();
-        sb.append("Tag_id=" + Tag_id);
+        sb.append("tag_id=" + Tag_id);
         write = sb.toString();
 
         //http接続を行うHttpURLConnectionオブジェクトを宣言。finallyで確実に解放するためにtry外で宣言。
@@ -91,14 +90,20 @@ public class TagMapDB extends AsyncTask<String, String, String> {
             }
 //                レスポンスデータであるInputStreamオブジェクトを文字列に変換。
             result = is2String(is);
-            Log.d("tag_id", result + "end");
+            Log.d("result", result + "end");
             String[] databases = result.split(";");
             for(int i = 0; i < databases.length; i++) {
 //                Log.d("databases", databases[i]);
                 json = new JSONObject(databases[i]);
                 data.add(json);
-//                Log.d("json", json.toString());
-                Common.tagList.add(json.getString("tag_id"));
+                Common.idList.add(json.getString("id"));
+                Common.imageList.add(json.getString("image"));
+                Common.titleList.add(json.getString("title"));
+                Common.areaList.add(json.getString("area"));
+                Common.localList.add(json.getString("local"));
+                Common.termList.add(json.getString("term"));
+                Common.deadlineList.add(json.getString("deadline"));
+                Common.memberList.add(json.getInt("current_num") + "/" + json.getInt("sum"));
             }
         } catch (IOException ex) {
         } catch (JSONException e) {
@@ -130,9 +135,4 @@ public class TagMapDB extends AsyncTask<String, String, String> {
         }
         return sb.toString();
     }
-
-
-
-
-
 }

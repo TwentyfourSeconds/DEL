@@ -29,6 +29,7 @@ public class Common {
     public static List<String> chat = new ArrayList<>();
 
     public static List<String> tagList = new ArrayList<>();
+    public static List<String> tagMapList = new ArrayList<>();
 
     public static String personId;
     public static String personName;

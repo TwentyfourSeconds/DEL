@@ -2,6 +2,7 @@ package twentyfour_seconds.com.del;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.internal.ThemeEnforcement;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -40,21 +42,35 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
         lsRecruitment = findViewById(R.id.lsRecruitment);
         progressBar = findViewById(R.id.progressBar);
 
+        //latchは1
+        final CountDownLatch latch = new CountDownLatch(1);
         // インテントを取得
         Intent intent = getIntent();
-        // インテントに保存されたデータを取得
-        String searchWord = intent.getStringExtra("searchWord");
-
-        final CountDownLatch latch = new CountDownLatch(1);
-//        DetectionDB ddb = new DetectionDB(searchWord, latch);
-        DetectionDB ddb = new DetectionDB(searchWord, latch);
-        ddb.execute();
-        try {
-            latch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        // インテントに保存されたデータから、どの処理を動かすかを判断
+        int value = intent.getIntExtra("VALUE", 0);
+        switch (value) {
+            case 1:
+                //サーチワードから検索する
+                String searchWord = intent.getStringExtra("searchWord");
+                DetectionDB ddb = new DetectionDB(searchWord, latch);
+                ddb.execute();
+                try {
+                    latch.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            case 2:
+                //タグから検索する
+                int tag_type = intent.getIntExtra("tag_type",0);
+                Log.i("tag_type",""+tag_type);
+                TagMapDB TagMapDB = new TagMapDB(tag_type, latch);
+                TagMapDB.execute();
+                try {
+                    latch.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
         }
-
 //DB取得時、データをcommonクラスに格納するため、commonクラスより、データを取得
         for(int i = 0; i < Common.titleList.size(); i++) {
 //            Log.d("size", ""+Common.titleList.size());
