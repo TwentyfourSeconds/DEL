@@ -24,9 +24,9 @@ public class EventFragmentPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new EventCreateflagment();
+                return new EventManagementFragment();
             case 1:
-                return new Eventkanriflagment();
+                return new EventEntryFragment();
             default:
                 return null;
         }

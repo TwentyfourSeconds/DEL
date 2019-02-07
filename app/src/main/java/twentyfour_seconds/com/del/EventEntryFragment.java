@@ -7,9 +7,11 @@ import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -20,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Eventkanriflagment extends Fragment implements View.OnClickListener{
+public class EventEntryFragment extends Fragment implements View.OnClickListener{
 
     private List<Integer> id = new ArrayList<>();
     private List<String> image = new ArrayList<>();
@@ -38,7 +40,7 @@ public class Eventkanriflagment extends Fragment implements View.OnClickListener
     private ListView entry_event;
 
     //コンストラクタ
-    public Eventkanriflagment() {
+    public EventEntryFragment() {
     }
 
     @Nullable
@@ -63,25 +65,24 @@ public class Eventkanriflagment extends Fragment implements View.OnClickListener
         //データベースヘルパーオブジェクトからデータベース接続オブジェクトを取得。
         SQLiteDatabase db = eeDB.getWritableDatabase();
         try {
-            //インサート用SQL文字列の用意。
-            String sqlInsert = "INSERT INTO entry_event VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            //SQL文字列を元にプリペアドステートメントを取得。
-            SQLiteStatement stmt = db.compileStatement(sqlInsert);
-            //変数のバイド。
-            stmt.bindLong(1, 1);
-            stmt.bindString(2, "imageA");
-            stmt.bindString(3, "○○の脱出");
-            stmt.bindString(4, "name");
-            stmt.bindString(5, "area");
-            stmt.bindString(6, "local");
-            stmt.bindString(7, "date");
-            stmt.bindString(8, "term");
-            stmt.bindString(9, "deadline");
-            stmt.bindLong(10, 1);
-            stmt.bindLong(11, 4);
-            stmt.bindString(12, "comment");
-            //インサートSQLの実行。
-            stmt.executeInsert();
+//            //インサート用SQL文字列の用意。
+//            String sqlInsert = "INSERT INTO entry_event (image, title, name, area, local, date, term, deadline, current_num, sum, comment) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+//            //SQL文字列を元にプリペアドステートメントを取得。
+//            SQLiteStatement stmt = db.compileStatement(sqlInsert);
+//            //変数のバイド。
+//            stmt.bindString(1, "imageA");
+//            stmt.bindString(2, "○○の脱出");
+//            stmt.bindString(3, "name");
+//            stmt.bindString(4, "area");
+//            stmt.bindString(5, "local");
+//            stmt.bindString(6, "date");
+//            stmt.bindString(7, "term");
+//            stmt.bindString(8, "deadline");
+//            stmt.bindLong(9, 1);
+//            stmt.bindLong(10, 4);
+//            stmt.bindString(11, "comment");
+//            //インサートSQLの実行。
+//            stmt.executeInsert();
 
             //主キーによる検索SQL文字列の用意。
             String sql = "SELECT * FROM entry_event";
@@ -103,6 +104,7 @@ public class Eventkanriflagment extends Fragment implements View.OnClickListener
                 sum.add(cursor.getInt(10));
                 comment.add(cursor.getString(11));
                 event = new HashMap<>();
+                event.put("id", "" + cursor.getInt(0));
                 event.put("title", cursor.getString(2));
                 event.put("date", cursor.getString(6));
                 eventList.add(event);
@@ -125,6 +127,8 @@ public class Eventkanriflagment extends Fragment implements View.OnClickListener
             //データベース接続オブジェクトの解放。
             db.close();
         }
+
+        entry_event.setOnItemClickListener(new ListItemClickListener());
 
         //        //下部メニューボタンを押下したときの処理を記載
         ImageView menu_bar_home = view.findViewById(R.id.tab3).findViewById(R.id.menu_bar_home);
@@ -166,4 +170,25 @@ public class Eventkanriflagment extends Fragment implements View.OnClickListener
         }
     }
 
+    /**
+     * リストがタップされたときの処理が記述されたメンバクラス。
+     */
+    private class ListItemClickListener implements AdapterView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            //タップされた行のデータを取得。
+            Map<String, Object> item = (Map<String, Object>) parent.getItemAtPosition(position);
+
+            String idNum = String.valueOf(item.get("id"));
+            Log.d("id", idNum);
+
+//            // インテントへのインスタンス生成
+//            Intent intent = new Intent(getContext(), RecruitmentDetailActivity.class);
+//            //　インテントに値をセット
+//            intent.putExtra("id", idNum);
+//            // サブ画面の呼び出し
+//            startActivity(intent);
+        }
+    }
 }
