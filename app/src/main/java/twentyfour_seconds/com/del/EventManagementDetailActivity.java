@@ -4,12 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
@@ -23,12 +20,19 @@ public class EventManagementDetailActivity extends AppCompatActivity {
     private Button dissolution;
     private Button recruitment_quit;
     private ListView entry_request;
-    private ListView entry_member;
-    private List<Map<String, String>> list = new ArrayList<>();
-    private String[] from = {"image", "name", "join", "message", "approval", "unapproved"};
-    private int[] to = new int[6];
+    private GridView entry_member;
+    private List<Map<String, String>> applicant = new ArrayList<>();
+    private List<Map<String, String>> participant = new ArrayList<>();
+    private List<Map<String, String>> nothing = new ArrayList<>();
+    private String[] fromReservation = {"image", "name", "join", "reservation"};
+//    private String[] fromReservation = {"image", "name", "join", "reservation", "approved", "unapproved"};
+    private String[] fromParticipant = {"image", "name"};
+    private String[] from = {"nothing"};
+    private int[] toReservation = new int[4];
+//    private int[] toReservation = new int[6];
+    private int[] toParticipant = new int[2];
+    private int[] to = new int[1];
     private SimpleAdapter adapter;
-    //処理の分岐を決める変数
     private int id;
     private String title;
     private String deadline;
@@ -40,7 +44,7 @@ public class EventManagementDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recruitment_list);
+        setContentView(R.layout.activity_event_management_detail);
 
         entry_request = findViewById(R.id.entry_request);
         entry_member = findViewById(R.id.entry_member);
@@ -54,44 +58,53 @@ public class EventManagementDetailActivity extends AppCompatActivity {
         title = intent.getStringExtra("title");
         deadline = intent.getStringExtra("deadline");
 
-        for(int i = 0; i < Common.titleList.size(); i++) {
-//            Log.d("size", ""+Common.titleList.size());
-//            Log.d("i", ""+i);
-            Map<String, String> menu = new HashMap<>();
-            menu.put("id", Common.idList.get(i));
-            menu.put("image", Common.imageList.get(i));
-            menu.put("name", Common.titleList.get(i));
-            menu.put("join", Common.areaList.get(i));
-            menu.put("local", Common.localList.get(i));
-            menu.put("term", Common.termList.get(i));
-            menu.put("deadline", Common.deadlineList.get(i));
-            menu.put("member", Common.memberList.get(i));
-            list.add(menu);
-        }
-
-
-
-//        for(int i = 0; i < 10; i++) {
-//            Map<String, String> menu = new HashMap<>();
-//            menu.put("image", "写真");
-//            menu.put("title", "○○の脱出");
-//            menu.put("area", "神奈川県");
-//            menu.put("local", "赤レンガ");
-//            menu.put("term", "男女不問　20代");
-//            menu.put("deadline", "12/24");
-//            menu.put("member", "1/4");
-//            list.add(menu);
+//        for(int i = 0; i < Common.titleList.size(); i++) {
+//            Map<String, String> map = new HashMap<>();
+//            map.put("image", Common.imageList.get(i));
+//            map.put("name", Common.titleList.get(i));
+//            map.put("join", Common.areaList.get(i));
+//            map.put("reservation", Common.localList.get(i));
+//            applicant.add(map);
+//        }
+//
+//        for(int i = 0; i < Common.titleList.size(); i++) {
+//            Map<String, String> map = new HashMap<>();
+//            map.put("image", Common.imageList.get(i));
+//            map.put("name", Common.titleList.get(i));
+//            participant.add(map);
 //        }
 
-//        to[0] = R.id.image;
-//        to[1] = R.id.name;
-//        to[2] = R.id.join;
-//        to[3] = R.id.message;
-//        to[4] = R.id.approval;
-//        to[5] = R.id.unapproved;
+//        for(int i = 0; i < 3; i++) {
+//            Map<String, String> map = new HashMap<>();
+//            map.put("image", "写真");
+//            map.put("name", "geeta");
+//            map.put("join", "参加");
+//            map.put("reservation", "メッセージ");
+////            map.put("approved", "");
+////            map.put("unapproved", "");
+//            applicant.add(map);
+//        }
 
-        adapter = new SimpleAdapter(EventManagementDetailActivity.this, list, R.layout.row, from, to);
 
+
+        toReservation[0] = R.id.image;
+        toReservation[1] = R.id.name;
+        toReservation[2] = R.id.join;
+        toReservation[3] = R.id.reservation;
+//        toReservation[4] = R.id.approved;
+//        toReservation[5] = R.id.unapproved;
+
+        if(applicant.isEmpty()) {
+            Map<String, String> map = new HashMap<>();
+            map.put("nothing", "なし");
+            nothing.add(map);
+            to[0] = R.id.nothing;
+            adapter = new SimpleAdapter(EventManagementDetailActivity.this, nothing, R.layout.row_nothing, from, to);
+        } else {
+            adapter = new SimpleAdapter(EventManagementDetailActivity.this, applicant, R.layout.row_applicant, fromReservation, toReservation);
+        }
+
+        Log.d("adapter", adapter.toString());
         entry_request.setAdapter(adapter);
 
         //コンテキストメニューをリストビューに登録。
