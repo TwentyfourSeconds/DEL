@@ -5,95 +5,79 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:id="@+id/linearLayout8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <include
+            android:id="@+id/tab4"
+            layout="@layout/menu_bar" />
+    </LinearLayout>
+
     <ScrollView
         android:id="@+id/scrollView5"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout8">
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout5"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <TextView
+                android:id="@+id/LimitDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="28dp"
+                android:text="募集終了日時を選択"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView39"
+                tools:text="募集終了日時を選択" />
+
             <Button
-                android:id="@+id/button"
+                android:id="@+id/entrybutton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
                 android:text="登録"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/scrollView6" />
 
             <Spinner
-                android:id="@+id/spinner7"
-                android:layout_width="161dp"
-                android:layout_height="22dp"
-                android:layout_marginEnd="8dp"
+                android:id="@+id/recruitmentNumbers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:entries="@array/recruitmentNumbers"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textView38" />
-
-            <Spinner
-                android:id="@+id/spinner6"
-                android:layout_width="161dp"
-                android:layout_height="22dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView32" />
-
-            <Spinner
-                android:id="@+id/spinner9"
-                android:layout_width="161dp"
-                android:layout_height="22dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView39" />
-
-            <Spinner
-                android:id="@+id/spinner8"
-                android:layout_width="161dp"
-                android:layout_height="22dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView37" />
-
-            <Spinner
-                android:id="@+id/spinner5"
-                android:layout_width="161dp"
-                android:layout_height="22dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView34" />
 
             <TextView
                 android:id="@+id/textView39"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="64dp"
                 android:text="募集期限"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView38" />
-
-            <TextView
-                android:id="@+id/textView34"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
-                android:text="性別"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView32" />
 
             <TextView
                 android:id="@+id/textView32"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
-                android:text="募集年齢"
+                android:layout_marginTop="64dp"
+                android:text="開催場所"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
@@ -102,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="64dp"
                 android:text="一言"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView39" />
@@ -112,8 +96,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
-                android:text="チケットの有無"
+                android:layout_marginTop="64dp"
+                android:text="募集人数"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
@@ -122,61 +106,50 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="64dp"
                 android:text="日程"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView34" />
+                app:layout_constraintTop_toBottomOf="@+id/textView32" />
 
             <TextView
                 android:id="@+id/textView18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="64dp"
                 android:text="参加するイベント名"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
             <TextView
                 android:id="@+id/textView20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
-                android:text="場所"
+                android:layout_marginTop="64dp"
+                android:text="開催県"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
             <EditText
-                android:id="@+id/editText3"
+                android:id="@+id/EventName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:ems="10"
+                android:hint="参加するイベント名"
                 android:inputType="textPersonName"
-                android:text="Name"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView18"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <Spinner
-                android:id="@+id/spinner4"
-                android:layout_width="161dp"
-                android:layout_height="22dp"
-                android:layout_marginEnd="8dp"
+                android:id="@+id/EventRegion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:entries="@array/region"
                 app:layout_constraintBottom_toBottomOf="@+id/textView20"
                 app:layout_constraintEnd_toEndOf="parent" />
-
-            <LinearLayout
-                android:id="@+id/linearLayout8"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent">
-
-                <include android:id="@+id/tab2" layout="@layout/menu_bar" />
-            </LinearLayout>
 
             <ScrollView
                 android:id="@+id/scrollView6"
@@ -189,13 +162,58 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView41">
 
                 <EditText
-                    android:id="@+id/editText6"
+                    android:id="@+id/hitokoto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#00000000"
                     android:ems="10"
                     android:inputType="textMultiLine" />
             </ScrollView>
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="8dp"
+                android:text="基本情報の登録 "
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/EventPlace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="イベント開催場所"
+                android:inputType="textPersonName"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView32"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/EventDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:text="開催日時を選択"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView37"
+                tools:text="開催日時を選択" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="TextView"
+                android:textColor="@color/colorAccent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

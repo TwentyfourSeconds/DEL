@@ -2,6 +2,7 @@
     <string name="app_name">DEL</string>
     <!--汎用選択肢 spinner-->
     <string name="noSelect">選択しない</string>
+    <string name="nullword">未選択</string>
     <!--性別選択肢 spinner-->
     <string name="man">男性</string>
     <string name="woman">女性</string>
@@ -64,4 +65,57 @@
     <string name="miyazaki">宮崎</string>
     <string name="kagoshima">鹿児島</string>
     <string name="okinawa">沖縄</string>
+    <!--&lt;!&ndash;数字 spinner&ndash;&gt;-->
+    <!--<string name="one">1</string>-->
+    <!--<string name="two">2</string>-->
+    <!--<string name="three">3</string>-->
+    <!--<string name="four">4</string>-->
+    <!--<string name="five">5</string>-->
+    <!--<string name="six">6</string>-->
+    <!--<string name="seven">7</string>-->
+    <!--<string name="eight">8</string>-->
+    <!--<string name="nine">9</string>-->
+    <!--<string name="ten">10</string>-->
+    <!--<string name="eleven">11</string>-->
+    <!--<string name="twelve">12</string>-->
+    <!--<string name="thirteen">13</string>-->
+    <!--<string name="fourteen">14</string>-->
+    <!--<string name="fifteen">15</string>-->
+    <!--<string name="sixteen">16</string>-->
+    <!--<string name="seventeen">17</string>-->
+    <!--<string name="eighteen">18</string>-->
+    <!--<string name="nineteen">19</string>-->
+    <!--<string name="twenty">20</string>-->
+    <!--<string name="twentyOne">21</string>-->
+    <!--<string name="twentyTwo">22</string>-->
+    <!--<string name="twentyThree">23</string>-->
+    <!--<string name="twentyFour">24</string>-->
+    <!--<string name="twentyFive">25</string>-->
+    <!--<string name="twentySix">26</string>-->
+    <!--<string name="twentySeven">27</string>-->
+    <!--<string name="twentyEight">28</string>-->
+    <!--<string name="twentyNine">29</string>-->
+    <!--<string name="thirty">30</string>-->
+    <!--<string name="thirtyOne">31</string>-->
+    募集人数選択肢 spinner
+    <string name="onePerson">1人</string>
+    <string name="twoPerson">2人</string>
+    <string name="threePerson">3人</string>
+    <string name="fourPerson">4人</string>
+    <string name="fivePerson">5人</string>
+    <string name="sixPerson">6人</string>
+    <string name="sevenPerson">7人</string>
+    <string name="eightPerson">8人</string>
+    <string name="ninePerson">9人</string>
+    <string name="tenPerson">10人</string>
+    <string name="elevenPerson">11人</string>
+    <string name="twelvePerson">12人</string>
+    <string name="thirteenPerson">13人</string>
+    <string name="fourteenPerson">14人</string>
+    <string name="fifteenPerson">15人</string>
+    <string name="sixteenPerson">16人</string>
+    <string name="seventeenPerson">17人</string>
+    <string name="eighteenPerson">18人</string>
+    <string name="nineteenPerson">19人</string>
+    <string name="twentyPerson">20人</string>
 </resources>

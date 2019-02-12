@@ -6,7 +6,7 @@
        <item>@string/woman</item>
        <item>@string/noSelect</item>
    </string-array>
-    <!--性別選択肢 spinner-->
+    <!--年齢選択肢 spinner-->
     <string-array name="age">
         <item>@string/age2024</item>
         <item>@string/age2529</item>
@@ -22,6 +22,7 @@
     </string-array>
     <!--都道府県選択肢 spinner-->
     <string-array name="region">
+        <item>@string/nullword</item>
         <item>@string/hokkaido</item>
         <item>@string/aomori</item>
         <item>@string/iwate</item>
@@ -71,4 +72,79 @@
         <item>@string/okinawa</item>
         <item>@string/noSelect</item>
     </string-array>
+    <!--募集人数選択肢 spinner-->
+    <string-array name="recruitmentNumbers">
+        <item>@string/nullword</item>
+        <item>@string/onePerson</item>
+        <item>@string/twoPerson</item>
+        <item>@string/threePerson</item>
+        <item>@string/fourPerson</item>
+        <item>@string/fivePerson</item>
+        <item>@string/sixPerson</item>
+        <item>@string/sevenPerson</item>
+        <item>@string/eightPerson</item>
+        <item>@string/ninePerson</item>
+        <item>@string/tenPerson</item>
+        <item>@string/elevenPerson</item>
+        <item>@string/twelvePerson</item>
+        <item>@string/thirteenPerson</item>
+        <item>@string/fourteenPerson</item>
+        <item>@string/fifteenPerson</item>
+        <item>@string/sixteenPerson</item>
+        <item>@string/seventeenPerson</item>
+        <item>@string/eighteenPerson</item>
+        <item>@string/nineteenPerson</item>
+        <item>@string/twentyPerson</item>
+    </string-array>
+        <!--&lt;!&ndash;月選択肢 spinner&ndash;&gt;-->
+    <!--<string-array name="month">-->
+        <!--<item>@string/nullword</item>-->
+        <!--<item>@string/one</item>-->
+        <!--<item>@string/two</item>-->
+        <!--<item>@string/three</item>-->
+        <!--<item>@string/four</item>-->
+        <!--<item>@string/five</item>-->
+        <!--<item>@string/six</item>-->
+        <!--<item>@string/seven</item>-->
+        <!--<item>@string/eight</item>-->
+        <!--<item>@string/nine</item>-->
+        <!--<item>@string/ten</item>-->
+        <!--<item>@string/eleven</item>-->
+        <!--<item>@string/twelve</item>-->
+    <!--</string-array>-->
+    <!--&lt;!&ndash;日にち選択肢 spinner&ndash;&gt;-->
+    <!--<string-array name="date">-->
+        <!--<item>@string/nullword</item>-->
+        <!--<item>@string/one</item>-->
+        <!--<item>@string/two</item>-->
+        <!--<item>@string/three</item>-->
+        <!--<item>@string/four</item>-->
+        <!--<item>@string/five</item>-->
+        <!--<item>@string/six</item>-->
+        <!--<item>@string/seven</item>-->
+        <!--<item>@string/eight</item>-->
+        <!--<item>@string/nine</item>-->
+        <!--<item>@string/ten</item>-->
+        <!--<item>@string/eleven</item>-->
+        <!--<item>@string/twelve</item>-->
+        <!--<item>@string/thirteen</item>-->
+        <!--<item>@string/fourteen</item>-->
+        <!--<item>@string/fifteen</item>-->
+        <!--<item>@string/sixteen</item>-->
+        <!--<item>@string/seventeen</item>-->
+        <!--<item>@string/eighteen</item>-->
+        <!--<item>@string/nineteen</item>-->
+        <!--<item>@string/twenty</item>-->
+        <!--<item>@string/twentyOne</item>-->
+        <!--<item>@string/twentyTwo</item>-->
+        <!--<item>@string/twentyThree</item>-->
+        <!--<item>@string/twentyFour</item>-->
+        <!--<item>@string/twentyFive</item>-->
+        <!--<item>@string/twentySix</item>-->
+        <!--<item>@string/twentySeven</item>-->
+        <!--<item>@string/twentyEight</item>-->
+        <!--<item>@string/twentyNine</item>-->
+        <!--<item>@string/thirty</item>-->
+        <!--<item>@string/thirtyOne</item>-->
+    <!--</string-array>-->
 </resources>

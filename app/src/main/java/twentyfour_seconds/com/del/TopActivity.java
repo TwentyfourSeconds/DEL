@@ -79,9 +79,6 @@ public class TopActivity extends CustomActivity {
         ImageView hole_type = findViewById(R.id.hole_type);
         View.OnClickListener EventTypeClick = new EventTypeClickListener();
         hole_type.setOnClickListener(EventTypeClick);
-
-
-
     }
 
     //グループを検索ボタンを押下時の動き

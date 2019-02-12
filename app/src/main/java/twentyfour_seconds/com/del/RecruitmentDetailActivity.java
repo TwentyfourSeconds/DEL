@@ -4,8 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -43,7 +41,7 @@ public class RecruitmentDetailActivity extends CustomActivity {
         icon = findViewById(R.id.icon);
         leader = findViewById(R.id.leader);
         title = findViewById(R.id.title);
-        date = findViewById(R.id.date);
+        date = findViewById(R.id.EventDay);
         comment = findViewById(R.id.comment);
         area = findViewById(R.id.area);
         location = findViewById(R.id.location);
