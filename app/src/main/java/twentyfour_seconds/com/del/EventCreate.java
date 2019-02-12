@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -107,14 +108,41 @@ public class EventCreate extends CustomActivity {
     public class entrybuttonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
+            //エラーメッセージ、エラーフラグを初期化
+            EventNameErrFlg = 0;
+            EventRegionErrFlg = 0;
+            EventPlaceErrFlg = 0;
+            EventDayErrFlg = 0;
+            recruitmentNumbersErrFlg = 0;
+            LimitDayErrFlg = 0;
+
+            TextView EventNameErrMessage = findViewById(R.id.EventNameErrMessage);
+            EventNameErrMessage.setText("");
+
+            TextView EventRegionErrMessage = findViewById(R.id.EventRegionErrMessage);
+            EventRegionErrMessage.setText("");
+
+            TextView EventPlaceErrMessage = findViewById(R.id.EventPlaceErrMessage);
+            EventPlaceErrMessage.setText("");
+
+            TextView EventDayErrMessage = findViewById(R.id.EventDayErrMessage);
+            EventDayErrMessage.setText("");
+
+            TextView recruitmentNumbersErrMessage = findViewById(R.id.recruitmentNumbersErrMessage);
+            recruitmentNumbersErrMessage.setText("");
+
+            TextView LimitDayErrMessage = findViewById(R.id.LimitDayErrMessage);
+            LimitDayErrMessage.setText("");
 
 
             //イベント名を取得
             EditText EventName = findViewById(R.id.EventName);
             String EventNameStr = EventName.getText().toString();
+            Log.d("LOG", EventNameStr);
             //登録チェック処理（一言以外は、未入力の場合エラー）
-            if (EventNameStr == null) {
+            if (EventNameStr.equals("")) {
                 EventNameErrFlg = 1;
+                EventNameErrMessage.setText("イベント名が未入力です");
             }
 
             //イベントの開催県を取得
@@ -123,14 +151,16 @@ public class EventCreate extends CustomActivity {
             //登録チェック処理（一言以外は、未入力の場合エラー）
             if (EventRegion.equals("未選択")) {
                 EventRegionErrFlg = 1;
+                EventRegionErrMessage.setText("開催県が未選択です");
             }
 
             //イベントの開催場所を取得
             EditText EventPlace = findViewById(R.id.EventPlace);
             String EventPlaceStr = EventPlace.getText().toString();
             //登録チェック処理（一言以外は、未入力の場合エラー）
-            if (EventPlaceStr == null) {
+            if (EventPlaceStr.equals("")) {
                 EventPlaceErrFlg = 1;
+                EventPlaceErrMessage.setText("開催場所が未選択です");
             }
 
             //イベントの開催日付を取得（〇/〇〇の形にして登録）
@@ -138,60 +168,68 @@ public class EventCreate extends CustomActivity {
             TextView EventDay = findViewById(R.id.EventDay);
             String EventDayStr = EventDay.getText().toString();
             //登録チェック処理（一言以外は、未入力の場合エラー）
-            if (EventDayStr == null) {
+            if (EventDayStr.equals("")) {
                 EventDayErrFlg = 1;
-            }
-            DateFormat EventDaydf1 = new SimpleDateFormat("yyyy年MM月dd日");
-            DateFormat EventDaydf2 = new SimpleDateFormat("y/M/d");
-            try {
-                Date d = EventDaydf1.parse(EventDayStr);
-                System.out.println(EventDaydf2.format(d)); // => 2014年05月11日
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+                EventDayErrMessage.setText("日程が未選択です");
+            }else {
+                DateFormat EventDaydf1 = new SimpleDateFormat("yyyy年MM月dd日");
+                DateFormat EventDaydf2 = new SimpleDateFormat("y/M/d");
+                try {
+                    Date d = EventDaydf1.parse(EventDayStr);
+                    System.out.println(EventDaydf2.format(d)); // => 2014年05月11日
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             EventDayStr = EventDaydf2.toString();
-
+            }
 
             //選択されている人数を取得（２人→２の形にして登録）
             Spinner recruitmentNumbersSpinner = (Spinner) findViewById(R.id.recruitmentNumbers);
             String recruitmentNumbersStr = (String) recruitmentNumbersSpinner.getSelectedItem();
             int size = recruitmentNumbersStr.length();
             int cut_length = 1;
+            int recruitmentNumbers = 0;
             String recruitmentNumbersStr2 = null;
             Log.d(recruitmentNumbersStr, recruitmentNumbersStr);
             //登録チェック処理（一言以外は、未入力の場合エラー）
             if (recruitmentNumbersStr.equals("未選択")) {
                 recruitmentNumbersErrFlg = 1;
+                recruitmentNumbersErrMessage.setText("募集人数が未選択です");
             } else {
                 //substring(int beginIndex, int endIndex):beginIndex～endIndexまでの文字列を抜き出す
-            recruitmentNumbersStr2 = recruitmentNumbersStr.substring(0, size - cut_length);
-            int recruitmentNumbers = parseInt(recruitmentNumbersStr2);
+                recruitmentNumbersStr2 = recruitmentNumbersStr.substring(0, size - cut_length);
+                recruitmentNumbers = parseInt(recruitmentNumbersStr2);
             }
 
             //イベント締切日付を取得（〇/〇〇の形にして登録）
             TextView LimitDay = findViewById(R.id.LimitDay);
             String LimitDayStr = LimitDay.getText().toString();
             //登録チェック処理（一言以外は、未入力の場合エラー）
-            if( LimitDayStr == null){
+            if( LimitDayStr.equals("")){
                 LimitDayErrFlg = 1;
+                LimitDayErrMessage.setText("募集期限が未選択です");
+            }else {
+                DateFormat LimitDaydf1 = new SimpleDateFormat("yyyy年MM月dd日");
+                DateFormat LimitDaydf2 = new SimpleDateFormat("y/M/d");
+                try {
+                    Date d = LimitDaydf1.parse(LimitDayStr);
+                    System.out.println(LimitDaydf2.format(d)); // => 2014年05月11日
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                LimitDayStr = LimitDaydf2.toString();
             }
-            DateFormat LimitDaydf1 = new SimpleDateFormat("yyyy年MM月dd日");
-            DateFormat LimitDaydf2 = new SimpleDateFormat("y/M/d");
-            try {
-                Date d = LimitDaydf1.parse(LimitDayStr);
-                System.out.println(LimitDaydf2.format(d)); // => 2014年05月11日
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            LimitDayStr = LimitDaydf2.toString();
-
 
             //一言を取得
             EditText hitokoto = findViewById(R.id.hitokoto);
             String hitokotoStr = hitokoto.getText().toString();
 
-////            //DBに書き込みに行く
-//            EventCreateDB EventCreateDB = new EventCreateDB(EventNameStr,EventRegion,EventPlaceStr,EventDayStr,recruitmentNumbers, LimitDayStr,hitokotoStr);
+            if((EventNameErrFlg == 1)||(EventRegionErrFlg == 1)||(EventPlaceErrFlg == 1)||(EventDayErrFlg == 1)||(recruitmentNumbersErrFlg == 1)||(LimitDayErrFlg ==1)){
+                Toast.makeText(EventCreate.this, "入力項目に誤りがあります", Toast.LENGTH_SHORT).show();
+            }else {
+//            //DBに書き込みに行く
+            EventCreateDB EventCreateDB = new EventCreateDB(EventNameStr,EventRegion,EventPlaceStr,EventDayStr,recruitmentNumbers, LimitDayStr,hitokotoStr);
+            }
         }
     }
 }
