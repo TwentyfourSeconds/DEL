@@ -74,25 +74,29 @@ public class EventManagementDetailActivity extends AppCompatActivity {
 //            participant.add(map);
 //        }
 
-//        for(int i = 0; i < 3; i++) {
+        for(int i = 0; i < 3; i++) {
+            Map<String, String> map = new HashMap<>();
+            map.put("image", "" + getResources().getIdentifier("business","drawable", getPackageName()));
+            map.put("name", "geeta");
+            map.put("join", "参加");
+            map.put("reservation", "メッセージ");
+            applicant.add(map);
+        }
+
+//        for(int i = 0; i < 5; i++) {
 //            Map<String, String> map = new HashMap<>();
-//            map.put("image", "写真");
+//            map.put("image", "" + getResources().getIdentifier("business","drawable", getPackageName()));
 //            map.put("name", "geeta");
-//            map.put("join", "参加");
-//            map.put("reservation", "メッセージ");
-////            map.put("approved", "");
-////            map.put("unapproved", "");
-//            applicant.add(map);
+//            participant.add(map);
 //        }
-
-
 
         toReservation[0] = R.id.image;
         toReservation[1] = R.id.name;
         toReservation[2] = R.id.join;
         toReservation[3] = R.id.reservation;
-//        toReservation[4] = R.id.approved;
-//        toReservation[5] = R.id.unapproved;
+
+        toParticipant[0] = R.id.image;
+        toParticipant[1] = R.id.name;
 
         if(applicant.isEmpty()) {
             Map<String, String> map = new HashMap<>();
@@ -104,8 +108,20 @@ public class EventManagementDetailActivity extends AppCompatActivity {
             adapter = new SimpleAdapter(EventManagementDetailActivity.this, applicant, R.layout.row_applicant, fromReservation, toReservation);
         }
 
-        Log.d("adapter", adapter.toString());
+//        Log.d("adapter", adapter.toString());
         entry_request.setAdapter(adapter);
+
+        if(participant.isEmpty()) {
+            Map<String, String> map = new HashMap<>();
+            map.put("nothing", "なし");
+            nothing.add(map);
+            to[0] = R.id.nothing;
+            adapter = new SimpleAdapter(EventManagementDetailActivity.this, nothing, R.layout.row_nothing, from, to);
+        } else {
+            adapter = new SimpleAdapter(EventManagementDetailActivity.this, participant, R.layout.row_participant, fromParticipant, toParticipant);
+        }
+
+        entry_member.setAdapter(adapter);
 
         //コンテキストメニューをリストビューに登録。
         registerForContextMenu(entry_request);
