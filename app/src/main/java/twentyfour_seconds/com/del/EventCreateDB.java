@@ -3,39 +3,37 @@ package twentyfour_seconds.com.del;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-
-import twentyfour_seconds.com.del.Common;
 
 public class EventCreateDB extends AsyncTask<String, String, String> {
 
-    private String EventName = null;
-    private String EventRegion = null;
-    private String EventPlace = null;
-    private String EventDay = null;
-    private int recruitmentNumbers = 0;
-    private String LimitDay = null;
-    private String hitokoto = null;
+    private String eventName = null;
+    private String area = null;
+    private String place = null;
+    private String eventDay = null;
+    private int wantedPerson = 0;
+    private String deadline = null;
+    private String comment = null;
 
-    EventCreateDB(String EventNameStr, String EventRegion, String EventPlaceStr, String EventDay, int recruitmentNumbers, String LimitDayStr, String hitokotoStr) {
+
+
+
+
+
+
+    EventCreateDB(String eventNameStr, String area, String placeStr, String eventDay, int wantedPerson, String deadline, String commentStr) {
         //コンストラクタ
-        this.EventName = EventNameStr;
-        this.EventRegion = EventRegion;
-        this.EventPlace = EventPlaceStr;
-        this.EventDay = EventDay;
-        this.recruitmentNumbers = recruitmentNumbers;
-        this.LimitDay = LimitDayStr;
-        this.hitokoto = hitokotoStr;
+        this.eventName = eventNameStr;
+        this.area = area;
+        this.place = placeStr;
+        this.eventDay = eventDay;
+        this.wantedPerson = wantedPerson;
+        this.deadline = deadline;
+        this.comment = commentStr;
     }
 
     @Override
@@ -45,14 +43,16 @@ public class EventCreateDB extends AsyncTask<String, String, String> {
         String result = "";
 
         StringBuilder sb = new StringBuilder();
-        sb.append("EventName=" + EventName);
-        sb.append("&EventRegion=" + EventRegion);
-        sb.append("&EventPlace=" + EventPlace);
-        sb.append("&EventDay=" + EventDay);
-        sb.append("&RecruitmentNumbers=" + recruitmentNumbers);
-        sb.append("&LimitDay=" + LimitDay);
-        sb.append("&Hitokoto=" + hitokoto);
+        sb.append("eventName=" + eventName);
+        sb.append("&area=" + area);
+        sb.append("&place=" + place);
+        sb.append("&eventDay=" + eventDay);
+        sb.append("&wantedPerson=" + wantedPerson);
+        sb.append("&deadline=" + deadline);
+        sb.append("&comment=" + comment);
         write = sb.toString();
+
+        Log.i("write",write);
 
         //http接続を行うHttpURLConnectionオブジェクトを宣言。finallyで確実に解放するためにtry外で宣言。
         HttpURLConnection con = null;

@@ -37,9 +37,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="28dp"
+                android:hint="募集終了日時を選択"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView39"
-                tools:text="募集終了日時を選択" />
+                app:layout_constraintTop_toTopOf="@+id/textView39" />
 
             <Button
                 android:id="@+id/entrybutton"
@@ -196,11 +196,11 @@
             <TextView
                 android:id="@+id/EventDay"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="19dp"
                 android:layout_marginEnd="32dp"
+                android:hint="イベント日程を選択"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView37"
-                tools:text="開催日時を選択" />
+                app:layout_constraintTop_toTopOf="@+id/textView37" />
 
             <TextView
                 android:id="@+id/EventNameErrMessage"

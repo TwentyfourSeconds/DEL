@@ -21,18 +21,18 @@ import static java.lang.Integer.parseInt;
 public class EventCreate extends CustomActivity {
 
     //未入力チェックエラーフラグ(1の時、エラー）
-    int EventNameErrFlg = 0;
-    int EventRegionErrFlg = 0;
-    int EventPlaceErrFlg = 0;
-    int EventDayErrFlg = 0;
-    int recruitmentNumbersErrFlg = 0;
-    int LimitDayErrFlg = 0;
+    int eventNameErrFlg = 0;
+    int areaErrFlg = 0;
+    int placeErrFlg = 0;
+    int eventDayErrFlg = 0;
+    int wantedPersonErrFlg = 0;
+    int deadlineErrFlg = 0;
 //    int hitokotoErrFlg = 0;（一言は未入力でもokとする）
 
     //カレンダーを読み込む処理はEventDay、LimitDayで共通で使用する
     //最後の出力時、どちらをクリックしたかを判断するために、以下のフラグて判断する。（１がクリックした）
-    int EventDayClickFlg = 0;
-    int LimitDayClickFlg = 0;
+    int eventDayClickFlg = 0;
+    int deadlineClickFlg = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +59,12 @@ public class EventCreate extends CustomActivity {
         entrybutton.setOnClickListener(entrybuttonClick);
 
         // イベント開催日時と、締切日については、カレンダーから取得する
-        TextView EventDay = (TextView) findViewById(R.id.EventDay);
-        TextView LimitDay = (TextView) findViewById(R.id.LimitDay);
+        TextView eventDay = (TextView) findViewById(R.id.EventDay);
+        TextView limitDay = (TextView) findViewById(R.id.LimitDay);
 
         carenderClickListener carenderClickListener = new carenderClickListener();
-        EventDay.setOnClickListener(carenderClickListener);
-        LimitDay.setOnClickListener(carenderClickListener);
+        eventDay.setOnClickListener(carenderClickListener);
+        limitDay.setOnClickListener(carenderClickListener);
     }
 
     //カレンダークリックイベント（カレンダーフラグメントを実行）
@@ -73,16 +73,16 @@ public class EventCreate extends CustomActivity {
         // クリックしたらダイアログを表示する処理
         public void onClick(View view) {
             // EventDay、LimitDayのどちらから押されたかを制御
-            EventDayClickFlg = 0;
-            LimitDayClickFlg = 0;
+            eventDayClickFlg = 0;
+            deadlineClickFlg = 0;
 
             int id = view.getId();
             switch (id) {
                 case R.id.EventDay:
-                    EventDayClickFlg = 1;
+                    eventDayClickFlg = 1;
                     break;
                 case R.id.LimitDay:
-                    LimitDayClickFlg = 1;
+                    deadlineClickFlg = 1;
                     break;
             }
             // ダイアログクラスをインスタンス化
@@ -94,11 +94,11 @@ public class EventCreate extends CustomActivity {
 
     // ダイアログで入力した値をtextViewに入れる - ダイアログから呼び出される
     public void setTextView(String value) {
-        if(EventDayClickFlg == 1) {
+        if(eventDayClickFlg == 1) {
             TextView EventDay = (TextView) findViewById(R.id.EventDay);
             EventDay.setText(value);
         }
-        if(LimitDayClickFlg == 1) {
+        if(deadlineClickFlg == 1) {
             TextView LimitDay = (TextView) findViewById(R.id.LimitDay);
             LimitDay.setText(value);
         }
@@ -109,126 +109,126 @@ public class EventCreate extends CustomActivity {
         @Override
         public void onClick(View view) {
             //エラーメッセージ、エラーフラグを初期化
-            EventNameErrFlg = 0;
-            EventRegionErrFlg = 0;
-            EventPlaceErrFlg = 0;
-            EventDayErrFlg = 0;
-            recruitmentNumbersErrFlg = 0;
-            LimitDayErrFlg = 0;
+            eventNameErrFlg = 0;
+            areaErrFlg = 0;
+            placeErrFlg = 0;
+            eventDayErrFlg = 0;
+            wantedPersonErrFlg = 0;
+            deadlineErrFlg = 0;
 
-            TextView EventNameErrMessage = findViewById(R.id.EventNameErrMessage);
-            EventNameErrMessage.setText("");
+            TextView eventNameErrMessage = findViewById(R.id.EventNameErrMessage);
+            eventNameErrMessage.setText("");
 
-            TextView EventRegionErrMessage = findViewById(R.id.EventRegionErrMessage);
-            EventRegionErrMessage.setText("");
+            TextView areaErrMessage = findViewById(R.id.EventRegionErrMessage);
+            areaErrMessage.setText("");
 
-            TextView EventPlaceErrMessage = findViewById(R.id.EventPlaceErrMessage);
-            EventPlaceErrMessage.setText("");
+            TextView placeErrMessage = findViewById(R.id.EventPlaceErrMessage);
+            placeErrMessage.setText("");
 
-            TextView EventDayErrMessage = findViewById(R.id.EventDayErrMessage);
-            EventDayErrMessage.setText("");
+            TextView eventDayErrMessage = findViewById(R.id.EventDayErrMessage);
+            eventDayErrMessage.setText("");
 
-            TextView recruitmentNumbersErrMessage = findViewById(R.id.recruitmentNumbersErrMessage);
-            recruitmentNumbersErrMessage.setText("");
+            TextView wantedPersonErrMessage = findViewById(R.id.recruitmentNumbersErrMessage);
+            wantedPersonErrMessage.setText("");
 
-            TextView LimitDayErrMessage = findViewById(R.id.LimitDayErrMessage);
-            LimitDayErrMessage.setText("");
+            TextView deadlineErrMessage = findViewById(R.id.LimitDayErrMessage);
+            deadlineErrMessage.setText("");
 
 
             //イベント名を取得
-            EditText EventName = findViewById(R.id.EventName);
-            String EventNameStr = EventName.getText().toString();
-            Log.d("LOG", EventNameStr);
+            EditText eventName = findViewById(R.id.EventName);
+            String eventNameStr = eventName.getText().toString();
             //登録チェック処理（一言以外は、未入力の場合エラー）
-            if (EventNameStr.equals("")) {
-                EventNameErrFlg = 1;
-                EventNameErrMessage.setText("イベント名が未入力です");
+            if (eventNameStr.equals("")) {
+                eventNameErrFlg = 1;
+                eventNameErrMessage.setText("イベント名が未入力です");
             }
 
             //イベントの開催県を取得
-            Spinner EventRegionSpinner = (Spinner) findViewById(R.id.EventRegion);
-            String EventRegion = (String) EventRegionSpinner.getSelectedItem();
+            Spinner areaSpinner = (Spinner) findViewById(R.id.EventRegion);
+            String area = (String) areaSpinner.getSelectedItem();
             //登録チェック処理（一言以外は、未入力の場合エラー）
-            if (EventRegion.equals("未選択")) {
-                EventRegionErrFlg = 1;
-                EventRegionErrMessage.setText("開催県が未選択です");
+            if (area.equals("未選択")) {
+                areaErrFlg = 1;
+                areaErrMessage.setText("開催県が未選択です");
             }
 
             //イベントの開催場所を取得
-            EditText EventPlace = findViewById(R.id.EventPlace);
-            String EventPlaceStr = EventPlace.getText().toString();
+            EditText place = findViewById(R.id.EventPlace);
+            String placeStr = place.getText().toString();
             //登録チェック処理（一言以外は、未入力の場合エラー）
-            if (EventPlaceStr.equals("")) {
-                EventPlaceErrFlg = 1;
-                EventPlaceErrMessage.setText("開催場所が未選択です");
+            if (placeStr.equals("")) {
+                placeErrFlg = 1;
+                placeErrMessage.setText("開催場所が未選択です");
             }
 
             //イベントの開催日付を取得（〇/〇〇の形にして登録）
             //EventDayの戻り値は　2019年2月6日　のように帰ってくる。
-            TextView EventDay = findViewById(R.id.EventDay);
-            String EventDayStr = EventDay.getText().toString();
+            TextView eventDay = findViewById(R.id.EventDay);
+            String eventDayStr = eventDay.getText().toString();
             //登録チェック処理（一言以外は、未入力の場合エラー）
-            if (EventDayStr.equals("")) {
-                EventDayErrFlg = 1;
-                EventDayErrMessage.setText("日程が未選択です");
+            if (eventDayStr.equals("")) {
+                eventDayErrFlg = 1;
+                eventDayErrMessage.setText("日程が未選択です");
             }else {
-                DateFormat EventDaydf1 = new SimpleDateFormat("yyyy年MM月dd日");
-                DateFormat EventDaydf2 = new SimpleDateFormat("y/M/d");
+                DateFormat eventDaydf1 = new SimpleDateFormat("yyyy年MM月dd日");
+                DateFormat eventDaydf2 = new SimpleDateFormat("y/M/d");
                 try {
-                    Date d = EventDaydf1.parse(EventDayStr);
-                    System.out.println(EventDaydf2.format(d)); // => 2014年05月11日
+                    Date d = eventDaydf1.parse(eventDayStr);
+                    System.out.println(eventDaydf2.format(d)); // => 2014年05月11日
+                    eventDayStr = new SimpleDateFormat("yyyy/MM/dd").format(d);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-            EventDayStr = EventDaydf2.toString();
             }
 
             //選択されている人数を取得（２人→２の形にして登録）
-            Spinner recruitmentNumbersSpinner = (Spinner) findViewById(R.id.recruitmentNumbers);
-            String recruitmentNumbersStr = (String) recruitmentNumbersSpinner.getSelectedItem();
-            int size = recruitmentNumbersStr.length();
+            Spinner wantedPersonSpinner = (Spinner) findViewById(R.id.recruitmentNumbers);
+            String wantedPersonStr = (String) wantedPersonSpinner.getSelectedItem();
+            int size = wantedPersonStr.length();
             int cut_length = 1;
-            int recruitmentNumbers = 0;
-            String recruitmentNumbersStr2 = null;
-            Log.d(recruitmentNumbersStr, recruitmentNumbersStr);
+            int wantedPerson = 0;
+            String wantedPersonStr2 = null;
+            Log.d(wantedPersonStr, wantedPersonStr);
             //登録チェック処理（一言以外は、未入力の場合エラー）
-            if (recruitmentNumbersStr.equals("未選択")) {
-                recruitmentNumbersErrFlg = 1;
-                recruitmentNumbersErrMessage.setText("募集人数が未選択です");
+            if (wantedPersonStr.equals("未選択")) {
+                wantedPersonErrFlg = 1;
+                wantedPersonErrMessage.setText("募集人数が未選択です");
             } else {
                 //substring(int beginIndex, int endIndex):beginIndex～endIndexまでの文字列を抜き出す
-                recruitmentNumbersStr2 = recruitmentNumbersStr.substring(0, size - cut_length);
-                recruitmentNumbers = parseInt(recruitmentNumbersStr2);
+                wantedPersonStr2 = wantedPersonStr.substring(0, size - cut_length);
+                wantedPerson = parseInt(wantedPersonStr2);
             }
 
             //イベント締切日付を取得（〇/〇〇の形にして登録）
-            TextView LimitDay = findViewById(R.id.LimitDay);
-            String LimitDayStr = LimitDay.getText().toString();
+            TextView deadline = findViewById(R.id.LimitDay);
+            String deadlineStr = deadline.getText().toString();
             //登録チェック処理（一言以外は、未入力の場合エラー）
-            if( LimitDayStr.equals("")){
-                LimitDayErrFlg = 1;
-                LimitDayErrMessage.setText("募集期限が未選択です");
+            if( deadlineStr.equals("")){
+                deadlineErrFlg = 1;
+                deadlineErrMessage.setText("募集期限が未選択です");
             }else {
-                DateFormat LimitDaydf1 = new SimpleDateFormat("yyyy年MM月dd日");
-                DateFormat LimitDaydf2 = new SimpleDateFormat("y/M/d");
+                DateFormat deadlinedf1 = new SimpleDateFormat("yyyy年MM月dd日");
+                DateFormat deadlinedf2 = new SimpleDateFormat("y/M/d");
                 try {
-                    Date d = LimitDaydf1.parse(LimitDayStr);
-                    System.out.println(LimitDaydf2.format(d)); // => 2014年05月11日
+                    Date d = deadlinedf1.parse(deadlineStr);
+                    System.out.println(deadlinedf2.format(d)); // => 2014年05月11日
+                    deadlineStr = new SimpleDateFormat("yyyy/MM/dd").format(d);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                LimitDayStr = LimitDaydf2.toString();
             }
 
             //一言を取得
-            EditText hitokoto = findViewById(R.id.hitokoto);
-            String hitokotoStr = hitokoto.getText().toString();
+            EditText comment = findViewById(R.id.hitokoto);
+            String commentStr = comment.getText().toString();
 
-            if((EventNameErrFlg == 1)||(EventRegionErrFlg == 1)||(EventPlaceErrFlg == 1)||(EventDayErrFlg == 1)||(recruitmentNumbersErrFlg == 1)||(LimitDayErrFlg ==1)){
+            if((eventNameErrFlg == 1)||(areaErrFlg == 1)||(placeErrFlg == 1)||(eventDayErrFlg == 1)||(wantedPersonErrFlg == 1)||(deadlineErrFlg ==1)){
                 Toast.makeText(EventCreate.this, "入力項目に誤りがあります", Toast.LENGTH_SHORT).show();
             }else {
 //            //DBに書き込みに行く
-            EventCreateDB EventCreateDB = new EventCreateDB(EventNameStr,EventRegion,EventPlaceStr,EventDayStr,recruitmentNumbers, LimitDayStr,hitokotoStr);
+                EventCreateDB eventCreateDB = new EventCreateDB(eventNameStr,area,placeStr,eventDayStr,wantedPerson, deadlineStr,commentStr);
+                eventCreateDB.execute();
             }
         }
     }
