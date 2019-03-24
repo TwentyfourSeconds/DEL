@@ -1,5 +1,6 @@
 package twentyfour_seconds.com.del;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -15,6 +16,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.CountDownLatch;
 
 import static java.lang.Integer.parseInt;
 
@@ -223,12 +225,49 @@ public class EventCreate extends CustomActivity {
             EditText comment = findViewById(R.id.hitokoto);
             String commentStr = comment.getText().toString();
 
+            //その他、eventDBに必要な情報を取得する
+            //founderは、person_infoより、nameを取得する
+            //latchは1
+//            final CountDownLatch latch = new CountDownLatch(1);
+//            String founder = null;
+//
+//            //データベース関連はテストのために一回コメント化
+//            PersonDB personDB = new PersonDB(1,latch);
+//            personDB.execute();
+//            try {
+//                latch.await();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//
+//            founder = Common.personName;
+//
+//            Log.d("founder", Common.personName + "");
+//            Log.d("founder", founder + "");
+
+            //current_personは、初期値の1を登録する
+            int current_person = 1;
+
+            //delete_flgは、初期値のゼロを登録する
+            int delete_flg = 0;
+
+            //データベース関連はテストのために一回コメント化
             if((eventNameErrFlg == 1)||(areaErrFlg == 1)||(placeErrFlg == 1)||(eventDayErrFlg == 1)||(wantedPersonErrFlg == 1)||(deadlineErrFlg ==1)){
                 Toast.makeText(EventCreate.this, "入力項目に誤りがあります", Toast.LENGTH_SHORT).show();
             }else {
-//            //DBに書き込みに行く
-                EventCreateDB eventCreateDB = new EventCreateDB(eventNameStr,area,placeStr,eventDayStr,wantedPerson, deadlineStr,commentStr);
-                eventCreateDB.execute();
+            //DBに書き込みに行く
+//                EventCreateDB eventCreateDB = new EventCreateDB(eventNameStr,founder,area,placeStr,eventDayStr,deadlineStr,current_person,wantedPerson,commentStr,delete_flg);
+//                eventCreateDB.execute();
+//            //タグ情報登録画面へ遷移
+                Intent intentEventCreate3 = new Intent(getApplicationContext(), EventCreate3.class);
+                intentEventCreate3.putExtra("eventNameStr", eventNameStr);
+                intentEventCreate3.putExtra("area", area);
+                intentEventCreate3.putExtra("placeStr", placeStr);
+                intentEventCreate3.putExtra("eventDayStr", eventDayStr);
+                intentEventCreate3.putExtra("wantedPersonStr", wantedPersonStr);
+                intentEventCreate3.putExtra("deadlineStr", deadlineStr);
+                intentEventCreate3.putExtra("commentStr", commentStr);
+                startActivity(intentEventCreate3);
             }
         }
     }

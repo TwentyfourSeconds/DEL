@@ -12,28 +12,29 @@ import java.net.URL;
 public class EventCreateDB extends AsyncTask<String, String, String> {
 
     private String eventName = null;
+    private String founder = null;
     private String area = null;
     private String place = null;
     private String eventDay = null;
-    private int wantedPerson = 0;
     private String deadline = null;
+    private int current_person = 0;
+    private int wanted_person = 0;
     private String comment = null;
+    private int delete_flg = 0;
 
 
-
-
-
-
-
-    EventCreateDB(String eventNameStr, String area, String placeStr, String eventDay, int wantedPerson, String deadline, String commentStr) {
+    EventCreateDB(String eventNameStr,String founder, String area, String placeStr, String eventDay, String deadline, int current_person, int wantedPerson, String commentStr, int delete_flg) {
         //コンストラクタ
         this.eventName = eventNameStr;
+        this.founder = founder;
         this.area = area;
         this.place = placeStr;
         this.eventDay = eventDay;
-        this.wantedPerson = wantedPerson;
         this.deadline = deadline;
+        this.current_person = current_person;
+        this.wanted_person = wantedPerson;
         this.comment = commentStr;
+        this.delete_flg = delete_flg;
     }
 
     @Override
@@ -43,13 +44,16 @@ public class EventCreateDB extends AsyncTask<String, String, String> {
         String result = "";
 
         StringBuilder sb = new StringBuilder();
-        sb.append("eventName=" + eventName);
+        sb.append("event_name=" + eventName);
+        sb.append("&founder=" + founder);
         sb.append("&area=" + area);
         sb.append("&place=" + place);
-        sb.append("&eventDay=" + eventDay);
-        sb.append("&wantedPerson=" + wantedPerson);
+        sb.append("&event_day=" + eventDay);
         sb.append("&deadline=" + deadline);
+        sb.append("&current_person=" + current_person);
+        sb.append("&wanted_person=" + wanted_person);
         sb.append("&comment=" + comment);
+        sb.append("&delete_flg=" + delete_flg);
         write = sb.toString();
 
         Log.i("write",write);

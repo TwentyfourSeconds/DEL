@@ -84,16 +84,17 @@ public class PersonDB extends AsyncTask<String, String, String> {
             is = con.getInputStream();
 //                レスポンスデータであるInputStreamオブジェクトを文字列に変換。
             result = is2String(is);
-//            Log.d("result", result);
+            Log.d("result", result);
             json = new JSONObject(result);
             Common.personId = json.getString("id");
             Common.personName = json.getString("name");
-            Common.personLocation = json.getString("location");
+            Common.personLocation = json.getString("area");
             Common.personAge = Integer.valueOf(json.getInt("age"));
             Common.personGender = Integer.valueOf(json.getInt("gender"));
-            Common.personSelfIntroduction = json.getString("selfIntroduction");
+            Common.personSelfIntroduction = json.getString("self_introduction");
 //            Log.d("result", json.getString("location"));
 //            Log.d("result", "" + json.getInt("age"));
+            Log.d("log", "" + json.getString("name"));
 //            Log.d("result", "" + Integer.valueOf(json.getInt("gender")));
 //            Log.d("result", json.getString("selfIntroduction"));
         } catch (IOException ex) {

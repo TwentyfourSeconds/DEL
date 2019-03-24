@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MyPageActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/flex_box_recycler_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView49" />
+
+            <TextView
+                android:id="@+id/textView46"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:text="その他、雰囲気の登録"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView47"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="グループタグを設定しましょう"
+                android:textColor="@color/colorAccent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView46" />
+
+            <TextView
+                android:id="@+id/textView48"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="（タグがあると、検索率アップ） "
+                android:textColor="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView47" />
+
+            <TextView
+                android:id="@+id/textView49"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="●現在セットしたタグ "
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView48" />
+
+            <TextView
+                android:id="@+id/textView50"
+                android:layout_width="100dp"
+                android:layout_height="17dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="●ジャンルタグ "
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/flex_box_recycler_view" />
+
+            <TextView
+                android:id="@+id/textView51"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="ジャンルタグを設定すると、TOPページのジャンルで検索したときに"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/textView50"
+                app:layout_constraintTop_toBottomOf="@+id/textView50" />
+
+            <TextView
+                android:id="@+id/textView52"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ヒットするようになります。 "
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/textView51"
+                app:layout_constraintTop_toBottomOf="@+id/textView51" />
+
+            <TextView
+                android:id="@+id/textView53"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="●雰囲気タグ "
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/outFieldType" />
+
+            <TextView
+                android:id="@+id/animeType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/tag_text"
+                android:text="＋アニメタイアップ "
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                app:layout_constraintStart_toEndOf="@+id/shortTimeType"
+                app:layout_constraintTop_toTopOf="@+id/shortTimeType" />
+
+            <TextView
+                android:id="@+id/shortTimeType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/tag_text"
+                android:text="＋短い時間で気軽に"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                app:layout_constraintStart_toEndOf="@+id/outFieldType"
+                app:layout_constraintTop_toTopOf="@+id/outFieldType" />
+
+            <TextView
+                android:id="@+id/tukueType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/tag_text"
+                android:text="＋机に座ってガッツリと"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView52" />
+
+            <TextView
+                android:id="@+id/outFieldType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/tag_text"
+                android:text="＋遊園地や野球場で"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tukueType" />
+
+            <TextView
+                android:id="@+id/missituType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/tag_text"
+                android:text="＋密室からの脱出"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/tukueType"
+                app:layout_constraintTop_toTopOf="@+id/tukueType" />
+
+            <TextView
+                android:id="@+id/cityType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/tag_text"
+                android:text="＋街を歩き回って"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/missituType"
+                app:layout_constraintTop_toTopOf="@+id/missituType" />
+
+            <TextView
+                android:id="@+id/seriousMood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/tag_text"
+                android:text="＋ガチで脱出めざします "
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView63" />
+
+            <TextView
+                android:id="@+id/amatureMood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/tag_text"
+                android:text="＋初心者歓迎 "
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                app:layout_constraintStart_toEndOf="@+id/seriousMood"
+                app:layout_constraintTop_toTopOf="@+id/seriousMood" />
+
+            <TextView
+                android:id="@+id/textView63"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="なります。"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/textView61"
+                app:layout_constraintTop_toBottomOf="@+id/textView61" />
+
+            <TextView
+                android:id="@+id/enjoyMood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/tag_text"
+                android:text="＋ワイワイと "
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                app:layout_constraintStart_toEndOf="@+id/amatureMood"
+                app:layout_constraintTop_toTopOf="@+id/amatureMood" />
+
+            <TextView
+                android:id="@+id/textView61"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="雰囲気タグを設定すると、あなたの希望に賛同する人を集めやすく"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/textView53"
+                app:layout_constraintTop_toBottomOf="@+id/textView53" />
+
+            <TextView
+                android:id="@+id/relaxMood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/tag_text"
+                android:text="＋まったりと "
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/seriousMood" />
+
+            <TextView
+                android:id="@+id/animeWatcherMood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/tag_text"
+                android:text="＋アニメ見た方歓迎 "
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                app:layout_constraintStart_toEndOf="@+id/PartyMood"
+                app:layout_constraintTop_toTopOf="@+id/PartyMood" />
+
+            <Button
+                android:id="@+id/contentCheckButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:maxLength="140"
+                android:text="登録内容の確認 "
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/comment" />
+
+            <TextView
+                android:id="@+id/PartyMood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/tag_text"
+                android:text="＋打ち上げしましょう "
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                app:layout_constraintStart_toEndOf="@+id/relaxMood"
+                app:layout_constraintTop_toTopOf="@+id/relaxMood" />
+
+            <TextView
+                android:id="@+id/textView64"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="●条件タグ"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relaxMood" />
+
+            <TextView
+                android:id="@+id/textView65"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="条件タグは人数決定後に時間や詳細条件を決める際の細かな条件の "
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/textView64"
+                app:layout_constraintTop_toBottomOf="@+id/textView64" />
+
+            <TextView
+                android:id="@+id/textView66"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="タグです。前提を共有した参加条件の人が集まりやすいです。"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/textView65"
+                app:layout_constraintTop_toBottomOf="@+id/textView65" />
+
+            <TextView
+                android:id="@+id/dayCondition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/tag_text"
+                android:text="＋平日参加 "
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView66" />
+
+            <TextView
+                android:id="@+id/ticketMyselfCondition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/tag_text"
+                android:text="＋チケットは各自用意 "
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                app:layout_constraintStart_toEndOf="@+id/lateCondition"
+                app:layout_constraintTop_toTopOf="@+id/lateCondition" />
+
+            <TextView
+                android:id="@+id/earlyCondition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/tag_text"
+                android:text="＋開始時間は早い時間 "
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                app:layout_constraintStart_toEndOf="@+id/holidayCondition"
+                app:layout_constraintTop_toTopOf="@+id/holidayCondition" />
+
+            <TextView
+                android:id="@+id/holidayCondition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/tag_text"
+                android:text="＋休日・祝日参加 "
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                app:layout_constraintStart_toEndOf="@+id/dayCondition"
+                app:layout_constraintTop_toTopOf="@+id/dayCondition" />
+
+            <TextView
+                android:id="@+id/ticketOfficerCondition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/tag_text"
+                android:text="＋チケットは主催者用意 "
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lateCondition" />
+
+            <TextView
+                android:id="@+id/textView75"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:text="●主催に向けて一言 "
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ticketOfficerCondition" />
+
+            <TextView
+                android:id="@+id/comment"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/outline"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView75" />
+
+            <TextView
+                android:id="@+id/lateCondition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/tag_text"
+                android:text="＋開始時間は遅い時間 "
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dayCondition" />
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>
