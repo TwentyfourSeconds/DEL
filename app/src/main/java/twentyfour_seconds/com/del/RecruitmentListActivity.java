@@ -105,8 +105,6 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
             list.add(menu);
         }
 
-
-
 //        for(int i = 0; i < 10; i++) {
 //            Map<String, String> menu = new HashMap<>();
 //            menu.put("image", "写真");
@@ -237,5 +235,4 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
             startActivity(intent);
         }
     }
-
 }
