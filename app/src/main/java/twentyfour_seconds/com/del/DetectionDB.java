@@ -144,7 +144,7 @@ public class DetectionDB extends AsyncTask<String, String, String> {
                 Common.idList.add(json.getString("id"));
                 Common.imageList.add(json.getString("image"));
                 Common.titleList.add(json.getString("event_name"));
-                Common.titleList.add(json.getString("founder"));
+                Common.founderList.add(json.getString("founder"));
                 Common.areaList.add(json.getString("area"));
                 Common.localList.add(json.getString("place"));
                 Common.termList.add(json.getString("event_day"));

@@ -9,6 +9,7 @@ public class Common {
     public static List<String> imageList = new ArrayList<>();
     public static List<String> titleList = new ArrayList<>();
     public static List<String> areaList = new ArrayList<>();
+    public static List<String> founderList = new ArrayList<>();
     public static List<String> localList = new ArrayList<>();
     public static List<String> termList = new ArrayList<>();
     public static List<String> deadlineList = new ArrayList<>();
@@ -38,5 +39,9 @@ public class Common {
     public static int personGender;
     public static int currentRecordsetLength;
     public static String personSelfIntroduction;
+
+    public static List<String> nameList = new ArrayList<>();
+    public static List<String> messageList = new ArrayList<>();
+    public static List<Integer> joinStatusList = new ArrayList<>();
 
 }

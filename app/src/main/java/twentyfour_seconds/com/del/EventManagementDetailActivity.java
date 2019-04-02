@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -54,9 +56,35 @@ public class EventManagementDetailActivity extends AppCompatActivity {
         // インテントを取得
         Intent intent = getIntent();
         // インテントに保存されたデータから、どの処理を動かすかを判断
-        id = intent.getIntExtra("id", 0);
+        id = intent.getIntExtra("id", 1);
         title = intent.getStringExtra("title");
         deadline = intent.getStringExtra("deadline");
+
+        JoinMemberDB jmDB = new JoinMemberDB(id, latch);
+        jmDB.execute();
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        for(int i = 0; i < Common.nameList.size(); i++) {
+            if(Common.joinStatusList.get(i) == 0) {
+                Map<String, String> map = new HashMap<>();
+                map.put("image", "" + getResources().getIdentifier("business","drawable", getPackageName()));
+                map.put("name", Common.nameList.get(i));
+                participant.add(map);
+            } else {
+                Map<String, String> map = new HashMap<>();
+                map.put("id", Common.idList.get(i));
+                map.put("image", "" + getResources().getIdentifier("business","drawable", getPackageName()));
+                map.put("name", Common.nameList.get(i));
+                map.put("join", "参加希望");
+                map.put("reservation", Common.messageList.get(i));
+                applicant.add(map);
+            }
+        }
+
 
 //        for(int i = 0; i < Common.titleList.size(); i++) {
 //            Map<String, String> map = new HashMap<>();
@@ -74,14 +102,14 @@ public class EventManagementDetailActivity extends AppCompatActivity {
 //            participant.add(map);
 //        }
 
-        for(int i = 0; i < 3; i++) {
-            Map<String, String> map = new HashMap<>();
-            map.put("image", "" + getResources().getIdentifier("business","drawable", getPackageName()));
-            map.put("name", "geeta");
-            map.put("join", "参加");
-            map.put("reservation", "メッセージ");
-            applicant.add(map);
-        }
+//        for(int i = 0; i < 3; i++) {
+//            Map<String, String> map = new HashMap<>();
+//            map.put("image", "" + getResources().getIdentifier("business","drawable", getPackageName()));
+//            map.put("name", "geeta");
+//            map.put("join", "参加希望");
+//            map.put("reservation", "メッセージ");
+//            applicant.add(map);
+//        }
 
 //        for(int i = 0; i < 5; i++) {
 //            Map<String, String> map = new HashMap<>();
@@ -122,10 +150,48 @@ public class EventManagementDetailActivity extends AppCompatActivity {
         }
 
         entry_member.setAdapter(adapter);
+        entry_member.setOnItemClickListener(new ListItemClickListener());
 
         //コンテキストメニューをリストビューに登録。
         registerForContextMenu(entry_request);
 
+        dissolution = findViewById(R.id.dissolution);
+        recruitment_quit = findViewById(R.id.recruitment_quit);
+
+        dissolution.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        recruitment_quit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
+    /**
+     * リストがタップされたときの処理が記述されたメンバクラス。
+     */
+    private class ListItemClickListener implements AdapterView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            //タップされた行のデータを取得。
+            Map<String, Object> item = (Map<String, Object>) parent.getItemAtPosition(position);
+
+            String idNum = (String)item.get("id");
+            Log.d("id", idNum);
+
+            // インテントへのインスタンス生成
+            Intent intent = new Intent(EventManagementDetailActivity.this, RecruitmentDetailActivity.class);
+            //　インテントに値をセット
+            intent.putExtra("id", idNum);
+            // サブ画面の呼び出し
+            startActivity(intent);
+        }
+    }
 }
