@@ -35,7 +35,6 @@ public class TagMapDB extends AsyncTask<String, String, String> {
         this.latch = latch;
     }
 
-
     @Override
     protected String doInBackground(String... string) {
         String urlStr = "http://10.0.2.2:8000/recruitment_tagMap";

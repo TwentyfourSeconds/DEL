@@ -264,7 +264,7 @@ public class EventCreate extends CustomActivity {
                 intentEventCreate3.putExtra("area", area);
                 intentEventCreate3.putExtra("placeStr", placeStr);
                 intentEventCreate3.putExtra("eventDayStr", eventDayStr);
-                intentEventCreate3.putExtra("wantedPersonStr", wantedPersonStr);
+                intentEventCreate3.putExtra("wantedPerson", wantedPerson);
                 intentEventCreate3.putExtra("deadlineStr", deadlineStr);
                 intentEventCreate3.putExtra("commentStr", commentStr);
                 startActivity(intentEventCreate3);

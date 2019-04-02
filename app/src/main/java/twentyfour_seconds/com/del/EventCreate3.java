@@ -42,7 +42,7 @@ public class EventCreate3 extends AppCompatActivity {
     private String area;
     private String placeStr;
     private String eventDayStr;
-    private String wantedPersonStr;
+    private int wantedPerson;
     private String deadlineStr;
 
 
@@ -151,7 +151,7 @@ public class EventCreate3 extends AppCompatActivity {
             EventCreate4Page.putExtra("area", area);
             EventCreate4Page.putExtra("placeStr", placeStr);
             EventCreate4Page.putExtra("eventDayStr", eventDayStr);
-            EventCreate4Page.putExtra("wantedPersonStr", wantedPersonStr);
+            EventCreate4Page.putExtra("wantedPerson", wantedPerson);
             EventCreate4Page.putExtra("deadlineStr", deadlineStr);
             startActivity(EventCreate4Page);
         }
@@ -164,7 +164,7 @@ public class EventCreate3 extends AppCompatActivity {
         this.area = intent.getStringExtra("area");
         this.placeStr = intent.getStringExtra("placeStr");
         this.eventDayStr = intent.getStringExtra("eventDayStr");
-        this.wantedPersonStr = intent.getStringExtra("wantedPersonStr");
+        this.wantedPerson = intent.getIntExtra("wantedPerson", 0);
         this.deadlineStr = intent.getStringExtra("deadlineStr");
     }
 

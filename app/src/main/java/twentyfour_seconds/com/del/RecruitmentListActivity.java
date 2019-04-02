@@ -65,6 +65,7 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                break;
             case 2:
                 //タグから検索する
                 tag_type = intent.getIntExtra("tag_type",0);
@@ -76,12 +77,23 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                break;
         }
+//データベースの件数が7件以上ある場合、下の配列のIndex数を超えるため、10以上あったらば、6に置き換える
+        int Indexlength;
+        if(Common.titleList.size() > 7){
+            Indexlength = 7;
+        }else{
+            Indexlength = Common.titleList.size();
+        }
+
 //DB取得時、データをcommonクラスに格納するため、commonクラスより、データを取得
-        for(int i = 0; i < Common.titleList.size(); i++) {
+        for(int i = 0; i < Indexlength; i++) {
 //            Log.d("size", ""+Common.titleList.size());
 //            Log.d("i", ""+i);
             Map<String, String> menu = new HashMap<>();
+            Log.d("i", i + "");
+            Log.d("word", Common.idList.get(i) + "");
             menu.put("id", Common.idList.get(i));
             menu.put("image", Common.imageList.get(i));
             menu.put("title", Common.titleList.get(i));
@@ -138,6 +150,11 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
         //visibleItemCount : 画面内に表示されているリストの個数（画面に隠れているリストはカウントしない）
         //totalItemCount : ListViewが持つリストの総数
 
+
+        Log.i("firstVisible", firstVisible + "");
+        Log.i("visibleCount", visibleCount + "");
+        Log.i("totalCount"  , totalCount + "");
+
         boolean loadMore = firstVisible + visibleCount >= totalCount;
 //      totalカウントを最初にDBから読み込むのではなく、前回取得したデータベースの個数が
 //      7件以下（最終レコードまで到達）であれば、スクロール時のデータベース読み込みを行わない。
@@ -159,6 +176,7 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    break;
                 case 2:
                     //タグから検索する
                     TagMapDB TagMapDB = new TagMapDB(count,tag_type, latch);
@@ -168,6 +186,7 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    break;
             }
 
 //            try {

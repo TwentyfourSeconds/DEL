@@ -16,6 +16,7 @@ import com.google.android.flexbox.JustifyContent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 public class EventCreate4 extends AppCompatActivity {
 
@@ -28,7 +29,7 @@ public class EventCreate4 extends AppCompatActivity {
     private String area;
     private String placeStr;
     private String eventDayStr;
-    private String wantedPersonStr;
+    private int wantedPerson;
     private String deadlineStr;
     private String commentStr;
     private ArrayList<String> StringList;
@@ -51,7 +52,7 @@ public class EventCreate4 extends AppCompatActivity {
         TextView EventDay = findViewById(R.id.EventDay);
         EventDay.setText(eventDayStr);
         TextView recruitmentNumbers = findViewById(R.id.recruitmentNumbers);
-        recruitmentNumbers.setText(wantedPersonStr);
+        recruitmentNumbers.setText(wantedPerson + "");
         TextView LimitDay = findViewById(R.id.LimitDay);
         LimitDay.setText(deadlineStr);
         TextView hitokoto = findViewById(R.id.hitokoto);
@@ -94,7 +95,7 @@ public class EventCreate4 extends AppCompatActivity {
     this.area = intent.getStringExtra("area");
     this.placeStr = intent.getStringExtra("placeStr");
     this.eventDayStr = intent.getStringExtra("eventDayStr");
-    this.wantedPersonStr = intent.getStringExtra("wantedPersonStr");
+    this.wantedPerson = intent.getIntExtra("wantedPerson", 0);
     this.deadlineStr = intent.getStringExtra("deadlineStr");
     this.commentStr = intent.getStringExtra("commentStr");
     this.StringList = intent.getStringArrayListExtra("list");
@@ -115,11 +116,49 @@ public class EventCreate4 extends AppCompatActivity {
         return ret;
     }
 
-
     //登録内容の確認ボタンを押下時の動き(eventCreate4に移動)
     public class  contentregistrationButtonClick implements View.OnClickListener {
         @Override
         public void onClick(View view) {
+            //データベースへの登録処理を行う。
+
+            //founderは、person_infoより、nameを取得する
+            //latchは1
+            final CountDownLatch latch = new CountDownLatch(1);
+            String founder = "サンプル太郎";
+
+            //current_personは、初期値の1を登録する
+            int current_person = 1;
+
+            //delete_flgは、初期値のゼロを登録する
+            int delete_flg = 0;
+
+
+//            //founderは一回コメント化
+//            PersonDB personDB = new PersonDB(1,latch);
+//            personDB.execute();
+//            try {
+//                latch.await();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//
+//            founder = Common.personName;
+//
+//            Log.d("founder", Common.personName + "");
+//            Log.d("founder", founder + "");
+
+            //DBに書き込みに行く
+            EventCreateDB eventCreateDB = new EventCreateDB(eventNameStr,founder,area,placeStr,eventDayStr,deadlineStr,current_person,wantedPerson,commentStr,delete_flg);
+            eventCreateDB.execute();
+
+            //TagDBに登録する
+
+
+
+
+
+            //登録完了画面(EventCreate5)に移動
             Intent EventCreate5Page = new Intent(getApplicationContext(), EventCreate5.class);
             startActivity(EventCreate5Page);
         }

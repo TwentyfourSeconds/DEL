@@ -28,6 +28,7 @@ import static twentyfour_seconds.com.del.Common.currentRecordsetLength;
 
 public class DetectionDB extends AsyncTask<String, String, String> {
 
+    //numberは、DBを読み込むときの開始位置
     private int number = 0;
     private String searchWord;
     private CountDownLatch latch;
@@ -142,12 +143,13 @@ public class DetectionDB extends AsyncTask<String, String, String> {
 //                Log.d("json", json.toString());
                 Common.idList.add(json.getString("id"));
                 Common.imageList.add(json.getString("image"));
-                Common.titleList.add(json.getString("title"));
+                Common.titleList.add(json.getString("event_name"));
+                Common.titleList.add(json.getString("founder"));
                 Common.areaList.add(json.getString("area"));
-                Common.localList.add(json.getString("local"));
-                Common.termList.add(json.getString("term"));
+                Common.localList.add(json.getString("place"));
+                Common.termList.add(json.getString("event_day"));
                 Common.deadlineList.add(json.getString("deadline"));
-                Common.memberList.add(json.getInt("current_num") + "/" + json.getInt("sum"));
+                Common.memberList.add(json.getInt("current_person") + "/" + json.getInt("wanted_person"));
 //            Log.d("json", json.toString());
 //            Log.d("id", "" + json.getInt("id"));
 //            Log.d("image", json.getString("image"));

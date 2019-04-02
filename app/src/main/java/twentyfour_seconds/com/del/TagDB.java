@@ -131,6 +131,5 @@ public class TagDB extends AsyncTask<String, String, String> {
         }
         return sb.toString();
     }
-
 }
 
