@@ -60,13 +60,13 @@ public class RecruitmentDetailActivity extends CustomActivity {
         // インテントに保存されたデータを取得
         int id = Integer.valueOf(intent.getStringExtra("id"));
 
-        final CountDownLatch latch = new CountDownLatch(3);
+        final CountDownLatch latch = new CountDownLatch(1);
         DetailDB ddb = new DetailDB(id, latch);
         ddb.execute();
-        ChatDB cdb = new ChatDB(id, latch);
-        cdb.execute();
-        TagDB tdb = new TagDB(id, latch);
-        tdb.execute();
+//        ChatDB cdb = new ChatDB(id, latch);
+//        cdb.execute();
+//        TagDB tdb = new TagDB(id, latch);
+//        tdb.execute();
         try {
             latch.await();
         } catch (InterruptedException e) {

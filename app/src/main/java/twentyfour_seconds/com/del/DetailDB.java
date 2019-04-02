@@ -89,14 +89,14 @@ public class DetailDB extends AsyncTask<String, String, String> {
             json = new JSONObject(result);
             Common.id = json.getString("id");
             Common.image = json.getString("image");
-            Common.title = json.getString("title");
-            Common.name = json.getString("name");
+            Common.title = json.getString("event_name");
+            Common.name = json.getString("founder");
             Common.area = json.getString("area");
-            Common.local = json.getString("local");
-            Common.date = json.getString("date");
-            Common.term = json.getString("term");
+            Common.local = json.getString("place");
+            Common.date = json.getString("event_day");
+            Common.term = "test";
             Common.deadline = json.getString("deadline");
-            Common.member = json.getString("current_num") + "/" + json.getString("sum");
+            Common.member = json.getString("current_person") + "/" + json.getString("wanted_person");
             Common.comment = json.getString("comment");
         } catch (IOException ex) {
         } catch (JSONException e) {
