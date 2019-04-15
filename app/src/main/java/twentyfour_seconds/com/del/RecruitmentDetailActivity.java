@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -36,7 +37,7 @@ public class RecruitmentDetailActivity extends CustomActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recruitment_detail);
+        setContentView(R.layout.wanted_detail);
 
         icon = findViewById(R.id.icon);
         leader = findViewById(R.id.leader);
@@ -49,10 +50,10 @@ public class RecruitmentDetailActivity extends CustomActivity {
         deadline = findViewById(R.id.deadline);
         tag = findViewById(R.id.tag);
         entry = findViewById(R.id.entry);
-        temporary = findViewById(R.id.temporary);
-        chat = findViewById(R.id.chat);
-        newComment = findViewById(R.id.newComment);
-        chatButton = findViewById(R.id.chatButton);
+//        temporary = findViewById(R.id.temporary);
+//        chat = findViewById(R.id.chat);
+//        newComment = findViewById(R.id.newComment);
+//        chatButton = findViewById(R.id.chatButton);
 
 
         // インテントを取得
@@ -65,8 +66,9 @@ public class RecruitmentDetailActivity extends CustomActivity {
         ddb.execute();
 //        ChatDB cdb = new ChatDB(id, latch);
 //        cdb.execute();
-//        TagDB tdb = new TagDB(id, latch);
-//        tdb.execute();
+        Log.i("id",id + "");
+        TagDB tdb = new TagDB(id, latch);
+        tdb.execute();
         try {
             latch.await();
         } catch (InterruptedException e) {
@@ -84,31 +86,29 @@ public class RecruitmentDetailActivity extends CustomActivity {
         member.setText("募集人数：" + Common.member);
 
 
-//        String[] tags = {"tag1", "tag2", "tag3", "tag4", "tag5"};
-//        ArrayAdapter<String> tagAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, tags);
-        ArrayAdapter<String> tagAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Common.tagList);
-//        Log.d("tag", tagAdapter.toString());
-        tag.setAdapter(tagAdapter);
 
-//        String[] data = {"1","2","3"};
-//        String[] data = new String[Common.chat.size()];
-//        for(int i = 0; i < Common.chat.size(); i++) {
-//            Log.d("chat", Common.chat.get(i));
-//            data[i] = Common.chat.get(i).toString();
-//        }
-//        ArrayList data = new ArrayList<>();
-//        for(int i = 0; i < Common.chat.size(); i++) {
-//            Log.d("chat", Common.chat.get(i));
-//            data.add("" + Common.chat.get(i));
-//            Log.d("data", "" + data.get(i));
-//        }
-//        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, data);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Common.chat);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(RecruitmentDetailActivity.this, android.R.layout.simple_list_item_1, data);
-//        ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);
-//        Log.d("data", data.toString());
-//        Log.d("chat", chat.toString());
-        chat.setAdapter(adapter);
+//        ArrayAdapter<String> tagAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Common.tagList);
+//        tag.setAdapter(tagAdapter);
+//
+////        String[] data = {"1","2","3"};
+////        String[] data = new String[Common.chat.size()];
+////        for(int i = 0; i < Common.chat.size(); i++) {
+////            Log.d("chat", Common.chat.get(i));
+////            data[i] = Common.chat.get(i).toString();
+////        }
+////        ArrayList data = new ArrayList<>();
+////        for(int i = 0; i < Common.chat.size(); i++) {
+////            Log.d("chat", Common.chat.get(i));
+////            data.add("" + Common.chat.get(i));
+////            Log.d("data", "" + data.get(i));
+////        }
+////        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, data);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Common.chat);
+////        ArrayAdapter<String> adapter = new ArrayAdapter<>(RecruitmentDetailActivity.this, android.R.layout.simple_list_item_1, data);
+////        ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);
+////        Log.d("data", data.toString());
+////        Log.d("chat", chat.toString());
+//        chat.setAdapter(adapter);
 
 
 //        icon.setImlocationResource(R.drawable.);
@@ -149,28 +149,26 @@ public class RecruitmentDetailActivity extends CustomActivity {
             }
         });
 
-        chatButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(RecruitmentDetailActivity.this);
-                alertDialog.setTitle("下記のコメントでよろしいですか？");
-                alertDialog.setMessage("テストメッセージ");
-                alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                alertDialog.setNegativeButton("キャンセル", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                alertDialog.create().show();
-            }
-        });
+//        chatButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                AlertDialog.Builder alertDialog = new AlertDialog.Builder(RecruitmentDetailActivity.this);
+//                alertDialog.setTitle("下記のコメントでよろしいですか？");
+//                alertDialog.setMessage("テストメッセージ");
+//                alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                    }
+//                });
+//                alertDialog.setNegativeButton("キャンセル", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                    }
+//                });
+//                alertDialog.create().show();
+//            }
+//        });
 
 
         //下部メニューボタンを押下したときの処理を記載

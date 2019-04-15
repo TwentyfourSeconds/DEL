@@ -149,14 +149,10 @@ public class EventCreate4 extends AppCompatActivity {
 //            Log.d("founder", founder + "");
 
             //DBに書き込みに行く
-            EventCreateDB eventCreateDB = new EventCreateDB(eventNameStr,founder,area,placeStr,eventDayStr,deadlineStr,current_person,wantedPerson,commentStr,delete_flg);
-            eventCreateDB.execute();
+            EventCreateDBWrite eventCreateDBWrite = new EventCreateDBWrite(eventNameStr,founder,area,placeStr,eventDayStr,deadlineStr,current_person,wantedPerson,commentStr,delete_flg);
+            eventCreateDBWrite.execute();
 
             //TagDBに登録する
-
-
-
-
 
             //登録完了画面(EventCreate5)に移動
             Intent EventCreate5Page = new Intent(getApplicationContext(), EventCreate5.class);

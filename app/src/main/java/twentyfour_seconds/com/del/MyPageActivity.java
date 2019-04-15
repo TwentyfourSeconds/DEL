@@ -2,8 +2,9 @@ package twentyfour_seconds.com.del;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,39 +12,37 @@ import java.util.concurrent.CountDownLatch;
 
 public class MyPageActivity extends CustomActivity {
 
-    private ImageView icon;
-    private TextView topName;
-    private TextView selfIntroduction;
-    private TextView name;
-    private TextView gender;
-    private TextView location;
-    private TextView age;
-    private TextView entryTrust;
-    private TextView planTrust;
+    private ImageView iconProfile;
+    private TextView topNameProfile;
+    private TextView selfIntroductionProfile;
+    private TextView nameProfile;
+    private TextView genderProfile;
+    private TextView areaProfile;
+    private TextView ageProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage);
 
-        icon = findViewById(R.id.icon);
-        topName = findViewById(R.id.topName);
-        selfIntroduction = findViewById(R.id.selfIntroduction);
-        name = findViewById(R.id.name);
-        gender = findViewById(R.id.gender);
-        location = findViewById(R.id.location);
-        age = findViewById(R.id.age);
-        entryTrust = findViewById(R.id.entryTrust);
-        planTrust = findViewById(R.id.planTrust);
-
+        iconProfile = findViewById(R.id.icon);
+        topNameProfile = findViewById(R.id.topName);
+        selfIntroductionProfile = findViewById(R.id.selfIntroduction);
+        nameProfile = findViewById(R.id.name);
+        genderProfile = findViewById(R.id.gender);
+        areaProfile = findViewById(R.id.location);
+        ageProfile = findViewById(R.id.age_profile);
 
         // インテントを取得
         Intent intent = getIntent();
+
         // インテントに保存されたデータを取得
         int id = Integer.valueOf(intent.getStringExtra("id"));
 
+        Log.d("マイページ　id" ,id + "");
+
         final CountDownLatch latch = new CountDownLatch(1);
-        PersonDB pdb = new PersonDB(id, latch);
+        PersonDBRead pdb = new PersonDBRead(id, latch);
         pdb.execute();
         try {
             latch.await();
@@ -51,28 +50,21 @@ public class MyPageActivity extends CustomActivity {
             e.printStackTrace();
         }
 
-        topName.setText(Common.personName);
-        name.setText(Common.personName);
-        selfIntroduction.setText(Common.personSelfIntroduction);
+        topNameProfile.setText(Common.personName);
+        selfIntroductionProfile.setText(Common.personSelfIntroduction);
         if(Common.personGender == 0) {
-            gender.setText("男");
+            genderProfile.setText("男");
         } else {
-            gender.setText("女");
+            genderProfile.setText("女");
         }
-        location.setText(Common.personLocation);
-        age.setText("" + Common.personAge);
-        entryTrust.setText("50");
-        planTrust.setText("50");
+        areaProfile.setText(Common.personLocation);
+        ageProfile.setText("" + Common.personAge);
 
-//        icon.setImageResource(R.drawable.);
-//        topName.setText("takuma");
-//        name.setText("takuma");
-//        selfIntroduction.setText("自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介");
-//        gender.setText("男");
-//        location.setText("東京");
-//        age.setText("29才");
-//        entryTrust.setText("50");
-//        planTrust.setText("50");
+        //プロフィール編集画面に遷移する
+
+        Button profileEdit = findViewById(R.id.profileEditButton);
+        View.OnClickListener buttonClick = new MyPageActivity.profileClickListener();
+        profileEdit.setOnClickListener(buttonClick);
 
 
         //下部メニューボタンを押下したときの処理を記載
@@ -90,46 +82,25 @@ public class MyPageActivity extends CustomActivity {
 
     }
 
-//    public class menuClickListener implements View.OnClickListener{
-//        @Override
-//        public void onClick(View view){
-//            int id = view.getId();
-//            switch(id){
-//                case R.id.menu_bar_home:
-//                    //home画面へと飛ぶ処理
-//                    Intent intentHome = new Intent(MyPageActivity.this, TopActivity.class);
-//                    startActivity(intentHome);
-//                    break;
-//                case R.id.menu_bar_event:
-//                    //イベント作成画面へと飛ぶ処理
-//                    Intent intentEvent = new Intent(MyPageActivity.this, tabcontrol_main.class);
-//                    startActivity(intentEvent);
-//                    break;
-//                case R.id.menu_bar_chat:
-//                    //チャット画面へと飛ぶ処理
-//                    Intent intentchat = new Intent(MyPageActivity.this, ChatDB.class);
-//                    startActivity(intentchat);
-//                    break;
-//                case R.id.menu_bar_mypage:
-//                    //マイページ画面へと飛ぶ処理
-//                    Intent intentMypage = new Intent(MyPageActivity.this, MyPageActivity.class);
-//                    startActivity(intentMypage);
-//                    break;
-//            }
-//        }
+    //グループを検索ボタンを押下時の動き
+    public class profileClickListener implements View.OnClickListener{
+        public void onClick(View view){
+            Intent intent_profileRegistrationMain = new Intent(getApplicationContext(), profileRegistrationMain.class);
+            String topNameString = topNameProfile.getText().toString();
+            String selfIntroductionString = selfIntroductionProfile.getText().toString();
+            //性別は男か女を変換しているため、Commonの値を持ってくる
+            String genderString = Common.personGender + "";
+            String areaString = areaProfile.getText().toString();
+            //ageはテキストに出すために文字列
+            String ageString = ageProfile.getText().toString();
 
+            intent_profileRegistrationMain.putExtra("topName",topNameString);
+            intent_profileRegistrationMain.putExtra("selfIntroduction",selfIntroductionString);
+            intent_profileRegistrationMain.putExtra("gender",genderString);
+            intent_profileRegistrationMain.putExtra("area",areaString);
+            intent_profileRegistrationMain.putExtra("ageString",ageString);
 
-
-//        Intent intent = getIntent();
-//        int iconId = getResources().getIdentifier(intent.getStringExtra("icon"), "drawable", getPackageName());
-//        icon.setImageResource(iconId);
-//        topName.setText(intent.getStringExtra("name"));
-//        name.setText(intent.getStringExtra("name"));
-//        selfIntroduction.setText(intent.getStringExtra("selfIntroduction"));
-//        gender.setText(intent.getStringExtra("gender"));
-//        location.setText(intent.getStringExtra("location"));
-//        age.setText(intent.getStringExtra("age") + "才");
-//        entryTrust.setText(intent.getStringExtra("entryTrust"));
-//        planTrust.setText(intent.getStringExtra("planTrust"));
-//    }
+            startActivity(intent_profileRegistrationMain);
+        }
+    }
 }

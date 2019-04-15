@@ -3,9 +3,6 @@ package twentyfour_seconds.com.del;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,52 +10,55 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.concurrent.CountDownLatch;
 
-public class TagMapDB extends AsyncTask<String, String, String> {
+public class EventCreateDBWrite extends AsyncTask<String, String, String> {
 
-    private int Tag_id;
-    private CountDownLatch latch;
-    private int number = 0;
-    private ArrayList<JSONObject> data = new ArrayList<JSONObject>();
-    private JSONObject json;
+    private String eventName = null;
+    private String founder = null;
+    private String area = null;
+    private String place = null;
+    private String eventDay = null;
+    private String deadline = null;
+    private int current_person = 0;
+    private int wanted_person = 0;
+    private String comment = null;
+    private int delete_flg = 0;
 
-    //初回の時に使用されるコンストラクタ。使用するnumberは0
-    TagMapDB(int Tag_id, CountDownLatch latch) {
-        this.Tag_id = Tag_id;
-        this.latch = latch;
-    }
 
-    //2回目の時に使用されるコンストラクタ。使用するnumberは0
-    TagMapDB(int number, int Tag_id, CountDownLatch latch) {
-        this.number = number;
-        this.Tag_id = Tag_id;
-        this.latch = latch;
+    EventCreateDBWrite(String eventNameStr,String founder, String area, String placeStr, String eventDay, String deadline, int current_person, int wantedPerson, String commentStr, int delete_flg) {
+        //コンストラクタ
+        this.eventName = eventNameStr;
+        this.founder = founder;
+        this.area = area;
+        this.place = placeStr;
+        this.eventDay = eventDay;
+        this.deadline = deadline;
+        this.current_person = current_person;
+        this.wanted_person = wantedPerson;
+        this.comment = commentStr;
+        this.delete_flg = delete_flg;
     }
 
     @Override
     protected String doInBackground(String... string) {
-        String urlStr = "http://10.0.2.2:8000/recruitment_tagMap";
+        String urlStr = "http://10.0.2.2:7000/EventCreateDB";
         String write = "";
         String result = "";
 
-        //動作前にcommonの中身をクリアする
-        Common.tagMapList.clear();
-        Common.idList.clear();
-        Common.imageList.clear();
-        Common.titleList.clear();
-        Common.areaList.clear();
-        Common.localList.clear();
-        Common.termList.clear();
-        Common.deadlineList.clear();
-        Common.memberList.clear();
-
-
         StringBuilder sb = new StringBuilder();
-        sb.append("tag_id=" + Tag_id);
-        sb.append("&number=" + number);
+        sb.append("event_name=" + eventName);
+        sb.append("&founder=" + founder);
+        sb.append("&area=" + area);
+        sb.append("&place=" + place);
+        sb.append("&event_day=" + eventDay);
+        sb.append("&deadline=" + deadline);
+        sb.append("&current_person=" + current_person);
+        sb.append("&wanted_person=" + wanted_person);
+        sb.append("&comment=" + comment);
+        sb.append("&delete_flg=" + delete_flg);
         write = sb.toString();
+
+        Log.i("write",write);
 
         //http接続を行うHttpURLConnectionオブジェクトを宣言。finallyで確実に解放するためにtry外で宣言。
         HttpURLConnection con = null;
@@ -77,19 +77,16 @@ public class TagMapDB extends AsyncTask<String, String, String> {
             con.setDoOutput(true);
             //接続。
             con.connect();
-
             // POSTデータ送信処理
             OutputStream outStream = null;
-
-
             try {
                 outStream = con.getOutputStream();
-                outStream.write( write.getBytes("UTF-8"));
+                outStream.write(write.getBytes("UTF-8"));
                 outStream.flush();
             } catch (IOException e) {
                 // POST送信エラー
                 e.printStackTrace();
-                result="POST送信エラー";
+                result = "POST送信エラー";
             } finally {
                 if (outStream != null) {
                     outStream.close();
@@ -104,34 +101,10 @@ public class TagMapDB extends AsyncTask<String, String, String> {
             }
             //HttpURLConnectionオブジェクトからレスポンスデータを取得。
             is = con.getInputStream();
-
-            if(is == null) {
-                return "0";
-            }
 //                レスポンスデータであるInputStreamオブジェクトを文字列に変換。
             result = is2String(is);
-            Log.d("result", result + "end");
-            String[] databases = result.split(";");
-            json = new JSONObject(databases[0]);
-            //      totalカウントを最初にDBから読み込むのではなく、前回取得したデータベースの個数が
-            //      7件以下（最終レコードまで到達）であれば、スクロール時のデータベース読み込みを行わない。
-            Common.currentRecordsetLength = databases.length;
-            for(int i = 0; i < databases.length; i++) {
-//                Log.d("databases", databases[i]);
-                json = new JSONObject(databases[i]);
-                data.add(json);
-                Common.idList.add(json.getString("id"));
-                Common.imageList.add(json.getString("image"));
-                Common.titleList.add(json.getString("title"));
-                Common.areaList.add(json.getString("area"));
-                Common.localList.add(json.getString("local"));
-                Common.termList.add(json.getString("term"));
-                Common.deadlineList.add(json.getString("deadline"));
-                Common.memberList.add(json.getInt("current_num") + "/" + json.getInt("sum"));
-            }
+            Log.d("result", result);
         } catch (IOException ex) {
-        } catch (JSONException e) {
-            e.printStackTrace();
         } finally {
             //HttpURLConnectionオブジェクトがnullでないなら解放。
             if (con != null) {
@@ -145,7 +118,6 @@ public class TagMapDB extends AsyncTask<String, String, String> {
                 }
             }
         }
-        latch.countDown();
         return result;
     }
 
@@ -159,4 +131,6 @@ public class TagMapDB extends AsyncTask<String, String, String> {
         }
         return sb.toString();
     }
+
 }
+
