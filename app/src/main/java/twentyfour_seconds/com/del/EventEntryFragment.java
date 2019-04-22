@@ -110,7 +110,6 @@ public class EventEntryFragment extends Fragment implements View.OnClickListener
                 eventList.add(event);
             }
 
-
             //SimpleAdapter第4引数from用データの用意。
             String[] from = {"title", "date"};
             //SimpleAdapter第5引数to用データの用意。

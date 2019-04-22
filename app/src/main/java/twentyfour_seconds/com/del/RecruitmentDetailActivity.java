@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,7 +14,15 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
+
+import static twentyfour_seconds.com.del.Common.tagList;
 
 
 public class RecruitmentDetailActivity extends CustomActivity {
@@ -33,6 +42,13 @@ public class RecruitmentDetailActivity extends CustomActivity {
     private ListView chat;
     private TextView newComment;
     private Button chatButton;
+
+    //変数の定義
+    private List<ViewItemDTO> messageList;
+    private ViewAdapterReadOnly viewAdapterReadOnly;
+    private String tag_id;
+    //取得してきたタグをリストの中に入れる
+    List<String> tagName = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,14 +82,94 @@ public class RecruitmentDetailActivity extends CustomActivity {
         ddb.execute();
 //        ChatDB cdb = new ChatDB(id, latch);
 //        cdb.execute();
-        Log.i("id",id + "");
-        TagDB tdb = new TagDB(id, latch);
-        tdb.execute();
+        //タグDBからidをキーにして、含まれているtagを取得する。
+//        Log.i("id",id +"");
+//        TagMapDB TagMapDB = new TagMapDB(id, latch);
+//        TagMapDB.execute();
         try {
             latch.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        //取得したタグid情報を取得する。複数くることはない想定なので、一番最初の要素を抽出
+        tag_id = Common.tag_type;
+        Log.d("tag_id", tag_id + "");
+
+        //取得したタグid情報を分割する。
+        String[] tag = tag_id.split(",", 0);
+
+        Log.d("tag.length", tag.length + "");
+
+        for(int i = 0; i < tag.length; i++){
+            Log.d("tag", Integer.parseInt(tag[i]) + "");
+        }
+
+        //タグDB用のラッチを新しく用意する
+//        CountDownLatch latch2 = new CountDownLatch(1);
+
+        //タグidから、tagDBを読み込み、タグ名称を取得する。
+//        for(int i = 0; i < tag.length; i++){
+//
+//            int tagIdSearch = Integer.parseInt(tag[i]);
+//            Log.d("tagIdSearch", tagIdSearch + "");
+//            TagDB tdb = new TagDB(tagIdSearch, latch2);
+//            tdb.execute();
+//            try {
+//                latch2.await();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            latch2 = new CountDownLatch(1);
+//        }
+
+        //
+
+        //タグを日本語化する処理を作成する★将来的には別クラスで作成する
+        for(int i = 0; i < tag.length; i++) {
+
+            int tagIdSearch = Integer.parseInt(tag[i]);
+            switch(tagIdSearch){
+                case 1:
+                    tagName.add("机に座ってガッツリと");
+                    break;
+                case 2:
+                    tagName.add("密室からの脱出");
+                    break;
+                case 3:
+                    tagName.add("街を歩き回って");
+                    break;
+                case 4:
+                    tagName.add("遊園地や野球場で");
+                    break;
+                case 5:
+                    tagName.add("短い時間で気軽に");
+                    break;
+            }
+        }
+
+        //*取得してきたデータをタグ形式で出力する*//
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.flex_box_recycler_view);
+
+        //--------------------------------flexBox Layout の調整-----------------------------------------------//
+        // FlexboxLayoutManangerを定義する（レイアウトマネージャーは、リストデータの見え方を決める。※これがリストビューとは異なるリサイクラービューのいいところ）
+        FlexboxLayoutManager flexboxLayoutManager = new FlexboxLayoutManager(getApplicationContext());
+        //どっち側に伸ばすか.
+        flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
+        // 子Viewの並び方向へのViewの張り付き位置
+        flexboxLayoutManager.setJustifyContent(JustifyContent.FLEX_START);
+        // リサイクラービューにレイアウトマネージャーを設定
+        recyclerView.setLayoutManager(flexboxLayoutManager);
+
+        //--------------------------------viewAdapter の調整-----------------------------------------------//
+
+        //データをmessageListに格納
+        messageList = this.initViewItemDtoList();
+        // アダプターオブジェクトを生成して、下のメソッドで設定した文字列を追加
+        viewAdapterReadOnly = new ViewAdapterReadOnly(messageList);
+        // アダプターオブジェクトをセット
+        recyclerView.setAdapter(viewAdapterReadOnly);
+
 
         leader.setText("募集者：" + Common.name + "さん");
         title.setText(Common.title);
@@ -196,4 +292,23 @@ public class RecruitmentDetailActivity extends CustomActivity {
 //        age.setText(intent.getStringExtra("age"));
 //        gender.setText(intent.getStringExtra("gender"));
     }
+
+    private List<ViewItemDTO> initViewItemDtoList() {
+        //リストの配列　retを定義
+        List<ViewItemDTO> ret = new ArrayList<ViewItemDTO>();
+
+        for (int i = 0; i < tagName.size(); i++) {
+            //ViewItemDTOのインスタンスを生成
+            ViewItemDTO itemDto = new ViewItemDTO();
+            itemDto.setText(tagName.get(i));
+
+//          ret配列に、設定した文字列を追加
+            ret.add(itemDto);
+        }
+        return ret;
+    }
+
+
+
+
 }

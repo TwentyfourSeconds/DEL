@@ -99,7 +99,7 @@ public class TagDB extends AsyncTask<String, String, String> {
                 json = new JSONObject(databases[i]);
                 data.add(json);
 //                Log.d("json", json.toString());
-                Common.tagList.add(json.getString("tag_name"));
+                Common.tagList.add(json.getString("tag"));
             }
         } catch (IOException ex) {
         } catch (JSONException e) {

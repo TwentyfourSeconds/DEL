@@ -81,7 +81,6 @@ public class TagMapDB extends AsyncTask<String, String, String> {
             // POSTデータ送信処理
             OutputStream outStream = null;
 
-
             try {
                 outStream = con.getOutputStream();
                 outStream.write( write.getBytes("UTF-8"));
@@ -122,12 +121,13 @@ public class TagMapDB extends AsyncTask<String, String, String> {
                 data.add(json);
                 Common.idList.add(json.getString("id"));
                 Common.imageList.add(json.getString("image"));
-                Common.titleList.add(json.getString("title"));
+                Common.titleList.add(json.getString("event_name"));
                 Common.areaList.add(json.getString("area"));
-                Common.localList.add(json.getString("local"));
-                Common.termList.add(json.getString("term"));
+                Common.localList.add(json.getString("place"));
+                Common.termList.add(json.getString("event_day"));
                 Common.deadlineList.add(json.getString("deadline"));
-                Common.memberList.add(json.getInt("current_num") + "/" + json.getInt("sum"));
+                Common.tagMapList.add(json.getString("tag_id"));
+                Common.memberList.add(json.getInt("current_person") + "/" + json.getInt("wanted_person"));
             }
         } catch (IOException ex) {
         } catch (JSONException e) {

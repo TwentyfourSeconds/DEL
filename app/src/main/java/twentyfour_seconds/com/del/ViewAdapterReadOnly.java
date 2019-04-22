@@ -31,7 +31,7 @@ public class ViewAdapterReadOnly extends RecyclerView.Adapter<RecyclerListViewHo
 
         //タッチイベント
         //activity_flexbox_layout_recycler_view_item（XMLレイアウト）の内部部品であるflex_box_recycler_view_text_item(テキストビュー)を取得
-        final TextView textItem = (TextView) itemView.findViewById(R.id.flex_box_recycler_view_text_item);
+        final TextView textItem = (TextView) itemView.findViewById(R.id.inviteTag);
 
         //ビューホルダーオブジェクトを生成（一番下で変数をreturnすることで、ViewHolderに処理が飛ぶ）
         final RecyclerListViewHolder ret = new RecyclerListViewHolder(itemView);

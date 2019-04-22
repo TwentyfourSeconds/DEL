@@ -39,7 +39,6 @@ public class EventTabcontrol_main extends AppCompatActivity {
         plus.setOnClickListener(EventCreateClick);
     }
 
-
     //イベント作成ボタンを押下時
     public class  EventCreateClickListener implements View.OnClickListener {
         @Override

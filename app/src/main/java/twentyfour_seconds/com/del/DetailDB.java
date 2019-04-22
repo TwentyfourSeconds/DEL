@@ -98,6 +98,8 @@ public class DetailDB extends AsyncTask<String, String, String> {
             Common.deadline = json.getString("deadline");
             Common.member = json.getString("current_person") + "/" + json.getString("wanted_person");
             Common.comment = json.getString("comment");
+            Common.tag_type = json.getString("tag_type");
+
         } catch (IOException ex) {
         } catch (JSONException e) {
             e.printStackTrace();

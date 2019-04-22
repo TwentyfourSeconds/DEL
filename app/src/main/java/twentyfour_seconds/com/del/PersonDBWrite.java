@@ -53,7 +53,6 @@ public class PersonDBWrite extends AsyncTask<String, String, String> {
         sb.append("&gender=" + gender);
 
         write = sb.toString();
-        Log.d("前1", "前1");
         //http接続を行うHttpURLConnectionオブジェクトを宣言。finallyで確実に解放するためにtry外で宣言。
         HttpURLConnection con = null;
         //http接続のレスポンスデータとして取得するInputStreamオブジェクトを宣言。同じくtry外で宣言。
@@ -82,18 +81,12 @@ public class PersonDBWrite extends AsyncTask<String, String, String> {
                 // POST送信エラー
                 e.printStackTrace();
                 result="POST送信エラー";
-                Log.d("前5", "前5");
             } finally {
                 if (outStream != null) {
-                    Log.d("前6", "前6");
                     outStream.close();
                 }
             }
-            Log.d("前2", "前2");
-            //★ここの処理が異常終了している。
-            //接続そのものに失敗した場合など、サーバから HTTPレスポンスコードを受け取れなかった場合、このメソッドは java.io.IOExceptionをスローします。
             final int status = con.getResponseCode();
-            Log.d("前3", "前3");
             if (status == HttpURLConnection.HTTP_OK) {
                 Log.d("HTTP_STATUS", "HTTP_OK");
             }
@@ -101,7 +94,6 @@ public class PersonDBWrite extends AsyncTask<String, String, String> {
                 Log.d("HTTP_STATUS", String.valueOf(status));
             }
             //HttpURLConnectionオブジェクトからレスポンスデータを取得。
-            Log.d("前4", "前4");
             is = con.getInputStream();
 //                レスポンスデータであるInputStreamオブジェクトを文字列に変換。
             result = is2String(is);

@@ -26,10 +26,13 @@ public class Common {
     public static String deadline;
     public static String member;
     public static String comment;
+    public static String tag_type;
 
     public static List<String> chat = new ArrayList<>();
 
+    //タグの名称が格納されているリスト
     public static List<String> tagList = new ArrayList<>();
+    //イベントに紐づくタグを管理している文字列
     public static List<String> tagMapList = new ArrayList<>();
 
     public static String personId;
