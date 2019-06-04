@@ -26,7 +26,7 @@ public class RecruitmentListDataGet extends AppCompatActivity implements AbsList
 
         final CountDownLatch latch = new CountDownLatch(1);
         //        DetectionDB ddb = new DetectionDB(searchWord, latch);
-        DetectionDB ddb = new DetectionDB(searchWord, latch);
+        event_info_event_name_search ddb = new event_info_event_name_search(searchWord, latch);
         ddb.execute();
         try {
             latch.await();
@@ -52,8 +52,8 @@ public class RecruitmentListDataGet extends AppCompatActivity implements AbsList
             count += visibleCount; // or any other amount
 
             final CountDownLatch latch = new CountDownLatch(1);
-//        DetectionDB ddb = new DetectionDB(searchWord, latch);
-            DetectionDB ddb = new DetectionDB(count, latch);
+
+            event_info_event_name_search ddb = new event_info_event_name_search(count, latch);
             ddb.execute();
             try {
                 latch.await();

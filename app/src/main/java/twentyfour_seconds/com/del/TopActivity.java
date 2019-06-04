@@ -3,11 +3,16 @@ package twentyfour_seconds.com.del;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Display;
 import android.view.GestureDetector;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 
 public class TopActivity extends CustomActivity {
@@ -26,6 +32,12 @@ public class TopActivity extends CustomActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top);
+
+        //toolbarを実装する
+        // ツールバーをアクションバーとしてセット
+        Toolbar toolbar_activityTop = (Toolbar) findViewById(R.id.toolbar_activityTop);
+        toolbar_activityTop.setTitle("");
+        setSupportActionBar(toolbar_activityTop);
 
         //横スクロールに入るimageviewの横幅をプログラムより指定
         WindowManager wm = (WindowManager)getSystemService(WINDOW_SERVICE);
@@ -81,6 +93,26 @@ public class TopActivity extends CustomActivity {
         hole_type.setOnClickListener(EventTypeClick);
     }
 
+    //toolbarに使用するmenuをここでinflateする
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_activitytop, menu);
+        return true;
+    }
+
+    //menuがクリックされた時の挙動を記載
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.add:
+
+                break;
+        }
+        return false;
+    }
+
+
+
     //グループを検索ボタンを押下時の動き
     public class buttonClickListener implements View.OnClickListener{
         public void onClick(View view){
@@ -97,6 +129,10 @@ public class TopActivity extends CustomActivity {
             startActivity(intentMypage);
         }
     }
+
+
+
+
 
     // //ジャンルボタンを押下時
     public class  EventTypeClickListener implements View.OnClickListener {

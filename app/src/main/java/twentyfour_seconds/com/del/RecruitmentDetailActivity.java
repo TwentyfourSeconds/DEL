@@ -78,7 +78,7 @@ public class RecruitmentDetailActivity extends CustomActivity {
         int id = Integer.valueOf(intent.getStringExtra("id"));
 
         final CountDownLatch latch = new CountDownLatch(1);
-        DetailDB ddb = new DetailDB(id, latch);
+        event_info_id_search ddb = new event_info_id_search(id, latch);
         ddb.execute();
 //        ChatDB cdb = new ChatDB(id, latch);
 //        cdb.execute();

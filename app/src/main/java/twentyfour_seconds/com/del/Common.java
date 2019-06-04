@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Common {
+
     public static int total;
     public static List<String> idList = new ArrayList<>();
     public static List<String> imageList = new ArrayList<>();
@@ -15,6 +16,12 @@ public class Common {
     public static List<String> deadlineList = new ArrayList<>();
     public static List<String> memberList = new ArrayList<>();
 
+    //user_id_table_readで使用（ユーザーを特定するための情報群）
+    public static String user_id;
+    public static String unique_id;
+
+
+    //detailDBにて使用
     public static String id;
     public static String image;
     public static String title;

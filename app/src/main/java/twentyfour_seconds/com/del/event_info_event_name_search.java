@@ -26,7 +26,7 @@ import java.util.concurrent.CountDownLatch;
 
 import static twentyfour_seconds.com.del.Common.currentRecordsetLength;
 
-public class DetectionDB extends AsyncTask<String, String, String> {
+public class event_info_event_name_search extends AsyncTask<String, String, String> {
 
     //numberは、DBを読み込むときの開始位置
     private int number = 0;
@@ -35,23 +35,23 @@ public class DetectionDB extends AsyncTask<String, String, String> {
     private ArrayList<JSONObject> data = new ArrayList<JSONObject>();
     private JSONObject json;
 
-    DetectionDB(int number, String searchWord, CountDownLatch latch) {
+    event_info_event_name_search(int number, String searchWord, CountDownLatch latch) {
         this.number = number;
         this.searchWord = searchWord;
         this.latch = latch;
     }
 
-    DetectionDB(int number, CountDownLatch latch) {
+    event_info_event_name_search(int number, CountDownLatch latch) {
         this.number = number;
         this.latch = latch;
     }
 
-    DetectionDB(String searchWord, CountDownLatch latch) {
+    event_info_event_name_search(String searchWord, CountDownLatch latch) {
         this.searchWord = searchWord;
         this.latch = latch;
     }
 
-    DetectionDB(CountDownLatch latch) {
+    event_info_event_name_search(CountDownLatch latch) {
         this.latch = latch;
     }
 
@@ -65,7 +65,7 @@ public class DetectionDB extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... string) {
-        String urlStr = "http://10.0.2.2:8000/recruitment_list";
+        String urlStr = "http://10.0.2.2:8000/event_info_event_name_search";
         String write = "";
         String result = "";
 

@@ -1,15 +1,59 @@
+
+
+<!--<action barを設定しようと思ったが、今はtoolbarが主流らしいので、この表記はすべてコメント化>-->
+
+<!--<resources xmlns:android="http://schemas.android.com/apk/res/android">-->
+
+    <!--&lt;!&ndash; Base application theme. &ndash;&gt;-->
+    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+        <!--<item name="android:actionBarStyle">@style/ActionBarStyle</item>-->
+    <!--</style>-->
+
+    <!--<style name="ActionBarStyle"-->
+        <!--parent="android:Widget.Holo.Light.ActionBar.Solid">-->
+
+        <!--<item name = "android:titleTextStyle">@style/ActionBarTitleStyle</item>-->
+        <!--<item name = "android:subtitleTextStyle">@style/ActionBarSubtitleStyle</item>-->
+        <!--<item name = "android:background">@color/mian_color</item>-->
+        <!--<item name = "android:backgroundStacked">#ffffff</item>-->
+        <!--<item name = "android:backgroundSplit">#ffe1cc</item>-->
+    <!--</style>-->
+
+    <!--<style name="ActionBarTitleStyle"-->
+        <!--parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">-->
+
+    <!--<item name="android:textStyle">bold|italic</item>-->
+    <!--<item name="android:textColor">#ffffff</item>-->
+    <!--</style>-->
+
+    <!--<style name="ActionBarSubtitleStyle"-->
+        <!--parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Subtitle">-->
+
+        <!--<item name="android:typeface">monospace</item>-->
+        <!--<item name="android:textColor">#ffffff</item>-->
+    <!--</style>-->
+
+<!--</resources>-->
+
+<!--<ここまでコメント化>-->
+
+
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <!--<colorPrimary：actionbarの色。今回は削除している>-->
         <item name="colorPrimary">@color/colorPrimary</item>
+        <!--<colorPrimaryDark：ステータスバー（一番上の電源系）の色。黒>-->
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!--<colorAccent：入力やタブのバーの色（一番上の電源系）の色。黒>-->
         <item name="colorAccent">@color/colorAccent</item>
-        <!-- delete title bar. -->
-        <item name="windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
-        <item name="android:windowContentOverlay">@null</item>
+
+        <!--<item name="windowNoTitle">true</item>-->
+        <!--<item name="windowActionBar">false</item>-->
+        <!--<item name="android:windowFullscreen">true</item>-->
+        <!--<item name="android:windowContentOverlay">@null</item>-->
     </style>
 
 </resources>

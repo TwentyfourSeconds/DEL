@@ -27,7 +27,7 @@ public class EventCreate3 extends AppCompatActivity {
 //    private String textArr[] = {"dev2qa.com", "is", "a very good", "android example website", "there are", "a lot of", "android, java examples";
     private String textArr[] = {};
     private List<ViewItemDTO> messageList;
-    private ViewAdapter viewAdapter;
+        private ViewAdapter viewAdapter;
 
     //削除用に別のクラスでも参照できるように、定義をここで行う。
     public TextView tukue;

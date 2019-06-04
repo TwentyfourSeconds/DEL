@@ -17,23 +17,24 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 
-public class DetailDB extends AsyncTask<String, String, String> {
+public class event_info_id_search extends AsyncTask<String, String, String> {
 
     private int id;
     private CountDownLatch latch;
     private ArrayList<JSONObject> data = new ArrayList<JSONObject>();
     private JSONObject json;
 
-    DetailDB(int id, CountDownLatch latch) {
+    event_info_id_search(int id, CountDownLatch latch) {
         this.id = id;
         this.latch = latch;
     }
 
     @Override
     protected String doInBackground(String... string) {
-        String urlStr = "http://10.0.2.2:8000/recruitment_detail";
+        String urlStr = "http://10.0.2.2:8000/event_info_id_search";
         String write = "";
         String result = "";
+
 
         StringBuilder sb = new StringBuilder();
         sb.append("id=" + id);

@@ -27,8 +27,6 @@ public class EventEntryFragment2 extends Fragment implements View.OnClickListene
     //(参考)Map型に値を追加する方法：https://stackoverrun.com/ja/q/10712774
     private List<Map<String, Object>> messageList = new ArrayList<Map<String, Object>>();
 
-
-
     //コンストラクタ
     public EventEntryFragment2() {
     }
@@ -45,13 +43,13 @@ public class EventEntryFragment2 extends Fragment implements View.OnClickListene
     // Viewが生成し終わった時に呼ばれるメソッド
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        Log.d("来た1","来た1");
         //自分のIDから、現在、作成しているイベントを抽出する。
-
         int id = 1;
-
         final CountDownLatch latch = new CountDownLatch(1);
-        DetailDB ddb = new DetailDB(id, latch);
+
+        //DetailDBを読み込む
+        event_info_id_search ddb = new event_info_id_search(id, latch);
         ddb.execute();
         try {
             latch.await();
@@ -59,6 +57,7 @@ public class EventEntryFragment2 extends Fragment implements View.OnClickListene
             e.printStackTrace();
         }
 
+        Log.d("来た2","来た2");
         //DB取得時、データをcommonクラスに格納するため、commonクラスより、データを取得
         for(int i = 0; i < Common.titleList.size(); i++) {
 
@@ -96,9 +95,21 @@ public class EventEntryFragment2 extends Fragment implements View.OnClickListene
 
         // アダプターオブジェクトを生成して、下のメソッドで設定した文字列を追加
         EventEntryViewAdapter = new EventEntryViewAdapter(messageList);
-        // アダプターオブジェク
-        // トをセット
+        // アダプターオブジェクトをセット
         recyclerView.setAdapter(EventEntryViewAdapter);
+
+
+        //        //下部メニューボタンを押下したときの処理を記載
+        ImageView menu_bar_home = view.findViewById(R.id.tab3).findViewById(R.id.menu_bar_home);
+        ImageView menu_bar_event = view.findViewById(R.id.tab3).findViewById(R.id.menu_bar_event);
+        ImageView menu_bar_chat = view.findViewById(R.id.tab3).findViewById(R.id.menu_bar_chat);
+        ImageView menu_bar_mypage = view.findViewById(R.id.tab3).findViewById(R.id.menu_bar_mypage);
+
+        menu_bar_home.setOnClickListener(this);
+        menu_bar_event.setOnClickListener(this);
+        menu_bar_chat.setOnClickListener(this);
+        menu_bar_mypage.setOnClickListener(this);
+
 
     }
 

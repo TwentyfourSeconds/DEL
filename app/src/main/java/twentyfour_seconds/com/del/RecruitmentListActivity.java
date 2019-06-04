@@ -58,7 +58,7 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
             case 1:
                 //サーチワードから検索する
                 searchWord = intent.getStringExtra("searchWord");
-                DetectionDB ddb = new DetectionDB(searchWord, latch);
+                event_info_event_name_search ddb = new event_info_event_name_search(searchWord, latch);
                 ddb.execute();
                 try {
                     latch.await();
@@ -167,7 +167,7 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
             switch (value) {
                 case 1:
                     //サーチワードから検索する
-                    DetectionDB ddb = new DetectionDB(count,searchWord, latch);
+                    event_info_event_name_search ddb = new event_info_event_name_search(count,searchWord, latch);
                     ddb.execute();
                     try {
                         latch.await();
