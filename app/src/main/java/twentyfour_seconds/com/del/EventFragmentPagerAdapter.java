@@ -24,11 +24,11 @@ public class EventFragmentPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                //イベント管理を設定するFlagmentをセット
-                return new EventManagementFragment();
-            case 1:
                 //イベント参加を設定するFlagmentをセット
                 return new EventEntryFragment2();
+            case 1:
+                //イベント管理を設定するFlagmentをセット
+                return new EventManagementFragment();
             default:
                 return null;
         }

@@ -35,6 +35,14 @@ public class event_info_id_search extends AsyncTask<String, String, String> {
         String write = "";
         String result = "";
 
+        Common.idList.clear();
+        Common.imageList.clear();
+        Common.titleList.clear();
+        Common.areaList.clear();
+        Common.localList.clear();
+        Common.termList.clear();
+        Common.deadlineList.clear();
+        Common.memberList.clear();
 
         StringBuilder sb = new StringBuilder();
         sb.append("id=" + id);
@@ -87,19 +95,50 @@ public class event_info_id_search extends AsyncTask<String, String, String> {
 //                レスポンスデータであるInputStreamオブジェクトを文字列に変換。
             result = is2String(is);
 //            Log.d("result", result);
-            json = new JSONObject(result);
-            Common.id = json.getString("id");
-            Common.image = json.getString("image");
-            Common.title = json.getString("event_name");
-            Common.name = json.getString("founder");
-            Common.area = json.getString("area");
-            Common.local = json.getString("place");
-            Common.date = json.getString("event_day");
-            Common.term = "test";
-            Common.deadline = json.getString("deadline");
-            Common.member = json.getString("current_person") + "/" + json.getString("wanted_person");
-            Common.comment = json.getString("comment");
-            Common.tag_type = json.getString("tag_type");
+            String[] databases = result.split(";");
+            json = new JSONObject(databases[0]);
+            //      totalカウントを最初にDBから読み込むのではなく、前回取得したデータベースの個数が
+            //      7件以下（最終レコードまで到達）であれば、スクロール時のデータベース読み込みを行わない。
+//            Common.currentRecordsetLength = databases.length;
+//                Common.total = json.getInt("COUNT(id)");
+            for(int i = 0; i < databases.length; i++) {
+//                Log.d("databases", databases[i]);
+                json = new JSONObject(databases[i]);
+                data.add(json);
+//                Log.d("json", json.toString());
+                Common.idList.add(json.getString("id"));
+                Common.imageList.add(json.getString("image"));
+                Common.titleList.add(json.getString("event_name"));
+                Common.founderList.add(json.getString("founder"));
+                Common.areaList.add(json.getString("area"));
+                Common.localList.add(json.getString("place"));
+                Common.termList.add(json.getString("event_day"));
+                Common.deadlineList.add(json.getString("deadline"));
+                Common.memberList.add(json.getInt("current_person") + "/" + json.getInt("wanted_person"));
+//            Log.d("json", json.toString());
+//            Log.d("id", "" + json.getInt("id"));
+//            Log.d("image", json.getString("image"));
+//            Log.d("title", json.getString("title"));
+//            Log.d("area", json.getString("area"));
+//            Log.d("local", json.getString("local"));
+//            Log.d("term", json.getString("term"));
+//            Log.d("deadline", json.getString("deadline"));
+//            Log.d("current_num", "" + json.getInt("current_num"));
+//            Log.d("sum", "" + json.getInt("sum"));
+            }
+//            json = new JSONObject(result);
+//            Common.id = json.getString("id");
+//            Common.image = json.getString("image");
+//            Common.title = json.getString("event_name");
+//            Common.name = json.getString("founder");
+//            Common.area = json.getString("area");
+//            Common.local = json.getString("place");
+//            Common.date = json.getString("event_day");
+//            Common.term = "test";
+//            Common.deadline = json.getString("deadline");
+//            Common.member = json.getString("current_person") + "/" + json.getString("wanted_person");
+//            Common.comment = json.getString("comment");
+//            Common.tag_type = json.getString("tag_type");
 
         } catch (IOException ex) {
         } catch (JSONException e) {
