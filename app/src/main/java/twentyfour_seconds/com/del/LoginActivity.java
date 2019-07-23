@@ -1,73 +1,82 @@
 package twentyfour_seconds.com.del;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Point;
-import android.provider.Settings;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.AttributeSet;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Display;
-import android.view.GestureDetector;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.HorizontalScrollView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.UUID;
-import java.util.concurrent.CountDownLatch;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class LoginActivity extends CustomActivity {
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
+
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
 
-        //端末情報を取得し、ユーザーidを付与する
-        String uniqueID = UUID.randomUUID().toString();
-        Log.d("uniqueID", uniqueID);
-        final CountDownLatch latch = new CountDownLatch(1);
+        //Loginボタンを押下時
+        Button login_button = findViewById(R.id.login_button);
+        login_button_buttonClickListener login_button_buttonClickListener = new login_button_buttonClickListener();
+        login_button.setOnClickListener(login_button_buttonClickListener);
 
+        //Back to registrationをクリック
+        TextView back_to_registration = findViewById(R.id.back_to_register_text);
+        back_to_registration_textClickListener back_to_registration_textClickListener = new back_to_registration_textClickListener();
+        back_to_registration.setOnClickListener(back_to_registration_textClickListener);
 
-        User_id_table_read userDBread = new User_id_table_read(uniqueID, latch);
-        userDBread.execute();
-        try {
-            latch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    }
+
+    //REGISTERボタンをクリックしたときの処理
+    private class login_button_buttonClickListener implements View.OnClickListener {
+        public void onClick(View view) {
+
+            TextView email_edittext_login = findViewById(R.id.Email_Edittext_login);
+            String email = email_edittext_login.getText().toString();
+            TextView password_edittext_login = findViewById(R.id.Password_Edittext_login);
+            String password = password_edittext_login.getText().toString();
+
+            Log.d("Login", "Attempt login with email/pw:" + email);
+
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d("Firebase Sign in success", "LoginUserWithEmail:success");
+
+                        //登録に成功した場合は、LatestMessagesActivityに遷移する
+                        Intent intent = new Intent(getApplicationContext(), TopActivity.class);
+                        //この一文を記載することで、元のログイン画面に戻れないようにする
+                        intent.addFlags(FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.d("Firebase Sign in failure", "LoginWithEmail:failure", task.getException());
+                    }
+                }
+            });
         }
+    }
 
-        Log.d("user_id", "user_id = " + Common.user_id);
 
-        //user_idを読み込んだ時に、レコードがない場合は、新規作成を行う。
-        final CountDownLatch latch2 = new CountDownLatch(1);
-        int user_id = 0;
 
-        if(Common.user_id == null){
-            //user_idがない場合は新たに採番する
-            User_id_table_write userDBwrite = new User_id_table_write(uniqueID,user_id,latch);
-            userDBwrite.execute();
-            try {
-                latch.await();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }else{
+    //REGISTERボタンをクリックしたときの処理
+    private class back_to_registration_textClickListener implements View.OnClickListener {
+        public void onClick(View view) {
+
+            //この画面を終了し、前のログイン画面に戻る
+//            LoginActivity.finish();
         }
-
-        //TopActivityに遷移
-        Intent intentTopActivity = new Intent(getApplicationContext(), TopActivity.class);
-        startActivity(intentTopActivity);
-
     }
 }

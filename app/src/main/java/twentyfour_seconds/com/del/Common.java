@@ -20,7 +20,6 @@ public class Common {
     public static String user_id;
     public static String unique_id;
 
-
     //detailDBにて使用
     public static String id;
     public static String image;
