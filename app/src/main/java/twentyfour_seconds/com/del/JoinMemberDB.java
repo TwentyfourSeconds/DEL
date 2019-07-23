@@ -33,7 +33,7 @@ public class JoinMemberDB extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... string) {
-        String urlStr = "http://10.0.2.2:1000/join_member";
+        String urlStr = Common.STR_MYSQL_URL + ":1000/join_member";
         String write = "";
         String result = "";
 

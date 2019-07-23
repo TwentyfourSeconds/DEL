@@ -30,7 +30,7 @@ public class PersonDBRead extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... string) {
-        String urlStr = "http://10.0.2.2:4000/person_read";
+        String urlStr = Common.STR_MYSQL_URL + ":4000/person_read";
         String write = "";
         String result = "";
 

@@ -31,7 +31,7 @@ public class event_info_id_search extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... string) {
-        String urlStr = "http://10.0.2.2:8000/event_info_id_search";
+        String urlStr = Common.STR_MYSQL_URL + ":8000/event_info_id_search";
         String write = "";
         String result = "";
 

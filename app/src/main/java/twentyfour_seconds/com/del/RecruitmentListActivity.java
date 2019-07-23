@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.internal.ThemeEnforcement;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -44,6 +47,13 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recruitment_list);
+
+        //toolbarを実装する
+        // ツールバーをアクションバーとしてセット
+        Toolbar toolbar_activityTop = (Toolbar) findViewById(R.id.toolbar_activityTop);
+        toolbar_activityTop.setTitle("");
+        setSupportActionBar(toolbar_activityTop);
+
 
         lsRecruitment = findViewById(R.id.lsRecruitment);
         progressBar = findViewById(R.id.progressBar);
@@ -234,5 +244,24 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
             // サブ画面の呼び出し
             startActivity(intent);
         }
+    }
+
+
+    //toolbarに使用するmenuをここでinflateする
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_activity_recruitment_list, menu);
+        return true;
+    }
+
+    //menuがクリックされた時の挙動を記載
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.add:
+
+                break;
+        }
+        return false;
     }
 }

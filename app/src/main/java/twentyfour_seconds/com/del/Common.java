@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Common {
 
+    public static final String STR_MYSQL_URL = "http://3.15.24.173";
+
     public static int total;
     public static List<String> idList = new ArrayList<>();
     public static List<String> imageList = new ArrayList<>();
@@ -19,6 +21,7 @@ public class Common {
     //user_id_table_readで使用（ユーザーを特定するための情報群）
     public static String user_id;
     public static String unique_id;
+
 
     //detailDBにて使用
     public static String id;

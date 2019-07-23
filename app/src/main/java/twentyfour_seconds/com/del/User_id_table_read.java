@@ -51,7 +51,7 @@ public class User_id_table_read extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... string) {
-        String urlStr = "http://10.0.2.2:3000/user_id_table_read";
+        String urlStr = Common.STR_MYSQL_URL + ":3000/user_id_table_read";
         String write = "";
         String result = "";
 

@@ -39,7 +39,7 @@ public class TagMapDB extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... string) {
-        String urlStr = "http://10.0.2.2:8000/recruitment_tagMap";
+        String urlStr = Common.STR_MYSQL_URL + ":8000/recruitment_tagMap";
         String write = "";
         String result = "";
 
