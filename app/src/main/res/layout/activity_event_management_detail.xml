@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyPageActivity">
+    tools:context=".mypage.MyPageActivity">
 
 
     <TextView
@@ -54,7 +54,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/entry_request" />
 
-            <twentyfour_seconds.com.del.NonScrollListView
+            <twentyfour_seconds.com.del.util.NonScrollListView
                 android:id="@+id/entry_request"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
-            <twentyfour_seconds.com.del.NonScrollGridListView
+            <twentyfour_seconds.com.del.util.NonScrollGridListView
                 android:id="@+id/entry_member"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

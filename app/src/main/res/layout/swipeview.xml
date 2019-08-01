@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".SwipeView" >
+tools:context=".top_page.SwipeView" >
 
 <TextView
     android:id="@+id/textView1"
@@ -13,7 +13,7 @@ tools:context=".SwipeView" >
     android:layout_height="wrap_content"
     android:text="hello_world" />
 
-    <twentyfour_seconds.com.del.SwipeView
+    <twentyfour_seconds.com.del.top_page.SwipeView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -21,7 +21,7 @@ tools:context=".SwipeView" >
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical" />
-    </twentyfour_seconds.com.del.SwipeView>
+    </twentyfour_seconds.com.del.top_page.SwipeView>
 
 
 </RelativeLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TopActivity">
+    tools:context=".top_page.TopActivity">
 
 
     <ScrollView
@@ -113,7 +113,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <twentyfour_seconds.com.del.NonScrollListView
+                    <twentyfour_seconds.com.del.util.NonScrollListView
                         android:id="@+id/chat"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -271,7 +271,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <twentyfour_seconds.com.del.NonScrollGridListView
+                <twentyfour_seconds.com.del.util.NonScrollGridListView
                     android:id="@+id/tag"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
