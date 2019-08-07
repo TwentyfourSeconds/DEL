@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,9 +15,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
+import twentyfour_seconds.com.del.create_user.RegisterActivity;
 import twentyfour_seconds.com.del.util.CustomActivity;
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.search_event.RecruitmentListActivity;
+
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
 
 public class TopActivity extends CustomActivity {
 
@@ -24,6 +30,9 @@ public class TopActivity extends CustomActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top);
+
+        //最初にログインしているかを確認する
+        verifyUserIsLoggedIn();
 
         //toolbarを実装する
         // ツールバーをアクションバーとしてセット
@@ -96,13 +105,31 @@ public class TopActivity extends CustomActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.add:
-
+            case R.id.logoff:
+                FirebaseAuth.getInstance().signOut();
+                //ログオフした場合は、登録画面に戻る
+                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                //この一文を記載することで、元のログイン画面に戻れないようにする
+                intent.addFlags(FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 break;
         }
         return false;
     }
 
+    //最初にログインしているかを確認する
+    private void verifyUserIsLoggedIn() {
+        String uid = FirebaseAuth.getInstance().getUid();
+        if (uid == null) {
+            //ログインしていない場合は、登録画面に戻る
+            Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+            //この一文を記載することで、元のログイン画面に戻れないようにする
+            intent.addFlags(FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }else{
+            Log.d("TopActivity", "Now Login uid is " + uid);
+        }
+    }
 
 
     //グループを検索ボタンを押下時の動き

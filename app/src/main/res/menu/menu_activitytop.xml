@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/add"
-        android:title="test"
+        android:id="@+id/logoff"
         android:icon="@drawable/ic_person_black_24dp"
+        android:title="test"
         app:showAsAction="ifRoom" />
 </menu>
