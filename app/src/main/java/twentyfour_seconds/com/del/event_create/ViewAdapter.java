@@ -1,4 +1,4 @@
-package twentyfour_seconds.com.del.util;
+package twentyfour_seconds.com.del.event_create;
 
 import android.app.Activity;
 import android.content.Context;

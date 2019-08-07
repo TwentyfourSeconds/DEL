@@ -19,8 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import twentyfour_seconds.com.del.R;
-import twentyfour_seconds.com.del.util.ViewItemDTO;
-import twentyfour_seconds.com.del.util.ViewAdapter;
 
 //元のサンプルコード：https://www.dev2qa.com/android-flexbox-layout-example/
 

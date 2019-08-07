@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import twentyfour_seconds.com.del.R;
-import twentyfour_seconds.com.del.util.ViewItemDTO;
 import twentyfour_seconds.com.del.util.ViewAdapterReadOnly;
 
 public class EventCreate4 extends AppCompatActivity {
