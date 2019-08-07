@@ -1,8 +1,6 @@
 package twentyfour_seconds.com.del.event_management;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,10 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -28,9 +23,7 @@ import java.util.concurrent.CountDownLatch;
 import twentyfour_seconds.com.del.chat.ChatActivity;
 import twentyfour_seconds.com.del.chat.ChatDB;
 import twentyfour_seconds.com.del.R;
-import twentyfour_seconds.com.del.event_entry.EventEntryViewAdapter;
-import twentyfour_seconds.com.del.event_entry.EventManagementViewHolder;
-import twentyfour_seconds.com.del.event_info.event_info_id_search;
+import twentyfour_seconds.com.del.trash.event_info_id_search_bk;
 import twentyfour_seconds.com.del.mypage.MyPageActivity;
 import twentyfour_seconds.com.del.top_page.TopActivity;
 import twentyfour_seconds.com.del.util.Common;
@@ -64,7 +57,7 @@ public class EventManagementFragment extends Fragment implements View.OnClickLis
         final CountDownLatch latch = new CountDownLatch(1);
 
         //DetailDBを読み込む
-        event_info_id_search ddb = new event_info_id_search(id, latch);
+        event_info_id_search_bk ddb = new event_info_id_search_bk(id, latch);
         ddb.execute();
         try {
             latch.await();

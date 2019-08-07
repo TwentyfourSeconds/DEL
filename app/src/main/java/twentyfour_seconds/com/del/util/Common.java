@@ -1,11 +1,16 @@
 package twentyfour_seconds.com.del.util;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Common {
 
     public static final String STR_MYSQL_URL = "http://3.15.24.173";
+    public static final String EVENT_INFO_MYSQL_URL = STR_MYSQL_URL + ":8000/event_info_id_search";
 
     public static int total;
     public static List<String> idList = new ArrayList<>();
@@ -55,5 +60,16 @@ public class Common {
     public static List<String> nameList = new ArrayList<>();
     public static List<String> messageList = new ArrayList<>();
     public static List<Integer> joinStatusList = new ArrayList<>();
+
+    public static String is2String(InputStream is) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+        StringBuffer sb = new StringBuffer();
+        char[] b = new char[1024];
+        int line;
+        while(0 <= (line = reader.read(b))) {
+            sb.append(b, 0, line);
+        }
+        return sb.toString();
+    }
 
 }

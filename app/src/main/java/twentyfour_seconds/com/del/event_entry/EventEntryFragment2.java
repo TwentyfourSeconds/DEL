@@ -20,7 +20,7 @@ import java.util.concurrent.CountDownLatch;
 
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.chat.ChatDB;
-import twentyfour_seconds.com.del.event_info.event_info_id_search;
+import twentyfour_seconds.com.del.trash.event_info_id_search_bk;
 import twentyfour_seconds.com.del.event_management.EventTabcontrol_main;
 import twentyfour_seconds.com.del.mypage.MyPageActivity;
 import twentyfour_seconds.com.del.top_page.TopActivity;
@@ -57,7 +57,7 @@ public class EventEntryFragment2 extends Fragment implements View.OnClickListene
         final CountDownLatch latch = new CountDownLatch(1);
 
         //DetailDBを読み込む
-        event_info_id_search ddb = new event_info_id_search(id, latch);
+        event_info_id_search_bk ddb = new event_info_id_search_bk(id, latch);
         ddb.execute();
         try {
             latch.await();

@@ -1,5 +1,4 @@
-package twentyfour_seconds.com.del.event_info;
-
+package twentyfour_seconds.com.del.trash;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,17 +21,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
+import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.util.Common;
 import twentyfour_seconds.com.del.util.CustomActivity;
-import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.util.ViewAdapterReadOnly;
 import twentyfour_seconds.com.del.event_create.ViewItemDTO;
 
 
-public class RecruitmentDetailActivity extends CustomActivity {
+public class RecruitmentDetailActivity_bk extends CustomActivity {
 
-    private EventInfoDTO eventInfoDTO = new EventInfoDTO();
-
+    private ImageView icon;
     private TextView leader;
     private TextView title;
     private TextView date;
@@ -41,7 +39,12 @@ public class RecruitmentDetailActivity extends CustomActivity {
     private TextView location;
     private TextView deadline;
     private TextView member;
+    private GridView tag;
     private Button entry;
+    private Button temporary;
+    private ListView chat;
+    private TextView newComment;
+    private Button chatButton;
 
     //変数の定義
     private List<ViewItemDTO> messageList;
@@ -53,10 +56,9 @@ public class RecruitmentDetailActivity extends CustomActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.loading_screen);
         setContentView(R.layout.wanted_detail);
 
-//        icon = findViewById(R.id.icon);
+        icon = findViewById(R.id.icon);
         leader = findViewById(R.id.leader);
         title = findViewById(R.id.title);
         date = findViewById(R.id.EventDay);
@@ -65,8 +67,13 @@ public class RecruitmentDetailActivity extends CustomActivity {
         location = findViewById(R.id.location);
         member = findViewById(R.id.member);
         deadline = findViewById(R.id.deadline);
-//        tag = findViewById(R.id.tag);
+        tag = findViewById(R.id.tag);
         entry = findViewById(R.id.entry);
+//        temporary = findViewById(R.id.temporary);
+//        chat = findViewById(R.id.chat);
+//        newComment = findViewById(R.id.newComment);
+//        chatButton = findViewById(R.id.chatButton);
+
 
         // インテントを取得
         Intent intent = getIntent();
@@ -74,26 +81,32 @@ public class RecruitmentDetailActivity extends CustomActivity {
         int id = Integer.valueOf(intent.getStringExtra("id"));
 
         final CountDownLatch latch = new CountDownLatch(1);
-        EventInfoDAO eventInfoDAO = new EventInfoDAO(id, eventInfoDTO, latch);
-        eventInfoDAO.execute();
+        event_info_id_search_bk ddb = new event_info_id_search_bk(id, latch);
+        ddb.execute();
+//        ChatDB cdb = new ChatDB(id, latch);
+//        cdb.execute();
+        //タグDBからidをキーにして、含まれているtagを取得する。
+//        Log.i("id",id +"");
+//        TagMapDB TagMapDB = new TagMapDB(id, latch);
+//        TagMapDB.execute();
         try {
             latch.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-//        //取得したタグid情報を取得する。複数くることはない想定なので、一番最初の要素を抽出
-//        tag_id = Common.tag_type;
-//        Log.d("tag_id", tag_id + "");
-//
-//        //取得したタグid情報を分割する。
-//        String[] tag = tag_id.split(",", 0);
-//
-//        Log.d("tag.length", tag.length + "");
-//
-//        for(int i = 0; i < tag.length; i++){
-//            Log.d("tag", Integer.parseInt(tag[i]) + "");
-//        }
+        //取得したタグid情報を取得する。複数くることはない想定なので、一番最初の要素を抽出
+        tag_id = Common.tag_type;
+        Log.d("tag_id", tag_id + "");
+
+        //取得したタグid情報を分割する。
+        String[] tag = tag_id.split(",", 0);
+
+        Log.d("tag.length", tag.length + "");
+
+        for(int i = 0; i < tag.length; i++){
+            Log.d("tag", Integer.parseInt(tag[i]) + "");
+        }
 
         //タグDB用のラッチを新しく用意する
 //        CountDownLatch latch2 = new CountDownLatch(1);
@@ -115,28 +128,28 @@ public class RecruitmentDetailActivity extends CustomActivity {
 
         //
 
-//        //タグを日本語化する処理を作成する★将来的には別クラスで作成する
-//        for(int i = 0; i < tag.length; i++) {
-//
-//            int tagIdSearch = Integer.parseInt(tag[i]);
-//            switch(tagIdSearch){
-//                case 1:
-//                    tagName.add("机に座ってガッツリと");
-//                    break;
-//                case 2:
-//                    tagName.add("密室からの脱出");
-//                    break;
-//                case 3:
-//                    tagName.add("街を歩き回って");
-//                    break;
-//                case 4:
-//                    tagName.add("遊園地や野球場で");
-//                    break;
-//                case 5:
-//                    tagName.add("短い時間で気軽に");
-//                    break;
-//            }
-//        }
+        //タグを日本語化する処理を作成する★将来的には別クラスで作成する
+        for(int i = 0; i < tag.length; i++) {
+
+            int tagIdSearch = Integer.parseInt(tag[i]);
+            switch(tagIdSearch){
+                case 1:
+                    tagName.add("机に座ってガッツリと");
+                    break;
+                case 2:
+                    tagName.add("密室からの脱出");
+                    break;
+                case 3:
+                    tagName.add("街を歩き回って");
+                    break;
+                case 4:
+                    tagName.add("遊園地や野球場で");
+                    break;
+                case 5:
+                    tagName.add("短い時間で気軽に");
+                    break;
+            }
+        }
 
         //*取得してきたデータをタグ形式で出力する*//
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.flex_box_recycler_view);
@@ -160,17 +173,16 @@ public class RecruitmentDetailActivity extends CustomActivity {
         // アダプターオブジェクトをセット
         recyclerView.setAdapter(viewAdapterReadOnly);
 
-        Log.d("eventInfo", eventInfoDTO.getName());
 
-        leader.setText("募集者：" + eventInfoDTO.getName() + "さん");
-        title.setText(eventInfoDTO.getTitle());
-        date.setText("日程：" + eventInfoDTO.getDate());
-        comment.setText(eventInfoDTO.getComment());
+        leader.setText("募集者：" + Common.name + "さん");
+        title.setText(Common.title);
+        date.setText("日程：" + Common.date);
+        comment.setText(Common.comment);
         comment.setFocusable(false);
-        area.setText("開催地：" + eventInfoDTO.getArea());
-        location.setText("開催場所：" + eventInfoDTO.getLocal());
-        deadline.setText("掲載期限：" + eventInfoDTO.getDeadline());
-        member.setText("募集人数：" + eventInfoDTO.getMember());
+        area.setText("開催地：" + Common.area);
+        location.setText("開催場所：" + Common.local);
+        deadline.setText("掲載期限：" + Common.deadline);
+        member.setText("募集人数：" + Common.member);
 
 
 
@@ -217,7 +229,7 @@ public class RecruitmentDetailActivity extends CustomActivity {
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(RecruitmentDetailActivity.this);
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(RecruitmentDetailActivity_bk.this);
                 alertDialog.setTitle("確認");
                 alertDialog.setMessage("このグループ参加しますか？");
                 alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -298,5 +310,8 @@ public class RecruitmentDetailActivity extends CustomActivity {
         }
         return ret;
     }
+
+
+
 
 }

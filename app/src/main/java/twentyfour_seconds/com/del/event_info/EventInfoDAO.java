@@ -1,5 +1,6 @@
 package twentyfour_seconds.com.del.event_info;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -13,37 +14,29 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 
+import twentyfour_seconds.com.del.search_event.RecruitmentListActivity;
 import twentyfour_seconds.com.del.util.Common;
 
-public class event_info_id_search extends AsyncTask<String, String, String> {
+public class EventInfoDAO extends AsyncTask<String, String, String> {
 
     private int id;
+    private EventInfoDTO eventInfoDTO;
     private CountDownLatch latch;
-    private ArrayList<JSONObject> data = new ArrayList<JSONObject>();
     private JSONObject json;
 
-    public event_info_id_search(int id, CountDownLatch latch) {
+    public EventInfoDAO(int id, EventInfoDTO eventInfoDTO, CountDownLatch latch) {
         this.id = id;
+        this.eventInfoDTO = eventInfoDTO;
         this.latch = latch;
     }
 
     @Override
     protected String doInBackground(String... string) {
-        String urlStr = Common.STR_MYSQL_URL + ":8000/event_info_id_search";
+        String urlStr = Common.EVENT_INFO_MYSQL_URL;
         String write = "";
         String result = "";
-
-        Common.idList.clear();
-        Common.imageList.clear();
-        Common.titleList.clear();
-        Common.areaList.clear();
-        Common.localList.clear();
-        Common.termList.clear();
-        Common.deadlineList.clear();
-        Common.memberList.clear();
 
         StringBuilder sb = new StringBuilder();
         sb.append("id=" + id);
@@ -94,28 +87,41 @@ public class event_info_id_search extends AsyncTask<String, String, String> {
             //HttpURLConnectionオブジェクトからレスポンスデータを取得。
             is = con.getInputStream();
 //                レスポンスデータであるInputStreamオブジェクトを文字列に変換。
-            result = is2String(is);
+            result = Common.is2String(is);
 //            Log.d("result", result);
-            String[] databases = result.split(";");
-            json = new JSONObject(databases[0]);
+
+            json = new JSONObject(result);
+            eventInfoDTO.setId(json.getString("id"));
+            eventInfoDTO.setImage(json.getString("image"));
+            eventInfoDTO.setTitle(json.getString("event_name"));
+            eventInfoDTO.setName(json.getString("founder"));
+            eventInfoDTO.setArea(json.getString("area"));
+            eventInfoDTO.setLocal(json.getString("place"));
+            eventInfoDTO.setDate(json.getString("event_day"));
+            eventInfoDTO.setDeadline(json.getString("deadline"));
+            eventInfoDTO.setMember(json.getInt("current_person") + "/" + json.getInt("wanted_person"));
+            eventInfoDTO.setComment(json.getString("comment"));
+
+//            String[] databases = result.split(";");
+//            json = new JSONObject(databases[0]);
             //      totalカウントを最初にDBから読み込むのではなく、前回取得したデータベースの個数が
             //      7件以下（最終レコードまで到達）であれば、スクロール時のデータベース読み込みを行わない。
 //            Common.currentRecordsetLength = databases.length;
 //                Common.total = json.getInt("COUNT(id)");
-            for(int i = 0; i < databases.length; i++) {
-//                Log.d("databases", databases[i]);
-                json = new JSONObject(databases[i]);
-                data.add(json);
-//                Log.d("json", json.toString());
-                Common.idList.add(json.getString("id"));
-                Common.imageList.add(json.getString("image"));
-                Common.titleList.add(json.getString("event_name"));
-                Common.founderList.add(json.getString("founder"));
-                Common.areaList.add(json.getString("area"));
-                Common.localList.add(json.getString("place"));
-                Common.termList.add(json.getString("event_day"));
-                Common.deadlineList.add(json.getString("deadline"));
-                Common.memberList.add(json.getInt("current_person") + "/" + json.getInt("wanted_person"));
+//            for(int i = 0; i < databases.length; i++) {
+////                Log.d("databases", databases[i]);
+//                json = new JSONObject(databases[i]);
+//                data.add(json);
+////                Log.d("json", json.toString());
+//                Common.idList.add(json.getString("id"));
+//                Common.imageList.add(json.getString("image"));
+//                Common.titleList.add(json.getString("event_name"));
+//                Common.founderList.add(json.getString("founder"));
+//                Common.areaList.add(json.getString("area"));
+//                Common.localList.add(json.getString("place"));
+//                Common.termList.add(json.getString("event_day"));
+//                Common.deadlineList.add(json.getString("deadline"));
+//                Common.memberList.add(json.getInt("current_person") + "/" + json.getInt("wanted_person"));
 //            Log.d("json", json.toString());
 //            Log.d("id", "" + json.getInt("id"));
 //            Log.d("image", json.getString("image"));
@@ -126,7 +132,7 @@ public class event_info_id_search extends AsyncTask<String, String, String> {
 //            Log.d("deadline", json.getString("deadline"));
 //            Log.d("current_num", "" + json.getInt("current_num"));
 //            Log.d("sum", "" + json.getInt("sum"));
-            }
+//            }
 //            json = new JSONObject(result);
 //            Common.id = json.getString("id");
 //            Common.image = json.getString("image");
@@ -161,16 +167,16 @@ public class event_info_id_search extends AsyncTask<String, String, String> {
         return result;
     }
 
-    private String is2String(InputStream is) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-        StringBuffer sb = new StringBuffer();
-        char[] b = new char[1024];
-        int line;
-        while(0 <= (line = reader.read(b))) {
-            sb.append(b, 0, line);
-        }
-        return sb.toString();
-    }
+//    private String is2String(InputStream is) throws IOException {
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+//        StringBuffer sb = new StringBuffer();
+//        char[] b = new char[1024];
+//        int line;
+//        while(0 <= (line = reader.read(b))) {
+//            sb.append(b, 0, line);
+//        }
+//        return sb.toString();
+//    }
 
 }
 
