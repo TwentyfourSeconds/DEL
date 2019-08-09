@@ -34,6 +34,9 @@ public class TopActivity extends CustomActivity {
         //最初にログインしているかを確認する
         verifyUserIsLoggedIn();
 
+        //ユーザー情報をUserDTOに格納する。（以降はここの処理を使用）
+
+
         //toolbarを実装する
         // ツールバーをアクションバーとしてセット
         Toolbar toolbar_activityTop = (Toolbar) findViewById(R.id.toolbar_activityTop);
