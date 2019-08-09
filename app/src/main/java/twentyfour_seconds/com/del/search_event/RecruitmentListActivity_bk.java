@@ -20,14 +20,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
-import twentyfour_seconds.com.del.DTO.EventInfoDTO;
-import twentyfour_seconds.com.del.DTO.EventInfoDTOList;
-import twentyfour_seconds.com.del.util.Common;
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.event_info.RecruitmentDetailActivity;
-import twentyfour_seconds.com.del.util.EventListAdapter;
+import twentyfour_seconds.com.del.util.Common;
 
-public class RecruitmentListActivity extends AppCompatActivity implements AbsListView.OnScrollListener {
+public class RecruitmentListActivity_bk extends AppCompatActivity implements AbsListView.OnScrollListener {
 
 
 //    private Aleph0 adapter1 = new Aleph0();
@@ -36,8 +33,7 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
     private List<Map<String, String>> list = new ArrayList<>();
     private String[] from = {"image", "title", "area", "local", "term", "deadline", "member"};
     private int[] to = new int[7];
-    private EventListAdapter adapter;
-    private SimpleAdapter bk_adapter;
+    private SimpleAdapter adapter;
     private ProgressBar progressBar;
     //処理の分岐を決める変数
     private int value;
@@ -45,7 +41,6 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
     private String searchWord;
     //top画面より渡されたタグ情報
     private int tag_type;
-    private EventInfoDTOList eventInfoDTOList = new EventInfoDTOList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +67,8 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
             case 1:
                 //サーチワードから検索する
                 searchWord = intent.getStringExtra("searchWord");
-                EventSearchNameDAO eventSearchNameDAO = new EventSearchNameDAO(searchWord, eventInfoDTOList, latch);
-                eventSearchNameDAO.execute();
+                event_info_event_name_search ddb = new event_info_event_name_search(searchWord, latch);
+                ddb.execute();
                 try {
                     latch.await();
                 } catch (InterruptedException e) {
@@ -94,30 +89,30 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
                 break;
         }
 //データベースの件数が7件以上ある場合、下の配列のIndex数を超えるため、10以上あったらば、6に置き換える
-//        int Indexlength;
-//        if(Common.titleList.size() > 7){
-//            Indexlength = 7;
-//        }else{
-//            Indexlength = Common.titleList.size();
-//        }
+        int Indexlength;
+        if(Common.titleList.size() > 7){
+            Indexlength = 7;
+        }else{
+            Indexlength = Common.titleList.size();
+        }
 
 //DB取得時、データをcommonクラスに格納するため、commonクラスより、データを取得
-//        for(int i = 0; i < Indexlength; i++) {
-////            Log.d("size", ""+Common.titleList.size());
-////            Log.d("i", ""+i);
-//            Map<String, String> menu = new HashMap<>();
-////            Log.d("i", i + "");
-////            Log.d("word", Common.idList.get(i) + "");
-//            menu.put("id", eventInfoDTOList.getDtoArrayList().get(i).getId());
-//            menu.put("image", eventInfoDTOList.getDtoArrayList().get(i).getImage());
-//            menu.put("title", eventInfoDTOList.getDtoArrayList().get(i).getTitle());
-//            menu.put("area", Common.areaList.get(i));
-//            menu.put("local", Common.localList.get(i));
-//            menu.put("term", Common.termList.get(i));
-//            menu.put("deadline", Common.deadlineList.get(i));
-//            menu.put("member", Common.memberList.get(i));
-//            list.add(menu);
-//        }
+        for(int i = 0; i < Indexlength; i++) {
+//            Log.d("size", ""+Common.titleList.size());
+//            Log.d("i", ""+i);
+            Map<String, String> menu = new HashMap<>();
+            Log.d("i", i + "");
+            Log.d("word", Common.idList.get(i) + "");
+            menu.put("id", Common.idList.get(i));
+            menu.put("image", Common.imageList.get(i));
+            menu.put("title", Common.titleList.get(i));
+            menu.put("area", Common.areaList.get(i));
+            menu.put("local", Common.localList.get(i));
+            menu.put("term", Common.termList.get(i));
+            menu.put("deadline", Common.deadlineList.get(i));
+            menu.put("member", Common.memberList.get(i));
+            list.add(menu);
+        }
 
 //        for(int i = 0; i < 10; i++) {
 //            Map<String, String> menu = new HashMap<>();
@@ -139,13 +134,9 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
         to[4] = R.id.term;
         to[5] = R.id.deadline;
         to[6] = R.id.member;
-//
-//        adapter = new SimpleAdapter(RecruitmentListActivity.this, list, R.layout.row, from, to);
-//
-//        lsRecruitment.setAdapter(adapter);
 
-        adapter = new EventListAdapter(RecruitmentListActivity.this);
-        adapter.setEventList(eventInfoDTOList);
+        adapter = new SimpleAdapter(RecruitmentListActivity_bk.this, list, R.layout.row, from, to);
+
         lsRecruitment.setAdapter(adapter);
 
         lsRecruitment.setOnItemClickListener(new ListItemClickListener());
@@ -223,8 +214,8 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
                 menu.put("member", Common.memberList.get(i));
                 list.add(menu);
             }
-            bk_adapter = new SimpleAdapter(RecruitmentListActivity.this, list, R.layout.row, from, to);
-            lsRecruitment.setAdapter(bk_adapter);
+            adapter = new SimpleAdapter(RecruitmentListActivity_bk.this, list, R.layout.row, from, to);
+            lsRecruitment.setAdapter(adapter);
 //            progressBar.setVisibility(View.INVISIBLE);
 //            adapter.notifyDataSetChanged();
         }
@@ -246,7 +237,7 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
             Log.d("id", idNum);
 
             // インテントへのインスタンス生成
-            Intent intent = new Intent(RecruitmentListActivity.this, RecruitmentDetailActivity.class);
+            Intent intent = new Intent(RecruitmentListActivity_bk.this, RecruitmentDetailActivity.class);
             //　インテントに値をセット
             intent.putExtra("id", idNum);
             // サブ画面の呼び出し

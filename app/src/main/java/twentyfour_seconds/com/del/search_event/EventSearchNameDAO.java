@@ -30,7 +30,7 @@ class EventSearchNameDAO extends AsyncTask<String, String, String> {
     private CountDownLatch latch;
     private ArrayList<JSONObject> data = new ArrayList<JSONObject>();
     private EventInfoDTOList eventInfoDTOList;
-    private EventInfoDTO eventInfoDTO = new EventInfoDTO();
+//    private EventInfoDTO eventInfoDTO = new EventInfoDTO();
     private List<EventInfoDTO> dtoArrayList = new ArrayList<>();
     private JSONObject json;
 
@@ -141,6 +141,7 @@ class EventSearchNameDAO extends AsyncTask<String, String, String> {
             for(int i = 1; i < databases.length; i++) {
 //                Log.d("databases", databases[i]);
                 json = new JSONObject(databases[i]);
+                EventInfoDTO eventInfoDTO = new EventInfoDTO();
                 eventInfoDTO.setId(json.getString("id"));
                 eventInfoDTO.setImage(json.getString("image"));
                 eventInfoDTO.setTitle(json.getString("event_name"));
@@ -151,28 +152,8 @@ class EventSearchNameDAO extends AsyncTask<String, String, String> {
                 eventInfoDTO.setDeadline(json.getString("deadline"));
                 eventInfoDTO.setMember(json.getInt("current_person") + "/" + json.getInt("wanted_person"));
                 eventInfoDTO.setComment(json.getString("comment"));
+                Log.d("DTO", eventInfoDTO.getTitle());
                 dtoArrayList.add(eventInfoDTO);
-//                data.add(json);
-////                Log.d("json", json.toString());
-//                Common.idList.add(json.getString("id"));
-//                Common.imageList.add(json.getString("image"));
-//                Common.titleList.add(json.getString("event_name"));
-//                Common.founderList.add(json.getString("founder"));
-//                Common.areaList.add(json.getString("area"));
-//                Common.localList.add(json.getString("place"));
-//                Common.termList.add(json.getString("event_day"));
-//                Common.deadlineList.add(json.getString("deadline"));
-//                Common.memberList.add(json.getInt("current_person") + "/" + json.getInt("wanted_person"));
-//            Log.d("json", json.toString());
-//            Log.d("id", "" + json.getInt("id"));
-//            Log.d("image", json.getString("image"));
-//            Log.d("title", json.getString("title"));
-//            Log.d("area", json.getString("area"));
-//            Log.d("local", json.getString("local"));
-//            Log.d("term", json.getString("term"));
-//            Log.d("deadline", json.getString("deadline"));
-//            Log.d("current_num", "" + json.getInt("current_num"));
-//            Log.d("sum", "" + json.getInt("sum"));
             }
             eventInfoDTOList.setDtoArrayList(dtoArrayList);
         } catch (MalformedURLException ex) {
