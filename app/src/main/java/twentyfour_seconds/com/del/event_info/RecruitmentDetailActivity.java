@@ -53,20 +53,7 @@ public class RecruitmentDetailActivity extends CustomActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.loading_screen);
-        setContentView(R.layout.wanted_detail);
-
-//        icon = findViewById(R.id.icon);
-        leader = findViewById(R.id.leader);
-        title = findViewById(R.id.title);
-        date = findViewById(R.id.EventDay);
-        comment = findViewById(R.id.comment);
-        area = findViewById(R.id.area);
-        location = findViewById(R.id.location);
-        member = findViewById(R.id.member);
-        deadline = findViewById(R.id.deadline);
-//        tag = findViewById(R.id.tag);
-        entry = findViewById(R.id.entry);
+        setContentView(R.layout.loading_screen);
 
         // インテントを取得
         Intent intent = getIntent();
@@ -81,7 +68,6 @@ public class RecruitmentDetailActivity extends CustomActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
 //        //取得したタグid情報を取得する。複数くることはない想定なので、一番最初の要素を抽出
 //        tag_id = Common.tag_type;
 //        Log.d("tag_id", tag_id + "");
@@ -137,6 +123,20 @@ public class RecruitmentDetailActivity extends CustomActivity {
 //                    break;
 //            }
 //        }
+
+        setContentView(R.layout.wanted_detail);
+
+//        icon = findViewById(R.id.icon);
+        leader = findViewById(R.id.leader);
+        title = findViewById(R.id.title);
+        date = findViewById(R.id.EventDay);
+        comment = findViewById(R.id.comment);
+        area = findViewById(R.id.area);
+        location = findViewById(R.id.location);
+        member = findViewById(R.id.member);
+        deadline = findViewById(R.id.deadline);
+//        tag = findViewById(R.id.tag);
+        entry = findViewById(R.id.entry);
 
         //*取得してきたデータをタグ形式で出力する*//
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.flex_box_recycler_view);
