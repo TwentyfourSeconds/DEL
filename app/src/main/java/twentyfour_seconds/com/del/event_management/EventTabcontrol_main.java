@@ -53,7 +53,7 @@ public class EventTabcontrol_main extends AppCompatActivity {
     //toolbarに使用するmenuをここでinflateする
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_activitytop, menu);
+        getMenuInflater().inflate(R.menu.event_management, menu);
         return true;
     }
 
@@ -61,7 +61,7 @@ public class EventTabcontrol_main extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.add:
+            case R.id.createevent:
                 Intent intentMypage = new Intent(getApplicationContext(), EventCreate.class);
                 startActivity(intentMypage);
                 break;
