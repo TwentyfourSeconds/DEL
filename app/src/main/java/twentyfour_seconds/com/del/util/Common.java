@@ -11,6 +11,7 @@ public class Common {
 
     public static final String STR_MYSQL_URL = "http://3.15.24.173";
     public static final String EVENT_INFO_MYSQL_URL = STR_MYSQL_URL + ":8000/event_info_id_search";
+    public static final String EVENT_SEARCH_NAME_URL = STR_MYSQL_URL + ":8000/event_info_event_name_search";
 
     public static int total;
     public static List<String> idList = new ArrayList<>();

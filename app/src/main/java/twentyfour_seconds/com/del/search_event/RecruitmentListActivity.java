@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
+import twentyfour_seconds.com.del.DTO.EventInfoDTO;
 import twentyfour_seconds.com.del.util.Common;
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.event_info.RecruitmentDetailActivity;

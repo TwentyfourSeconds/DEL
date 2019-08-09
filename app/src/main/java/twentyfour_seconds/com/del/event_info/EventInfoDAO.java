@@ -1,22 +1,19 @@
 package twentyfour_seconds.com.del.event_info;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.CountDownLatch;
 
-import twentyfour_seconds.com.del.search_event.RecruitmentListActivity;
+import twentyfour_seconds.com.del.DTO.EventInfoDTO;
 import twentyfour_seconds.com.del.util.Common;
 
 public class EventInfoDAO extends AsyncTask<String, String, String> {

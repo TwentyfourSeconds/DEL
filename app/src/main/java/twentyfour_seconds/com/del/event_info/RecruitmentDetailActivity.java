@@ -9,9 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.flexbox.FlexDirection;
@@ -22,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
-import twentyfour_seconds.com.del.util.Common;
+import twentyfour_seconds.com.del.DTO.EventInfoDTO;
 import twentyfour_seconds.com.del.util.CustomActivity;
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.util.ViewAdapterReadOnly;
