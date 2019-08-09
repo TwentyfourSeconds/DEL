@@ -73,4 +73,15 @@ public class Common {
         return sb.toString();
     }
 
+
+    //UserDTOの値を全画面で共有するため、コモンクラスに現在のログイン者の情報を管理
+    public static String uid;
+    public static String username;
+    public static int age;
+    public static int gender;
+    public static String profile;
+    public static String profileImageUrl;
+    public static String regionsetting;
+
+
 }

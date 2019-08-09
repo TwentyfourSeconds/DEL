@@ -31,8 +31,8 @@ import java.io.IOException;
 import java.util.UUID;
 
 import twentyfour_seconds.com.del.R;
+import twentyfour_seconds.com.del.chat.UserDTO;
 import twentyfour_seconds.com.del.top_page.TopActivity;
-import twentyfour_seconds.com.del.util.GetterUser;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
 
@@ -230,10 +230,15 @@ public class RegisterActivity extends AppCompatActivity {
         //ユーザーのuid、ユーザー情報のデータベースリファレンス、引き継いできたユーザーimageを登録する
         String uid = FirebaseAuth.getInstance().getUid();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/users/" + uid);
-        //Firebaseのデータベースへの登録処理
+        //Firebaseのデータベースへの初期登録処理（uid, username_edittext_register_text, profileImageUrl以外は初期値を登録を実施する）
+        int age = 0;
+        int gender = 0;
+        String profile = "";
+        String regionsetting = "";
+
         //ここでRegisterActivityの内部で別のclassを定義すると、FirebaseでDatabaseException:Found conflicting getters for nameのエラーになる。
         //解決策は、別のpackageに移すこと：https://stackoverflow.com/questions/47767636/found-conflicting-getters-for-namedatabase-exception
-        GetterUser user = new GetterUser(uid, username_edittext_register_text, profileImageUrl);
+        UserDTO user = new UserDTO(uid, username_edittext_register_text,age,gender,profile, profileImageUrl, regionsetting);
 
         //addOnSuccessListenerは、帰ってくる引数がないときはVoid、それ以外は決められた変数を指定する？？
         ref.setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {

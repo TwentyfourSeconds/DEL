@@ -28,6 +28,7 @@ import com.xwray.groupie.ViewHolder;
 import java.util.concurrent.CountDownLatch;
 
 import twentyfour_seconds.com.del.R;
+import twentyfour_seconds.com.del.util.Common;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -47,16 +48,16 @@ public class ChatActivity extends AppCompatActivity {
 //        String username = user.username;
 
         //ユーザー情報をFirebaseから取得する
-        fetchCurrentUser();
+//        fetchCurrentUser();
+        currentUser = new UserDTO();
 
-        try {
-            System.out.println("5秒停止します");
-            Thread.sleep(5000);
-            System.out.println("一時停止を解除しました。");
-        } catch(InterruptedException e){
-            e.printStackTrace();
-        }
-
+        currentUser.uid = Common.uid;
+        currentUser.username = Common.username;
+        currentUser.age = Common.age;
+        currentUser.gender = Common.gender;
+        currentUser.profile = Common.profile;
+        currentUser.profileImageUrl = Common.profileImageUrl;
+        currentUser.regionSetting = Common.regionsetting;
 
         //右上のアクションバーの名前(バージョンの問題？こける）
 //        getSupportActionBar().setTitle(eventId);
@@ -92,22 +93,22 @@ public class ChatActivity extends AppCompatActivity {
 
 
     //firebaseより、イベントidでデータを取得する
-    private void fetchCurrentUser(){
-
-        String uid = FirebaseAuth.getInstance().getUid();
-        Log.d("fetchCurrentUser", " uid = " + uid);
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("/users/" + uid);
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                currentUser = dataSnapshot.getValue(UserDTO.class);
-                Log.d("currentUser", " currentUser = " + currentUser);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-    }
+//    private void fetchCurrentUser(){
+//
+//        String uid = FirebaseAuth.getInstance().getUid();
+//        Log.d("fetchCurrentUser", " uid = " + uid);
+//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("/users/" + uid);
+//        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                currentUser = dataSnapshot.getValue(UserDTO.class);
+//                Log.d("currentUser", " currentUser = " + currentUser);
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//            }
+//        });
+//    }
 
 
     //firebaseからメッセージを受信する
@@ -126,8 +127,6 @@ public class ChatActivity extends AppCompatActivity {
                 //取得したメッセージをリサイクラービューにセット
                 if (chatMessageDTO != null) {
                     Log.d("ChatLog", chatMessageDTO.text);
-
-
 
                     //Userクラスに、画像とメッセージを編集
                     ChatFromItem chatFromItem = new ChatFromItem(chatMessageDTO.text, currentUser);

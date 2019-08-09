@@ -1,4 +1,4 @@
-package twentyfour_seconds.com.del.util;
+package twentyfour_seconds.com.del.trash;
 
 import android.os.Parcel;
 import android.os.Parcelable;

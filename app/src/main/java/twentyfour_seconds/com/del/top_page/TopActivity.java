@@ -3,6 +3,7 @@ package twentyfour_seconds.com.del.top_page;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Display;
@@ -16,8 +17,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import twentyfour_seconds.com.del.chat.UserDTO;
 import twentyfour_seconds.com.del.create_user.RegisterActivity;
+import twentyfour_seconds.com.del.util.Common;
 import twentyfour_seconds.com.del.util.CustomActivity;
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.search_event.RecruitmentListActivity;
@@ -26,6 +34,8 @@ import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
 
 public class TopActivity extends CustomActivity {
 
+    UserDTO currentUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,9 +43,6 @@ public class TopActivity extends CustomActivity {
 
         //最初にログインしているかを確認する
         verifyUserIsLoggedIn();
-
-        //ユーザー情報をUserDTOに格納する。（以降はここの処理を使用）
-
 
         //toolbarを実装する
         // ツールバーをアクションバーとしてセット
@@ -130,9 +137,40 @@ public class TopActivity extends CustomActivity {
             intent.addFlags(FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }else{
+            //ユーザー情報をコモンクラスに格納する。（以降はここの処理を使用）
+            //firebaseより、イベントidでデータを取得する
+            fetchCurrentUser();
             Log.d("TopActivity", "Now Login uid is " + uid);
         }
     }
+
+    //現在のログイン者を取得
+    private void fetchCurrentUser(){
+
+        String uid = FirebaseAuth.getInstance().getUid();
+        Log.d("fetchCurrentUser", " uid = " + uid);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("/users/" + uid);
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                currentUser = dataSnapshot.getValue(UserDTO.class);
+                Log.d("currentUser", " currentUser = " + currentUser);
+                //コモンクラスに登録
+                Common.uid = currentUser.getUid();
+                Log.d("Common.uid","a" + Common.uid);
+                Common.username = currentUser.getUsername();
+                Common.age = currentUser.getAge();
+                Common.gender = currentUser.getGender();
+                Common.profile = currentUser.getProfile();
+                Common.profileImageUrl = currentUser.getProfileImageUrl();
+                Common.regionsetting = currentUser.getRegionSetting();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
+
 
 
     //グループを検索ボタンを押下時の動き
