@@ -130,6 +130,7 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
 //            menu.put("member", "1/4");
 //            list.add(menu);
 //        }
+        
 
 
         to[0] = R.id.image;
