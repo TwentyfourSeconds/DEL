@@ -266,8 +266,9 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.add:
-
+            case R.id.region_search_setting:
+                Intent intent = new Intent(getApplicationContext(), RegionSearchActivity.class);
+                startActivity(intent);
                 break;
         }
         return false;

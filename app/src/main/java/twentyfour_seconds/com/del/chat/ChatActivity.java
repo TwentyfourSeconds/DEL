@@ -1,12 +1,16 @@
 package twentyfour_seconds.com.del.chat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,7 +32,10 @@ import com.xwray.groupie.ViewHolder;
 import java.util.concurrent.CountDownLatch;
 
 import twentyfour_seconds.com.del.R;
+import twentyfour_seconds.com.del.create_user.RegisterActivity;
 import twentyfour_seconds.com.del.util.Common;
+
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -61,6 +68,15 @@ public class ChatActivity extends AppCompatActivity {
 
         //右上のアクションバーの名前(バージョンの問題？こける）
 //        getSupportActionBar().setTitle(eventId);
+
+        //toolbarを実装する
+        // ツールバーをアクションバーとしてセット
+        Toolbar toolbar_activityTop = (Toolbar) findViewById(R.id.toolbar_chatActivity);
+        toolbar_activityTop.setTitle("");
+        //toolbar内のtextviewを取得し、文字列を設定（色を白に変えたいが、style.xmlで変えようとすると、すべて変わる）
+        TextView toolbar_text = findViewById(R.id.toolbar_text);
+        toolbar_text.setText(eventId);
+        setSupportActionBar(toolbar_activityTop);
 
 
         //ChatLogActivityで使用するリサイクラービューの定義
@@ -275,5 +291,25 @@ public class ChatActivity extends AppCompatActivity {
             imageView_chat_to_low = rootView.findViewById(R.id.imageView_chat_to_row);
         }
     }
+
+    //toolbarに使用するmenuをここでinflateする
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_chat_activity, menu);
+        return true;
+    }
+
+    //menuがクリックされた時の挙動を記載
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.check_event:
+                //イベント詳細画面に飛ぶ
+                break;
+        }
+        return false;
+    }
+
+
 
 }

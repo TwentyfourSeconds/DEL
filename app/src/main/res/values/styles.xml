@@ -49,6 +49,9 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <!--<colorAccent：入力やタブのバーの色（一番上の電源系）の色。黒>-->
         <item name="colorAccent">@color/colorAccent</item>
+        <!-- ToolBarのタイトルテキスト色 -->
+        <!--ここでtoolbarの色を指定すると、すべてのtoolbarの色が変わる-->
+        <!--<item name="android:textColorPrimary">@color/white</item>-->
 
         <!--<item name="windowNoTitle">true</item>-->
         <!--<item name="windowActionBar">false</item>-->

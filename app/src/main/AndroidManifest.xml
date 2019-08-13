@@ -114,6 +114,12 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+        <activity android:name=".search_event.RegionSearchActivity"
+            android:windowSoftInputMode="adjustPan|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
         <activity android:name=".trash.MessageActivity"
             android:windowSoftInputMode="adjustPan|adjustResize">
             <intent-filter>
