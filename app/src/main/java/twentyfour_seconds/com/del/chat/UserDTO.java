@@ -5,6 +5,7 @@ public class UserDTO {
     String username;
     int age;
     int gender;
+    String location;
     String profile;
     String profileImageUrl;
     String regionSetting;
@@ -13,11 +14,12 @@ public class UserDTO {
     }
 
     //チャット実施時に使用するコンストラクタ
-    public UserDTO(String uid, String username, int age, int gender, String profile,  String profileImageUrl, String regionSetting){
+    public UserDTO(String uid, String username, int age, int gender, String location,String profile,  String profileImageUrl, String regionSetting){
         this.uid = uid;
         this.username = username;
         this.age = age;
         this.gender = gender;
+        this.location = location;
         this.profile = profile;
         this.profileImageUrl = profileImageUrl;
         this.regionSetting = regionSetting;
@@ -37,6 +39,10 @@ public class UserDTO {
 
     public int getGender() {
         return gender;
+    }
+
+    public String getLocation() {
+        return location;
     }
 
     public String getProfile() {

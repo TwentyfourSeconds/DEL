@@ -2,30 +2,20 @@ package twentyfour_seconds.com.del.mypage;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
-
 import java.util.concurrent.CountDownLatch;
 
 import twentyfour_seconds.com.del.R;
-import twentyfour_seconds.com.del.chat.UserDTO;
 import twentyfour_seconds.com.del.profile_registration.profileRegistrationMain;
 import twentyfour_seconds.com.del.util.Common;
 import twentyfour_seconds.com.del.util.CustomActivity;
 
-public class MyPageActivity extends CustomActivity {
+public class MyPageActivityOld extends CustomActivity {
 
     private ImageView iconProfile;
     private TextView topNameProfile;
@@ -40,55 +30,45 @@ public class MyPageActivity extends CustomActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage);
 
-        //toolbarを実装する
-        // ツールバーをアクションバーとしてセット
-        Toolbar toolbar_activityTop = (Toolbar) findViewById(R.id.toolbar_activityMypage);
-        toolbar_activityTop.setTitle("");
-        //toolbar内のtextviewを取得し、文字列を設定（色を白に変えたいが、style.xmlで変えようとすると、すべて変わる）
-        TextView toolbar_text = findViewById(R.id.toolbartext_activity_mypage);
-        toolbar_text.setText("プロフィールの設定");
-        setSupportActionBar(toolbar_activityTop);
+        iconProfile = findViewById(R.id.icon);
+        topNameProfile = findViewById(R.id.userName);
+        selfIntroductionProfile = findViewById(R.id.selfIntroduction);
+        nameProfile = findViewById(R.id.name);
+        genderProfile = findViewById(R.id.gender);
+        areaProfile = findViewById(R.id.location);
+        ageProfile = findViewById(R.id.age_profile);
 
+        // インテントを取得
+        Intent intent = getIntent();
 
-        //Firebaseより、写真を取得し、画面に表示
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/users/" + Common.uid);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                UserDTO user = dataSnapshot.getValue(UserDTO.class);
+        // インテントに保存されたデータを取得
+        int id = Integer.valueOf(intent.getStringExtra("id"));
 
-                //imageを張り付ける
-                ImageView profileImageView = findViewById(R.id.profileImageView);
-                Picasso.get().load(user.getProfile()).into(profileImageView);
-            }
+        Log.d("マイページ　id" ,id + "");
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+        final CountDownLatch latch = new CountDownLatch(1);
+        PersonDBRead pdb = new PersonDBRead(id, latch);
+        pdb.execute();
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-            }
-        });
-
-
-        //Commonクラスより、ユーザー情報を取得する
-        TextView userName = findViewById(R.id.userName);
-        TextView selfIntroduction = findViewById(R.id.selfIntroduction);
-        TextView location = findViewById(R.id.location);
-        TextView age_profile = findViewById(R.id.age_profile);
-        TextView gender = findViewById(R.id.gender);
-
-        //Commonクラスより値を設定
-        userName.setText(Common.username);
-        selfIntroduction.setText(Common.profile);
-        location.setText(Common.username);
-        age_profile.setText(Common.username);
-        gender.setText(Common.username);
-        location.setText(Common.location);
-
+        topNameProfile.setText(Common.personName);
+        selfIntroductionProfile.setText(Common.personSelfIntroduction);
+        if(Common.personGender == 0) {
+            genderProfile.setText("男");
+        } else {
+            genderProfile.setText("女");
+        }
+        areaProfile.setText(Common.personLocation);
+        ageProfile.setText("" + Common.personAge);
 
         //プロフィール編集画面に遷移する
 
         Button profileEdit = findViewById(R.id.profileEditButton);
-        View.OnClickListener buttonClick = new MyPageActivity.profileClickListener();
+        View.OnClickListener buttonClick = new MyPageActivityOld.profileClickListener();
         profileEdit.setOnClickListener(buttonClick);
 
 
@@ -98,7 +78,7 @@ public class MyPageActivity extends CustomActivity {
         ImageView menu_bar_chat = findViewById(R.id.mypage_tab).findViewById(R.id.menu_bar_chat);
         ImageView menu_bar_mypage = findViewById(R.id.mypage_tab).findViewById(R.id.menu_bar_mypage);
 
-        MyPageActivity.menuClickListener menuClickListener = new MyPageActivity.menuClickListener();
+        MyPageActivityOld.menuClickListener menuClickListener = new MyPageActivityOld.menuClickListener();
 
         menu_bar_home.setOnClickListener(menuClickListener);
         menu_bar_event.setOnClickListener(menuClickListener);
@@ -107,7 +87,7 @@ public class MyPageActivity extends CustomActivity {
 
     }
 
-    //プロフィールを編集するボタンを押下時の動き
+    //グループを検索ボタンを押下時の動き
     public class profileClickListener implements View.OnClickListener{
         public void onClick(View view){
             Intent intent_profileRegistrationMain = new Intent(getApplicationContext(), profileRegistrationMain.class);

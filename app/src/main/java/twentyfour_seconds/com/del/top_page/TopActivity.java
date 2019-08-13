@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,6 +36,9 @@ import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
 public class TopActivity extends CustomActivity {
 
     UserDTO currentUser;
+
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,8 +133,16 @@ public class TopActivity extends CustomActivity {
 
     //最初にログインしているかを確認する
     private void verifyUserIsLoggedIn() {
-        String uid = FirebaseAuth.getInstance().getUid();
-        if (uid == null) {
+//        String uid = FirebaseAuth.getInstance().getUid();
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+//        initAuthStateListener();
+
+        Log.d("TopActivity", "Login User uid is " + firebaseUser);
+
+        if (firebaseUser == null) {
             //ログインしていない場合は、登録画面に戻る
             Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
             //この一文を記載することで、元のログイン画面に戻れないようにする
@@ -140,9 +152,41 @@ public class TopActivity extends CustomActivity {
             //ユーザー情報をコモンクラスに格納する。（以降はここの処理を使用）
             //firebaseより、イベントidでデータを取得する
             fetchCurrentUser();
-            Log.d("TopActivity", "Now Login uid is " + uid);
+            Log.d("TopActivity", "fetchCurrentUser() Now Login uid is " + firebaseUser);
         }
     }
+
+
+
+
+//    private void initAuthStateListener() {
+//
+//        mAuthListener = new FirebaseAuth.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                FirebaseUser user = firebaseAuth.getCurrentUser();
+//                if (user == null) {
+//                    Log.d("user is not logged in","user is not logged in");
+//                    //user is not logged in
+//                } else {
+//                    Log.d("user is logged in","user is logged in");
+//                    //user is logged in
+//                    //logic to finish the activity and proceed to the app can be put here
+//                }
+//            }
+//        };
+//    }
+//
+//    @Override
+//    public void onStart(){
+//        super.onStart();
+//
+//        // リスナの追加
+//        mAuth.addAuthStateListener(mAuthListener);
+//    }
+
+
+
 
     //現在のログイン者を取得
     private void fetchCurrentUser(){
@@ -161,6 +205,7 @@ public class TopActivity extends CustomActivity {
                 Common.username = currentUser.getUsername();
                 Common.age = currentUser.getAge();
                 Common.gender = currentUser.getGender();
+                Common.location = currentUser.getLocation();
                 Common.profile = currentUser.getProfile();
                 Common.profileImageUrl = currentUser.getProfileImageUrl();
                 Common.regionsetting = currentUser.getRegionSetting();

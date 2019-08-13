@@ -234,11 +234,12 @@ public class RegisterActivity extends AppCompatActivity {
         int age = 0;
         int gender = 0;
         String profile = "";
+        String location = "";
         String regionsetting = "";
 
         //ここでRegisterActivityの内部で別のclassを定義すると、FirebaseでDatabaseException:Found conflicting getters for nameのエラーになる。
         //解決策は、別のpackageに移すこと：https://stackoverflow.com/questions/47767636/found-conflicting-getters-for-namedatabase-exception
-        UserDTO user = new UserDTO(uid, username_edittext_register_text,age,gender,profile, profileImageUrl, regionsetting);
+        UserDTO user = new UserDTO(uid, username_edittext_register_text,age,gender,location,profile, profileImageUrl, regionsetting);
 
         //addOnSuccessListenerは、帰ってくる引数がないときはVoid、それ以外は決められた変数を指定する？？
         ref.setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {

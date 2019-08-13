@@ -157,6 +157,7 @@ public class Common {
     public static String username;
     public static int age;
     public static int gender;
+    public static String location;
     public static String profile;
     public static String profileImageUrl;
     public static String regionsetting;
