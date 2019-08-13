@@ -44,6 +44,10 @@ public class EventListAdapter extends BaseAdapter {
         return Integer.valueOf(eventInfoDTOList.get(position).getId());
     }
 
+    public long getItemAtPosition(int position) {
+        return Integer.valueOf(eventInfoDTOList.get(position).getId());
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = layoutInflater.inflate(R.layout.row, parent,false);

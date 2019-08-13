@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import twentyfour_seconds.com.del.R;
+import twentyfour_seconds.com.del.util.Common;
 import twentyfour_seconds.com.del.util.ViewAdapterReadOnly;
 
 public class EventCreate4 extends AppCompatActivity {
@@ -151,8 +152,21 @@ public class EventCreate4 extends AppCompatActivity {
 //            Log.d("founder", founder + "");
 
             //DBに書き込みに行く
-            EventCreateDBWrite eventCreateDBWrite = new EventCreateDBWrite(eventNameStr,founder,area,placeStr,eventDayStr,deadlineStr,current_person,wantedPerson,commentStr,delete_flg);
-            eventCreateDBWrite.execute();
+            StringBuilder sb = new StringBuilder();
+            String write = "";
+            sb.append("event_name=" + eventNameStr);
+            sb.append("&founder=" + founder);
+            sb.append("&area=" + area);
+            sb.append("&place=" + placeStr);
+            sb.append("&event_day=" + eventDayStr);
+            sb.append("&deadline=" + deadlineStr);
+            sb.append("&current_person=" + current_person);
+            sb.append("&wanted_person=" + wantedPerson);
+            sb.append("&comment=" + commentStr);
+            sb.append("&delete_flg=" + delete_flg);
+            write = sb.toString();
+            EventCreateDAO eventCreateDAO = new EventCreateDAO(Common.EVENT_CREATE_URL, write);
+            eventCreateDAO.execute();
 
             //TagDBに登録する
 

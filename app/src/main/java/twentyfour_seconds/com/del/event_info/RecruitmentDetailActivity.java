@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import twentyfour_seconds.com.del.DTO.EventInfoDTO;
+import twentyfour_seconds.com.del.util.Common;
 import twentyfour_seconds.com.del.util.CustomActivity;
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.util.ViewAdapterReadOnly;
@@ -59,7 +60,7 @@ public class RecruitmentDetailActivity extends CustomActivity {
         int id = Integer.valueOf(intent.getStringExtra("id"));
 
         final CountDownLatch latch = new CountDownLatch(1);
-        EventInfoDAO eventInfoDAO = new EventInfoDAO(id, eventInfoDTO, latch);
+        EventInfoDAO eventInfoDAO = new EventInfoDAO(Common.EVENT_INFO_MYSQL_URL, id, eventInfoDTO, latch);
         eventInfoDAO.execute();
         try {
             latch.await();

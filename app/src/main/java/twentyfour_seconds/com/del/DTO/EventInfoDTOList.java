@@ -14,4 +14,8 @@ public class EventInfoDTOList {
     public void setDtoArrayList(List<EventInfoDTO> dtoArrayList) {
         this.dtoArrayList = dtoArrayList;
     }
+
+    public void addDtoArrayList(EventInfoDTO eventInfoDTO) {
+        this.dtoArrayList.add(eventInfoDTO);
+    }
 }

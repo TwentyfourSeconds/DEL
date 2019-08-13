@@ -13,7 +13,7 @@ import java.net.URL;
 
 import twentyfour_seconds.com.del.util.Common;
 
-public class EventCreateDBWrite extends AsyncTask<String, String, String> {
+public class EventCreateDBWrite_bk extends AsyncTask<String, String, String> {
 
     private String eventName = null;
     private String founder = null;
@@ -27,7 +27,7 @@ public class EventCreateDBWrite extends AsyncTask<String, String, String> {
     private int delete_flg = 0;
 
 
-    EventCreateDBWrite(String eventNameStr,String founder, String area, String placeStr, String eventDay, String deadline, int current_person, int wantedPerson, String commentStr, int delete_flg) {
+    EventCreateDBWrite_bk(String eventNameStr, String founder, String area, String placeStr, String eventDay, String deadline, int current_person, int wantedPerson, String commentStr, int delete_flg) {
         //コンストラクタ
         this.eventName = eventNameStr;
         this.founder = founder;

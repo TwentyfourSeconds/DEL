@@ -68,30 +68,35 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
         Intent intent = getIntent();
         // インテントに保存されたデータから、どの処理を動かすかを判断
         value = intent.getIntExtra("VALUE", 0);
+        String write = "";
+        String urlStr = "";
+        StringBuilder sb = new StringBuilder();
         switch (value) {
             case 1:
                 //サーチワードから検索する
                 searchWord = intent.getStringExtra("searchWord");
-                EventSearchNameDAO eventSearchNameDAO = new EventSearchNameDAO(searchWord, eventInfoDTOList, latch);
-                eventSearchNameDAO.execute();
-                try {
-                    latch.await();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                urlStr = Common.EVENT_SEARCH_NAME_URL;
+                sb.append("number=" + 0);
+                sb.append("&searchWord=" + searchWord);
+                write = sb.toString();
+
                 break;
             case 2:
                 //タグから検索する
-                tag_type = intent.getIntExtra("tag_type",0);
+                tag_type = intent.getIntExtra("tag_type",1);
                 Log.i("tag_type","" + tag_type);
-                TagMapDB TagMapDB = new TagMapDB(tag_type, latch);
-                TagMapDB.execute();
-                try {
-                    latch.await();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                urlStr = Common.EVENT_SEARCH_TAG_URL;
+                sb.append("tag_id=" + tag_type);
+                sb.append("&number=" + 0);
+                write = sb.toString();
                 break;
+        }
+        EventSearchDAO eventSearchDAO = new EventSearchDAO(urlStr, write, eventInfoDTOList, latch);
+        eventSearchDAO.execute();
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 //データベースの件数が7件以上ある場合、下の配列のIndex数を超えるため、10以上あったらば、6に置き換える
 //        int Indexlength;
@@ -130,16 +135,8 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
 //            menu.put("member", "1/4");
 //            list.add(menu);
 //        }
-        
 
 
-        to[0] = R.id.image;
-        to[1] = R.id.title;
-        to[2] = R.id.area;
-        to[3] = R.id.local;
-        to[4] = R.id.term;
-        to[5] = R.id.deadline;
-        to[6] = R.id.member;
 //
 //        adapter = new SimpleAdapter(RecruitmentListActivity.this, list, R.layout.row, from, to);
 //
@@ -153,8 +150,43 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
 
         //コンテキストメニューをリストビューに登録。
         registerForContextMenu(lsRecruitment);
-
         lsRecruitment.setOnScrollListener(this);
+
+//        if(eventInfoDTOList.getDtoArrayList().size() == 0) {
+//            Map<String, String> menu = new HashMap<>();
+//            menu.put("image", "なし");
+//            menu.put("title", "なし");
+//            menu.put("area", "なし");
+//            menu.put("local", "なし");
+//            menu.put("term", "なし");
+//            menu.put("deadline", "なし");
+//            menu.put("member", "なし");
+//            list.add(menu);
+//
+//            to[0] = R.id.image;
+//            to[1] = R.id.title;
+//            to[2] = R.id.area;
+//            to[3] = R.id.local;
+//            to[4] = R.id.term;
+//            to[5] = R.id.deadline;
+//            to[6] = R.id.member;
+//            bk_adapter = new SimpleAdapter(RecruitmentListActivity.this, list, R.layout.row, from, to);
+//
+//            lsRecruitment.setAdapter(bk_adapter);
+//
+//        } else {
+//
+//            adapter = new EventListAdapter(RecruitmentListActivity.this);
+//            adapter.setEventList(eventInfoDTOList);
+//            lsRecruitment.setAdapter(adapter);
+//
+//            lsRecruitment.setOnItemClickListener(new ListItemClickListener());
+//
+//            //コンテキストメニューをリストビューに登録。
+//            registerForContextMenu(lsRecruitment);
+//            lsRecruitment.setOnScrollListener(this);
+//
+//        }
 //        progressBar.setVisibility(View.INVISIBLE);
 
     }
@@ -183,27 +215,33 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
 //            progressBar.setVisibility(View.VISIBLE);
             count += visibleCount; // or any other amount
             final CountDownLatch latch = new CountDownLatch(1);
+            String write = "";
+            String urlStr = "";
+            StringBuilder sb = new StringBuilder();
             switch (value) {
                 case 1:
                     //サーチワードから検索する
-                    event_info_event_name_search ddb = new event_info_event_name_search(count,searchWord, latch);
-                    ddb.execute();
-                    try {
-                        latch.await();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    urlStr = Common.EVENT_SEARCH_NAME_URL;
+                    sb.append("number=" + count);
+                    sb.append("&searchWord=" + searchWord);
+                    write = sb.toString();
+
                     break;
                 case 2:
                     //タグから検索する
-                    TagMapDB TagMapDB = new TagMapDB(count,tag_type, latch);
-                    TagMapDB.execute();
-                    try {
-                        latch.await();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Log.i("tag_type","" + tag_type);
+                    urlStr = Common.EVENT_SEARCH_TAG_URL;
+                    sb.append("tag_id=" + tag_type);
+                    sb.append("&number=" + count);
+                    write = sb.toString();
                     break;
+            }
+            EventSearchDAO eventSearchDAO = new EventSearchDAO(urlStr, write, eventInfoDTOList, latch);
+            eventSearchDAO.execute();
+            try {
+                latch.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
 
 //            try {
@@ -212,22 +250,32 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
 //                e.printStackTrace();
 //            }
 
-            for(int i = 0; i < Common.titleList.size(); i++) {
-                Map<String, String> menu = new HashMap<>();
-                menu.put("id", Common.idList.get(i));
-                menu.put("image", Common.imageList.get(i));
-                menu.put("title", Common.titleList.get(i));
-                menu.put("area", Common.areaList.get(i));
-                menu.put("local", Common.localList.get(i));
-                menu.put("term", Common.termList.get(i));
-                menu.put("deadline", Common.deadlineList.get(i));
-                menu.put("member", Common.memberList.get(i));
-                list.add(menu);
-            }
-            bk_adapter = new SimpleAdapter(RecruitmentListActivity.this, list, R.layout.row, from, to);
-            lsRecruitment.setAdapter(bk_adapter);
+//            for(int i = 0; i < Common.titleList.size(); i++) {
+//                Map<String, String> menu = new HashMap<>();
+//                menu.put("id", Common.idList.get(i));
+//                menu.put("image", Common.imageList.get(i));
+//                menu.put("title", Common.titleList.get(i));
+//                menu.put("area", Common.areaList.get(i));
+//                menu.put("local", Common.localList.get(i));
+//                menu.put("term", Common.termList.get(i));
+//                menu.put("deadline", Common.deadlineList.get(i));
+//                menu.put("member", Common.memberList.get(i));
+//                list.add(menu);
+//            }
+//            bk_adapter = new SimpleAdapter(RecruitmentListActivity.this, list, R.layout.row, from, to);
+//            lsRecruitment.setAdapter(bk_adapter);
 //            progressBar.setVisibility(View.INVISIBLE);
 //            adapter.notifyDataSetChanged();
+            adapter = new EventListAdapter(RecruitmentListActivity.this);
+            adapter.setEventList(eventInfoDTOList);
+            lsRecruitment.setAdapter(adapter);
+
+            lsRecruitment.setOnItemClickListener(new ListItemClickListener());
+
+            //コンテキストメニューをリストビューに登録。
+            registerForContextMenu(lsRecruitment);
+
+            lsRecruitment.setOnScrollListener(this);
         }
     }
 
@@ -240,10 +288,11 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             //タップされた行のデータを取得。
-            Map<String, Object> item = (Map<String, Object>) parent.getItemAtPosition(position);
+            String idNum = ((EventInfoDTO)parent.getItemAtPosition(position)).getId();
 
-            String idNum = (String)item.get("id");
+//            String idNum = (String)item.get("id");
             Log.d("id", idNum);
 
             // インテントへのインスタンス生成

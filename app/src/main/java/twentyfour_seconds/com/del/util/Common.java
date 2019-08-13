@@ -1,9 +1,17 @@
 package twentyfour_seconds.com.del.util;
 
+import android.util.Log;
+
+import org.json.JSONException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +20,8 @@ public class Common {
     public static final String STR_MYSQL_URL = "http://3.15.24.173";
     public static final String EVENT_INFO_MYSQL_URL = STR_MYSQL_URL + ":8000/event_info_id_search";
     public static final String EVENT_SEARCH_NAME_URL = STR_MYSQL_URL + ":8000/event_info_event_name_search";
+    public static final String EVENT_SEARCH_TAG_URL = STR_MYSQL_URL + ":8000/recruitment_tagMap";
+    public static final String EVENT_CREATE_URL = STR_MYSQL_URL + ":7000/EventCreateDB";
 
     public static int total;
     public static List<String> idList = new ArrayList<>();
@@ -62,7 +72,75 @@ public class Common {
     public static List<String> messageList = new ArrayList<>();
     public static List<Integer> joinStatusList = new ArrayList<>();
 
-    public static String is2String(InputStream is) throws IOException {
+    public static String URLConnection(String urlStr, String write) {
+
+        String result = "";
+
+        //http接続を行うHttpURLConnectionオブジェクトを宣言。finallyで確実に解放するためにtry外で宣言。
+        HttpURLConnection con = null;
+        //http接続のレスポンスデータとして取得するInputStreamオブジェクトを宣言。同じくtry外で宣言。
+        InputStream is = null;
+        try {
+            //URLオブジェクトを生成。
+            URL url = new URL(urlStr);
+            //URLオブジェクトからHttpURLConnectionオブジェクトを取得。
+            con = (HttpURLConnection) url.openConnection();
+            //http接続メソッドを設定。
+            con.setRequestMethod("POST");
+            // no Redirects
+            con.setInstanceFollowRedirects(false);
+            // データを書き込む
+            con.setDoOutput(true);
+            //接続。
+            con.connect();
+
+            // POSTデータ送信処理
+            OutputStream outStream = null;
+
+
+            try {
+                outStream = con.getOutputStream();
+                outStream.write( write.getBytes("UTF-8"));
+                outStream.flush();
+            } catch (IOException e) {
+                // POST送信エラー
+                e.printStackTrace();
+                result="POST送信エラー";
+            } finally {
+                if (outStream != null) {
+                    outStream.close();
+                }
+            }
+            final int status = con.getResponseCode();
+            if (status == HttpURLConnection.HTTP_OK) {
+                Log.d("HTTP_STATUS", "HTTP_OK");
+            }
+            else{
+                Log.d("HTTP_STATUS", String.valueOf(status));
+            }
+            //HttpURLConnectionオブジェクトからレスポンスデータを取得。
+            is = con.getInputStream();
+//                レスポンスデータであるInputStreamオブジェクトを文字列に変換。
+            result = is2String(is);
+        } catch (MalformedURLException ex) {
+        } catch (IOException ex) {
+        } finally {
+            //HttpURLConnectionオブジェクトがnullでないなら解放。
+            if (con != null) {
+                con.disconnect();
+            }
+            //InputStreamオブジェクトがnullでないなら解放。
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException ex) {
+                }
+            }
+        }
+        return result;
+    }
+
+    private static String is2String(InputStream is) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
         StringBuffer sb = new StringBuffer();
         char[] b = new char[1024];
