@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import twentyfour_seconds.com.del.event_create.EventCreate;
+import twentyfour_seconds.com.del.event_create.EventCreate1;
 import twentyfour_seconds.com.del.R;
 
 public class EventTabcontrol_main extends AppCompatActivity {
@@ -45,7 +45,7 @@ public class EventTabcontrol_main extends AppCompatActivity {
     public class  EventCreateClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            Intent intentMypage = new Intent(getApplicationContext(), EventCreate.class);
+            Intent intentMypage = new Intent(getApplicationContext(), EventCreate1.class);
             startActivity(intentMypage);
             }
         }
@@ -62,7 +62,7 @@ public class EventTabcontrol_main extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.createevent:
-                Intent intentMypage = new Intent(getApplicationContext(), EventCreate.class);
+                Intent intentMypage = new Intent(getApplicationContext(), EventCreate1.class);
                 startActivity(intentMypage);
                 break;
         }

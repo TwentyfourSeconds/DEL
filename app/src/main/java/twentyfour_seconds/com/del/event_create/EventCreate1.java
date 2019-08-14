@@ -22,7 +22,7 @@ import twentyfour_seconds.com.del.util.calender;
 
 import static java.lang.Integer.parseInt;
 
-public class EventCreate extends CustomActivity {
+public class EventCreate1 extends CustomActivity {
 
     //未入力チェックエラーフラグ(1の時、エラー）
     int eventNameErrFlg = 0;
@@ -255,13 +255,13 @@ public class EventCreate extends CustomActivity {
 
             //データベース関連はテストのために一回コメント化
             if((eventNameErrFlg == 1)||(areaErrFlg == 1)||(placeErrFlg == 1)||(eventDayErrFlg == 1)||(wantedPersonErrFlg == 1)||(deadlineErrFlg ==1)){
-                Toast.makeText(EventCreate.this, "入力項目に誤りがあります", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EventCreate1.this, "入力項目に誤りがあります", Toast.LENGTH_SHORT).show();
             }else {
             //DBに書き込みに行く
 //                EventCreateDB eventCreateDB = new EventCreateDB(eventNameStr,founder,area,placeStr,eventDayStr,deadlineStr,current_person,wantedPerson,commentStr,delete_flg);
 //                eventCreateDB.execute();
 //            //タグ情報登録画面へ遷移
-                Intent intentEventCreate3 = new Intent(getApplicationContext(), EventCreate3.class);
+                Intent intentEventCreate3 = new Intent(getApplicationContext(), EventCreate2.class);
                 intentEventCreate3.putExtra("eventNameStr", eventNameStr);
                 intentEventCreate3.putExtra("area", area);
                 intentEventCreate3.putExtra("placeStr", placeStr);

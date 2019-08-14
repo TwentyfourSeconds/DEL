@@ -16,7 +16,7 @@ import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.util.CustomActivity;
 
 
-public class EventCreate2 extends CustomActivity {
+public class EventCreate2_bk extends CustomActivity {
 
     //前回押下したボタンのID
     int prevButtonID = 0;
@@ -254,7 +254,7 @@ public class EventCreate2 extends CustomActivity {
 //            }
 //        }
 
-//public class EventCreate2 extends CustomActivity {
+//public class EventCreate2_bk extends CustomActivity {
 //
 //    //前回押下したボタンのID
 //    int prevButtonID = 0;
@@ -363,7 +363,7 @@ public class EventCreate2 extends CustomActivity {
 
 
 //過去の履歴
-//public class EventCreate2 extends CustomActivity {
+//public class EventCreate2_bk extends CustomActivity {
 //
 //    int previd = 0;
 //    Button prevbutton;

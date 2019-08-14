@@ -8,7 +8,7 @@ import android.widget.DatePicker;
 
 import java.util.Calendar;
 
-import twentyfour_seconds.com.del.event_create.EventCreate;
+import twentyfour_seconds.com.del.event_create.EventCreate1;
 
 public class calender extends DialogFragment {
     // ダイアログが生成された時に呼ばれるメソッド ※必須
@@ -31,8 +31,8 @@ public class calender extends DialogFragment {
                         // 選択された年・月・日を整形 ※月は0-11なので+1している
                         String dateStr = year + "年" + (month + 1) + "月" + dayOfMonth + "日";
                         // MainActivityのインスタンスを取得
-                        EventCreate EventCreateActivity = (EventCreate) getActivity();
-                        EventCreateActivity.setTextView(dateStr);
+                        EventCreate1 eventCreate1Activity = (EventCreate1) getActivity();
+                        eventCreate1Activity.setTextView(dateStr);
                     }
                 },
                 calendar.get(Calendar.YEAR), // 初期選択年

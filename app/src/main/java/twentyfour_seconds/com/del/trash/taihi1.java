@@ -25,7 +25,7 @@
 ////④タグ情報を一覧に出力（今回の仕組み？）
 ////
 //
-//public class EventCreate4 extends AppCompatActivity {
+//public class EventCreate3 extends AppCompatActivity {
 //
 //    FlexboxLayout flexboxlayout;
 //
@@ -126,7 +126,7 @@
 //
 //
 //
-////public class EventCreate4 extends AppCompatActivity {
+////public class EventCreate3 extends AppCompatActivity {
 ////
 ////    @Override
 ////    protected void onCreate(Bundle savedInstanceState) {
