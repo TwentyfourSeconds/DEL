@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.concurrent.CountDownLatch;
 
 import twentyfour_seconds.com.del.R;
-import twentyfour_seconds.com.del.profile_registration.profileRegistrationMain;
+import twentyfour_seconds.com.del.profile_registration.ProfileRegistrationMainA;
 import twentyfour_seconds.com.del.util.Common;
 import twentyfour_seconds.com.del.util.CustomActivity;
 
@@ -90,7 +90,7 @@ public class MyPageActivityOld extends CustomActivity {
     //グループを検索ボタンを押下時の動き
     public class profileClickListener implements View.OnClickListener{
         public void onClick(View view){
-            Intent intent_profileRegistrationMain = new Intent(getApplicationContext(), profileRegistrationMain.class);
+            Intent intent_profileRegistrationMain = new Intent(getApplicationContext(), ProfileRegistrationMainA.class);
             String topNameString = topNameProfile.getText().toString();
             String selfIntroductionString = selfIntroductionProfile.getText().toString();
             //性別は男か女を変換しているため、Commonの値を持ってくる

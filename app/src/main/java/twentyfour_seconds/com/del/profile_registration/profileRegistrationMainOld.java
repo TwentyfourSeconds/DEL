@@ -13,7 +13,7 @@ import java.util.concurrent.CountDownLatch;
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.mypage.MyPageActivity;
 
-public class profileRegistrationMain  extends AppCompatActivity {
+public class profileRegistrationMainOld  extends AppCompatActivity {
 
 
     String topName;

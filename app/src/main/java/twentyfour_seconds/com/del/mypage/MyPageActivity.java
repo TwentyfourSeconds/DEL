@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,11 +16,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import java.util.concurrent.CountDownLatch;
-
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.chat.UserDTO;
-import twentyfour_seconds.com.del.profile_registration.profileRegistrationMain;
+import twentyfour_seconds.com.del.profile_registration.ProfileRegistrationMainA;
 import twentyfour_seconds.com.del.util.Common;
 import twentyfour_seconds.com.del.util.CustomActivity;
 
@@ -80,9 +77,22 @@ public class MyPageActivity extends CustomActivity {
         userName.setText(Common.username);
         selfIntroduction.setText(Common.profile);
         location.setText(Common.username);
-        selfIntroduction.setText("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeoooooooooooooooooooooooooooooo\nkkkkkkkkkkkkkkkkkkk");
-        age_profile.setText(Common.username);
-        gender.setText(Common.username);
+        //年齢を設定
+        String ageStr = Common.age + "";
+        age_profile.setText(ageStr);
+
+        //性別を設定
+        String genderStr;
+        if(Common.gender == 0){
+            //コード値0は男
+            genderStr = "男性";
+        }else{
+            //コード値1は女
+            genderStr = "女性";
+        }
+        gender.setText(genderStr);
+
+        //現在地を設定
         location.setText(Common.location);
 
 
@@ -111,21 +121,7 @@ public class MyPageActivity extends CustomActivity {
     //プロフィールを編集するボタンを押下時の動き
     public class profileClickListener implements View.OnClickListener{
         public void onClick(View view){
-            Intent intent_profileRegistrationMain = new Intent(getApplicationContext(), profileRegistrationMain.class);
-            String topNameString = topNameProfile.getText().toString();
-            String selfIntroductionString = selfIntroductionProfile.getText().toString();
-            //性別は男か女を変換しているため、Commonの値を持ってくる
-            String genderString = Common.personGender + "";
-            String areaString = areaProfile.getText().toString();
-            //ageはテキストに出すために文字列
-            String ageString = ageProfile.getText().toString();
-
-            intent_profileRegistrationMain.putExtra("topName",topNameString);
-            intent_profileRegistrationMain.putExtra("selfIntroduction",selfIntroductionString);
-            intent_profileRegistrationMain.putExtra("gender",genderString);
-            intent_profileRegistrationMain.putExtra("area",areaString);
-            intent_profileRegistrationMain.putExtra("ageString",ageString);
-
+            Intent intent_profileRegistrationMain = new Intent(getApplicationContext(), ProfileRegistrationMainA.class);
             startActivity(intent_profileRegistrationMain);
         }
     }
