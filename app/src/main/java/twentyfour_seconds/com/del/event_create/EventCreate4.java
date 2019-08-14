@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
+import twentyfour_seconds.com.del.DTO.ViewItemDTO;
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.util.Common;
 import twentyfour_seconds.com.del.util.ViewAdapterReadOnly;

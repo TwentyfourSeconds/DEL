@@ -19,27 +19,17 @@ import twentyfour_seconds.com.del.util.Common;
 public class EventInfoDAO extends AsyncTask<String, String, String> {
 
     private String urlStr;
-    private String write = "";
-    private int id;
+    private String write;
     private EventInfoDTO eventInfoDTO;
     private CountDownLatch latch;
     private JSONObject json;
 
-    public EventInfoDAO(String urlStr, String write, int id, EventInfoDTO eventInfoDTO, CountDownLatch latch) {
+    public EventInfoDAO(String urlStr, String write, EventInfoDTO eventInfoDTO, CountDownLatch latch) {
         this.urlStr = urlStr;
         this.write = write;
-        this.id = id;
         this.eventInfoDTO = eventInfoDTO;
         this.latch = latch;
     }
-
-    public EventInfoDAO(String urlStr, int id, EventInfoDTO eventInfoDTO, CountDownLatch latch) {
-        this.urlStr = urlStr;
-        this.id = id;
-        this.eventInfoDTO = eventInfoDTO;
-        this.latch = latch;
-    }
-
 
     @Override
     protected String doInBackground(String... string) {

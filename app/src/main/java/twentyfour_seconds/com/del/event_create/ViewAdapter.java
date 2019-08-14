@@ -12,7 +12,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import twentyfour_seconds.com.del.DTO.ViewItemDTO;
 import twentyfour_seconds.com.del.R;
+import twentyfour_seconds.com.del.util.RecyclerListViewHolder;
 
 //ViewAdapterクラス
 //概要：リサイクラービューでは、リストビューと異なり、自分でアダプターを作成しなければいけない。

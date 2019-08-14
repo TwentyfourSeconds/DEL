@@ -25,7 +25,7 @@ import twentyfour_seconds.com.del.util.Common;
 import twentyfour_seconds.com.del.util.CustomActivity;
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.util.ViewAdapterReadOnly;
-import twentyfour_seconds.com.del.event_create.ViewItemDTO;
+import twentyfour_seconds.com.del.DTO.ViewItemDTO;
 
 
 public class RecruitmentDetailActivity extends CustomActivity {
@@ -59,8 +59,13 @@ public class RecruitmentDetailActivity extends CustomActivity {
         // インテントに保存されたデータを取得
         int id = Integer.valueOf(intent.getStringExtra("id"));
 
+        String write = "";
+        StringBuilder sb = new StringBuilder();
+        sb.append("id=" + id);
+        write = sb.toString();
+
         final CountDownLatch latch = new CountDownLatch(1);
-        EventInfoDAO eventInfoDAO = new EventInfoDAO(Common.EVENT_INFO_MYSQL_URL, id, eventInfoDTO, latch);
+        EventInfoDAO eventInfoDAO = new EventInfoDAO(Common.EVENT_INFO_MYSQL_URL, write, eventInfoDTO, latch);
         eventInfoDAO.execute();
         try {
             latch.await();

@@ -25,7 +25,7 @@ import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.util.Common;
 import twentyfour_seconds.com.del.util.CustomActivity;
 import twentyfour_seconds.com.del.util.ViewAdapterReadOnly;
-import twentyfour_seconds.com.del.event_create.ViewItemDTO;
+import twentyfour_seconds.com.del.DTO.ViewItemDTO;
 
 
 public class RecruitmentDetailActivity_bk extends CustomActivity {

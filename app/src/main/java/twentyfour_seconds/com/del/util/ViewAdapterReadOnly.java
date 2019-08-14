@@ -9,8 +9,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import twentyfour_seconds.com.del.R;
-import twentyfour_seconds.com.del.event_create.RecyclerListViewHolder;
-import twentyfour_seconds.com.del.event_create.ViewItemDTO;
+import twentyfour_seconds.com.del.DTO.ViewItemDTO;
 
 public class ViewAdapterReadOnly extends RecyclerView.Adapter<RecyclerListViewHolder>  {
 

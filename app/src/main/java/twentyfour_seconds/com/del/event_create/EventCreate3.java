@@ -18,6 +18,7 @@ import com.google.android.flexbox.JustifyContent;
 import java.util.ArrayList;
 import java.util.List;
 
+import twentyfour_seconds.com.del.DTO.ViewItemDTO;
 import twentyfour_seconds.com.del.R;
 
 //元のサンプルコード：https://www.dev2qa.com/android-flexbox-layout-example/
@@ -28,7 +29,7 @@ public class EventCreate3 extends AppCompatActivity {
 //    private String textArr[] = {"dev2qa.com", "is", "a very good", "android example website", "there are", "a lot of", "android, java examples";
     private String textArr[] = {};
     private List<ViewItemDTO> messageList;
-        private ViewAdapter viewAdapter;
+    private ViewAdapter viewAdapter;
 
     //削除用に別のクラスでも参照できるように、定義をここで行う。
     public TextView tukue;
@@ -87,21 +88,21 @@ public class EventCreate3 extends AppCompatActivity {
     textbuttonClickListener shortTimeText = new EventCreate3.textbuttonClickListener();
     textbuttonClickListener animeText = new EventCreate3.textbuttonClickListener();
 
-        tukue.setOnClickListener(tukueText);
-        missitu.setOnClickListener(missituText);
-        cityType.setOnClickListener(cityTypeText);
-        outField.setOnClickListener(outFieldText);
-        shortTime.setOnClickListener(shortTimeText);
-        anime.setOnClickListener(animeText);
+    tukue.setOnClickListener(tukueText);
+    missitu.setOnClickListener(missituText);
+    cityType.setOnClickListener(cityTypeText);
+    outField.setOnClickListener(outFieldText);
+    shortTime.setOnClickListener(shortTimeText);
+    anime.setOnClickListener(animeText);
 
     Button contentCheckButton = findViewById(R.id.contentCheckButton);
     View.OnClickListener contentCheckButtonClick = new contentCheckButtonClickListener();
-        contentCheckButton.setOnClickListener(contentCheckButtonClick);
+    contentCheckButton.setOnClickListener(contentCheckButtonClick);
 
     // アダプターオブジェクトを生成して、下のメソッドで設定した文字列を追加
     viewAdapter = new ViewAdapter(messageList);
     // アダプターオブジェクトをセット
-        recyclerView.setAdapter(viewAdapter);
+    recyclerView.setAdapter(viewAdapter);
 
 }
 

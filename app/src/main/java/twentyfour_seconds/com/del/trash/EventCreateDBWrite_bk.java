@@ -1,4 +1,4 @@
-package twentyfour_seconds.com.del.event_create;
+package twentyfour_seconds.com.del.trash;
 
 import android.os.AsyncTask;
 import android.util.Log;

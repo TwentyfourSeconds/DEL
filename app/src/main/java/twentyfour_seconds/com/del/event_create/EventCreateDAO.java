@@ -21,9 +21,7 @@ public class EventCreateDAO extends AsyncTask<String, String, String> {
 
     private String urlStr;
     private String write = "";
-    private EventInfoDTO eventInfoDTO;
     private CountDownLatch latch;
-    private JSONObject json;
 //    private String eventName = null;
 //    private String founder = null;
 //    private String area = null;
@@ -34,19 +32,6 @@ public class EventCreateDAO extends AsyncTask<String, String, String> {
 //    private int wanted_person = 0;
 //    private String comment = null;
 //    private int delete_flg = 0;
-
-    public EventCreateDAO(String urlStr, String write, EventInfoDTO eventInfoDTO, CountDownLatch latch) {
-        this.urlStr = urlStr;
-        this.write = write;
-        this.eventInfoDTO = eventInfoDTO;
-        this.latch = latch;
-    }
-
-    public EventCreateDAO(String urlStr, EventInfoDTO eventInfoDTO, CountDownLatch latch) {
-        this.urlStr = urlStr;
-        this.eventInfoDTO = eventInfoDTO;
-        this.latch = latch;
-    }
 
     public EventCreateDAO(String urlStr, CountDownLatch latch) {
         this.urlStr = urlStr;
