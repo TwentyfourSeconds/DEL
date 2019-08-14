@@ -180,7 +180,7 @@
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="0dp"
-                android:layout_height="78dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="40dp"
@@ -189,18 +189,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView">
 
-                <EditText
+                <TextView
                     android:id="@+id/selfIntroduction"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="#00000000"
-                    android:clickable="true"
                     android:ems="10"
-                    android:inputType="textMultiLine"
-                    android:lines="3"
                     android:padding="0dp"
                     android:singleLine="false"
                     android:textSize="14sp" />
+
             </LinearLayout>
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

@@ -80,6 +80,7 @@ public class MyPageActivity extends CustomActivity {
         userName.setText(Common.username);
         selfIntroduction.setText(Common.profile);
         location.setText(Common.username);
+        selfIntroduction.setText("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeoooooooooooooooooooooooooooooo\nkkkkkkkkkkkkkkkkkkk");
         age_profile.setText(Common.username);
         gender.setText(Common.username);
         location.setText(Common.location);
