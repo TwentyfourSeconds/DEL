@@ -59,7 +59,7 @@ public class MyPageActivity extends CustomActivity {
 
                 //imageを張り付ける
                 ImageView profileImageView = findViewById(R.id.profileImageView);
-                Picasso.get().load(user.getProfile()).into(profileImageView);
+                Picasso.get().load(user.getProfileImageUrl()).into(profileImageView);
             }
 
             @Override
