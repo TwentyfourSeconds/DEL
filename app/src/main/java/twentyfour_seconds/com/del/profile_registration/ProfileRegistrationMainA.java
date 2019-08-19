@@ -250,9 +250,12 @@ public class ProfileRegistrationMainA extends AppCompatActivity {
                         //新しいuriを保存する
                         Common.profileImageUrl = uri.toString();
                         Log.d("profileImageUrl Change", "New File Location : " + Common.profileImageUrl);
-                        //新しい画像の登録が完了したら、古い画像を消しに行く
-                        deleteOldImageFromFirebase();
-
+                        // 古い画像のfilenameを使用して削除処理を実施する。同時に、CommonのFilenameを新しい画像名に変更する
+                        String oldFilename = Common.filename;
+                        deleteOldImageFromFirebase(oldFilename);
+                        Common.filename = newFilename;
+                        Log.d("filename Change", "New filename is " + Common.filename);
+                        firebaseDatanewEntry();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -262,33 +265,19 @@ public class ProfileRegistrationMainA extends AppCompatActivity {
                 });
             }
         });
-
-
-
-
-
-
-
-
     }
 
     //古い画像をFirebaseから削除する。
-    private void deleteOldImageFromFirebase(){
+    private void deleteOldImageFromFirebase(final String oldFilename){
         // Create a storage reference from our app
-        StorageReference ref = FirebaseStorage.getInstance().getReference("/image/" + Common.filename);
+        StorageReference ref = FirebaseStorage.getInstance().getReference("/image/" + oldFilename);
 
         // Delete the file
         ref.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-
-                Log.d("filename Change", "Old filename is " + Common.filename);
-                // 古い画像の削除が完了したら、CommonのFilenameを新しい画像名に変更する
-                Common.filename = newFilename;
-                Log.d("filename Change", "New filename is " + Common.filename);
-                firebaseDatanewEntry();
+                Log.d("Delete file", "Old filename is " + oldFilename);
 //                latch.countDown();
-
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
