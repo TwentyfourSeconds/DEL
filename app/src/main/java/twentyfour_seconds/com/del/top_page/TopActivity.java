@@ -137,7 +137,6 @@ public class TopActivity extends CustomActivity {
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
-
 //        initAuthStateListener();
 
         Log.d("TopActivity", "Login User uid is " + firebaseUser);
@@ -198,18 +197,28 @@ public class TopActivity extends CustomActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 currentUser = dataSnapshot.getValue(UserDTO.class);
-                Log.d("currentUser", " currentUser = " + currentUser);
-                //コモンクラスに登録
-                Common.uid = currentUser.getUid();
-                Log.d("Common.uid","a" + Common.uid);
-                Common.username = currentUser.getUsername();
-                Common.age = currentUser.getAge();
-                Common.gender = currentUser.getGender();
-                Common.location = currentUser.getLocation();
-                Common.profile = currentUser.getProfile();
-                Common.profileImageUrl = currentUser.getProfileImageUrl();
-                Common.filename = currentUser.getFilename();
-                Common.regionsetting = currentUser.getRegionSetting();
+                if(currentUser == null) {
+                    mAuth.signOut();
+                    Log.d("test", "test");
+                    //ログインしていない場合は、登録画面に戻る
+                    Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                    //この一文を記載することで、元のログイン画面に戻れないようにする
+                    intent.addFlags(FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                } else {
+                    Log.d("currentUser", " currentUser = " + currentUser);
+                    //コモンクラスに登録
+                    Common.uid = currentUser.getUid();
+                    Log.d("Common.uid","a" + Common.uid);
+                    Common.username = currentUser.getUsername();
+                    Common.age = currentUser.getAge();
+                    Common.gender = currentUser.getGender();
+                    Common.location = currentUser.getLocation();
+                    Common.profile = currentUser.getProfile();
+                    Common.profileImageUrl = currentUser.getProfileImageUrl();
+                    Common.filename = currentUser.getFilename();
+                    Common.regionsetting = currentUser.getRegionSetting();
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
