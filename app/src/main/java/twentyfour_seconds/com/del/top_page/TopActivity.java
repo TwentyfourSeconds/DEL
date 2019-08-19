@@ -208,6 +208,7 @@ public class TopActivity extends CustomActivity {
                 Common.location = currentUser.getLocation();
                 Common.profile = currentUser.getProfile();
                 Common.profileImageUrl = currentUser.getProfileImageUrl();
+                Common.filename = currentUser.getFilename();
                 Common.regionsetting = currentUser.getRegionSetting();
             }
             @Override

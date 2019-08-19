@@ -160,6 +160,7 @@ public class Common {
     public static String location;
     public static String profile;
     public static String profileImageUrl;
+    public static String filename;
     public static String regionsetting;
 
 

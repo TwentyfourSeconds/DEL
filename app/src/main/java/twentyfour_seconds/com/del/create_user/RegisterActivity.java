@@ -188,10 +188,10 @@ public class RegisterActivity extends AppCompatActivity {
         //端末内の写真の場所を示すuri
         if(uri != null){
             //filenameはランダムな文字列を設定する
-            String filename = UUID.randomUUID().toString();
+            final String filename = UUID.randomUUID().toString();
             //firebaseStorageの格納先を指定
             final StorageReference ref = FirebaseStorage.getInstance().getReference("/image/" + filename);
-
+            Log.d("RegisterActivity", "ref = " + ref.toString());
             //***写真のアップロード***//
             //写真や動画など、端末上のローカル ファイルは、putFile() メソッドを使用してアップロードできます。
             // putFile() は File を受け取って UploadTask を返します。これを使用してアップロード ステータスの管理とモニタリングを行うことができます。
@@ -209,7 +209,7 @@ public class RegisterActivity extends AppCompatActivity {
                             Log.d("RegisterActivity", "File Location : " + uri.toString());
 
                             //firebaseにデータを登録する
-                            saveUserToFirebase(uri.toString());
+                            saveUserToFirebase(uri.toString(),filename);
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -225,9 +225,9 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 //    //ユーザー情報をFirebaseのデータベースに登録するためのメソッド
-    public void saveUserToFirebase(String profileImageUrl){
+    public void saveUserToFirebase(String profileImageUrl, String filename){
 
-        //ユーザーのuid、ユーザー情報のデータベースリファレンス、引き継いできたユーザーimageを登録する
+        //ユーザーのuid、ユーザー情報のデータベースリファレンス、引き継いできた画像へのurl、ファイル名を登録する
         String uid = FirebaseAuth.getInstance().getUid();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/users/" + uid);
         //Firebaseのデータベースへの初期登録処理（uid, username_edittext_register_text, profileImageUrl以外は初期値を登録を実施する）
@@ -239,7 +239,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         //ここでRegisterActivityの内部で別のclassを定義すると、FirebaseでDatabaseException:Found conflicting getters for nameのエラーになる。
         //解決策は、別のpackageに移すこと：https://stackoverflow.com/questions/47767636/found-conflicting-getters-for-namedatabase-exception
-        UserDTO user = new UserDTO(uid, username_edittext_register_text,age,gender,location,profile, profileImageUrl, regionsetting);
+        UserDTO user = new UserDTO(uid, username_edittext_register_text,age,gender,location,profile, profileImageUrl, filename, regionsetting);
 
         //addOnSuccessListenerは、帰ってくる引数がないときはVoid、それ以外は決められた変数を指定する？？
         ref.setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -254,7 +254,6 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     //ログイン画面に遷移するときの動き

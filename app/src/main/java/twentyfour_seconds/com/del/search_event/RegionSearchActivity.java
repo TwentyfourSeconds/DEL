@@ -58,6 +58,8 @@ public class RegionSearchActivity extends AppCompatActivity {
         //splitに関する説明：https://zero-config.com/java/string_split.html
         //splitに関する説明：https://qiita.com/komiya_atsushi/items/7fdca9710578723fa8c7
 
+        regionsetting = "101";
+
         String[] regionsettingchar = regionsetting.split("");
 
         Log.d("0", regionsettingchar[0]);
