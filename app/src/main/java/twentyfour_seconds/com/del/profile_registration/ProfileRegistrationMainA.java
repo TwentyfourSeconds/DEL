@@ -151,13 +151,20 @@ public class ProfileRegistrationMainA extends AppCompatActivity {
 
             //①画像データをFireStoreに新規登録する
 
-            uploadImageToFirebaseStorage();
-            try {
-                latch.await();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            //端末内の写真の場所を示すuri
+            if(uri != null){
+                uploadImageToFirebaseStorage();
+            }else{
+                //画像を選択していない場合は、処理しない
+                Log.d("profileImageUrl No Change", "File Location : " + Common.profileImageUrl);
+                firebaseDatanewEntry();
+//                latch.countDown();
             }
-            firebaseDatanewEntry();
+//            try {
+//                latch.await();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
 
             //②FireStoreから、旧の画像データを削除する
 //            deleteOldImageFromFirebase();
@@ -217,54 +224,47 @@ public class ProfileRegistrationMainA extends AppCompatActivity {
     //新しい画像をFirebaseに登録する。またその画像のファイル名、URLを取得する
     private void uploadImageToFirebaseStorage(){
 
-        //端末内の写真の場所を示すuri
-        if(uri != null){
-            //画像を新しく選択していた場合
-            //filenameはランダムな文字列を設定する
-            newFilename = UUID.randomUUID().toString();
-            //firebaseStorageの格納先を指定
-            final StorageReference ref = FirebaseStorage.getInstance().getReference("/image/" + newFilename);
-            Log.d("来た3", "ref = " + ref.toString());
-            //***写真のアップロード***//
+        //画像を新しく選択していた場合
+        //filenameはランダムな文字列を設定する
+        newFilename = UUID.randomUUID().toString();
+        //firebaseStorageの格納先を指定
+        final StorageReference ref = FirebaseStorage.getInstance().getReference("/image/" + newFilename);
+        Log.d("来た3", "ref = " + ref.toString());
+        //***写真のアップロード***//
+        setContentView(R.layout.loading_screen);
+        //写真や動画など、端末上のローカル ファイルは、putFile() メソッドを使用してアップロードできます。
+        // putFile() は File を受け取って UploadTask を返します。これを使用してアップロード ステータスの管理とモニタリングを行うことができます。
+        ref.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // Write was successful!
+                Log.d("profileRegistrationActivity", "Successfly upload image = " + uri);
 
-            //写真や動画など、端末上のローカル ファイルは、putFile() メソッドを使用してアップロードできます。
-            // putFile() は File を受け取って UploadTask を返します。これを使用してアップロード ステータスの管理とモニタリングを行うことができます。
-            ref.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    // Write was successful!
-                    Log.d("profileRegistrationActivity", "Successfly upload image = " + uri);
+                //ファイルをアップロードした後、StorageReference で getDownloadUrl() メソッドを呼び出して、ファイルをダウンロードするための URL を取得することができます。
+                // Continue with the task to get the download URL
+                ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
 
-                    //ファイルをアップロードした後、StorageReference で getDownloadUrl() メソッドを呼び出して、ファイルをダウンロードするための URL を取得することができます。
-                    // Continue with the task to get the download URL
-                    ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
+                        Log.d("profileImageUrl Change", "Old File Location : " + Common.profileImageUrl);
+                        //新しいuriを保存する
+                        Common.profileImageUrl = uri.toString();
+                        Log.d("profileImageUrl Change", "New File Location : " + Common.profileImageUrl);
+                        //新しい画像の登録が完了したら、古い画像を消しに行く
+                        deleteOldImageFromFirebase();
 
-                            Log.d("profileImageUrl Change", "Old File Location : " + Common.profileImageUrl);
-                            //新しいuriを保存する
-                            Common.profileImageUrl = uri.toString();
-                            Log.d("profileImageUrl Change", "New File Location : " + Common.profileImageUrl);
-                            //新しい画像の登録が完了したら、古い画像を消しに行く
-                            deleteOldImageFromFirebase();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("profileRegistrationActivity", "File Location Get Fail");
+                    }
+                });
+            }
+        });
 
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.d("profileRegistrationActivity", "File Location Get Fail");
-                        }
-                    });
-                }
-            });
 
-            
 
-        }else{
-            //画像を選択していない場合は、処理しない
-            Log.d("profileImageUrl No Change", "File Location : " + Common.profileImageUrl);
-            latch.countDown();
-        }
 
 
 
@@ -286,14 +286,15 @@ public class ProfileRegistrationMainA extends AppCompatActivity {
                 // 古い画像の削除が完了したら、CommonのFilenameを新しい画像名に変更する
                 Common.filename = newFilename;
                 Log.d("filename Change", "New filename is " + Common.filename);
-                latch.countDown();
+                firebaseDatanewEntry();
+//                latch.countDown();
 
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Uh-oh, an error occurred!
-                latch.countDown();
+//                latch.countDown();
             }
         });
         //Firebaseの処理が完了したら、latchを減らす
