@@ -48,9 +48,6 @@ public class ProfileRegistrationMainA extends AppCompatActivity {
     //処理が完了してから、画面遷移を行い、再度データベースを読み込むので、latchを使用し、同期処理を行う。
     CountDownLatch latch = new CountDownLatch(1);
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -317,10 +314,4 @@ public class ProfileRegistrationMainA extends AppCompatActivity {
             }
         });
     }
-
-
-
-
-
-
 }
