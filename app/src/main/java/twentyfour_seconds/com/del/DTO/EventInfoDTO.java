@@ -13,6 +13,17 @@ public class EventInfoDTO {
     private String member;
     private String comment;
 
+    private String eventId;
+    private String eventerUid;
+    private String eventName;
+    private String largeArea;
+    private String smallArea;
+    private String eventDay;
+    private String closedDay;
+//    private String member;
+//    private String comment;
+    private String eventTag;
+
     public String getId() {
         return id;
     }
@@ -91,5 +102,69 @@ public class EventInfoDTO {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(String eventId) {
+        this.eventId = eventId;
+    }
+
+    public String getEventerUid() {
+        return eventerUid;
+    }
+
+    public void setEventerUid(String eventerUid) {
+        this.eventerUid = eventerUid;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
+    public String getLargeArea() {
+        return largeArea;
+    }
+
+    public void setLargeArea(String largeArea) {
+        this.largeArea = largeArea;
+    }
+
+    public String getSmallArea() {
+        return smallArea;
+    }
+
+    public void setSmallArea(String smallArea) {
+        this.smallArea = smallArea;
+    }
+
+    public String getEventDay() {
+        return eventDay;
+    }
+
+    public void setEventDay(String eventDay) {
+        this.eventDay = eventDay;
+    }
+
+    public String getClosedDay() {
+        return closedDay;
+    }
+
+    public void setClosedDay(String closedDay) {
+        this.closedDay = closedDay;
+    }
+
+    public String getEventTag() {
+        return eventTag;
+    }
+
+    public void setEventTag(String eventTag) {
+        this.eventTag = eventTag;
     }
 }

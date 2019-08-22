@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
+import twentyfour_seconds.com.del.DTO.EventInfoDTO;
+import twentyfour_seconds.com.del.DTO.EventInfoDTOList;
 import twentyfour_seconds.com.del.chat.ChatActivity;
 import twentyfour_seconds.com.del.chat.ChatDB;
 import twentyfour_seconds.com.del.R;
@@ -29,6 +31,10 @@ import twentyfour_seconds.com.del.top_page.TopActivity;
 import twentyfour_seconds.com.del.util.Common;
 
 public class EventManagementFragment extends Fragment implements View.OnClickListener{
+
+    private final String SEND_UID = "eventer_uid=" + Common.uid;
+    private final String UID_SEARCH_URL = Common.UID_SEARCH_EVENT_URL;
+    private EventInfoDTOList eventInfoDTOList = new EventInfoDTOList();
 
     //アダプターにセットするリスト（Map型でいろいろ格納できるようにしておく）
     //(参考)Map型とは：https://qiita.com/hainet/items/daab47dc991285b1f552
@@ -51,6 +57,36 @@ public class EventManagementFragment extends Fragment implements View.OnClickLis
     // Viewが生成し終わった時に呼ばれるメソッド
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+//        //新DB用
+//        final CountDownLatch latch = new CountDownLatch(1);
+//        String write = "";
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(SEND_UID);
+//        write = sb.toString();
+//        //DetailDBを読み込む
+//        UidSearchEventDAO ddb = new UidSearchEventDAO(UID_SEARCH_URL, write, eventInfoDTOList, latch);
+//        ddb.execute();
+//        try {
+//            latch.await();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        for(int i = 0; i < Common.titleList.size(); i++) {
+//
+//            Map<String, Object> Map = new HashMap<>();
+//
+//            EventInfoDTO eventInfoDTO = eventInfoDTOList.getDtoArrayList().get(i);
+//            Map.put("image", "test");
+//            Map.put("title", eventInfoDTO.getEventName());
+//            Map.put("area", eventInfoDTO.getLargeArea());
+//            Map.put("local", eventInfoDTO.getSmallArea());
+//            Map.put("term", "nothing");
+//            Map.put("deadline", eventInfoDTO.getClosedDay());
+//            Map.put("member", eventInfoDTO.getMember());
+//            EventManagementList.add(Map);
+//        }
+
 
         //暫定的にidを設定。本来はFirebaseより取得
         int id = 1;
@@ -112,7 +148,8 @@ public class EventManagementFragment extends Fragment implements View.OnClickLis
 
 
     //イベント管理画面のAdapterを作成する。
-    class EventManagementViewAdapter extends RecyclerView.Adapter<EventManagementViewHolder> {              //ここでは、作成したビューホルダクラスを指定する
+    class EventManagementViewAdapter extends RecyclerView.Adapter<EventManagementViewHolder> {
+        //ここでは、作成したビューホルダクラスを指定する
 
         List<Map<String, Object>> EventManagementList;
 

@@ -22,6 +22,14 @@ public class Common {
     public static final String EVENT_SEARCH_NAME_URL = STR_MYSQL_URL + ":8000/event_info_event_name_search";
     public static final String EVENT_SEARCH_TAG_URL = STR_MYSQL_URL + ":8000/recruitment_tagMap";
     public static final String EVENT_CREATE_URL = STR_MYSQL_URL + ":7000/EventCreateDB";
+    public static final String COUNT_EVENT_URL = STR_MYSQL_URL + ":1050/count_event";
+    public static final String SEARCH_EVENT_URL = STR_MYSQL_URL + ":1051/search_event";
+    public static final String UID_SEARCH_EVENT_URL = STR_MYSQL_URL + ":1052/uid_search_event";
+    public static final String ID_SEARCH_EVENT_URL = STR_MYSQL_URL + ":2050/id_search_event";
+    public static final String PARTICIPANT_EVENT_URL = STR_MYSQL_URL + ":3050/participant_event";
+    public static final String ADD_PARTICIPANT_EVENT_URL = STR_MYSQL_URL + ":3051/add_participant_event";
+    public static final String CREATE_EVENT_URL = STR_MYSQL_URL + ":4050/create_event";
+    public static final String UPDATE_EVENT_URL = STR_MYSQL_URL + ":4051/update_event";
 
     public static int total;
     public static List<String> idList = new ArrayList<>();

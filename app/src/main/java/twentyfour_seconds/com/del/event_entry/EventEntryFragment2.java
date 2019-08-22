@@ -28,6 +28,8 @@ import twentyfour_seconds.com.del.util.Common;
 
 public class EventEntryFragment2 extends Fragment implements View.OnClickListener {
 
+//    private final String
+
     //アダプター
     private twentyfour_seconds.com.del.event_entry.EventEntryViewAdapter EventEntryViewAdapter;
     //アダプターにセットするリスト（Map型でいろいろ格納できるようにしておく）
@@ -52,6 +54,39 @@ public class EventEntryFragment2 extends Fragment implements View.OnClickListene
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.d("来た1","来た1");
+
+
+//        //自分のIDから、現在、作成しているイベントを抽出する。
+//        int id = 1;
+//        final CountDownLatch latch = new CountDownLatch(1);
+//
+//        //DetailDBを読み込む
+//        event_info_id_search_bk ddb = new event_info_id_search_bk(id, latch);
+//        ddb.execute();
+//        try {
+//            latch.await();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//
+//        Log.d("来た2","来た2");
+//        //DB取得時、データをcommonクラスに格納するため、commonクラスより、データを取得
+//        for(int i = 0; i < Common.titleList.size(); i++) {
+//
+//            Map<String, Object> Map = new HashMap<>();
+//
+//            Map.put("image", Common.imageList.get(i));
+//            Map.put("title", Common.titleList.get(i));
+//            Map.put("area", Common.areaList.get(i));
+//            Map.put("local", Common.localList.get(i));
+//            Map.put("term", Common.termList.get(i));
+//            Map.put("deadline", Common.deadlineList.get(i));
+//            Map.put("member", Common.memberList.get(i));
+//            messageList.add(Map);
+//        }
+
+
+
         //自分のIDから、現在、作成しているイベントを抽出する。
         int id = 1;
         final CountDownLatch latch = new CountDownLatch(1);

@@ -30,6 +30,13 @@ import twentyfour_seconds.com.del.DTO.ViewItemDTO;
 
 public class RecruitmentDetailActivity extends CustomActivity {
 
+    private final String ID_SEND = "id=";
+    private final String EVENT_URL = Common.ID_SEARCH_EVENT_URL;
+    private final String REQUEST_JOIN = Common.ADD_PARTICIPANT_EVENT_URL;
+    private final String MEMBER_ID_SEND = "member=" + Common.uid;
+    private final String EVENT_ID_SEND = "&event_id=";
+    private int id;
+
     private EventInfoDTO eventInfoDTO = new EventInfoDTO();
 
     private TextView leader;
@@ -57,7 +64,18 @@ public class RecruitmentDetailActivity extends CustomActivity {
         // インテントを取得
         Intent intent = getIntent();
         // インテントに保存されたデータを取得
-        int id = Integer.valueOf(intent.getStringExtra("id"));
+        id = Integer.valueOf(intent.getStringExtra("id"));
+
+//        //新DB用
+//        String write = "";
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(ID_SEND + id);
+//        write = sb.toString();
+//
+//        final CountDownLatch latch = new CountDownLatch(1);
+//        EventInfoDAO eventInfoDAO = new EventInfoDAO(EVENT_URL, write, eventInfoDTO, latch);
+//        eventInfoDAO.execute();
+
 
         String write = "";
         StringBuilder sb = new StringBuilder();
@@ -177,46 +195,6 @@ public class RecruitmentDetailActivity extends CustomActivity {
         member.setText("募集人数：" + eventInfoDTO.getMember());
 
 
-
-//        ArrayAdapter<String> tagAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Common.tagList);
-//        tag.setAdapter(tagAdapter);
-//
-////        String[] data = {"1","2","3"};
-////        String[] data = new String[Common.chat.size()];
-////        for(int i = 0; i < Common.chat.size(); i++) {
-////            Log.d("chat", Common.chat.get(i));
-////            data[i] = Common.chat.get(i).toString();
-////        }
-////        ArrayList data = new ArrayList<>();
-////        for(int i = 0; i < Common.chat.size(); i++) {
-////            Log.d("chat", Common.chat.get(i));
-////            data.add("" + Common.chat.get(i));
-////            Log.d("data", "" + data.get(i));
-////        }
-////        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, data);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Common.chat);
-////        ArrayAdapter<String> adapter = new ArrayAdapter<>(RecruitmentDetailActivity.this, android.R.layout.simple_list_item_1, data);
-////        ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);
-////        Log.d("data", data.toString());
-////        Log.d("chat", chat.toString());
-//        chat.setAdapter(adapter);
-
-
-//        icon.setImlocationResource(R.drawable.);
-//        leader.setText("ジータ");
-//        date1.setText("12/24");
-//        date2.setText("12/24");
-//        title.setText("○○のリアル脱出ゲーム");
-//        valuation.setText("50");
-//        comment.setText("自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介");
-//        comment.setFocusable(false);
-//        location.setText("東京");
-//        age.setText("29歳");
-//        gender.setText("男");
-//        ticket.setText("なし");
-//        deadline.setText("12/20");
-//        chat.setFocusable(false);
-
         entry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -227,7 +205,7 @@ public class RecruitmentDetailActivity extends CustomActivity {
                 alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+//                        requestJoin();
                     }
                 });
                 alertDialog.setNegativeButton("キャンセル", new DialogInterface.OnClickListener() {
@@ -239,27 +217,6 @@ public class RecruitmentDetailActivity extends CustomActivity {
                 alertDialog.create().show();
             }
         });
-
-//        chatButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                AlertDialog.Builder alertDialog = new AlertDialog.Builder(RecruitmentDetailActivity.this);
-//                alertDialog.setTitle("下記のコメントでよろしいですか？");
-//                alertDialog.setMessage("テストメッセージ");
-//                alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                    }
-//                });
-//                alertDialog.setNegativeButton("キャンセル", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//
-//                    }
-//                });
-//                alertDialog.create().show();
-//            }
-//        });
 
 
         //下部メニューボタンを押下したときの処理を記載
@@ -274,18 +231,16 @@ public class RecruitmentDetailActivity extends CustomActivity {
         menu_bar_event.setOnClickListener(menuClickListener);
         menu_bar_chat.setOnClickListener(menuClickListener);
         menu_bar_mypage.setOnClickListener(menuClickListener);
+    }
 
-//        Intent intent = getIntent();
-//        int iconId = getResources().getIdentifier(intent.getStringExtra("icon"), "drawable", getPacklocationdate());
-//        icon.setImlocationResource(iconId);
-//        leader.setText(intent.getStringExtra("date"));
-//        date.setText(intent.getStringExtra("date"));
-//        title.setText(intent.getStringExtra("title"));
-//        valuation.setText(intent.getStringExtra("valuation"));
-//        comment.setText(intent.getStringExtra("comment"));
-//        location.setText(intent.getStringExtra("location") + "才");
-//        age.setText(intent.getStringExtra("age"));
-//        gender.setText(intent.getStringExtra("gender"));
+    private void requestJoin() {
+        String write = "";
+        StringBuilder sb = new StringBuilder();
+        sb.append(MEMBER_ID_SEND);
+        sb.append(EVENT_ID_SEND + id);
+        write = sb.toString();
+        RequestJoinDAO requestJoinDAO = new RequestJoinDAO(REQUEST_JOIN, write);
+        requestJoinDAO.execute();
     }
 
     private List<ViewItemDTO> initViewItemDtoList() {

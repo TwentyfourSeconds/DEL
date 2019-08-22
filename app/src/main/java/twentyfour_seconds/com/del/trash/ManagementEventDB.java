@@ -1,4 +1,4 @@
-package twentyfour_seconds.com.del.event_management;
+package twentyfour_seconds.com.del.trash;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

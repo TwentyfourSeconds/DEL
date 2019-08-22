@@ -37,6 +37,7 @@ public class EventCreate3 extends AppCompatActivity {
     private String deadlineStr;
     private String commentStr;
     private ArrayList<String> StringList;
+    private final String CREATE_EVENT_URL = Common.CREATE_EVENT_URL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,6 +175,27 @@ public class EventCreate3 extends AppCompatActivity {
             //登録完了画面(EventCreate4)に移動
             Intent EventCreate5Page = new Intent(getApplicationContext(), EventCreate4.class);
             startActivity(EventCreate5Page);
+
+
+//            //新DB用
+//            StringBuilder sb = new StringBuilder();
+//            String write = "";
+//            sb.append("eventer_uid=" + Common.uid);
+//            sb.append("&event_name=" + eventNameStr);
+//            sb.append("&large_area=" + area);
+//            sb.append("&small_area=" + placeStr);
+//            sb.append("&event_day_on=" + eventDayStr);
+//            sb.append("&closed_on=" + deadlineStr);
+//            sb.append("&max_persons=" + wantedPerson);
+//            sb.append("&comment=" + commentStr);
+//            sb.append("&event_tag=" + 1);
+//            write = sb.toString();
+//            EventCreateDAO eventCreateDAO = new EventCreateDAO(CREATE_EVENT_URL, write);
+//            eventCreateDAO.execute();
+//
+//            //登録完了画面(EventCreate4)に移動
+//            Intent EventCreate5Page = new Intent(getApplicationContext(), EventCreate4.class);
+//            startActivity(EventCreate5Page);
         }
     }
 
