@@ -35,7 +35,7 @@ class CountEventDAO extends AsyncTask<String, String, String> {
             json = new JSONObject(result);
             //      totalカウントを最初にDBから読み込むのではなく、前回取得したデータベースの個数が
             //      7件以下（最終レコードまで到達）であれば、スクロール時のデータベース読み込みを行わない。
-            Common.currentRecordsetLength = json.getInt("COUNT(*)");
+            Common.currentRecordsetLength = json.getInt("COUNT(event_id)");
 
         } catch (JSONException e) {
             e.printStackTrace();

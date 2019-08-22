@@ -44,7 +44,7 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
     //文字列検索時の検索用語
     private String searchWord;
     private String tagType;
-    private final String SEARCH_WORD_SEND = "&searchWord=";
+    private final String SEARCH_WORD_SEND = "searchWord=";
     private final String EVENT_TAG_SEND = "&eventTag=";
     private final String LARGE_AREA = "&largeArea=";
     private final String SEND_NUM = "&number=";
@@ -61,24 +61,6 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recruitment_list);
 
-//        //新DB用
-//        // インテントを取得
-//        Intent intent = getIntent();
-//        //サーチワードから検索する
-//        searchWord = SEARCH_WORD_SEND + intent.getStringExtra("searchWord");
-//        tagType = EVENT_TAG_SEND + intent.getStringExtra("tag_type");
-//        StringBuilder sb = new StringBuilder();
-//        sb.append(searchWord);
-//        sb.append(LARGE_AREA);
-//        sb.append(tagType);
-//        sb.append(SEND_NUM + INITIAL_NUMBER);
-//        write = sb.toString();
-//        final CountDownLatch latch = new CountDownLatch(2);
-//        EventSearchDAO eventSearchDAO = new EventSearchDAO(COUNT_URL, write, eventInfoDTOList, latch);
-//        eventSearchDAO.execute();
-//        CountEventDAO countEventDAO = new CountEventDAO(SEARCH_URL, write, latch);
-//        countEventDAO.execute();
-
 
         //toolbarを実装する
         // ツールバーをアクションバーとしてセット
@@ -90,38 +72,61 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
         lsRecruitment = findViewById(R.id.lsRecruitment);
         progressBar = findViewById(R.id.progressBar);
 
-        //latchは1
-        final CountDownLatch latch = new CountDownLatch(1);
+        //新DB用
         // インテントを取得
         Intent intent = getIntent();
-        // インテントに保存されたデータから、どの処理を動かすかを判断
-        value = intent.getIntExtra("VALUE", 0);
-        String urlStr = "";
-        StringBuilder sb = new StringBuilder();
-        switch (value) {
-            case 1:
-                //サーチワードから検索する
-                searchWord = intent.getStringExtra("searchWord");
-                urlStr = Common.EVENT_SEARCH_NAME_URL;
-                sb.append("number=0");
-                sb.append("&searchWord=" + searchWord);
-                sb.append("&tag_id=" + tag_type);
-                write = sb.toString();
-
-                break;
-            case 2:
-                //タグから検索する
-                tag_type = intent.getIntExtra("tag_type",1);
-                Log.i("tag_type","" + tag_type);
-                urlStr = Common.EVENT_SEARCH_TAG_URL;
-                sb.append("number=0");
-                sb.append("&searchWord=" + searchWord);
-                sb.append("&tag_id=" + tag_type);
-                write = sb.toString();
-                break;
+        //サーチワードから検索する
+        if(intent.getStringExtra("searchWord") == null) {
+            searchWord = SEARCH_WORD_SEND;
+        } else {
+            searchWord = SEARCH_WORD_SEND + intent.getStringExtra("searchWord");
         }
-        EventSearchDAO eventSearchDAO = new EventSearchDAO(urlStr, write, eventInfoDTOList, latch);
+        tagType = EVENT_TAG_SEND + intent.getIntExtra("tag_type", 1);
+        StringBuilder sb = new StringBuilder();
+        sb.append(searchWord);
+        sb.append(LARGE_AREA);
+        sb.append(tagType);
+        sb.append(SEND_NUM + INITIAL_NUMBER);
+        write = sb.toString();
+//        Log.d("write", write);
+        final CountDownLatch latch = new CountDownLatch(2);
+        EventSearchDAO eventSearchDAO = new EventSearchDAO(SEARCH_URL, write, eventInfoDTOList, latch);
         eventSearchDAO.execute();
+        CountEventDAO countEventDAO = new CountEventDAO(COUNT_URL, write, latch);
+        countEventDAO.execute();
+
+//        //latchは1
+//        final CountDownLatch latch = new CountDownLatch(1);
+//        // インテントを取得
+//        Intent intent = getIntent();
+//        // インテントに保存されたデータから、どの処理を動かすかを判断
+//        value = intent.getIntExtra("VALUE", 0);
+//        String urlStr = "";
+//        StringBuilder sb = new StringBuilder();
+//        switch (value) {
+//            case 1:
+//                //サーチワードから検索する
+//                searchWord = intent.getStringExtra("searchWord");
+//                urlStr = Common.EVENT_SEARCH_NAME_URL;
+//                sb.append("number=0");
+//                sb.append("&searchWord=" + searchWord);
+//                sb.append("&tag_id=" + tag_type);
+//                write = sb.toString();
+//
+//                break;
+//            case 2:
+//                //タグから検索する
+//                tag_type = intent.getIntExtra("tag_type",1);
+//                Log.i("tag_type","" + tag_type);
+//                urlStr = Common.EVENT_SEARCH_TAG_URL;
+//                sb.append("number=0");
+//                sb.append("&searchWord=" + searchWord);
+//                sb.append("&tag_id=" + tag_type);
+//                write = sb.toString();
+//                break;
+//        }
+//        EventSearchDAO eventSearchDAO = new EventSearchDAO(urlStr, write, eventInfoDTOList, latch);
+//        eventSearchDAO.execute();
         try {
             latch.await();
         } catch (InterruptedException e) {
@@ -245,43 +250,43 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
             count += visibleCount; // or any other amount
 
 
-//            //新DB用
-//            StringBuilder sb = new StringBuilder();
-//            sb.append(searchWord);LARGE_AREA
-//            sb.append(LARGE_AREA);
-//            sb.append(tagType);
-//            sb.append(SEND_NUM + count);
-//            write = sb.toString();
-//            final CountDownLatch latch = new CountDownLatch(1);
-//            EventSearchDAO eventSearchDAO = new EventSearchDAO(COUNT_URL, write, eventInfoDTOList, latch);
-//            eventSearchDAO.execute();
-
-
-
-            final CountDownLatch latch = new CountDownLatch(1);
-            String write = "";
-            String urlStr = "";
+            //新DB用
             StringBuilder sb = new StringBuilder();
-            switch (value) {
-                case 1:
-                    //サーチワードから検索する
-                    urlStr = Common.EVENT_SEARCH_NAME_URL;
-                    sb.append("number=" + count);
-                    sb.append("&searchWord=" + searchWord);
-                    write = sb.toString();
-
-                    break;
-                case 2:
-                    //タグから検索する
-                    Log.i("tag_type","" + tag_type);
-                    urlStr = Common.EVENT_SEARCH_TAG_URL;
-                    sb.append("tag_id=" + tag_type);
-                    sb.append("&number=" + count);
-                    write = sb.toString();
-                    break;
-            }
-            EventSearchDAO eventSearchDAO = new EventSearchDAO(urlStr, write, eventInfoDTOList, latch);
+            sb.append(searchWord);
+            sb.append(LARGE_AREA);
+            sb.append(tagType);
+            sb.append(SEND_NUM + count);
+            write = sb.toString();
+            final CountDownLatch latch = new CountDownLatch(1);
+            EventSearchDAO eventSearchDAO = new EventSearchDAO(COUNT_URL, write, eventInfoDTOList, latch);
             eventSearchDAO.execute();
+
+
+
+//            final CountDownLatch latch = new CountDownLatch(1);
+//            String write = "";
+//            String urlStr = "";
+//            StringBuilder sb = new StringBuilder();
+//            switch (value) {
+//                case 1:
+//                    //サーチワードから検索する
+//                    urlStr = Common.EVENT_SEARCH_NAME_URL;
+//                    sb.append("number=" + count);
+//                    sb.append("&searchWord=" + searchWord);
+//                    write = sb.toString();
+//
+//                    break;
+//                case 2:
+//                    //タグから検索する
+//                    Log.i("tag_type","" + tag_type);
+//                    urlStr = Common.EVENT_SEARCH_TAG_URL;
+//                    sb.append("tag_id=" + tag_type);
+//                    sb.append("&number=" + count);
+//                    write = sb.toString();
+//                    break;
+//            }
+//            EventSearchDAO eventSearchDAO = new EventSearchDAO(urlStr, write, eventInfoDTOList, latch);
+//            eventSearchDAO.execute();
             try {
                 latch.await();
             } catch (InterruptedException e) {
@@ -334,7 +339,7 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             //タップされた行のデータを取得。
-            String idNum = ((EventInfoDTO)parent.getItemAtPosition(position)).getId();
+            String idNum = ((EventInfoDTO)parent.getItemAtPosition(position)).getEventId();
 
 //            String idNum = (String)item.get("id");
             Log.d("id", idNum);

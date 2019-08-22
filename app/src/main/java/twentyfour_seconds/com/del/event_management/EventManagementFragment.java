@@ -58,62 +58,62 @@ public class EventManagementFragment extends Fragment implements View.OnClickLis
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        //新DB用
-//        final CountDownLatch latch = new CountDownLatch(1);
-//        String write = "";
-//        StringBuilder sb = new StringBuilder();
-//        sb.append(SEND_UID);
-//        write = sb.toString();
-//        //DetailDBを読み込む
-//        UidSearchEventDAO ddb = new UidSearchEventDAO(UID_SEARCH_URL, write, eventInfoDTOList, latch);
-//        ddb.execute();
-//        try {
-//            latch.await();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        for(int i = 0; i < Common.titleList.size(); i++) {
-//
-//            Map<String, Object> Map = new HashMap<>();
-//
-//            EventInfoDTO eventInfoDTO = eventInfoDTOList.getDtoArrayList().get(i);
-//            Map.put("image", "test");
-//            Map.put("title", eventInfoDTO.getEventName());
-//            Map.put("area", eventInfoDTO.getLargeArea());
-//            Map.put("local", eventInfoDTO.getSmallArea());
-//            Map.put("term", "nothing");
-//            Map.put("deadline", eventInfoDTO.getClosedDay());
-//            Map.put("member", eventInfoDTO.getMember());
-//            EventManagementList.add(Map);
-//        }
-
-
-        //暫定的にidを設定。本来はFirebaseより取得
-        int id = 1;
+        //新DB用
         final CountDownLatch latch = new CountDownLatch(1);
-
+        String write = "";
+        StringBuilder sb = new StringBuilder();
+        sb.append(SEND_UID);
+        write = sb.toString();
         //DetailDBを読み込む
-        event_info_id_search_bk ddb = new event_info_id_search_bk(id, latch);
+        UidSearchEventDAO ddb = new UidSearchEventDAO(UID_SEARCH_URL, write, eventInfoDTOList, latch);
         ddb.execute();
         try {
             latch.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        for(int i = 0; i < Common.titleList.size(); i++) {
+        for(int i = 0; i < eventInfoDTOList.getDtoArrayList().size(); i++) {
 
             Map<String, Object> Map = new HashMap<>();
 
-            Map.put("image", Common.imageList.get(i));
-            Map.put("title", Common.titleList.get(i));
-            Map.put("area", Common.areaList.get(i));
-            Map.put("local", Common.localList.get(i));
-            Map.put("term", Common.termList.get(i));
-            Map.put("deadline", Common.deadlineList.get(i));
-            Map.put("member", Common.memberList.get(i));
+            EventInfoDTO eventInfoDTO = eventInfoDTOList.getDtoArrayList().get(i);
+            Map.put("image", "test");
+            Map.put("title", eventInfoDTO.getEventName());
+            Map.put("area", eventInfoDTO.getLargeArea());
+            Map.put("local", eventInfoDTO.getSmallArea());
+            Map.put("term", "nothing");
+            Map.put("deadline", eventInfoDTO.getClosedDay());
+            Map.put("member", eventInfoDTO.getMember());
             EventManagementList.add(Map);
         }
+
+
+//        //暫定的にidを設定。本来はFirebaseより取得
+//        int id = 1;
+//        final CountDownLatch latch = new CountDownLatch(1);
+//
+//        //DetailDBを読み込む
+//        event_info_id_search_bk ddb = new event_info_id_search_bk(id, latch);
+//        ddb.execute();
+//        try {
+//            latch.await();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//
+//        for(int i = 0; i < Common.titleList.size(); i++) {
+//
+//            Map<String, Object> Map = new HashMap<>();
+//
+//            Map.put("image", Common.imageList.get(i));
+//            Map.put("title", Common.titleList.get(i));
+//            Map.put("area", Common.areaList.get(i));
+//            Map.put("local", Common.localList.get(i));
+//            Map.put("term", Common.termList.get(i));
+//            Map.put("deadline", Common.deadlineList.get(i));
+//            Map.put("member", Common.memberList.get(i));
+//            EventManagementList.add(Map);
+//        }
 
         // Get the RecyclerView object.
         RecyclerView recyclerView = view.findViewById(R.id.ManagementEventList);

@@ -41,22 +41,22 @@ public class EventListAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return Integer.valueOf(eventInfoDTOList.get(position).getId());
+        return Integer.valueOf(eventInfoDTOList.get(position).getEventId());
     }
 
     public long getItemAtPosition(int position) {
-        return Integer.valueOf(eventInfoDTOList.get(position).getId());
+        return Integer.valueOf(eventInfoDTOList.get(position).getEventId());
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = layoutInflater.inflate(R.layout.row, parent,false);
 
-        ((TextView)convertView.findViewById(R.id.image)).setText(eventInfoDTOList.get(position).getImage());
-        ((TextView)convertView.findViewById(R.id.title)).setText(eventInfoDTOList.get(position).getTitle());
-        ((TextView)convertView.findViewById(R.id.area)).setText(eventInfoDTOList.get(position).getArea());
-        ((TextView)convertView.findViewById(R.id.term)).setText(eventInfoDTOList.get(position).getDate());
-        ((TextView)convertView.findViewById(R.id.deadline)).setText(eventInfoDTOList.get(position).getDeadline());
+        ((TextView)convertView.findViewById(R.id.image)).setText("test");
+        ((TextView)convertView.findViewById(R.id.title)).setText(eventInfoDTOList.get(position).getEventName());
+        ((TextView)convertView.findViewById(R.id.area)).setText(eventInfoDTOList.get(position).getLargeArea());
+        ((TextView)convertView.findViewById(R.id.term)).setText(eventInfoDTOList.get(position).getEventDay());
+        ((TextView)convertView.findViewById(R.id.deadline)).setText(eventInfoDTOList.get(position).getClosedDay());
         ((TextView)convertView.findViewById(R.id.member)).setText(eventInfoDTOList.get(position).getMember());
 
         return convertView;

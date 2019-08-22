@@ -12,7 +12,7 @@ import twentyfour_seconds.com.del.DTO.EventInfoDTO;
 import twentyfour_seconds.com.del.DTO.EventInfoDTOList;
 import twentyfour_seconds.com.del.util.Common;
 
-class UidSearchEventDAO extends AsyncTask<String, String, String> {
+public class UidSearchEventDAO extends AsyncTask<String, String, String> {
 
     //numberは、DBを読み込むときの開始位置
     private String write;
@@ -21,7 +21,7 @@ class UidSearchEventDAO extends AsyncTask<String, String, String> {
     private String urlStr;
     private JSONObject json;
 
-    UidSearchEventDAO(String urlStr, String write, EventInfoDTOList eventInfoDTOList, CountDownLatch latch) {
+    public UidSearchEventDAO(String urlStr, String write, EventInfoDTOList eventInfoDTOList, CountDownLatch latch) {
         this.urlStr = urlStr;
         this.write = write;
         this.eventInfoDTOList = eventInfoDTOList;

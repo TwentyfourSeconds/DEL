@@ -153,49 +153,49 @@ public class EventCreate3 extends AppCompatActivity {
 //            Log.d("founder", Common.personName + "");
 //            Log.d("founder", founder + "");
 
-            //DBに書き込みに行く
-            StringBuilder sb = new StringBuilder();
-            String write = "";
-            sb.append("event_name=" + eventNameStr);
-            sb.append("&founder=" + founder);
-            sb.append("&area=" + area);
-            sb.append("&place=" + placeStr);
-            sb.append("&event_day=" + eventDayStr);
-            sb.append("&deadline=" + deadlineStr);
-            sb.append("&current_person=" + current_person);
-            sb.append("&wanted_person=" + wantedPerson);
-            sb.append("&comment=" + commentStr);
-            sb.append("&delete_flg=" + delete_flg);
-            write = sb.toString();
-            EventCreateDAO eventCreateDAO = new EventCreateDAO(Common.EVENT_CREATE_URL, write);
-            eventCreateDAO.execute();
-
-            //TagDBに登録する
-
-            //登録完了画面(EventCreate4)に移動
-            Intent EventCreate5Page = new Intent(getApplicationContext(), EventCreate4.class);
-            startActivity(EventCreate5Page);
-
-
-//            //新DB用
+//            //DBに書き込みに行く
 //            StringBuilder sb = new StringBuilder();
 //            String write = "";
-//            sb.append("eventer_uid=" + Common.uid);
-//            sb.append("&event_name=" + eventNameStr);
-//            sb.append("&large_area=" + area);
-//            sb.append("&small_area=" + placeStr);
-//            sb.append("&event_day_on=" + eventDayStr);
-//            sb.append("&closed_on=" + deadlineStr);
-//            sb.append("&max_persons=" + wantedPerson);
+//            sb.append("event_name=" + eventNameStr);
+//            sb.append("&founder=" + founder);
+//            sb.append("&area=" + area);
+//            sb.append("&place=" + placeStr);
+//            sb.append("&event_day=" + eventDayStr);
+//            sb.append("&deadline=" + deadlineStr);
+//            sb.append("&current_person=" + current_person);
+//            sb.append("&wanted_person=" + wantedPerson);
 //            sb.append("&comment=" + commentStr);
-//            sb.append("&event_tag=" + 1);
+//            sb.append("&delete_flg=" + delete_flg);
 //            write = sb.toString();
-//            EventCreateDAO eventCreateDAO = new EventCreateDAO(CREATE_EVENT_URL, write);
+//            EventCreateDAO eventCreateDAO = new EventCreateDAO(Common.EVENT_CREATE_URL, write);
 //            eventCreateDAO.execute();
+//
+//            //TagDBに登録する
 //
 //            //登録完了画面(EventCreate4)に移動
 //            Intent EventCreate5Page = new Intent(getApplicationContext(), EventCreate4.class);
 //            startActivity(EventCreate5Page);
+
+
+            //新DB用
+            StringBuilder sb = new StringBuilder();
+            String write = "";
+            sb.append("eventer_uid=" + Common.uid);
+            sb.append("&event_name=" + eventNameStr);
+            sb.append("&large_area=" + area);
+            sb.append("&small_area=" + placeStr);
+            sb.append("&event_day_on=" + eventDayStr);
+            sb.append("&closed_on=" + deadlineStr);
+            sb.append("&max_persons=" + wantedPerson);
+            sb.append("&comment=" + commentStr);
+            sb.append("&event_tag=" + 1);
+            write = sb.toString();
+            EventCreateDAO eventCreateDAO = new EventCreateDAO(CREATE_EVENT_URL, write);
+            eventCreateDAO.execute();
+
+            //登録完了画面(EventCreate4)に移動
+            Intent EventCreate5Page = new Intent(getApplicationContext(), EventCreate4.class);
+            startActivity(EventCreate5Page);
         }
     }
 

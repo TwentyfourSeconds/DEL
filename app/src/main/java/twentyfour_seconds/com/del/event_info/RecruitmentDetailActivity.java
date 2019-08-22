@@ -66,25 +66,25 @@ public class RecruitmentDetailActivity extends CustomActivity {
         // インテントに保存されたデータを取得
         id = Integer.valueOf(intent.getStringExtra("id"));
 
-//        //新DB用
-//        String write = "";
-//        StringBuilder sb = new StringBuilder();
-//        sb.append(ID_SEND + id);
-//        write = sb.toString();
-//
-//        final CountDownLatch latch = new CountDownLatch(1);
-//        EventInfoDAO eventInfoDAO = new EventInfoDAO(EVENT_URL, write, eventInfoDTO, latch);
-//        eventInfoDAO.execute();
-
-
+        //新DB用
         String write = "";
         StringBuilder sb = new StringBuilder();
-        sb.append("id=" + id);
+        sb.append(ID_SEND + id);
         write = sb.toString();
 
         final CountDownLatch latch = new CountDownLatch(1);
-        EventInfoDAO eventInfoDAO = new EventInfoDAO(Common.EVENT_INFO_MYSQL_URL, write, eventInfoDTO, latch);
+        EventInfoDAO eventInfoDAO = new EventInfoDAO(EVENT_URL, write, eventInfoDTO, latch);
         eventInfoDAO.execute();
+
+
+//        String write = "";
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("id=" + id);
+//        write = sb.toString();
+//
+//        final CountDownLatch latch = new CountDownLatch(1);
+//        EventInfoDAO eventInfoDAO = new EventInfoDAO(Common.EVENT_INFO_MYSQL_URL, write, eventInfoDTO, latch);
+//        eventInfoDAO.execute();
         try {
             latch.await();
         } catch (InterruptedException e) {
@@ -182,16 +182,16 @@ public class RecruitmentDetailActivity extends CustomActivity {
         // アダプターオブジェクトをセット
         recyclerView.setAdapter(viewAdapterReadOnly);
 
-        Log.d("eventInfo", eventInfoDTO.getName());
+        Log.d("eventInfo", eventInfoDTO.getEventName());
 
-        leader.setText("募集者：" + eventInfoDTO.getName() + "さん");
+        leader.setText("募集者：" + "test" + "さん");
         title.setText(eventInfoDTO.getTitle());
-        date.setText("日程：" + eventInfoDTO.getDate());
+        date.setText("日程：" + eventInfoDTO.getEventDay());
         comment.setText(eventInfoDTO.getComment());
         comment.setFocusable(false);
-        area.setText("開催地：" + eventInfoDTO.getArea());
-        location.setText("開催場所：" + eventInfoDTO.getLocal());
-        deadline.setText("掲載期限：" + eventInfoDTO.getDeadline());
+        area.setText("開催地：" + eventInfoDTO.getLargeArea());
+        location.setText("開催場所：" + eventInfoDTO.getSmallArea());
+        deadline.setText("掲載期限：" + eventInfoDTO.getClosedDay());
         member.setText("募集人数：" + eventInfoDTO.getMember());
 
 
@@ -205,7 +205,7 @@ public class RecruitmentDetailActivity extends CustomActivity {
                 alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-//                        requestJoin();
+                        requestJoin();
                     }
                 });
                 alertDialog.setNegativeButton("キャンセル", new DialogInterface.OnClickListener() {

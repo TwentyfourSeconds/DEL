@@ -18,8 +18,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
+import twentyfour_seconds.com.del.DTO.EventInfoDTO;
+import twentyfour_seconds.com.del.DTO.EventInfoDTOList;
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.chat.ChatDB;
+import twentyfour_seconds.com.del.event_management.UidSearchEventDAO;
 import twentyfour_seconds.com.del.trash.event_info_id_search_bk;
 import twentyfour_seconds.com.del.event_management.EventTabcontrol_main;
 import twentyfour_seconds.com.del.mypage.MyPageActivity;
@@ -28,7 +31,9 @@ import twentyfour_seconds.com.del.util.Common;
 
 public class EventEntryFragment2 extends Fragment implements View.OnClickListener {
 
-//    private final String
+    private final String SEND_UID = "eventer_uid=" + Common.uid;
+    private final String UID_SEARCH_URL = Common.UID_SEARCH_EVENT_URL;
+    private EventInfoDTOList eventInfoDTOList = new EventInfoDTOList();
 
     //アダプター
     private twentyfour_seconds.com.del.event_entry.EventEntryViewAdapter EventEntryViewAdapter;
@@ -53,7 +58,38 @@ public class EventEntryFragment2 extends Fragment implements View.OnClickListene
     // Viewが生成し終わった時に呼ばれるメソッド
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.d("来た1","来た1");
+
+        //新DB用
+        final CountDownLatch latch = new CountDownLatch(1);
+        String write = "";
+        StringBuilder sb = new StringBuilder();
+        sb.append(SEND_UID);
+        write = sb.toString();
+        //DetailDBを読み込む
+        UidSearchEventDAO ddb = new UidSearchEventDAO(UID_SEARCH_URL, write, eventInfoDTOList, latch);
+        ddb.execute();
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //DB取得時、データをcommonクラスに格納するため、commonクラスより、データを取得
+        for(int i = 0; i < eventInfoDTOList.getDtoArrayList().size(); i++) {
+
+            Map<String, Object> Map = new HashMap<>();
+
+            EventInfoDTO eventInfoDTO = eventInfoDTOList.getDtoArrayList().get(i);
+            Map.put("image", "test");
+            Map.put("title", eventInfoDTO.getEventName());
+            Map.put("area", eventInfoDTO.getLargeArea());
+            Map.put("local", eventInfoDTO.getSmallArea());
+            Map.put("term", "nothing");
+            Map.put("deadline", eventInfoDTO.getClosedDay());
+            Map.put("member", eventInfoDTO.getMember());
+            messageList.add(Map);
+        }
+
 
 
 //        //自分のIDから、現在、作成しているイベントを抽出する。
@@ -84,37 +120,6 @@ public class EventEntryFragment2 extends Fragment implements View.OnClickListene
 //            Map.put("member", Common.memberList.get(i));
 //            messageList.add(Map);
 //        }
-
-
-
-        //自分のIDから、現在、作成しているイベントを抽出する。
-        int id = 1;
-        final CountDownLatch latch = new CountDownLatch(1);
-
-        //DetailDBを読み込む
-        event_info_id_search_bk ddb = new event_info_id_search_bk(id, latch);
-        ddb.execute();
-        try {
-            latch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        Log.d("来た2","来た2");
-        //DB取得時、データをcommonクラスに格納するため、commonクラスより、データを取得
-        for(int i = 0; i < Common.titleList.size(); i++) {
-
-            Map<String, Object> Map = new HashMap<>();
-
-            Map.put("image", Common.imageList.get(i));
-            Map.put("title", Common.titleList.get(i));
-            Map.put("area", Common.areaList.get(i));
-            Map.put("local", Common.localList.get(i));
-            Map.put("term", Common.termList.get(i));
-            Map.put("deadline", Common.deadlineList.get(i));
-            Map.put("member", Common.memberList.get(i));
-            messageList.add(Map);
-        }
 
 
         //joinメンバーDBを読み込む。
