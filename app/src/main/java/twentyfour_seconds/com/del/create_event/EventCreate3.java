@@ -1,10 +1,11 @@
-package twentyfour_seconds.com.del.event_create;
+package twentyfour_seconds.com.del.create_event;
 
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -122,14 +123,14 @@ public class EventCreate3 extends AppCompatActivity {
     }
 
     //登録内容の確認ボタンを押下時の動き(eventCreate4に移動)
-    public class  contentregistrationButtonClick implements View.OnClickListener {
+    public class contentregistrationButtonClick implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             //データベースへの登録処理を行う。
 
             //founderは、person_infoより、nameを取得する
             //latchは1
-            final CountDownLatch latch = new CountDownLatch(1);
+//            final CountDownLatch latch = new CountDownLatch(1);
             String founder = "サンプル太郎";
 
             //current_personは、初期値の1を登録する
@@ -190,6 +191,7 @@ public class EventCreate3 extends AppCompatActivity {
             sb.append("&comment=" + commentStr);
             sb.append("&event_tag=" + 1);
             write = sb.toString();
+            Log.d("write", write);
             EventCreateDAO eventCreateDAO = new EventCreateDAO(CREATE_EVENT_URL, write);
             eventCreateDAO.execute();
 

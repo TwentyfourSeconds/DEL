@@ -1,7 +1,6 @@
-package twentyfour_seconds.com.del.event_management;
+package twentyfour_seconds.com.del.management_event;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,7 +11,7 @@ import twentyfour_seconds.com.del.DTO.EventInfoDTO;
 import twentyfour_seconds.com.del.DTO.EventInfoDTOList;
 import twentyfour_seconds.com.del.util.Common;
 
-public class UidSearchEventDAO extends AsyncTask<String, String, String> {
+class UidSearchEventDAO extends AsyncTask<String, String, String> {
 
     //numberは、DBを読み込むときの開始位置
     private String write;
@@ -21,7 +20,7 @@ public class UidSearchEventDAO extends AsyncTask<String, String, String> {
     private String urlStr;
     private JSONObject json;
 
-    public UidSearchEventDAO(String urlStr, String write, EventInfoDTOList eventInfoDTOList, CountDownLatch latch) {
+    UidSearchEventDAO(String urlStr, String write, EventInfoDTOList eventInfoDTOList, CountDownLatch latch) {
         this.urlStr = urlStr;
         this.write = write;
         this.eventInfoDTOList = eventInfoDTOList;

@@ -1,4 +1,4 @@
-package twentyfour_seconds.com.del.event_entry;
+package twentyfour_seconds.com.del.entry_event;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,21 +21,19 @@ import twentyfour_seconds.com.del.DTO.EventInfoDTO;
 import twentyfour_seconds.com.del.DTO.EventInfoDTOList;
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.chat.ChatDB;
-import twentyfour_seconds.com.del.event_management.UidSearchEventDAO;
-import twentyfour_seconds.com.del.trash.event_info_id_search_bk;
-import twentyfour_seconds.com.del.event_management.EventTabcontrol_main;
+import twentyfour_seconds.com.del.management_event.EventTabcontrol_main;
 import twentyfour_seconds.com.del.mypage.MyPageActivity;
 import twentyfour_seconds.com.del.top_page.TopActivity;
 import twentyfour_seconds.com.del.util.Common;
 
 public class EventEntryFragment2 extends Fragment implements View.OnClickListener {
 
-    private final String SEND_UID = "eventer_uid=" + Common.uid;
-    private final String UID_SEARCH_URL = Common.UID_SEARCH_EVENT_URL;
+    private final String SEND_UID = "member_uid=" + Common.uid;
+    private final String PARTICIPANT_EVENT = Common.PARTICIPANT_EVENT_URL;
     private EventInfoDTOList eventInfoDTOList = new EventInfoDTOList();
 
     //アダプター
-    private twentyfour_seconds.com.del.event_entry.EventEntryViewAdapter EventEntryViewAdapter;
+    private twentyfour_seconds.com.del.entry_event.EventEntryViewAdapter EventEntryViewAdapter;
     //アダプターにセットするリスト（Map型でいろいろ格納できるようにしておく）
     //(参考)Map型とは：https://qiita.com/hainet/items/daab47dc991285b1f552
     //(参考)Map型に値を追加する方法：https://stackoverrun.com/ja/q/10712774
@@ -66,8 +63,8 @@ public class EventEntryFragment2 extends Fragment implements View.OnClickListene
         sb.append(SEND_UID);
         write = sb.toString();
         //DetailDBを読み込む
-        UidSearchEventDAO ddb = new UidSearchEventDAO(UID_SEARCH_URL, write, eventInfoDTOList, latch);
-        ddb.execute();
+        ParticipantEventDAO participantEventDAO = new ParticipantEventDAO(PARTICIPANT_EVENT, write, eventInfoDTOList, latch);
+        participantEventDAO.execute();
         try {
             latch.await();
         } catch (InterruptedException e) {

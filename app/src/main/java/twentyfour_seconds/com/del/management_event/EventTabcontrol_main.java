@@ -1,4 +1,4 @@
-package twentyfour_seconds.com.del.event_management;
+package twentyfour_seconds.com.del.management_event;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import twentyfour_seconds.com.del.event_create.EventCreate1;
+import twentyfour_seconds.com.del.create_event.EventCreate1;
 import twentyfour_seconds.com.del.R;
 
 public class EventTabcontrol_main extends AppCompatActivity {

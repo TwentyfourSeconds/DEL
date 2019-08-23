@@ -1,11 +1,10 @@
-package twentyfour_seconds.com.del.event_management;
+package twentyfour_seconds.com.del.management_event;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import twentyfour_seconds.com.del.event_entry.EventEntryFragment2;
-import twentyfour_seconds.com.del.event_management.EventManagementFragment;
+import twentyfour_seconds.com.del.entry_event.EventEntryFragment2;
 
 public class EventFragmentPagerAdapter extends FragmentPagerAdapter {
 
@@ -27,11 +26,11 @@ public class EventFragmentPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                //イベント参加を設定するFlagmentをセット
-                return new EventEntryFragment2();
-            case 1:
                 //イベント管理を設定するFlagmentをセット
                 return new EventManagementFragment();
+            case 1:
+                //イベント参加を設定するFlagmentをセット
+                return new EventEntryFragment2();
             default:
                 return null;
         }

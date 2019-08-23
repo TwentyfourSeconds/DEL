@@ -1,4 +1,4 @@
-package twentyfour_seconds.com.del.event_management;
+package twentyfour_seconds.com.del.management_event;
 
 import android.content.Intent;
 import android.database.Cursor;

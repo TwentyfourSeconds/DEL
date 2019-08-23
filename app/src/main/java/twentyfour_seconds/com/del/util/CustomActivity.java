@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import twentyfour_seconds.com.del.chat.ChatDB;
-import twentyfour_seconds.com.del.event_management.EventTabcontrol_main;
+import twentyfour_seconds.com.del.management_event.EventTabcontrol_main;
 import twentyfour_seconds.com.del.mypage.MyPageActivity;
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.top_page.TopActivity;

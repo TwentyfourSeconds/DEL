@@ -1,20 +1,10 @@
-package twentyfour_seconds.com.del.event_create;
+package twentyfour_seconds.com.del.create_event;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.concurrent.CountDownLatch;
 
-import twentyfour_seconds.com.del.DTO.EventInfoDTO;
 import twentyfour_seconds.com.del.util.Common;
 
 public class EventCreateDAO extends AsyncTask<String, String, String> {
@@ -33,8 +23,9 @@ public class EventCreateDAO extends AsyncTask<String, String, String> {
 //    private String comment = null;
 //    private int delete_flg = 0;
 
-    public EventCreateDAO(String urlStr, CountDownLatch latch) {
+    public EventCreateDAO(String urlStr, String write, CountDownLatch latch) {
         this.urlStr = urlStr;
+        this.write = write;
         this.latch = latch;
     }
 

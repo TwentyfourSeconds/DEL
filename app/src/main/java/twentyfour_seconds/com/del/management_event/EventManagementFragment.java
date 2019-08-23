@@ -1,4 +1,4 @@
-package twentyfour_seconds.com.del.event_management;
+package twentyfour_seconds.com.del.management_event;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,7 +25,6 @@ import twentyfour_seconds.com.del.DTO.EventInfoDTOList;
 import twentyfour_seconds.com.del.chat.ChatActivity;
 import twentyfour_seconds.com.del.chat.ChatDB;
 import twentyfour_seconds.com.del.R;
-import twentyfour_seconds.com.del.trash.event_info_id_search_bk;
 import twentyfour_seconds.com.del.mypage.MyPageActivity;
 import twentyfour_seconds.com.del.top_page.TopActivity;
 import twentyfour_seconds.com.del.util.Common;

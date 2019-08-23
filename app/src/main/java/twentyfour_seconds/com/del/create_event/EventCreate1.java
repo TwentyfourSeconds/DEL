@@ -1,4 +1,4 @@
-package twentyfour_seconds.com.del.event_create;
+package twentyfour_seconds.com.del.create_event;
 
 import android.content.Intent;
 import android.os.Bundle;

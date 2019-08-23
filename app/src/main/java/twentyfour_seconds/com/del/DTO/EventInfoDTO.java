@@ -149,11 +149,11 @@ public class EventInfoDTO {
     }
 
     public void setEventDay(String eventDay) {
-        this.eventDay = eventDay;
+        this.eventDay = eventDay.substring(0,10).replaceAll("-", "/");
     }
 
     public String getClosedDay() {
-        return closedDay;
+        return closedDay.substring(0,10).replaceAll("-", "/");
     }
 
     public void setClosedDay(String closedDay) {

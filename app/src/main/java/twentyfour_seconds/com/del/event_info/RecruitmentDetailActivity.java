@@ -33,8 +33,8 @@ public class RecruitmentDetailActivity extends CustomActivity {
     private final String ID_SEND = "id=";
     private final String EVENT_URL = Common.ID_SEARCH_EVENT_URL;
     private final String REQUEST_JOIN = Common.ADD_PARTICIPANT_EVENT_URL;
-    private final String MEMBER_ID_SEND = "member=" + Common.uid;
-    private final String EVENT_ID_SEND = "&event_id=";
+    private final String EVENT_ID_SEND = "event_id=";
+    private final String MEMBER_ID_SEND = "&member_uid=" + Common.uid;
     private int id;
 
     private EventInfoDTO eventInfoDTO = new EventInfoDTO();
@@ -236,9 +236,10 @@ public class RecruitmentDetailActivity extends CustomActivity {
     private void requestJoin() {
         String write = "";
         StringBuilder sb = new StringBuilder();
-        sb.append(MEMBER_ID_SEND);
         sb.append(EVENT_ID_SEND + id);
+        sb.append(MEMBER_ID_SEND);
         write = sb.toString();
+        Log.d("id", "write=" + write);
         RequestJoinDAO requestJoinDAO = new RequestJoinDAO(REQUEST_JOIN, write);
         requestJoinDAO.execute();
     }

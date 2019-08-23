@@ -8,7 +8,7 @@ import android.widget.DatePicker;
 
 import java.util.Calendar;
 
-import twentyfour_seconds.com.del.event_create.EventCreate1;
+import twentyfour_seconds.com.del.create_event.EventCreate1;
 
 public class calender extends DialogFragment {
     // ダイアログが生成された時に呼ばれるメソッド ※必須

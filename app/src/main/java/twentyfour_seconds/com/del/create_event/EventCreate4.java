@@ -1,4 +1,4 @@
-package twentyfour_seconds.com.del.event_create;
+package twentyfour_seconds.com.del.create_event;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

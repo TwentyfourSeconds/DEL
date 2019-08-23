@@ -1,4 +1,4 @@
-package twentyfour_seconds.com.del.event_entry;
+package twentyfour_seconds.com.del.entry_event;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
