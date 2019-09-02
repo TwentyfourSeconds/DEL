@@ -41,8 +41,6 @@ public class RegionSearchActivity extends AppCompatActivity {
         setContentView(R.layout.region_setting);
 
         final String REGION[] = { "北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県", "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県", "三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県", "鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県", "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"};
-//        final int REGION_ID[] = { R.id.hokkaido, R.id.aomori, R.id.iwate, R.id.miyagi, R.id.akita, R.id.yamagata, R.id.fukushima, R.id.ibaraki, R.id.tochigi, R.id.gunma, R.id.saitama, R.id.chiba, R.id.tokyo, R.id.kanagawa, R.id.niigata, R.id.toyama, R.id.ishikawa, R.id.fukui, R.id.yamanashi, R.id.nagano, R.id.gifu, R.id.shizuoka, R.id.aichi, R.id.mie, R.id.shiga, R.id.kyoto, R.id.osaka, R.id.hyogo, R.id.nara, R.id.wakayama, R.id.tottori, R.id.shimane, R.id.okayama, R.id.hiroshima, R.id.yamaguchi, R.id.tokushima, R.id.kagawa, R.id.ehime, R.id.kochi, R.id.fukuoka, R.id.saga, R.id.nagasaki, R.id.kumamoto, R.id.oita, R.id.miyazaki, R.id.kagoshima, R.id.okinawa };
-//        ConstraintLayout constraintLayout = findViewById(R.id.constraintLayout);
         LinearLayout layout = findViewById(R.id.linearLayout);
         LinearLayout.LayoutParams checkBoxLayoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -55,15 +53,6 @@ public class RegionSearchActivity extends AppCompatActivity {
             checkBoxs[i].setText(REGION[i]);
             checkBoxs[i].setLayoutParams(checkBoxLayoutParams);
             layout.addView(checkBoxs[i]);
-//            constraintLayout.addView(checkBoxs[i]);
-//            ConstraintSet constraintSet = new ConstraintSet();
-//            constraintSet.clone(constraintLayout);
-//            if(i == 0) {
-//                constraintSet.connect(checkBoxs[i].getId(), constraintSet.TOP, R.id.toolbar_chatActivity,constraintSet.BOTTOM);
-//            } else {
-//                constraintSet.connect(checkBoxs[i].getId(), constraintSet.TOP, checkBoxs[i-1].getId(),constraintSet.BOTTOM);
-//            }
-//            constraintSet.applyTo(constraintLayout);
         }
 
         //toolbarを実装する
