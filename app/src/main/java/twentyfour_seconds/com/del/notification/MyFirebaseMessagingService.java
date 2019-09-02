@@ -18,6 +18,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String NOTIFICATION_CHANNEL_ID = "my_notification_channel";
 
     @Override
+    //メッセージの受信処理
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
         Log.d(TAG, "From: " + remoteMessage.getFrom());

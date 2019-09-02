@@ -18,6 +18,7 @@ import com.squareup.picasso.Picasso;
 
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.chat.UserDTO;
+import twentyfour_seconds.com.del.notification.AddTopicTest;
 import twentyfour_seconds.com.del.profile_registration.ProfileRegistrationMainA;
 import twentyfour_seconds.com.del.util.Common;
 import twentyfour_seconds.com.del.util.CustomActivity;
@@ -116,6 +117,11 @@ public class MyPageActivity extends CustomActivity {
         menu_bar_chat.setOnClickListener(menuClickListener);
         menu_bar_mypage.setOnClickListener(menuClickListener);
 
+        //終わったら削除すること
+        Button addbutton = findViewById(R.id.addTopicButton);
+        MyPageActivity.addTopicButtonClickListener addTopicButtonClickListener = new MyPageActivity.addTopicButtonClickListener();
+        addbutton.setOnClickListener(addTopicButtonClickListener);
+
     }
 
     //プロフィールを編集するボタンを押下時の動き
@@ -125,4 +131,15 @@ public class MyPageActivity extends CustomActivity {
             startActivity(intent_profileRegistrationMain);
         }
     }
+
+
+    //終わったら削除すること
+    public class addTopicButtonClickListener implements View.OnClickListener{
+        public void onClick(View view){
+            Intent AddTopicTest = new Intent(getApplicationContext(), AddTopicTest.class);
+            startActivity(AddTopicTest);
+        }
+    }
+
+
 }
