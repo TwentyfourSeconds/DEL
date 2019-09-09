@@ -43,6 +43,7 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
     private int value;
     //文字列検索時の検索用語
     private String searchWord;
+    private String searchArea;
     private String tagType;
     private final String SEARCH_WORD_SEND = "searchWord=";
     private final String EVENT_TAG_SEND = "&eventTag=";
@@ -75,20 +76,91 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
         //新DB用
         // インテントを取得
         Intent intent = getIntent();
+
+        //エリア設定を取得する
+        StringBuilder sbSearchArea = new StringBuilder();
+        String regionSetting = Common.regionSetting;
+        if(regionSetting == null || regionSetting.length() != Common.REGION_ARY.length) {
+            regionSetting = "";
+        }
+
+        //エリア検索のsbSearchWordコマンド発行
+        String[] regionSettingAry = regionSetting.split("");
+        sbSearchArea.append("large_area IN (");
+        boolean firstFlg = true;
+        for(int i = 0; i < regionSettingAry.length; i++) {
+            if(regionSettingAry[i].equals(Common.REGION_FLG_ON) && firstFlg) {
+                sbSearchArea.append(" \"");
+                sbSearchArea.append(Common.REGION_ARY[i]);
+                sbSearchArea.append("\"");
+                firstFlg = false;
+            } else if(regionSettingAry[i].equals(Common.REGION_FLG_ON)) {
+                sbSearchArea.append(", \"");
+                sbSearchArea.append(Common.REGION_ARY[i]);
+                sbSearchArea.append("\"");
+            }
+        }
+        sbSearchArea.append(")");
+//        if(regionSetting != "") {
+        if(true) {
+//            sbSearchArea.setLength(sbSearchArea.length() - 3);
+            sbSearchArea.insert(0, " AND ");
+            sbSearchArea.insert(0, LARGE_AREA);
+            searchArea = sbSearchArea.toString();
+        } else {
+            searchArea = LARGE_AREA;
+        }
+
+
         //サーチワードから検索する
-        if(intent.getStringExtra("searchWord") == null) {
+        if(intent.getStringExtra("searchWord") == null || intent.getStringExtra("searchWord") == "") {
+//        if(true) {
             searchWord = SEARCH_WORD_SEND;
         } else {
-            searchWord = SEARCH_WORD_SEND + intent.getStringExtra("searchWord");
+            StringBuilder sbSearchWord = new StringBuilder();
+            firstFlg = true;
+            for (String keyword : intent.getStringExtra("searchWord").replaceAll("　", " ").split(" ")) {
+                if(firstFlg) {
+                    sbSearchWord.append(" event_name like \"%");
+                    sbSearchWord.append(keyword);
+                    sbSearchWord.append("%\"");
+                    firstFlg = false;
+                } else {
+                    sbSearchWord.append(" AND event_name like \"%");
+                    sbSearchWord.append(keyword);
+                    sbSearchWord.append("%\"");
+                }
+            }
+//            sbSearchWord.insert(0, "\"");
+            sbSearchWord.insert(0, SEARCH_WORD_SEND);
+//            sbSearchWord.append("\"");
+            searchWord = sbSearchWord.toString();
         }
-        tagType = EVENT_TAG_SEND + intent.getIntExtra("tag_type", 1);
+
+        //タグ検索のコマンドを発行
+//        tagType = EVENT_TAG_SEND + intent.getIntExtra("tag_type", 1);
+        if(intent.getStringExtra("tag_type") == null) {
+            tagType = EVENT_TAG_SEND;
+        } else {
+            String[] tagTypeAry = intent.getStringExtra("tag_type").split("");
+            StringBuilder sbStagType = new StringBuilder();
+            for(int i = 0; i < tagTypeAry.length; i++) {
+                sbStagType.append(" AND event_tag = ");
+                sbStagType.append(tagTypeAry[i]);
+            }
+            sbStagType.insert(0, EVENT_TAG_SEND);
+            tagType = sbStagType.toString();
+        }
+
+
         StringBuilder sb = new StringBuilder();
         sb.append(searchWord);
-        sb.append(LARGE_AREA);
+        sb.append(searchArea);
         sb.append(tagType);
-        sb.append(SEND_NUM + INITIAL_NUMBER);
+        sb.append(SEND_NUM);
+        sb.append(INITIAL_NUMBER);
         write = sb.toString();
-//        Log.d("write", write);
+        Log.d("write", write);
         final CountDownLatch latch = new CountDownLatch(2);
         EventSearchDAO eventSearchDAO = new EventSearchDAO(SEARCH_URL, write, eventInfoDTOList, latch);
         eventSearchDAO.execute();

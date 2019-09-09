@@ -217,7 +217,7 @@ public class TopActivity extends CustomActivity {
                     Common.profile = currentUser.getProfile();
                     Common.profileImageUrl = currentUser.getProfileImageUrl();
                     Common.filename = currentUser.getFilename();
-                    Common.regionsetting = currentUser.getRegionSetting();
+                    Common.regionSetting = currentUser.getRegionSetting();
                 }
             }
             @Override
@@ -239,8 +239,8 @@ public class TopActivity extends CustomActivity {
             intentMypage.putExtra("searchWord", searchWord);
             //RecruitmentListActivity遷移時、遷移先で処理を分岐する
             // サーチワードから検索する場合、valueは1とする
-            int value = 1;
-            intentMypage.putExtra("VALUE",value);
+//            int value = 1;
+//            intentMypage.putExtra("VALUE",value);
             startActivity(intentMypage);
         }
     }
@@ -259,11 +259,11 @@ public class TopActivity extends CustomActivity {
                     //hole_typeのコード値を１とする
                     int tag_type = 1;
                     Intent intentMypage = new Intent(getApplicationContext(), RecruitmentListActivity.class);
-                    intentMypage.putExtra("tag_type", 1);
+                    intentMypage.putExtra("tag_type", "1");
                     //RecruitmentListActivity遷移時、遷移先で処理を分岐する
                     // tagから検索する場合、valueは2とする
-                    int value = 2;
-                    intentMypage.putExtra("VALUE",value);
+//                    int value = 2;
+//                    intentMypage.putExtra("VALUE",value);
                     startActivity(intentMypage);
                     break;
 //                case R.id.hole_type:
