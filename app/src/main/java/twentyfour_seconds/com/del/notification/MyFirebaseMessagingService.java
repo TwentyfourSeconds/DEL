@@ -31,10 +31,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             // Configure the notification channel.
             notificationChannel.setDescription("Channel description");
+            //プッシュが来た時に、ライトをつけるか
             notificationChannel.enableLights(true);
+            //ライトの色
             notificationChannel.setLightColor(Color.RED);
-            notificationChannel.setVibrationPattern(new long[]{0, 1000, 500, 1000});
+            //バイブレーションの有無
             notificationChannel.enableVibration(true);
+            //バイブレーションのパターン
+            notificationChannel.setVibrationPattern(new long[]{0, 1000, 500, 1000});
             notificationManager.createNotificationChannel(notificationChannel);
         }
 
@@ -44,7 +48,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("Title")
                 .setContentText(remoteMessage.getNotification().getBody())
-                .setOngoing(true)
+                //Notificationをユーザに消されないようにする
+//                .setOngoing(false)
+                //ユーザーがタップしたときに削除する
+                .setAutoCancel(true)
                 .setChannelId(NOTIFICATION_CHANNEL_ID);
 
         notificationManager.notify(NOTIFICATION_ID, mBuilder.build());

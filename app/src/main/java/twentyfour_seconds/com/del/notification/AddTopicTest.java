@@ -1,10 +1,13 @@
 package twentyfour_seconds.com.del.notification;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,6 +21,8 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import twentyfour_seconds.com.del.R;
+import twentyfour_seconds.com.del.login.LoginActivity;
+import twentyfour_seconds.com.del.search_event.RecruitmentListActivity;
 
 public class AddTopicTest extends AppCompatActivity {
 
@@ -26,6 +31,47 @@ public class AddTopicTest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.topic_test);
 
+
+        //topic登録処理
+        Button topicbutton = findViewById(R.id.topicbutton);
+
+        AddTopicTest.topic_button_buttonClickListener topic_button_buttonClickListener = new AddTopicTest.topic_button_buttonClickListener();
+        topicbutton.setOnClickListener(topic_button_buttonClickListener);
+
+
+        //token登録処理
+        Button tokenbutton = findViewById(R.id.tokenbutton);
+
+        AddTopicTest.token_button_buttonClickListener token_button_buttonClickListener = new AddTopicTest.token_button_buttonClickListener();
+        tokenbutton.setOnClickListener(token_button_buttonClickListener);
+
+    }
+
+
+    //topic登録ボタンを押下時
+    public class topic_button_buttonClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+
+            topicRegistration();
+
+        }
+    }
+
+
+    //token登録を押下時
+    public class token_button_buttonClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+
+            tokenRegistration();
+
+        }
+    }
+
+
+
+     private void topicRegistration() {
 
         //テストでここの画面に来たら、topicを登録する
         FirebaseMessaging.getInstance().subscribeToTopic("chattest")
@@ -40,6 +86,10 @@ public class AddTopicTest extends AppCompatActivity {
                         Toast.makeText(AddTopicTest.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+
+    private void tokenRegistration() {
 
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
@@ -53,7 +103,6 @@ public class AddTopicTest extends AppCompatActivity {
                         // Get new Instance ID token
                         String token = task.getResult().getToken();
                         Log.d("token get success", "token is = " + token);
-
                     }
                 });
     }

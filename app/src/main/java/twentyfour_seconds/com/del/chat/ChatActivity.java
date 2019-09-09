@@ -1,5 +1,6 @@
 package twentyfour_seconds.com.del.chat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,20 +23,25 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.xwray.groupie.GroupAdapter;
 import com.xwray.groupie.Item;
 import com.xwray.groupie.ViewHolder;
 
+import java.util.concurrent.CountDownLatch;
+
 import twentyfour_seconds.com.del.R;
+import twentyfour_seconds.com.del.create_user.RegisterActivity;
 import twentyfour_seconds.com.del.util.Common;
+
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
 
 public class ChatActivity extends AppCompatActivity {
 
     private GroupAdapter adapter;
     private UserDTO currentUser;
-    //テスト用
-    String eventId = "AAA";
+    String eventId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +53,10 @@ public class ChatActivity extends AppCompatActivity {
 //        user = getIntent().getParcelableExtra("USER_KEY");
 //        String username = user.username;
 
+        //EventManegementFragmentのintentより、イベントidを取得する
+        Intent intent = getIntent();
+        eventId = intent.getStringExtra("event_id");
+
         //ユーザー情報をFirebaseから取得する
 //        fetchCurrentUser();
         currentUser = new UserDTO();
@@ -57,7 +67,7 @@ public class ChatActivity extends AppCompatActivity {
         currentUser.gender = Common.gender;
         currentUser.profile = Common.profile;
         currentUser.profileImageUrl = Common.profileImageUrl;
-        currentUser.regionSetting = Common.regionSetting;
+        currentUser.regionSetting = Common.regionsetting;
 
         //右上のアクションバーの名前(バージョンの問題？こける）
 //        getSupportActionBar().setTitle(eventId);

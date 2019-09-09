@@ -76,6 +76,9 @@ public class EventManagementFragment extends Fragment implements View.OnClickLis
             Map<String, Object> Map = new HashMap<>();
 
             EventInfoDTO eventInfoDTO = eventInfoDTOList.getDtoArrayList().get(i);
+            //チャット画面に遷移する際、イベントを識別するため
+            Map.put("event_id",eventInfoDTO.getEventId());
+            //一覧に出す情報を取得
             Map.put("image", "test");
             Map.put("title", eventInfoDTO.getEventName());
             Map.put("area", eventInfoDTO.getLargeArea());
@@ -180,12 +183,20 @@ public class EventManagementFragment extends Fragment implements View.OnClickLis
                     //タッチしたイベントのpositionを取得
                     int position = EventManagementViewHolderRet.getAdapterPosition(); // positionを取得
                     Log.i("position", position + "");
-                    //イベントのイベントidを取得する
-                    //Firebase.database　～
-                    //チャット画面に遷移する（intentでイベントidを遷移）
-                    //ログインしていない場合は、登録画面に戻る
+
+                    //**イベントのイベントidを取得する*
+                    //タッチしたポジションに対応するEventManagementList（DBの情報をすべて取得したLIST型の変数）より取得する
+                    //*
+
+                    //渡された引数positionに該当する、リストからリストデータ一行分のMapデータを取得
+                    Map<String, Object> singleRow = EventManagementList.get(position);
+                    String eventId = singleRow.get("event_id").toString();
+
+                    //チャット画面に遷移する（intentでイベントidを遷移）      ログインしていない場合は、登録画面に戻る?
                     //Flagmentの画面遷移はgetActivity()
                     Intent intent = new Intent(getActivity(), ChatActivity.class);
+                    intent.putExtra("event_id", eventId);
+
                     startActivity(intent);
                 }
             });
