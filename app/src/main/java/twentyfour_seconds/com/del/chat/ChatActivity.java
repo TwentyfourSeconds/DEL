@@ -67,7 +67,7 @@ public class ChatActivity extends AppCompatActivity {
         currentUser.gender = Common.gender;
         currentUser.profile = Common.profile;
         currentUser.profileImageUrl = Common.profileImageUrl;
-        currentUser.regionSetting = Common.regionsetting;
+        currentUser.regionSetting = Common.regionSetting;
 
         //右上のアクションバーの名前(バージョンの問題？こける）
 //        getSupportActionBar().setTitle(eventId);
