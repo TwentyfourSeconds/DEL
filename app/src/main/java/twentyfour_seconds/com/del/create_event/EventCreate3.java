@@ -13,6 +13,9 @@ import android.widget.TextView;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,7 @@ import java.util.concurrent.CountDownLatch;
 
 import twentyfour_seconds.com.del.DTO.ViewItemDTO;
 import twentyfour_seconds.com.del.R;
+import twentyfour_seconds.com.del.chat.ChatMessageDTO;
 import twentyfour_seconds.com.del.util.Common;
 import twentyfour_seconds.com.del.util.ViewAdapterReadOnly;
 
@@ -128,10 +132,6 @@ public class EventCreate3 extends AppCompatActivity {
         public void onClick(View view) {
             //データベースへの登録処理を行う。
 
-            //founderは、person_infoより、nameを取得する
-            //latchは1
-//            final CountDownLatch latch = new CountDownLatch(1);
-            String founder = "サンプル太郎";
 
             //current_personは、初期値の1を登録する
             int current_person = 1;
@@ -153,7 +153,6 @@ public class EventCreate3 extends AppCompatActivity {
 //
 //            Log.d("founder", Common.personName + "");
 //            Log.d("founder", founder + "");
-
 //            //DBに書き込みに行く
 //            StringBuilder sb = new StringBuilder();
 //            String write = "";
@@ -178,7 +177,6 @@ public class EventCreate3 extends AppCompatActivity {
 //            startActivity(EventCreate5Page);
 
 
-            //新DB用
             StringBuilder sb = new StringBuilder();
             String write = "";
             sb.append("eventer_uid=" + Common.uid);
@@ -192,8 +190,46 @@ public class EventCreate3 extends AppCompatActivity {
             sb.append("&event_tag=" + 1);
             write = sb.toString();
             Log.d("write", write);
-            EventCreateDAO eventCreateDAO = new EventCreateDAO(CREATE_EVENT_URL, write);
+            //latchは1
+            final CountDownLatch latch = new CountDownLatch(1);
+
+            EventCreateDAO eventCreateDAO = new EventCreateDAO(CREATE_EVENT_URL, write, latch);
             eventCreateDAO.execute();
+
+            //書き込みが完了したタイミングで自動採番されたイベントのevent_idを取得する
+            try {
+                latch.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Log.d("EventCreate3", "latchCountDown");
+
+
+            //書き込みが完了したタイミングで自動採番されたイベントのevent_idを取得する（firebaseでのキーとするため）
+            StringBuilder sb2 = new StringBuilder();
+            String write2 = "";
+            sb2.append("eventer_uid=" + Common.uid);
+            write2 = sb2.toString();
+
+            final CountDownLatch latch2 = new CountDownLatch(1);
+            String SEARCH_NEW_EVENT_URL = "http://10.0.2.2:4052/search_create_event";
+
+            SearchNewEventDAO searchNewEventDAO = new SearchNewEventDAO(SEARCH_NEW_EVENT_URL, write2, latch2);
+            searchNewEventDAO.execute();
+
+            try {
+                latch2.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Log.d("event_id", "newEventId = " + Common.newEventId);
+
+
+            //firebaseにGroupMemberの初期データを登録する
+            FirebaseGroupMemberDAO firebaseGroupMemberDAO = new FirebaseGroupMemberDAO(Common.uid);
+            performSendMessage(firebaseGroupMemberDAO);
+
 
             //登録完了画面(EventCreate4)に移動
             Intent EventCreate5Page = new Intent(getApplicationContext(), EventCreate4.class);
@@ -201,6 +237,20 @@ public class EventCreate3 extends AppCompatActivity {
         }
     }
 
+    //firebaseにメッセージを登録する
+    private void performSendMessage(FirebaseGroupMemberDAO firebaseGroupMemberDAO){
 
+
+        //firebaseのmessage-userに登録する（グループidは、新しく書き込んだ番号を使用する
+        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/Group/" + Common.newEventId + "/GroupMembers").push();
+
+        //*****現状、spaceでも送れてしまうので注意*************//
+        ref.setValue(firebaseGroupMemberDAO).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d("ChatLog", "Save our chat message:" + ref.getKey());
+            }
+        });
+    }
 
 }

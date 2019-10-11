@@ -136,7 +136,7 @@ public class ChatActivity extends AppCompatActivity {
 
 
         //メッセージを受信する
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/GroupMessages/" + eventId);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/Group/" + eventId + "/Messages");
 
         ref.addChildEventListener(new ChildEventListener() {
             @Override
@@ -190,7 +190,7 @@ public class ChatActivity extends AppCompatActivity {
         String sendId = currentUser.uid;
 
         //firebaseのmessage-userに登録する
-        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/GroupMessages/" + eventId).push();
+        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/Group/" + eventId + "/Messages").push();
 
         ChatMessageDTO chatMessageDTO = new ChatMessageDTO(ref.getKey(),text,sendId,System.currentTimeMillis()/1000);
         //*****現状、spaceでも送れてしまうので注意*************//

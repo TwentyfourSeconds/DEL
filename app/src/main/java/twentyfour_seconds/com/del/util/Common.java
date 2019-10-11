@@ -182,5 +182,7 @@ public class Common {
     public static String filename;
     public static String regionSetting;
 
+    //イベント作成後の新しいイベントidを取得する
+    public static int newEventId;
 
 }

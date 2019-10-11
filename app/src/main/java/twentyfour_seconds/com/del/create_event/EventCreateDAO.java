@@ -38,7 +38,7 @@ public class EventCreateDAO extends AsyncTask<String, String, String> {
     protected String doInBackground(String... string) {
 
         String result = Common.URLConnection(urlStr, write);
-
+        latch.countDown();
         return result;
     }
 }
