@@ -53,13 +53,14 @@ public class RegionSearchActivity extends AppCompatActivity {
             regionSetting = Common.REGION_NOTHING;
         }
         String[] regionSettingAry = regionSetting.split("");
-        for(int i = 0; i < checkBoxs.length; i++) {
-            Log.d("i", i+ "");
+        Log.d("test", regionSettingAry.length + "");
+        for(int i = 0; i < Common.REGION_ARY.length; i++) {
+//            Log.d("i", i+ "");
             checkBoxs[i] = new CheckBox(this);
             checkBoxs[i].setId(View.generateViewId());
 //            checkBoxs[i].setId(ids[i]);
             checkBoxs[i].setText(Common.REGION_ARY[i]);
-            if(regionSettingAry[i].equals(Common.REGION_FLG_ON)) {
+            if(regionSettingAry[i + 1].equals(Common.REGION_FLG_ON)) {
                 checkBoxs[i].setChecked(true);
             }
             checkBoxs[i].setLayoutParams(checkBoxLayoutParams);
@@ -141,6 +142,7 @@ public class RegionSearchActivity extends AppCompatActivity {
 
                 //現在のチェック状況を取得
                 String regionSettingValue = GetRegionValue();
+                Common.regionSetting = regionSettingValue;
 
                 //ユーザーのuid、ユーザー情報のデータベースリファレンス、引き継いできたユーザーimageを登録する
                 String uid = FirebaseAuth.getInstance().getUid();
@@ -215,7 +217,7 @@ public class RegionSearchActivity extends AppCompatActivity {
 
 
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < 47; i++) {
+        for(int i = 0; i < Common.REGION_ARY.length; i++) {
             if(checkBoxs[i].isChecked()) {
                 sb.append(Common.REGION_FLG_ON);
             } else {

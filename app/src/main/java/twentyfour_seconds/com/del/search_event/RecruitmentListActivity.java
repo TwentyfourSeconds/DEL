@@ -88,15 +88,15 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
         String[] regionSettingAry = regionSetting.split("");
         sbSearchArea.append("large_area IN (");
         boolean firstFlg = true;
-        for(int i = 0; i < regionSettingAry.length; i++) {
+        for(int i = 1; i < regionSettingAry.length; i++) {
             if(regionSettingAry[i].equals(Common.REGION_FLG_ON) && firstFlg) {
                 sbSearchArea.append(" \"");
-                sbSearchArea.append(Common.REGION_ARY[i]);
+                sbSearchArea.append(Common.REGION_ARY[i - 1]);
                 sbSearchArea.append("\"");
                 firstFlg = false;
             } else if(regionSettingAry[i].equals(Common.REGION_FLG_ON)) {
                 sbSearchArea.append(", \"");
-                sbSearchArea.append(Common.REGION_ARY[i]);
+                sbSearchArea.append(Common.REGION_ARY[i - 1]);
                 sbSearchArea.append("\"");
             }
         }
@@ -115,7 +115,7 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
         //サーチワードから検索する
         if(intent.getStringExtra("searchWord") == null || intent.getStringExtra("searchWord") == "") {
 //        if(true) {
-            searchWord = SEARCH_WORD_SEND;
+            searchWord = SEARCH_WORD_SEND + "event_name like \"%\"";
         } else {
             StringBuilder sbSearchWord = new StringBuilder();
             firstFlg = true;
@@ -144,7 +144,7 @@ public class RecruitmentListActivity extends AppCompatActivity implements AbsLis
         } else {
             String[] tagTypeAry = intent.getStringExtra("tag_type").split("");
             StringBuilder sbStagType = new StringBuilder();
-            for(int i = 0; i < tagTypeAry.length; i++) {
+            for(int i = 1; i < tagTypeAry.length; i++) {
                 sbStagType.append(" AND event_tag = ");
                 sbStagType.append(tagTypeAry[i]);
             }
