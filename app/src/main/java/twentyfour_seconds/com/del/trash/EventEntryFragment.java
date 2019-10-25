@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 import twentyfour_seconds.com.del.chat.ChatDB;
-import twentyfour_seconds.com.del.management_event.EventTabcontrol_main;
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.mypage.MyPageActivity;
 import twentyfour_seconds.com.del.top_page.TopActivity;

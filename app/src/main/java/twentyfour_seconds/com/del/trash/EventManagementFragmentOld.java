@@ -1,4 +1,4 @@
-package twentyfour_seconds.com.del.management_event;
+package twentyfour_seconds.com.del.trash;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -24,7 +24,6 @@ import twentyfour_seconds.com.del.chat.ChatDB;
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.mypage.MyPageActivity;
 import twentyfour_seconds.com.del.top_page.TopActivity;
-import twentyfour_seconds.com.del.trash.ManagementEventDB;
 
 public class EventManagementFragmentOld extends Fragment implements View.OnClickListener{
 

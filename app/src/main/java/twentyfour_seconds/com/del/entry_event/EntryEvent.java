@@ -1,14 +1,8 @@
 package twentyfour_seconds.com.del.entry_event;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -20,41 +14,29 @@ import java.util.concurrent.CountDownLatch;
 import twentyfour_seconds.com.del.DTO.EventInfoDTO;
 import twentyfour_seconds.com.del.DTO.EventInfoDTOList;
 import twentyfour_seconds.com.del.R;
-import twentyfour_seconds.com.del.chat.ChatDB;
-import twentyfour_seconds.com.del.management_event.EventTabcontrol_main;
-import twentyfour_seconds.com.del.mypage.MyPageActivity;
-import twentyfour_seconds.com.del.top_page.TopActivity;
+import twentyfour_seconds.com.del.trash.EventEntryViewAdapter;
 import twentyfour_seconds.com.del.util.Common;
+import twentyfour_seconds.com.del.util.CustomActivity;
 
-public class EventEntryFragment2 extends Fragment implements View.OnClickListener {
+public class EntryEvent extends CustomActivity {
 
     private final String SEND_UID = "member_uid=" + Common.uid;
     private final String PARTICIPANT_EVENT = Common.PARTICIPANT_EVENT_URL;
     private EventInfoDTOList eventInfoDTOList = new EventInfoDTOList();
 
     //アダプター
-    private twentyfour_seconds.com.del.entry_event.EventEntryViewAdapter EventEntryViewAdapter;
+    private twentyfour_seconds.com.del.trash.EventEntryViewAdapter EventEntryViewAdapter;
     //アダプターにセットするリスト（Map型でいろいろ格納できるようにしておく）
     //(参考)Map型とは：https://qiita.com/hainet/items/daab47dc991285b1f552
     //(参考)Map型に値を追加する方法：https://stackoverrun.com/ja/q/10712774
     private List<Map<String, Object>> messageList = new ArrayList<Map<String, Object>>();
 
-    //コンストラクタ
-    public EventEntryFragment2() {
-    }
-
-    @Nullable
-    @Override
-    // Fragmentで表示するViewを作成するメソッド
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // 先ほどのレイアウトをここでViewとして作成します
-        return inflater.inflate(R.layout.eventkanri2, container, false);
-    }
 
     @Override
-    // Viewが生成し終わった時に呼ばれるメソッド
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.eventkanri2);
+
 
         //新DB用
         final CountDownLatch latch = new CountDownLatch(1);
@@ -127,11 +109,11 @@ public class EventEntryFragment2 extends Fragment implements View.OnClickListene
         //出た情報をリサイクラービューにてリスト出力
 
         // Get the RecyclerView object.
-        RecyclerView recyclerView = view.findViewById(R.id.entry_event);
+        RecyclerView recyclerView = findViewById(R.id.entry_event);
 
         //--------------------------------flexBox Layout の調整-----------------------------------------------//
         // FlexboxLayoutManangerを定義する（レイアウトマネージャーは、リストデータの見え方を決める。※これがリストビューとは異なるリサイクラービューのいいところ）
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         // リサイクラービューにレイアウトマネージャーを設定
         recyclerView.setLayoutManager(linearLayoutManager);
 
@@ -145,44 +127,22 @@ public class EventEntryFragment2 extends Fragment implements View.OnClickListene
 
 
         //        //下部メニューボタンを押下したときの処理を記載
-        ImageView menu_bar_home = view.findViewById(R.id.tab3).findViewById(R.id.menu_bar_home);
-        ImageView menu_bar_event = view.findViewById(R.id.tab3).findViewById(R.id.menu_bar_event);
-        ImageView menu_bar_chat = view.findViewById(R.id.tab3).findViewById(R.id.menu_bar_chat);
-        ImageView menu_bar_mypage = view.findViewById(R.id.tab3).findViewById(R.id.menu_bar_mypage);
+        ImageView menu_bar_home = findViewById(R.id.tab3).findViewById(R.id.menu_bar_home);
+        ImageView menu_bar_event = findViewById(R.id.tab3).findViewById(R.id.menu_bar_event);
+        ImageView menu_bar_chat = findViewById(R.id.tab3).findViewById(R.id.menu_bar_chat);
+        ImageView menu_bar_mypage = findViewById(R.id.tab3).findViewById(R.id.menu_bar_mypage);
 
-        menu_bar_home.setOnClickListener(this);
-        menu_bar_event.setOnClickListener(this);
-        menu_bar_chat.setOnClickListener(this);
-        menu_bar_mypage.setOnClickListener(this);
+        menuClickListener menuClickListener = new menuClickListener();
+
+        menu_bar_home.setOnClickListener(menuClickListener);
+        menu_bar_event.setOnClickListener(menuClickListener);
+        menu_bar_chat.setOnClickListener(menuClickListener);
+        menu_bar_mypage.setOnClickListener(menuClickListener);
 
 
     }
 
 
-    @Override
-    public void onClick(View view) {
-        int id = view.getId();
-        switch(id){
-            case R.id.menu_bar_home:
-                //home画面へと飛ぶ処理
-                Intent intentHome = new Intent(getActivity(), TopActivity.class);
-                startActivity(intentHome);
-                break;
-            case R.id.menu_bar_event:
-                //イベント作成画面へと飛ぶ処理
-                Intent intentEvent = new Intent(getActivity(), EventTabcontrol_main.class);
-                startActivity(intentEvent);
-                break;
-            case R.id.menu_bar_chat:
-                //チャット画面へと飛ぶ処理
-                Intent intentchat = new Intent(getActivity(), ChatDB.class);
-                startActivity(intentchat);
-                break;
-            case R.id.menu_bar_mypage:
-                //マイページ画面へと飛ぶ処理
-                Intent intentMypage = new Intent(getActivity(), MyPageActivity.class);
-                startActivity(intentMypage);
-                break;
-        }
-    }
 }
+
+

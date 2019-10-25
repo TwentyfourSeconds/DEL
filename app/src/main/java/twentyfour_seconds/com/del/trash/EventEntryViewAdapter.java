@@ -1,4 +1,4 @@
-package twentyfour_seconds.com.del.entry_event;
+package twentyfour_seconds.com.del.trash;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;

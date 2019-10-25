@@ -1,4 +1,4 @@
-package twentyfour_seconds.com.del.management_event;
+package twentyfour_seconds.com.del.trash;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +25,7 @@ import twentyfour_seconds.com.del.DTO.EventInfoDTOList;
 import twentyfour_seconds.com.del.chat.ChatActivity;
 import twentyfour_seconds.com.del.chat.ChatDB;
 import twentyfour_seconds.com.del.R;
+//import twentyfour_seconds.com.del.management_event.UidSearchEventDAO;
 import twentyfour_seconds.com.del.mypage.MyPageActivity;
 import twentyfour_seconds.com.del.top_page.TopActivity;
 import twentyfour_seconds.com.del.util.Common;
@@ -64,8 +65,8 @@ public class EventManagementFragment extends Fragment implements View.OnClickLis
         sb.append(SEND_UID);
         write = sb.toString();
         //DetailDBを読み込む
-        UidSearchEventDAO ddb = new UidSearchEventDAO(UID_SEARCH_URL, write, eventInfoDTOList, latch);
-        ddb.execute();
+//        UidSearchEventDAO ddb = new UidSearchEventDAO(UID_SEARCH_URL, write, eventInfoDTOList, latch);
+//        ddb.execute();
         try {
             latch.await();
         } catch (InterruptedException e) {

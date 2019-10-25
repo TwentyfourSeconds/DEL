@@ -1,4 +1,4 @@
-package twentyfour_seconds.com.del.management_event;
+package twentyfour_seconds.com.del.trash;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;

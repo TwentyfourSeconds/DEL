@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import twentyfour_seconds.com.del.chat.ChatDB;
-import twentyfour_seconds.com.del.management_event.EventTabcontrol_main;
+import twentyfour_seconds.com.del.entry_event.EntryEvent;
+import twentyfour_seconds.com.del.management_event.EventManagement;
 import twentyfour_seconds.com.del.mypage.MyPageActivity;
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.top_page.TopActivity;
@@ -30,12 +30,12 @@ public class CustomActivity extends AppCompatActivity {
                     break;
                 case R.id.menu_bar_event:
                     //イベント作成画面へと飛ぶ処理
-                    Intent intentEvent = new Intent(getApplicationContext(), EventTabcontrol_main.class);
+                    Intent intentEvent = new Intent(getApplicationContext(), EventManagement.class);
                     startActivity(intentEvent);
                     break;
                 case R.id.menu_bar_chat:
                     //チャット画面へと飛ぶ処理
-                    Intent intentchat = new Intent(getApplicationContext(), ChatDB.class);
+                    Intent intentchat = new Intent(getApplicationContext(), EntryEvent.class);
                     startActivity(intentchat);
                     break;
                 case R.id.menu_bar_mypage:

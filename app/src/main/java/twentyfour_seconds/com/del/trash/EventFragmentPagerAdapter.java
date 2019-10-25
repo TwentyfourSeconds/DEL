@@ -1,10 +1,8 @@
-package twentyfour_seconds.com.del.management_event;
+package twentyfour_seconds.com.del.trash;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-
-import twentyfour_seconds.com.del.entry_event.EventEntryFragment2;
 
 public class EventFragmentPagerAdapter extends FragmentPagerAdapter {
 
