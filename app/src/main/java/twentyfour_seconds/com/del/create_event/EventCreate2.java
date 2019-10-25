@@ -51,7 +51,7 @@ public class EventCreate2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.eventcreate3);
+        setContentView(R.layout.eventcreate2);
 
     //前ページより引き継いできた情報を取得
         Receivedata();
@@ -134,7 +134,7 @@ public class EventCreate2 extends AppCompatActivity {
     public class  contentCheckButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            Intent EventCreate4Page = new Intent(getApplicationContext(), EventCreate3.class);
+            Intent EventCreate3 = new Intent(getApplicationContext(), EventCreate3.class);
             //intentに送るデータ配列(String)と、変換用の一行のViewItemDTOを定義
             List<String> list = new ArrayList<String>();
             ViewItemDTO data;
@@ -148,14 +148,14 @@ public class EventCreate2 extends AppCompatActivity {
                 String dataB = dataA.substring(1);
                 list.add(dataB);
             }
-            EventCreate4Page.putStringArrayListExtra("list", (ArrayList<String>) list);
-            EventCreate4Page.putExtra("eventNameStr", eventNameStr);
-            EventCreate4Page.putExtra("area", area);
-            EventCreate4Page.putExtra("placeStr", placeStr);
-            EventCreate4Page.putExtra("eventDayStr", eventDayStr);
-            EventCreate4Page.putExtra("wantedPerson", wantedPerson);
-            EventCreate4Page.putExtra("deadlineStr", deadlineStr);
-            startActivity(EventCreate4Page);
+            EventCreate3.putStringArrayListExtra("list", (ArrayList<String>) list);
+            EventCreate3.putExtra("eventNameStr", eventNameStr);
+            EventCreate3.putExtra("area", area);
+            EventCreate3.putExtra("placeStr", placeStr);
+            EventCreate3.putExtra("eventDayStr", eventDayStr);
+            EventCreate3.putExtra("wantedPerson", wantedPerson);
+            EventCreate3.putExtra("deadlineStr", deadlineStr);
+            startActivity(EventCreate3);
         }
     }
 

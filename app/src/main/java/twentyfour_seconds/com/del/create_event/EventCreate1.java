@@ -223,10 +223,6 @@ public class EventCreate1 extends CustomActivity {
                 }
             }
 
-            //一言を取得
-            EditText comment = findViewById(R.id.hitokoto);
-            String commentStr = comment.getText().toString();
-
             //その他、eventDBに必要な情報を取得する
             //founderは、person_infoより、nameを取得する
             //latchは1
@@ -268,7 +264,6 @@ public class EventCreate1 extends CustomActivity {
                 intentEventCreate3.putExtra("eventDayStr", eventDayStr);
                 intentEventCreate3.putExtra("wantedPerson", wantedPerson);
                 intentEventCreate3.putExtra("deadlineStr", deadlineStr);
-                intentEventCreate3.putExtra("commentStr", commentStr);
                 startActivity(intentEventCreate3);
             }
         }
