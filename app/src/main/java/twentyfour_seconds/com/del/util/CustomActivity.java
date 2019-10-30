@@ -8,6 +8,7 @@ import android.view.View;
 import twentyfour_seconds.com.del.event_entry.EventEntry;
 
 import twentyfour_seconds.com.del.event_management.EventManagement;
+import twentyfour_seconds.com.del.event_management.EventManagementList;
 import twentyfour_seconds.com.del.mypage.MyPageActivity;
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.top_page.TopActivity;
@@ -36,7 +37,7 @@ public class CustomActivity extends AppCompatActivity {
                     break;
                 case R.id.menu_bar_chat:
                     //チャット画面へと飛ぶ処理
-                    Intent intentchat = new Intent(getApplicationContext(), EventManagement.class);
+                    Intent intentchat = new Intent(getApplicationContext(), EventManagementList.class);
                     startActivity(intentchat);
                     break;
                 case R.id.menu_bar_mypage:
