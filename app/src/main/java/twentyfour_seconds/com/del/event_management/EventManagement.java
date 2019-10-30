@@ -1,4 +1,4 @@
-package twentyfour_seconds.com.del.entry_event;
+package twentyfour_seconds.com.del.event_management;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,18 +14,17 @@ import java.util.concurrent.CountDownLatch;
 import twentyfour_seconds.com.del.DTO.EventInfoDTO;
 import twentyfour_seconds.com.del.DTO.EventInfoDTOList;
 import twentyfour_seconds.com.del.R;
-import twentyfour_seconds.com.del.trash.EventEntryViewAdapter;
 import twentyfour_seconds.com.del.util.Common;
 import twentyfour_seconds.com.del.util.CustomActivity;
 
-public class EntryEvent extends CustomActivity {
+public class EventManagement extends CustomActivity {
 
     private final String SEND_UID = "member_uid=" + Common.uid;
     private final String PARTICIPANT_EVENT = Common.PARTICIPANT_EVENT_URL;
     private EventInfoDTOList eventInfoDTOList = new EventInfoDTOList();
 
     //アダプター
-    private twentyfour_seconds.com.del.trash.EventEntryViewAdapter EventEntryViewAdapter;
+    private twentyfour_seconds.com.del.event_management.EventManagementViewAdapter EventManagementViewAdapter;
     //アダプターにセットするリスト（Map型でいろいろ格納できるようにしておく）
     //(参考)Map型とは：https://qiita.com/hainet/items/daab47dc991285b1f552
     //(参考)Map型に値を追加する方法：https://stackoverrun.com/ja/q/10712774
@@ -35,7 +34,7 @@ public class EntryEvent extends CustomActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.eventkanri2);
+        setContentView(R.layout.event_join);
 
 
         //新DB用
@@ -64,7 +63,8 @@ public class EntryEvent extends CustomActivity {
             Map.put("area", eventInfoDTO.getLargeArea());
             Map.put("local", eventInfoDTO.getSmallArea());
             Map.put("term", "nothing");
-            Map.put("deadline", eventInfoDTO.getClosedDay());
+
+//            Map.put("deadline", eventInfoDTO.getClosedDay());
             Map.put("member", eventInfoDTO.getMember());
             messageList.add(Map);
         }
@@ -121,9 +121,9 @@ public class EntryEvent extends CustomActivity {
 //        messageList = this.initViewItemDtoList();
 
         // アダプターオブジェクトを生成して、下のメソッドで設定した文字列を追加
-        EventEntryViewAdapter = new EventEntryViewAdapter(messageList);
+        EventManagementViewAdapter = new EventManagementViewAdapter(messageList);
         // アダプターオブジェクトをセット
-        recyclerView.setAdapter(EventEntryViewAdapter);
+        recyclerView.setAdapter(EventManagementViewAdapter);
 
 
         //        //下部メニューボタンを押下したときの処理を記載

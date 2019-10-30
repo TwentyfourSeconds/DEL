@@ -1,4 +1,4 @@
-package twentyfour_seconds.com.del.trash;
+package twentyfour_seconds.com.del.event_management;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -15,12 +15,12 @@ import twentyfour_seconds.com.del.R;
 //概要：リサイクラービューでは、リストビューと異なり、自分でアダプターを作成しなければいけない。
 // 　　 ここでは、ViewAdapterクラスを作成し、作成したアダプタークラスに、データを割り当てる。
 
-public class EventEntryViewAdapter extends RecyclerView.Adapter<EventManagementViewHolder> {              //ここでは、作成したビューホルダクラスを指定する
+public class EventManagementViewAdapter extends RecyclerView.Adapter<EventManagementViewHolder> {              //ここでは、作成したビューホルダクラスを指定する
 
     private List<Map<String, Object>> messageList;
 
     //コンストラクタに引き継いできた値を設定
-    public EventEntryViewAdapter(List<Map<String, Object>> messageList) {
+    public EventManagementViewAdapter(List<Map<String, Object>> messageList) {
         this.messageList = messageList;
     }
 
@@ -61,7 +61,8 @@ public class EventEntryViewAdapter extends RecyclerView.Adapter<EventManagementV
         holder.area.setText(message.get("area").toString());
         holder.place.setText(message.get("local").toString());
         holder.event_day.setText(message.get("term").toString());
-        holder.deadline.setText(message.get("deadline").toString());
+        holder.eventstatus.setText("参加中");
+//        holder.eventstatus.setText(message.get("eventstatus").toString());
 //        holder.textItem.setText(message.get("member").toString());
 
     }

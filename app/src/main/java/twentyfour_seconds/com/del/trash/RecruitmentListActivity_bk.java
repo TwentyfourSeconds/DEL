@@ -132,7 +132,7 @@ public class RecruitmentListActivity_bk extends AppCompatActivity implements Abs
         to[2] = R.id.area;
         to[3] = R.id.local;
         to[4] = R.id.term;
-        to[5] = R.id.deadline;
+        to[5] = R.id.eventstatus;
         to[6] = R.id.member;
 
         adapter = new SimpleAdapter(RecruitmentListActivity_bk.this, list, R.layout.row, from, to);

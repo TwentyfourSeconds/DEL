@@ -1,7 +1,6 @@
 package twentyfour_seconds.com.del.util;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +55,7 @@ public class EventListAdapter extends BaseAdapter {
         ((TextView)convertView.findViewById(R.id.title)).setText(eventInfoDTOList.get(position).getEventName());
         ((TextView)convertView.findViewById(R.id.area)).setText(eventInfoDTOList.get(position).getLargeArea());
         ((TextView)convertView.findViewById(R.id.term)).setText(eventInfoDTOList.get(position).getEventDay());
-        ((TextView)convertView.findViewById(R.id.deadline)).setText(eventInfoDTOList.get(position).getClosedDay());
+        ((TextView)convertView.findViewById(R.id.eventstatus)).setText(eventInfoDTOList.get(position).getClosedDay());
         ((TextView)convertView.findViewById(R.id.member)).setText(eventInfoDTOList.get(position).getMember());
 
         return convertView;

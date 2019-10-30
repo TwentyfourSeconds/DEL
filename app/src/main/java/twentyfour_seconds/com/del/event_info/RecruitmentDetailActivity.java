@@ -156,7 +156,7 @@ public class RecruitmentDetailActivity extends CustomActivity {
         area = findViewById(R.id.area);
         location = findViewById(R.id.location);
         member = findViewById(R.id.member);
-        deadline = findViewById(R.id.deadline);
+        deadline = findViewById(R.id.eventstatus);
 //        tag = findViewById(R.id.tag);
         entry = findViewById(R.id.entry);
 

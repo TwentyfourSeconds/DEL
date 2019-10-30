@@ -1,4 +1,4 @@
-package twentyfour_seconds.com.del.management_event;
+package twentyfour_seconds.com.del.event_entry;
 
 import android.os.AsyncTask;
 

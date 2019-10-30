@@ -1,4 +1,4 @@
-package twentyfour_seconds.com.del.trash;
+package twentyfour_seconds.com.del.event_entry;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -9,7 +9,7 @@ import twentyfour_seconds.com.del.R;
 //RecyclerListViewHolderクラス
 //概要：ビューホルダクラスは、画面部品を保持するクラス。このクラスを通じて、部品のデータを管理する。（今回は、TextViewのみ）
 
-public class EventManagementViewHolder extends RecyclerView.ViewHolder {
+public class EventEntryViewHolder extends RecyclerView.ViewHolder {
 
     //row_event_managementの一行分の画面定義
     public TextView event_name;
@@ -20,18 +20,18 @@ public class EventManagementViewHolder extends RecyclerView.ViewHolder {
     public TextView deadline;
 
     //コンストラクタ
-    public EventManagementViewHolder(View EventManagementItemView) {
+    public EventEntryViewHolder(View EventEntryItemView) {
         //親クラスのコンストラクタの呼び出し
-        super(EventManagementItemView);
+        super(EventEntryItemView);
         //引数で渡されたitemViewがない場合の処理（保険）
-        if(EventManagementItemView!=null) {
+        if(EventEntryItemView!=null) {
             //引数で渡された一行分の画面部品から、表示に使われる部品を取得。
-            this.event_name = EventManagementItemView.findViewById(R.id.event_name);
-            this.area = EventManagementItemView.findViewById(R.id.area);
-            this.place = EventManagementItemView.findViewById(R.id.place);
-            this.event_day = EventManagementItemView.findViewById(R.id.event_day);
-            this.inviteTag = EventManagementItemView.findViewById(R.id.inviteTag);
-            this.deadline = EventManagementItemView.findViewById(R.id.deadline);
+            this.event_name = EventEntryItemView.findViewById(R.id.event_name);
+            this.area = EventEntryItemView.findViewById(R.id.area);
+            this.place = EventEntryItemView.findViewById(R.id.place);
+            this.event_day = EventEntryItemView.findViewById(R.id.event_day);
+            this.inviteTag = EventEntryItemView.findViewById(R.id.inviteTag);
+            this.deadline = EventEntryItemView.findViewById(R.id.eventstatus);
         }
     }
 

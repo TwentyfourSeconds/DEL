@@ -57,7 +57,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/deadline"
+                android:id="@+id/eventstatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -80,8 +80,8 @@
                 android:layout_height="0dp"
                 android:layout_marginTop="8dp"
                 android:text="募集人数"
-                app:layout_constraintStart_toStartOf="@+id/deadline"
-                app:layout_constraintTop_toBottomOf="@+id/deadline" />
+                app:layout_constraintStart_toStartOf="@+id/eventstatus"
+                app:layout_constraintTop_toBottomOf="@+id/eventstatus" />
 
             <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/flex_box_recycler_view"

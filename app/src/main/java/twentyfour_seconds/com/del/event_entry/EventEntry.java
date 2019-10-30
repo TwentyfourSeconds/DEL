@@ -1,32 +1,19 @@
-package twentyfour_seconds.com.del.management_event;
+package twentyfour_seconds.com.del.event_entry;
 
 import android.content.Intent;
-import android.graphics.Point;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,15 +25,11 @@ import twentyfour_seconds.com.del.DTO.EventInfoDTO;
 import twentyfour_seconds.com.del.DTO.EventInfoDTOList;
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.chat.ChatActivity;
-import twentyfour_seconds.com.del.chat.UserDTO;
-import twentyfour_seconds.com.del.create_user.RegisterActivity;
-import twentyfour_seconds.com.del.search_event.RecruitmentListActivity;
+import twentyfour_seconds.com.del.create_event.EventCreate1;
 import twentyfour_seconds.com.del.util.Common;
 import twentyfour_seconds.com.del.util.CustomActivity;
 
-import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
-
-public class EventManagement extends CustomActivity {
+public class EventEntry extends CustomActivity {
 
     private final String SEND_UID = "eventer_uid=" + Common.uid;
     private final String UID_SEARCH_URL = Common.UID_SEARCH_EVENT_URL;
@@ -55,13 +38,21 @@ public class EventManagement extends CustomActivity {
     //アダプターにセットするリスト（Map型でいろいろ格納できるようにしておく）
     //(参考)Map型とは：https://qiita.com/hainet/items/daab47dc991285b1f552
     //(参考)Map型に値を追加する方法：https://stackoverrun.com/ja/q/10712774
-    private List<Map<String, Object>> EventManagementList = new ArrayList<Map<String, Object>>();
+    private List<Map<String, Object>> EventEntryList = new ArrayList<Map<String, Object>>();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.eventkanri);
+        setContentView(R.layout.event_join);
+
+
+        //toolbarを実装する
+        // ツールバーをアクションバーとしてセット
+        Toolbar toolbar_activityTop = (Toolbar) findViewById(R.id.toolbar_activityTop);
+        toolbar_activityTop.setTitle("");
+        setSupportActionBar(toolbar_activityTop);
+
 
         //新DB用
         final CountDownLatch latch = new CountDownLatch(1);
@@ -83,16 +74,36 @@ public class EventManagement extends CustomActivity {
 
             EventInfoDTO eventInfoDTO = eventInfoDTOList.getDtoArrayList().get(i);
             //チャット画面に遷移する際、イベントを識別するため
+//            Map.put("event_id",eventInfoDTO.getEventId());
+//            //一覧に出す情報を取得
+//            Map.put("image", "test");
+//            Map.put("title", eventInfoDTO.getEventName());
+//            Map.put("area", eventInfoDTO.getLargeArea());
+//            Map.put("local", eventInfoDTO.getSmallArea());
+//            Map.put("term", "nothing");
+//            Map.put("deadline", eventInfoDTO.getClosedDay());
+//            Map.put("member", eventInfoDTO.getMember());
+
+            //イベントid
             Map.put("event_id",eventInfoDTO.getEventId());
             //一覧に出す情報を取得
             Map.put("image", "test");
+            //イベント名
             Map.put("title", eventInfoDTO.getEventName());
+            //場所（県）
             Map.put("area", eventInfoDTO.getLargeArea());
-            Map.put("local", eventInfoDTO.getSmallArea());
+            //日にち
+            Map.put("date", eventInfoDTO.getEventDay());
+            //場所（地域）
+            Map.put("place", eventInfoDTO.getSmallArea());
+            //
             Map.put("term", "nothing");
+            //場所
             Map.put("deadline", eventInfoDTO.getClosedDay());
             Map.put("member", eventInfoDTO.getMember());
-            EventManagementList.add(Map);
+
+
+            EventEntryList.add(Map);
         }
 
 
@@ -124,7 +135,7 @@ public class EventManagement extends CustomActivity {
 //        }
 
         // Get the RecyclerView object.
-        RecyclerView recyclerView = findViewById(R.id.ManagementEventList);
+        RecyclerView recyclerView = findViewById(R.id.entry_event);
 
         //--------------------------------flexBox Layout の調整-----------------------------------------------//
         // FlexboxLayoutManangerを定義する（レイアウトマネージャーは、リストデータの見え方を決める。※これがリストビューとは異なるリサイクラービューのいいところ）
@@ -136,9 +147,9 @@ public class EventManagement extends CustomActivity {
 //        messageList = this.initViewItemDtoList();
 
         // アダプターオブジェクトを生成して、下のメソッドで設定した文字列を追加
-        EventManagementViewAdapter eventManagementAdapter = new EventManagementViewAdapter(EventManagementList);
+        EventEntryViewAdapter eventEntryAdapter = new EventEntryViewAdapter(EventEntryList);
         // アダプターオブジェクトをセット
-        recyclerView.setAdapter(eventManagementAdapter);
+        recyclerView.setAdapter(eventEntryAdapter);
 
 
         //下部メニューボタンを押下したときの処理を記載
@@ -181,14 +192,14 @@ public class EventManagement extends CustomActivity {
 //    }
 
     //イベント管理画面のAdapterを作成する。
-    class EventManagementViewAdapter extends RecyclerView.Adapter<EventManagementViewHolder> {
+    class EventEntryViewAdapter extends RecyclerView.Adapter<EventEntryViewHolder> {
         //ここでは、作成したビューホルダクラスを指定する
 
-        List<Map<String, Object>> EventManagementList;
+        List<Map<String, Object>> EventEntryList;
 
         //コンストラクタに引き継いできた値を設定
-        public EventManagementViewAdapter(List<Map<String, Object>> EventManagementList) {
-            this.EventManagementList = EventManagementList;
+        private EventEntryViewAdapter(List<Map<String, Object>> EventManagementList) {
+            this.EventEntryList = EventManagementList;
         }
 
         //ステップ①　最初に呼ばれるメソッド
@@ -196,23 +207,23 @@ public class EventManagement extends CustomActivity {
         //RecyclerViewに返す。（戻り値：RecyclerListViewHolder）
         @Override
         //-----------------------レイアウト　部品　作成箇所---------------------------------//
-        public EventManagementViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public EventEntryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
             ////レイアウトxmlから、Viewオブジェクトを作成
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-            View itemView = inflater.inflate(R.layout.row_event_management, parent, false);    //activity_flexbox_layout_recycler_view_item（XMLレイアウト）をinflateし、一行分の画面部品とする。
+            View itemView = inflater.inflate(R.layout.row_now_join_event, parent, false);    //activity_flexbox_layout_recycler_view_item（XMLレイアウト）をinflateし、一行分の画面部品とする。
 
             //row_event_management_backgroung（XMLレイアウト）の内部部品であるcardViewを取得
             final CardView cardView = itemView.findViewById(R.id.cardView);
             //ビューホルダーオブジェクトを生成（一番下で変数をreturnすることで、ViewHolderに処理が飛ぶ）
-            final EventManagementViewHolder EventManagementViewHolderRet = new EventManagementViewHolder(itemView);
+            final EventEntryViewHolder EventEntryViewHolderRet = new EventEntryViewHolder(itemView);
             //タッチイベント
             //リストの内容をクリックしたら、チャット画面に遷移する
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //タッチしたイベントのpositionを取得
-                    int position = EventManagementViewHolderRet.getAdapterPosition(); // positionを取得
+                    int position = EventEntryViewHolderRet.getAdapterPosition(); // positionを取得
                     Log.i("position", position + "");
 
                     //**イベントのイベントidを取得する*
@@ -220,7 +231,7 @@ public class EventManagement extends CustomActivity {
                     //*
 
                     //渡された引数positionに該当する、リストからリストデータ一行分のMapデータを取得
-                    Map<String, Object> singleRow = EventManagementList.get(position);
+                    Map<String, Object> singleRow = EventEntryList.get(position);
                     String eventId = singleRow.get("event_id").toString();
 
                     //チャット画面に遷移する（intentでイベントidを遷移）      ログインしていない場合は、登録画面に戻る?
@@ -232,25 +243,26 @@ public class EventManagement extends CustomActivity {
                 }
             });
 
-            return EventManagementViewHolderRet;
+            return EventEntryViewHolderRet;
         }
 
         //ステップ②　onCreateViewHolderの次に呼ばれるメソッド
         //ここでデータの紐づけを行う。
         //-----------------------データ　設定　作成箇所---------------------------------//
         @Override
-        public void onBindViewHolder(EventManagementViewHolder holder, int position) {
+        public void onBindViewHolder(EventEntryViewHolder holder, int position) {
 
             //渡された引数positionに該当する、リストからリストデータ一行分のMapデータを取得
-            Map<String, Object> message = EventManagementList.get(position);
+            Map<String, Object> message = EventEntryList.get(position);
             //一行分の部品(activity_flexbox_layout_recycler_view_item)のテキスト部品(flex_box_recycler_view_text_itemをtextItemとして、上で定義）
 
 //        holder.textItem.setText(message.get("image").toString());
             holder.event_name.setText(message.get("title").toString());
             holder.area.setText(message.get("area").toString());
-            holder.place.setText(message.get("local").toString());
-            holder.event_day.setText(message.get("term").toString());
-            holder.deadline.setText(message.get("deadline").toString());
+            holder.place.setText(message.get("place").toString());
+            holder.event_day.setText(message.get("date").toString());
+            holder.eventstatus.setText("参加済み");
+//            holder.deadline.setText(message.get("deadline").toString());
 //        holder.textItem.setText(message.get("member").toString());
 
         }
@@ -259,38 +271,38 @@ public class EventManagement extends CustomActivity {
         //③ リストデータ中の件数をリターン。 (layout managerから呼ばれる)
         public int getItemCount() {
             int ret = 0;
-            if(this.EventManagementList!=null)
+            if(this.EventEntryList!=null)
             {
-                ret = EventManagementList.size();
+                ret = EventEntryList.size();
             }
             return ret;
         }
     }
 
     //イベント管理画面のViewHolderを作成する。
-    class EventManagementViewHolder extends RecyclerView.ViewHolder {
+    class EventEntryViewHolder extends RecyclerView.ViewHolder {
 
         //row_event_managementの一行分の画面定義
         public TextView event_name;
         public TextView area;
         public TextView place;
         public TextView event_day;
-        public TextView inviteTag;
-        public TextView deadline;
+//        public TextView inviteTag;
+        public TextView eventstatus;
 
         //コンストラクタ
-        public EventManagementViewHolder(View EventManagementItemView) {
+        public EventEntryViewHolder(View EventEntryItemView) {
             //親クラスのコンストラクタの呼び出し
-            super(EventManagementItemView);
+            super(EventEntryItemView);
             //引数で渡されたitemViewがない場合の処理（保険）
-            if(EventManagementItemView!=null) {
+            if(EventEntryItemView!=null) {
                 //引数で渡された一行分の画面部品から、表示に使われる部品を取得。
-                this.event_name = EventManagementItemView.findViewById(R.id.event_name);
-                this.area = EventManagementItemView.findViewById(R.id.area);
-                this.place = EventManagementItemView.findViewById(R.id.place);
-                this.event_day = EventManagementItemView.findViewById(R.id.event_day);
-                this.inviteTag = EventManagementItemView.findViewById(R.id.inviteTag);
-                this.deadline = EventManagementItemView.findViewById(R.id.deadline);
+                this.event_name = EventEntryItemView.findViewById(R.id.event_name);
+                this.area = EventEntryItemView.findViewById(R.id.area);
+                this.place = EventEntryItemView.findViewById(R.id.place);
+                this.event_day = EventEntryItemView.findViewById(R.id.event_day);
+//                this.inviteTag = EventManagementItemView.findViewById(R.id.inviteTag);
+                this.eventstatus = EventEntryItemView.findViewById(R.id.eventstatus);
             }
         }
 
@@ -298,6 +310,26 @@ public class EventManagement extends CustomActivity {
             return event_name;
         }
     }
+
+    //toolbarに使用するmenuをここでinflateする
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.event_management, menu);
+        return true;
+    }
+
+    //menuがクリックされた時の挙動を記載
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.createevent:
+                Intent intentMypage = new Intent(getApplicationContext(), EventCreate1.class);
+                startActivity(intentMypage);
+                break;
+        }
+        return false;
+    }
+
 
 
 }
