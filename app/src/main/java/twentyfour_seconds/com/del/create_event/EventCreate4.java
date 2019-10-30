@@ -244,7 +244,6 @@ public class EventCreate4 extends AppCompatActivity {
     //firebaseにメッセージを登録する
     private void performSendMessage(FirebaseGroupMemberDAO firebaseGroupMemberDAO){
 
-
         //firebaseのmessage-userに登録する（グループidは、新しく書き込んだ番号を使用する
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/Group/" + Common.newEventId + "/GroupMembers").push();
 

@@ -1,4 +1,4 @@
-package twentyfour_seconds.com.del.event_management_detail;
+package twentyfour_seconds.com.del.event_join;
 
 import android.os.AsyncTask;
 import android.util.Log;

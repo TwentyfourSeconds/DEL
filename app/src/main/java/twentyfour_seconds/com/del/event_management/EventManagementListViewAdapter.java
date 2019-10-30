@@ -1,7 +1,9 @@
 package twentyfour_seconds.com.del.event_management;
 
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +17,12 @@ import twentyfour_seconds.com.del.R;
 //概要：リサイクラービューでは、リストビューと異なり、自分でアダプターを作成しなければいけない。
 // 　　 ここでは、ViewAdapterクラスを作成し、作成したアダプタークラスに、データを割り当てる。
 
-public class EventManagementViewAdapter extends RecyclerView.Adapter<EventManagementViewHolder> {              //ここでは、作成したビューホルダクラスを指定する
+public class EventManagementListViewAdapter extends RecyclerView.Adapter<EventManagementListViewHolder> {              //ここでは、作成したビューホルダクラスを指定する
 
     private List<Map<String, Object>> messageList;
 
     //コンストラクタに引き継いできた値を設定
-    public EventManagementViewAdapter(List<Map<String, Object>> messageList) {
+    public EventManagementListViewAdapter(List<Map<String, Object>> messageList) {
         this.messageList = messageList;
     }
 
@@ -30,7 +32,7 @@ public class EventManagementViewAdapter extends RecyclerView.Adapter<EventManage
 
     @Override
     //-----------------------レイアウト　部品　作成箇所---------------------------------//
-    public EventManagementViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public EventManagementListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         ////レイアウトxmlから、Viewオブジェクトを作成
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -41,7 +43,40 @@ public class EventManagementViewAdapter extends RecyclerView.Adapter<EventManage
         final CardView cardView = itemView.findViewById(R.id.cardView);
 
         //ビューホルダーオブジェクトを生成（一番下で変数をreturnすることで、ViewHolderに処理が飛ぶ）
-        final EventManagementViewHolder EventManagementViewHolderRet = new EventManagementViewHolder(itemView);
+        final EventManagementListViewHolder EventManagementViewHolderRet = new EventManagementListViewHolder(itemView);
+
+        //タッチイベント
+        //リストの内容をクリックしたら、チャット画面に遷移する
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //タッチしたイベントのpositionを取得
+                int position = EventManagementViewHolderRet.getAdapterPosition(); // positionを取得
+                Log.i("position", position + "");
+
+                //**イベントのイベントidを取得する*
+                //タッチしたポジションに対応するEventManagementList（DBの情報をすべて取得したLIST型の変数）より取得する
+                //*
+
+                //渡された引数positionに該当する、リストからリストデータ一行分のMapデータを取得
+                Map<String, Object> singleRow = messageList.get(position);
+                String eventId = singleRow.get("event_id").toString();
+
+                //チャット画面に遷移する（intentでイベントidを遷移）      ログインしていない場合は、登録画面に戻る?
+                //Flagmentの画面遷移はgetActivity()
+//                Intent intent = new Intent(getActivity(), EventManagement.class);
+//                intent.putExtra("event_id", eventId);
+//
+//                startActivity(intent);
+            }
+        });
+
+
+
+
+
+
+
 
         return EventManagementViewHolderRet;
     }
@@ -50,7 +85,7 @@ public class EventManagementViewAdapter extends RecyclerView.Adapter<EventManage
     //ここでデータの紐づけを行う。
     //-----------------------データ　設定　作成箇所---------------------------------//
     @Override
-    public void onBindViewHolder(EventManagementViewHolder holder, int position) {
+    public void onBindViewHolder(EventManagementListViewHolder holder, int position) {
 
         //渡された引数positionに該当する、リストからリストデータ一行分のMapデータを取得
         Map<String, Object> message = messageList.get(position);

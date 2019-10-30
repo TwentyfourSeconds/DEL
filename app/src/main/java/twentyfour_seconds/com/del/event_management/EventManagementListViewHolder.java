@@ -9,7 +9,7 @@ import twentyfour_seconds.com.del.R;
 //RecyclerListViewHolderクラス
 //概要：ビューホルダクラスは、画面部品を保持するクラス。このクラスを通じて、部品のデータを管理する。（今回は、TextViewのみ）
 
-public class EventManagementViewHolder extends RecyclerView.ViewHolder{
+public class EventManagementListViewHolder extends RecyclerView.ViewHolder{
 
     //row_event_managementの一行分の画面定義
     public TextView event_name;
@@ -20,18 +20,18 @@ public class EventManagementViewHolder extends RecyclerView.ViewHolder{
     public TextView eventstatus;
 
     //コンストラクタ
-    public EventManagementViewHolder(View EventEntryItemView) {
+    public EventManagementListViewHolder(View EventManagementItemView) {
         //親クラスのコンストラクタの呼び出し
-        super(EventEntryItemView);
+        super(EventManagementItemView);
         //引数で渡されたitemViewがない場合の処理（保険）
-        if(EventEntryItemView!=null) {
+        if(EventManagementItemView!=null) {
             //引数で渡された一行分の画面部品から、表示に使われる部品を取得。
-            this.event_name = EventEntryItemView.findViewById(R.id.event_name);
-            this.area = EventEntryItemView.findViewById(R.id.area);
-            this.place = EventEntryItemView.findViewById(R.id.place);
-            this.event_day = EventEntryItemView.findViewById(R.id.event_day);
-            this.inviteTag = EventEntryItemView.findViewById(R.id.inviteTag);
-            this.eventstatus = EventEntryItemView.findViewById(R.id.eventstatus);
+            this.event_name = EventManagementItemView.findViewById(R.id.event_name);
+            this.area = EventManagementItemView.findViewById(R.id.area);
+            this.place = EventManagementItemView.findViewById(R.id.place);
+            this.event_day = EventManagementItemView.findViewById(R.id.event_day);
+            this.inviteTag = EventManagementItemView.findViewById(R.id.inviteTag);
+            this.eventstatus = EventManagementItemView.findViewById(R.id.eventstatus);
         }
     }
 

@@ -1,4 +1,4 @@
-package twentyfour_seconds.com.del.event_management_detail;
+package twentyfour_seconds.com.del.event_join;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +21,7 @@ import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.event_info.RecruitmentDetailActivity;
 import twentyfour_seconds.com.del.util.Common;
 
-public class EventManagementDetailActivity extends AppCompatActivity {
+public class JoinEventActivity extends AppCompatActivity {
 
     private Button dissolution;
     private Button recruitment_quit;
@@ -135,9 +135,9 @@ public class EventManagementDetailActivity extends AppCompatActivity {
             map.put("nothing", "なし");
             nothing.add(map);
             to[0] = R.id.nothing;
-            adapter = new SimpleAdapter(EventManagementDetailActivity.this, nothing, R.layout.row_nothing, from, to);
+            adapter = new SimpleAdapter(JoinEventActivity.this, nothing, R.layout.row_nothing, from, to);
         } else {
-            adapter = new SimpleAdapter(EventManagementDetailActivity.this, applicant, R.layout.row_applicant, fromReservation, toReservation);
+            adapter = new SimpleAdapter(JoinEventActivity.this, applicant, R.layout.row_applicant, fromReservation, toReservation);
         }
 
 //        Log.d("adapter", adapter.toString());
@@ -148,9 +148,9 @@ public class EventManagementDetailActivity extends AppCompatActivity {
             map.put("nothing", "なし");
             nothing.add(map);
             to[0] = R.id.nothing;
-            adapter = new SimpleAdapter(EventManagementDetailActivity.this, nothing, R.layout.row_nothing, from, to);
+            adapter = new SimpleAdapter(JoinEventActivity.this, nothing, R.layout.row_nothing, from, to);
         } else {
-            adapter = new SimpleAdapter(EventManagementDetailActivity.this, participant, R.layout.row_participant, fromParticipant, toParticipant);
+            adapter = new SimpleAdapter(JoinEventActivity.this, participant, R.layout.row_participant, fromParticipant, toParticipant);
         }
 
         entry_member.setAdapter(adapter);
@@ -191,7 +191,7 @@ public class EventManagementDetailActivity extends AppCompatActivity {
             Log.d("id", idNum);
 
             // インテントへのインスタンス生成
-            Intent intent = new Intent(EventManagementDetailActivity.this, RecruitmentDetailActivity.class);
+            Intent intent = new Intent(JoinEventActivity.this, RecruitmentDetailActivity.class);
             //　インテントに値をセット
             intent.putExtra("id", idNum);
             // サブ画面の呼び出し
