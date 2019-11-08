@@ -11,21 +11,36 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
 import twentyfour_seconds.com.del.DTO.EventInfoDTO;
+import twentyfour_seconds.com.del.chat.UserDTO;
+import twentyfour_seconds.com.del.top_page.TopActivity;
 import twentyfour_seconds.com.del.util.Common;
 import twentyfour_seconds.com.del.util.CustomActivity;
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.util.ViewAdapterReadOnly;
 import twentyfour_seconds.com.del.DTO.ViewItemDTO;
+
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
 
 
 public class RecruitmentDetailActivity extends CustomActivity {
@@ -194,6 +209,29 @@ public class RecruitmentDetailActivity extends CustomActivity {
         deadline.setText("掲載期限：" + eventInfoDTO.getClosedDay());
         member.setText("募集人数：" + eventInfoDTO.getMember());
 
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/Group/" + id + "/eventAttendees");
+        ref.orderByChild("uid").equalTo(Common.uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d("onDataChange", "1");
+                Object uid = dataSnapshot.getValue();
+                if (uid == null) {
+                    entry.setEnabled(true);
+                    return;
+                } else {
+                    entry.setEnabled(false);
+                    return;
+                }
+                // ...
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d("onCancelled", "2");
+                // ...
+            }
+        });
+        Log.d("koko", "kita");
 
         entry.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -234,14 +272,45 @@ public class RecruitmentDetailActivity extends CustomActivity {
     }
 
     private void requestJoin() {
-        String write = "";
-        StringBuilder sb = new StringBuilder();
-        sb.append(EVENT_ID_SEND + id);
-        sb.append(MEMBER_ID_SEND);
-        write = sb.toString();
-        Log.d("id", "write=" + write);
-        RequestJoinDAO requestJoinDAO = new RequestJoinDAO(REQUEST_JOIN, write);
-        requestJoinDAO.execute();
+
+
+//        //ユーザーのuid、ユーザー情報のデータベースリファレンス、引き継いできた画像へのurl、ファイル名を登録する
+//        String uid = FirebaseAuth.getInstance().getUid();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/Group/"+ id + "/eventAttendees").push();
+        //Firebaseのデータベースへの初期登録処理（uid, username_edittext_register_text, profileImageUrl以外は初期値を登録を実施する）
+
+        //ここでRegisterActivityの内部で別のclassを定義すると、FirebaseでDatabaseException:Found conflicting getters for nameのエラーになる。
+        //解決策は、別のpackageに移すこと：https://stackoverflow.com/questions/47767636/found-conflicting-getters-for-namedatabase-exception
+        Map<String, Object> insertUserId = new HashMap<>();
+        insertUserId.put("uid", Common.uid);
+
+        //addOnSuccessListenerは、帰ってくる引数がないときはVoid、それ以外は決められた変数を指定する？？
+        ref.setValue(insertUserId).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d("RegisterEventAttendees", "Finally we save the user to Firebase Databese in event data");
+
+                Toast myToast = Toast.makeText(
+                        getApplicationContext(),
+                        "参加申請を行いました!",
+                        Toast.LENGTH_SHORT
+                );
+                myToast.show();
+//                //登録に成功した場合は、LatestMessagesActivityに遷移する
+//                Intent intent = new Intent(getApplicationContext(), TopActivity.class);
+//                //この一文を記載することで、元のログイン画面に戻れないようにする
+//                intent.addFlags(FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                startActivity(intent);
+            }
+        });
+//        String write = "";
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(EVENT_ID_SEND + id);
+//        sb.append(MEMBER_ID_SEND);
+//        write = sb.toString();
+//        Log.d("id", "write=" + write);
+//        RequestJoinDAO requestJoinDAO = new RequestJoinDAO(REQUEST_JOIN, write);
+//        requestJoinDAO.execute();
     }
 
     private List<ViewItemDTO> initViewItemDtoList() {
