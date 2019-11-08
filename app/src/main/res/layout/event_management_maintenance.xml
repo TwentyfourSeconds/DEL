@@ -184,10 +184,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView92">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <ListView
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" />
+            android:id="@+id/listView"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
     </HorizontalScrollView>
 
     <TextView

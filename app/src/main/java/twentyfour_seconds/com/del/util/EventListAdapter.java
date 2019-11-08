@@ -51,7 +51,7 @@ public class EventListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = layoutInflater.inflate(R.layout.row, parent,false);
 
-        ((TextView)convertView.findViewById(R.id.image)).setText("test");
+        ((TextView)convertView.findViewById(R.id.group_member_image)).setText("test");
         ((TextView)convertView.findViewById(R.id.title)).setText(eventInfoDTOList.get(position).getEventName());
         ((TextView)convertView.findViewById(R.id.large_area)).setText(eventInfoDTOList.get(position).getLargeArea());
         ((TextView)convertView.findViewById(R.id.term)).setText(eventInfoDTOList.get(position).getEventDay());

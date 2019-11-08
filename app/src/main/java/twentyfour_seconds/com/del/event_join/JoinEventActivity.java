@@ -122,12 +122,12 @@ public class JoinEventActivity extends AppCompatActivity {
 //            participant.add(map);
 //        }
 
-        toReservation[0] = R.id.image;
+        toReservation[0] = R.id.group_member_image;
         toReservation[1] = R.id.name;
         toReservation[2] = R.id.join;
         toReservation[3] = R.id.reservation;
 
-        toParticipant[0] = R.id.image;
+        toParticipant[0] = R.id.group_member_image;
         toParticipant[1] = R.id.name;
 
         if(applicant.isEmpty()) {
@@ -150,7 +150,7 @@ public class JoinEventActivity extends AppCompatActivity {
             to[0] = R.id.nothing;
             adapter = new SimpleAdapter(JoinEventActivity.this, nothing, R.layout.row_nothing, from, to);
         } else {
-            adapter = new SimpleAdapter(JoinEventActivity.this, participant, R.layout.row_participant, fromParticipant, toParticipant);
+            adapter = new SimpleAdapter(JoinEventActivity.this, participant, R.layout.event_management_maintenance_group_member_list_row, fromParticipant, toParticipant);
         }
 
         entry_member.setAdapter(adapter);

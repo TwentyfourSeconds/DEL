@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/event_management_maintenance_group_member_list_row_flameline">
 
     <ImageView
-        android:id="@+id/image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:id="@+id/group_member_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -17,14 +18,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/group_member_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/image"
-        app:layout_constraintStart_toStartOf="@+id/image"
-        app:layout_constraintTop_toBottomOf="@+id/image" />
+        app:layout_constraintEnd_toEndOf="@+id/group_member_image"
+        app:layout_constraintStart_toStartOf="@+id/group_member_image"
+        app:layout_constraintTop_toBottomOf="@+id/group_member_image" />
 
 </android.support.constraint.ConstraintLayout>
