@@ -7,7 +7,7 @@ import android.view.View;
 
 import twentyfour_seconds.com.del.event_entry.EventEntry;
 
-import twentyfour_seconds.com.del.event_management.EventManagement;
+import twentyfour_seconds.com.del.event_management.EventManagementMaintenance;
 import twentyfour_seconds.com.del.event_management.EventManagementList;
 import twentyfour_seconds.com.del.mypage.MyPageActivity;
 import twentyfour_seconds.com.del.R;

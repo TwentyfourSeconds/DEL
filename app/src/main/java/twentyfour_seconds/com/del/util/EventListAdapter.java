@@ -53,7 +53,7 @@ public class EventListAdapter extends BaseAdapter {
 
         ((TextView)convertView.findViewById(R.id.image)).setText("test");
         ((TextView)convertView.findViewById(R.id.title)).setText(eventInfoDTOList.get(position).getEventName());
-        ((TextView)convertView.findViewById(R.id.area)).setText(eventInfoDTOList.get(position).getLargeArea());
+        ((TextView)convertView.findViewById(R.id.large_area)).setText(eventInfoDTOList.get(position).getLargeArea());
         ((TextView)convertView.findViewById(R.id.term)).setText(eventInfoDTOList.get(position).getEventDay());
         ((TextView)convertView.findViewById(R.id.eventstatus)).setText(eventInfoDTOList.get(position).getClosedDay());
         ((TextView)convertView.findViewById(R.id.member)).setText(eventInfoDTOList.get(position).getMember());

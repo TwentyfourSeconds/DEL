@@ -30,7 +30,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/eventstatus" />
 
             <TextView
-                android:id="@+id/area"
+                android:id="@+id/large_area"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -40,13 +40,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/event_name" />
 
             <TextView
-                android:id="@+id/place"
+                android:id="@+id/small_area"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="TextView"
-                app:layout_constraintStart_toStartOf="@+id/area"
-                app:layout_constraintTop_toBottomOf="@+id/area" />
+                app:layout_constraintStart_toStartOf="@+id/large_area"
+                app:layout_constraintTop_toBottomOf="@+id/large_area" />
 
             <TextView
                 android:id="@+id/event_day"
@@ -54,8 +54,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="TextView"
-                app:layout_constraintStart_toStartOf="@+id/place"
-                app:layout_constraintTop_toBottomOf="@+id/place" />
+                app:layout_constraintStart_toStartOf="@+id/small_area"
+                app:layout_constraintTop_toBottomOf="@+id/small_area" />
 
             <TextView
                 android:id="@+id/eventstatus"

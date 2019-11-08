@@ -27,8 +27,8 @@ public class EventEntryViewHolder extends RecyclerView.ViewHolder {
         if(EventEntryItemView!=null) {
             //引数で渡された一行分の画面部品から、表示に使われる部品を取得。
             this.event_name = EventEntryItemView.findViewById(R.id.event_name);
-            this.area = EventEntryItemView.findViewById(R.id.area);
-            this.place = EventEntryItemView.findViewById(R.id.place);
+            this.area = EventEntryItemView.findViewById(R.id.large_area);
+            this.place = EventEntryItemView.findViewById(R.id.small_area);
             this.event_day = EventEntryItemView.findViewById(R.id.event_day);
             this.inviteTag = EventEntryItemView.findViewById(R.id.inviteTag);
             this.deadline = EventEntryItemView.findViewById(R.id.eventstatus);

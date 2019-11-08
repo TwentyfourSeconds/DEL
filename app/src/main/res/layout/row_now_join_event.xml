@@ -20,7 +20,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/area"
+                android:id="@+id/large_area"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -28,11 +28,11 @@
                 android:text="日時（yyyymmdd）"
                 android:textColor="#0000ff"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/place"
-                app:layout_constraintTop_toBottomOf="@+id/place" />
+                app:layout_constraintStart_toStartOf="@+id/small_area"
+                app:layout_constraintTop_toBottomOf="@+id/small_area" />
 
             <TextView
-                android:id="@+id/place"
+                android:id="@+id/small_area"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"

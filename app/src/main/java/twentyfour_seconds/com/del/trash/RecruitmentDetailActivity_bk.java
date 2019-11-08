@@ -63,7 +63,7 @@ public class RecruitmentDetailActivity_bk extends CustomActivity {
         title = findViewById(R.id.title);
         date = findViewById(R.id.EventDay);
         comment = findViewById(R.id.comment);
-        area = findViewById(R.id.area);
+        area = findViewById(R.id.large_area);
         location = findViewById(R.id.location);
         member = findViewById(R.id.member);
         deadline = findViewById(R.id.eventstatus);

@@ -121,7 +121,7 @@ public class EventCreate4 extends AppCompatActivity {
             ViewItemDTO itemDto = new ViewItemDTO();
 
             itemDto.setText(StringList.get(i));
-//          ret配列に、設定した文字列を追加
+            //ret配列に、設定した文字列を追加
             ret.add(itemDto);
         }
         return ret;
@@ -144,6 +144,33 @@ public class EventCreate4 extends AppCompatActivity {
             //delete_flgは、初期値のゼロを登録する
             int delete_flg = 0;
 
+            //タグ情報を数字に変換する
+            StringBuilder sbTag = new StringBuilder();
+
+            for (int i = 0; i < StringList.size(); i++) {
+                switch (StringList.get(i)) {
+                    case "机に座ってガッツリと":
+                        sbTag.append(1);
+                        break;
+                    case "密室からの脱出":
+                        sbTag.append(2);
+                        break;
+                    case "街を歩き回って":
+                        sbTag.append(3);
+                        break;
+                    case "遊園地や野球場で":
+                        sbTag.append(4);
+                        break;
+                    case "短い時間で気軽に":
+                        sbTag.append(5);
+                        break;
+                    case "アニメタイアップ":
+                        sbTag.append(6);
+                        break;
+                }
+            }
+
+            Log.d("tag",sbTag + "");
 
 //            //founderは一回コメント化
 //            PersonDB personDB = new PersonDB(1,latch);
@@ -192,7 +219,7 @@ public class EventCreate4 extends AppCompatActivity {
             sb.append("&closed_on=" + deadlineStr);
             sb.append("&max_persons=" + wantedPerson);
             sb.append("&comment=" + commentStr);
-            sb.append("&event_tag=" + 1);
+            sb.append("&event_tag=" + sbTag);
             write = sb.toString();
             Log.d("write", write);
             //latchは1
@@ -216,6 +243,8 @@ public class EventCreate4 extends AppCompatActivity {
             sb2.append("eventer_uid=" + Common.uid);
             write2 = sb2.toString();
 
+            Log.d("write2",write2);
+
             final CountDownLatch latch2 = new CountDownLatch(1);
 
             SearchNewEventDAO searchNewEventDAO = new SearchNewEventDAO(Common.CREATE_NEW_EVENT_SEARCH_URL, write2, latch2);
@@ -236,8 +265,8 @@ public class EventCreate4 extends AppCompatActivity {
 
 
             //登録完了画面(EventCreate4)に移動
-            Intent EventCreate5Page = new Intent(getApplicationContext(), EventCreate4.class);
-            startActivity(EventCreate5Page);
+            Intent EventCreate5 = new Intent(getApplicationContext(), EventCreate5.class);
+            startActivity(EventCreate5);
         }
     }
 

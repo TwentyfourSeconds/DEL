@@ -28,7 +28,7 @@
                 app:srcCompat="@drawable/business" />
 
             <TextView
-                android:id="@+id/area"
+                android:id="@+id/large_area"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -71,8 +71,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="大阪アジトオブスクラップ"
-                app:layout_constraintStart_toStartOf="@+id/area"
-                app:layout_constraintTop_toBottomOf="@+id/area" />
+                app:layout_constraintStart_toStartOf="@+id/large_area"
+                app:layout_constraintTop_toBottomOf="@+id/large_area" />
 
             <TextView
                 android:id="@+id/member"

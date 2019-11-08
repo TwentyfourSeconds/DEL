@@ -234,6 +234,7 @@ public class EventEntry extends CustomActivity {
                     Map<String, Object> singleRow = EventEntryList.get(position);
                     String eventId = singleRow.get("event_id").toString();
 
+
                     //チャット画面に遷移する（intentでイベントidを遷移）      ログインしていない場合は、登録画面に戻る?
                     //Flagmentの画面遷移はgetActivity()
                     Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
@@ -298,8 +299,8 @@ public class EventEntry extends CustomActivity {
             if(EventEntryItemView!=null) {
                 //引数で渡された一行分の画面部品から、表示に使われる部品を取得。
                 this.event_name = EventEntryItemView.findViewById(R.id.event_name);
-                this.area = EventEntryItemView.findViewById(R.id.area);
-                this.place = EventEntryItemView.findViewById(R.id.place);
+                this.area = EventEntryItemView.findViewById(R.id.large_area);
+                this.place = EventEntryItemView.findViewById(R.id.small_area);
                 this.event_day = EventEntryItemView.findViewById(R.id.event_day);
 //                this.inviteTag = EventManagementItemView.findViewById(R.id.inviteTag);
                 this.eventstatus = EventEntryItemView.findViewById(R.id.eventstatus);

@@ -129,7 +129,7 @@ public class RecruitmentListActivity_bk extends AppCompatActivity implements Abs
 
         to[0] = R.id.image;
         to[1] = R.id.title;
-        to[2] = R.id.area;
+        to[2] = R.id.large_area;
         to[3] = R.id.local;
         to[4] = R.id.term;
         to[5] = R.id.eventstatus;

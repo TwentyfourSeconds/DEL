@@ -75,6 +75,9 @@ public class EventCreate3 extends AppCompatActivity {
         public void onClick(View view) {
             Intent EventCreate4 = new Intent(getApplicationContext(), EventCreate4.class);
 
+            //画面のコメントを取得
+            GetComment();
+
             EventCreate4.putStringArrayListExtra("list", StringList);
             EventCreate4.putExtra("eventNameStr", eventNameStr);
             EventCreate4.putExtra("area", area);
@@ -83,9 +86,6 @@ public class EventCreate3 extends AppCompatActivity {
             EventCreate4.putExtra("wantedPerson", wantedPerson);
             EventCreate4.putExtra("deadlineStr", deadlineStr);
             EventCreate4.putExtra("commentStr", conmmentstr);
-
-            //画面のコメントを取得
-            GetComment();
 
             startActivity(EventCreate4);
         }
