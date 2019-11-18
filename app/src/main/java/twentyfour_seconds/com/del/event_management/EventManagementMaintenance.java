@@ -26,6 +26,9 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import twentyfour_seconds.com.del.DTO.EventInfoDTO;
 import twentyfour_seconds.com.del.DTO.ViewItemDTO;
@@ -50,6 +53,17 @@ public class EventManagementMaintenance extends CustomActivity {
     private GroupMembersDTO groupMembersDTO = new GroupMembersDTO();
     //参加者全員分の名前と画像urlを保持
     private List<GroupMembersDTO> groupMembersDTOArrayList = new ArrayList<GroupMembersDTO>();
+    /*
+     * firebaseの同期処理を管理するクラス
+     */
+    private Lock lock = new ReentrantLock();
+    private Condition finishedCondition = lock.newCondition();
+    /*
+     * 読み込みが完了したかどうかを表す
+     */
+    private boolean finished;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,8 +163,27 @@ public class EventManagementMaintenance extends CustomActivity {
 
         EventMembersUidGet();
 
+        lock.lock();
+        try {
+            while (!finished) {
+                finishedCondition.await();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+
+
         Log.d("memberUidList", memberUidList.size() + "");
         //参加者の名前と画像を取得する
+
+        ListView listView = (ListView)findViewById(R.id.listView);
+
+        EventManagementGroupMemberAdapter adapter = new EventManagementGroupMemberAdapter(EventManagementMaintenance.this);
+        Log.d("adapter mae" ,"adapter mae");
+        adapter.setMemberList(groupMembersDTOArrayList);
+        listView.setAdapter(adapter);
 
 
     }
@@ -181,30 +214,23 @@ public class EventManagementMaintenance extends CustomActivity {
                 memberUidList.add(groupMembersDTO.uid);
 
 
-
                 for(int i = 0; i < memberUidList.size(); i++) {
 
                     String uid = memberUidList.get(i);
                     Log.d("uid", uid + "");
                     EventMembersProfileGet(uid);
-
                 }
 
+                lock.lock();
                 try {
-                    Thread.sleep(10000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    finished = true;
+                    finishedCondition.signal();
+                } finally {
+                    lock.unlock();
                 }
 
 
-                ListView listView = (ListView)findViewById(R.id.listView);
-
-                EventManagementGroupMemberAdapter adapter = new EventManagementGroupMemberAdapter(EventManagementMaintenance.this);
-                Log.d("adapter mae" ,"adapter mae");
-                adapter.setMemberList(groupMembersDTOArrayList);
-                listView.setAdapter(adapter);
-
-                }
+            }
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
@@ -260,6 +286,7 @@ public class EventManagementMaintenance extends CustomActivity {
                 groupMembersDTO.setProfileImageUrl(currentUser.getProfileImageUrl());
                 groupMembersDTOArrayList.add(groupMembersDTO);
                 Log.d("完了", "完了");
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
