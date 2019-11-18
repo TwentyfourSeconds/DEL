@@ -180,6 +180,8 @@ public class EventManagementMaintenance extends CustomActivity {
 
                 memberUidList.add(groupMembersDTO.uid);
 
+
+
                 for(int i = 0; i < memberUidList.size(); i++) {
 
                     String uid = memberUidList.get(i);
@@ -189,7 +191,7 @@ public class EventManagementMaintenance extends CustomActivity {
                 }
 
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(10000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -198,6 +200,7 @@ public class EventManagementMaintenance extends CustomActivity {
                 ListView listView = (ListView)findViewById(R.id.listView);
 
                 EventManagementGroupMemberAdapter adapter = new EventManagementGroupMemberAdapter(EventManagementMaintenance.this);
+                Log.d("adapter mae" ,"adapter mae");
                 adapter.setMemberList(groupMembersDTOArrayList);
                 listView.setAdapter(adapter);
 
