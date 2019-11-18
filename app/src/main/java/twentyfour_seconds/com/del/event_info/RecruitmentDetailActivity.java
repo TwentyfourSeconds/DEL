@@ -296,6 +296,7 @@ public class RecruitmentDetailActivity extends CustomActivity {
                         Toast.LENGTH_SHORT
                 );
                 myToast.show();
+                entry.setEnabled(false);
 //                //登録に成功した場合は、LatestMessagesActivityに遷移する
 //                Intent intent = new Intent(getApplicationContext(), TopActivity.class);
 //                //この一文を記載することで、元のログイン画面に戻れないようにする
