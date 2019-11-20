@@ -161,30 +161,43 @@ public class EventManagementMaintenance extends CustomActivity {
 
         //現在の参加者uidをFirebaseから取得する
 
-        EventMembersUidGet();
+//        EventMembersUidGet();
 
-        lock.lock();
-        try {
-            while (!finished) {
-                finishedCondition.await();
+//        lock.lock();
+//        try {
+//            while (!finished) {
+//                finishedCondition.await();
+//            }
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } finally {
+//            lock.unlock();
+//        }
+
+//      callback関数の書き方：https://www.youtube.com/watch?v=OvDZVV5CbQg
+        readData(new FirebaseCallback() {
+            @Override
+            public void onCallback(List<String> list) {
+                Log.d("readData", "readData" + list);
+
+                for(int i = 0; i < list.size(); i++) {
+                    Log.d("uid", "uid start");
+                    String uid = list.get(i);
+                    Log.d("uid", "uid = " + uid);
+                    EventMembersProfileGet(uid);
+                }
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            lock.unlock();
-        }
+        });
 
 
-        Log.d("memberUidList", memberUidList.size() + "");
         //参加者の名前と画像を取得する
-
-        ListView listView = (ListView)findViewById(R.id.listView);
-
-        EventManagementGroupMemberAdapter adapter = new EventManagementGroupMemberAdapter(EventManagementMaintenance.this);
-        Log.d("adapter mae" ,"adapter mae");
-        adapter.setMemberList(groupMembersDTOArrayList);
-        listView.setAdapter(adapter);
-
+//        Log.d("adapter set", "adapter set");
+//        ListView listView = (ListView)findViewById(R.id.listView);
+//
+//        EventManagementGroupMemberAdapter adapter = new EventManagementGroupMemberAdapter(EventManagementMaintenance.this);
+//        Log.d("adapter mae" ,"adapter mae");
+//        adapter.setMemberList(groupMembersDTOArrayList);
+//        listView.setAdapter(adapter);
 
     }
 
@@ -202,55 +215,46 @@ public class EventManagementMaintenance extends CustomActivity {
     //現在のログイン者を取得
     private void EventMembersUidGet(){
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/Group/" + 41 + "/GroupMembers");
-        ref.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                GroupMembersDTO groupMembersDTO = dataSnapshot.getValue(GroupMembersDTO.class);
-
-                //取得したメッセージをリサイクラービューにセット
-                Log.d("groupMembersDTO", groupMembersDTO.uid);
-
-                memberUidList.add(groupMembersDTO.uid);
-
-
-                for(int i = 0; i < memberUidList.size(); i++) {
-
-                    String uid = memberUidList.get(i);
-                    Log.d("uid", uid + "");
-                    EventMembersProfileGet(uid);
-                }
-
-                lock.lock();
-                try {
-                    finished = true;
-                    finishedCondition.signal();
-                } finally {
-                    lock.unlock();
-                }
-
-
-            }
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/Group/" + 41 + "/GroupMembers");
+//        ref.addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//                GroupMembersDTO groupMembersDTO = dataSnapshot.getValue(GroupMembersDTO.class);
+//
+//                //取得したメッセージをリサイクラービューにセット
+//                Log.d("groupMembersDTO", groupMembersDTO.uid);
+//
+//                memberUidList.add(groupMembersDTO.uid);
+//
+//
+//                for(int i = 0; i < memberUidList.size(); i++) {
+//
+//                    String uid = memberUidList.get(i);
+//                    Log.d("uid", uid + "");
+//                    EventMembersProfileGet(uid);
+//                }
+//
+//            }
+//            @Override
+//            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
 
         //addListenerForSingleValueEventは、細かい場所まで指定しないと、値をとってこれなかった。
 //        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("/Group/" + 41 + "/GroupMembers");
@@ -266,8 +270,50 @@ public class EventManagementMaintenance extends CustomActivity {
 //            public void onCancelled(@NonNull DatabaseError databaseError) {
 //            }
 //        });
-
     }
+
+    //firebaseの同期処理を行うため、callback関数で処理を記載
+    private interface FirebaseCallback{
+        void onCallback(List<String> list);
+    }
+
+    private void readData(final FirebaseCallback firebaseCallback){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/Group/" + 41 + "/GroupMembers");
+        ref.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                GroupMembersDTO groupMembersDTO = dataSnapshot.getValue(GroupMembersDTO.class);
+
+                for(int i = 0; i < dataSnapshot.getChildrenCount(); i++){
+                    //取得したメッセージをリサイクラービューにセット
+                    Log.d("groupMembersDTO", groupMembersDTO.uid);
+                    memberUidList.add(groupMembersDTO.uid);
+                }
+                //取得完了
+                Log.d("finish　groupMembersDTO", "finish　groupMembersDTO");
+                firebaseCallback.onCallback(memberUidList);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
+
+
+
 
     //firebaseからグループメンバーを取得する
 
@@ -282,12 +328,21 @@ public class EventManagementMaintenance extends CustomActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserDTO currentUser = dataSnapshot.getValue(UserDTO.class);
                 //imageを張り付ける
-                groupMembersDTO.setUsername(currentUser.getUsername());
-                groupMembersDTO.setProfileImageUrl(currentUser.getProfileImageUrl());
-                groupMembersDTOArrayList.add(groupMembersDTO);
-                Log.d("完了", "完了");
+                for(int i = 0; i < dataSnapshot.getChildrenCount(); i++) {
+                    groupMembersDTO.setUsername(currentUser.getUsername());
+                    groupMembersDTO.setProfileImageUrl(currentUser.getProfileImageUrl());
+                    groupMembersDTOArrayList.add(groupMembersDTO);
+                }
+                Log.d("完了", "groupMembersDTOArrayList" + groupMembersDTOArrayList);
 
+                //取得したデータをアダプターにセットする。
+                EventManagementGroupMemberAdapter adapter = new EventManagementGroupMemberAdapter(EventManagementMaintenance.this);
+                Log.d("adapter mae" ,"adapter mae");
+                adapter.setMemberList(groupMembersDTOArrayList);
+                ListView listView = (ListView)findViewById(R.id.listView);
+                listView.setAdapter(adapter);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -307,8 +362,5 @@ public class EventManagementMaintenance extends CustomActivity {
             startActivity(intent);
         }
     }
-
-
-
 
 }
