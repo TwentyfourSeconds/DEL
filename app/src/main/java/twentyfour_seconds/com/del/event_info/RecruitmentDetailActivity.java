@@ -4,6 +4,7 @@ package twentyfour_seconds.com.del.event_info;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,8 +18,6 @@ import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,14 +32,11 @@ import java.util.concurrent.CountDownLatch;
 
 import twentyfour_seconds.com.del.DTO.EventInfoDTO;
 import twentyfour_seconds.com.del.chat.UserDTO;
-import twentyfour_seconds.com.del.top_page.TopActivity;
 import twentyfour_seconds.com.del.util.Common;
 import twentyfour_seconds.com.del.util.CustomActivity;
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.util.ViewAdapterReadOnly;
 import twentyfour_seconds.com.del.DTO.ViewItemDTO;
-
-import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
 
 
 public class RecruitmentDetailActivity extends CustomActivity {
@@ -172,11 +168,45 @@ public class RecruitmentDetailActivity extends CustomActivity {
         location = findViewById(R.id.location);
         member = findViewById(R.id.member);
         deadline = findViewById(R.id.eventstatus);
-//        tag = findViewById(R.id.tag);
+        String eventTag = eventInfoDTO.getEventTag();
         entry = findViewById(R.id.entry);
 
+        //eventTagをメッセージに変換する
+        String[] strArray = eventTag.split("");
+        ViewItemDTO viewItemDTO = new ViewItemDTO();
+        List<ViewItemDTO> tagMessageList = new ArrayList<ViewItemDTO>();
+
+        for(int i = 0; i < strArray.length; i++) {
+            switch (strArray[i]) {
+                case "1":
+                    viewItemDTO.setText("机に座ってガッツリと");
+                    tagMessageList.add(viewItemDTO);
+                    break;
+                case "2":
+                    viewItemDTO.setText("密室からの脱出");
+                    tagMessageList.add(viewItemDTO);
+                    break;
+                case "3":
+                    viewItemDTO.setText("街を歩き回って");
+                    tagMessageList.add(viewItemDTO);
+                    break;
+                case "4":
+                    viewItemDTO.setText("遊園地や野球場で");
+                    tagMessageList.add(viewItemDTO);
+                    break;
+                case "5":
+                    viewItemDTO.setText("短い時間で気軽に");
+                    tagMessageList.add(viewItemDTO);
+                    break;
+                case "6":
+                    viewItemDTO.setText("アニメタイアップ");
+                    tagMessageList.add(viewItemDTO);
+                    break;
+            }
+        }
+
         //*取得してきたデータをタグ形式で出力する*//
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.flex_box_recycler_view);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.event_tag);
 
         //--------------------------------flexBox Layout の調整-----------------------------------------------//
         // FlexboxLayoutManangerを定義する（レイアウトマネージャーは、リストデータの見え方を決める。※これがリストビューとは異なるリサイクラービューのいいところ）
@@ -190,16 +220,28 @@ public class RecruitmentDetailActivity extends CustomActivity {
 
         //--------------------------------viewAdapter の調整-----------------------------------------------//
 
-        //データをmessageListに格納
-        messageList = this.initViewItemDtoList();
         // アダプターオブジェクトを生成して、下のメソッドで設定した文字列を追加
-        viewAdapterReadOnly = new ViewAdapterReadOnly(messageList);
+        ViewAdapterReadOnly viewAdapterReadOnly = new ViewAdapterReadOnly(tagMessageList);
         // アダプターオブジェクトをセット
         recyclerView.setAdapter(viewAdapterReadOnly);
 
         Log.d("eventInfo", eventInfoDTO.getEventName());
 
-        leader.setText("募集者：" + "test" + "さん");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("/users/" + eventInfoDTO.getEventerUid());
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d("use_name", dataSnapshot.getKey());
+                UserDTO uid = dataSnapshot.getValue(UserDTO.class);
+                leader.setText("募集者：" + uid.getUsername());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         title.setText(eventInfoDTO.getTitle());
         date.setText("日程：" + eventInfoDTO.getEventDay());
         comment.setText(eventInfoDTO.getComment());
@@ -209,8 +251,8 @@ public class RecruitmentDetailActivity extends CustomActivity {
         deadline.setText("掲載期限：" + eventInfoDTO.getClosedDay());
         member.setText("募集人数：" + eventInfoDTO.getMember());
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/Group/" + id + "/eventAttendees");
-        ref.orderByChild("uid").equalTo(Common.uid).addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference("/Group/" + id + "/eventAttendees");
+        ref2.orderByChild("uid").equalTo(Common.uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.d("onDataChange", "1");
@@ -231,7 +273,6 @@ public class RecruitmentDetailActivity extends CustomActivity {
                 // ...
             }
         });
-        Log.d("koko", "kita");
 
         entry.setOnClickListener(new View.OnClickListener() {
             @Override

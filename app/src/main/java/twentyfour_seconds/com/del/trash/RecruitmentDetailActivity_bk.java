@@ -152,7 +152,7 @@ public class RecruitmentDetailActivity_bk extends CustomActivity {
         }
 
         //*取得してきたデータをタグ形式で出力する*//
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.flex_box_recycler_view);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.event_tag);
 
         //--------------------------------flexBox Layout の調整-----------------------------------------------//
         // FlexboxLayoutManangerを定義する（レイアウトマネージャーは、リストデータの見え方を決める。※これがリストビューとは異なるリサイクラービューのいいところ）

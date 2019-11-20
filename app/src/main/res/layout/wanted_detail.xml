@@ -84,7 +84,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/eventstatus" />
 
             <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/flex_box_recycler_view"
+                android:id="@+id/event_tag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -115,7 +115,7 @@
                 android:layout_marginTop="8dp"
                 android:text="主催者から一言 "
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/flex_box_recycler_view" />
+                app:layout_constraintTop_toBottomOf="@+id/event_tag" />
 
             <Button
                 android:id="@+id/entry"
