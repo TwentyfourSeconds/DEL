@@ -97,6 +97,7 @@ public class ChatActivity extends AppCompatActivity {
         //リサイクラービューにセット
         RecyclerView recyclerView_newmessage = findViewById(R.id.recyclerview_chat_log);
         recyclerView_newmessage.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        Log.d("ChatActivity", "Chat recycler view adapter");
         recyclerView_newmessage.setAdapter(adapter);
     }
 

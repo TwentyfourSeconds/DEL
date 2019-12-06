@@ -21,13 +21,20 @@ import java.util.concurrent.CountDownLatch;
 import twentyfour_seconds.com.del.DTO.EventInfoDTO;
 import twentyfour_seconds.com.del.DTO.EventInfoDTOList;
 import twentyfour_seconds.com.del.R;
+import twentyfour_seconds.com.del.event_entry.UidSearchEventDAO;
 import twentyfour_seconds.com.del.util.Common;
 import twentyfour_seconds.com.del.util.CustomActivity;
 
 public class EventManagementList extends CustomActivity {
 
-    private final String SEND_UID = "member_uid=" + Common.uid;
+    //participateを呼ぶ用
+//    private final String SEND_UID = "member_uid=" + Common.uid;
     private final String PARTICIPANT_EVENT = Common.PARTICIPANT_EVENT_URL;
+
+    //participateを呼ぶ用
+    private final String SEND_UID = "eventer_uid=" + Common.uid;
+    final String UID_SEARCH_URL = Common.UID_SEARCH_EVENT_URL;
+
     private EventInfoDTOList eventInfoDTOList = new EventInfoDTOList();
 
     //アダプター
@@ -48,18 +55,17 @@ public class EventManagementList extends CustomActivity {
         final CountDownLatch latch = new CountDownLatch(1);
         String write = "";
         StringBuilder sb = new StringBuilder();
+        Log.d("SEND_UID", SEND_UID);
         sb.append(SEND_UID);
         write = sb.toString();
         //DetailDBを読み込む
-        ParticipantEventDAO participantEventDAO = new ParticipantEventDAO(PARTICIPANT_EVENT, write, eventInfoDTOList, latch);
-        participantEventDAO.execute();
+        UidSearchEventDAO ddb = new UidSearchEventDAO(UID_SEARCH_URL, write, eventInfoDTOList, latch);
+        ddb.execute();
         try {
             latch.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        //DB取得時、データをcommonクラスに格納するため、commonクラスより、データを取得
         for(int i = 0; i < eventInfoDTOList.getDtoArrayList().size(); i++) {
 
             Map<String, Object> Map = new HashMap<>();
@@ -76,6 +82,41 @@ public class EventManagementList extends CustomActivity {
             Map.put("member", eventInfoDTO.getMember());
             messageList.add(Map);
         }
+
+
+        //新DB用（SQLが間違っているため、削除
+//        final CountDownLatch latch = new CountDownLatch(1);
+//        String write = "";
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(SEND_UID);
+//        write = sb.toString();
+//        //DetailDBを読み込む
+//        ParticipantEventDAO participantEventDAO = new ParticipantEventDAO(PARTICIPANT_EVENT, write, eventInfoDTOList, latch);
+//        participantEventDAO.execute();
+//        try {
+//            latch.await();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//
+//        //DB取得時、データをcommonクラスに格納するため、commonクラスより、データを取得
+//        for(int i = 0; i < eventInfoDTOList.getDtoArrayList().size(); i++) {
+//
+//            Map<String, Object> Map = new HashMap<>();
+//
+//            EventInfoDTO eventInfoDTO = eventInfoDTOList.getDtoArrayList().get(i);
+//            Map.put("image", "test");
+//            Map.put("event_id", eventInfoDTO.getEventId());
+//            Map.put("title", eventInfoDTO.getEventName());
+//            Map.put("area", eventInfoDTO.getLargeArea());
+//            Map.put("local", eventInfoDTO.getSmallArea());
+//            Map.put("term", "nothing");
+//
+////            Map.put("deadline", eventInfoDTO.getClosedDay());
+//            Map.put("member", eventInfoDTO.getMember());
+//            messageList.add(Map);
+//        }
+
 
 //        //自分のIDから、現在、作成しているイベントを抽出する。
 //        int id = 1;

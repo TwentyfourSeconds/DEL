@@ -12,7 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_activityTop">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_activityTop"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="0dp">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -28,23 +30,23 @@
                 android:layout_marginEnd="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button3"></android.support.v7.widget.RecyclerView>
+                app:layout_constraintTop_toBottomOf="@+id/event_tag_change_button"></android.support.v7.widget.RecyclerView>
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/event_condition_change_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="Button"
+                android:text="募集条件の変更"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textView78" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/event_tag_change_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="Button"
+                android:text="タグの変更"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textView86" />
 
@@ -54,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="募集条件の変更"
+                android:text="募集状況の変更"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textView76" />
 
@@ -68,24 +70,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView78" />
 
-            <HorizontalScrollView
-                android:layout_width="395dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/group_member"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:fillViewport="true"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView92">
-
-                <ListView
-                    android:id="@+id/listView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true" />
-
-            </HorizontalScrollView>
+                app:layout_constraintTop_toBottomOf="@+id/textView92"></android.support.v7.widget.RecyclerView>
 
             <TextView
                 android:id="@+id/textView76"
@@ -119,7 +115,7 @@
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/event_tag" />
+                app:layout_constraintTop_toBottomOf="@+id/check_join_member_button" />
 
             <TextView
                 android:id="@+id/small_area"
@@ -173,6 +169,31 @@
                 android:text="TextView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/event_day_on" />
+
+            <TextView
+                android:id="@+id/exist_join_member_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:text="TextView"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/event_tag" />
+
+            <Button
+                android:id="@+id/check_join_member_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="こちらよりご確認ください"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/exist_join_member_text" />
+
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 
