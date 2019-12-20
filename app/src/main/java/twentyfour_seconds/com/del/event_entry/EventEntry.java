@@ -209,7 +209,7 @@ public class EventEntry extends CustomActivity {
         //-----------------------レイアウト　部品　作成箇所---------------------------------//
         public EventEntryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-            ////レイアウトxmlから、Viewオブジェクトを作成
+            //レイアウトxmlから、Viewオブジェクトを作成
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
             View itemView = inflater.inflate(R.layout.row_now_join_event, parent, false);    //activity_flexbox_layout_recycler_view_item（XMLレイアウト）をinflateし、一行分の画面部品とする。
 

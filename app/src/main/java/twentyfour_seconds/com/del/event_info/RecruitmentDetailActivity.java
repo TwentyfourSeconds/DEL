@@ -110,6 +110,7 @@ public class RecruitmentDetailActivity extends CustomActivity {
 //
 //        Log.d("tag.length", tag.length + "");
 //
+
 //        for(int i = 0; i < tag.length; i++){
 //            Log.d("tag", Integer.parseInt(tag[i]) + "");
 //        }

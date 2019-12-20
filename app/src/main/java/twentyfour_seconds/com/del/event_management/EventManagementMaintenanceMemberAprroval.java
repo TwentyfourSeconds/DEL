@@ -7,7 +7,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +22,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.xwray.groupie.GroupAdapter;
 import com.xwray.groupie.Item;
+import com.xwray.groupie.OnItemClickListener;
 import com.xwray.groupie.ViewHolder;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.chat.ChatActivity;
@@ -38,6 +45,11 @@ public class EventManagementMaintenanceMemberAprroval extends CustomActivity {
      */
     private String event_id;
 
+    /*
+     * 押下時、データを取得するためのList形式の変数を用意
+     */
+    private List<GroupMembersDTO> groupMembersDTOList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +60,7 @@ public class EventManagementMaintenanceMemberAprroval extends CustomActivity {
 
         //firebaseより、参加希望者の情報を取得
         //参加者一覧で使用するアダプターの定義
-        adapter = new GroupAdapter<ChatActivity.ContentViewHolder>();
+            adapter = new GroupAdapter<ChatActivity.ContentViewHolder>();
 
         //*参加者一覧に必要な情報を取得する
         firebaseDataGet();
@@ -63,7 +75,19 @@ public class EventManagementMaintenanceMemberAprroval extends CustomActivity {
         recyclerView.setAdapter(adapter);
 
 
-
+//        adapter.setOnItemClickListener(new OnItemClickListener() {
+//            @Override
+//            public void onItemClick(@NonNull Item item, @NonNull View view) {
+//
+//                int index = adapter.getAdapterPosition(item);
+//                GroupMembersDTO groupMembersDTO = new GroupMembersDTO();
+//                groupMembersDTO = groupMembersDTOList.get(index);
+//                Log.d("a", groupMembersDTO.getUsername() + "");
+//
+//                Log.d("index", index + "");
+//
+//            }
+//        });
 
 
 
@@ -110,10 +134,16 @@ public class EventManagementMaintenanceMemberAprroval extends CustomActivity {
                         groupMembersDTO.setUid(currentUser.getUid());
                         groupMembersDTO.setUsername(currentUser.getUsername());
                         groupMembersDTO.setProfileImageUrl(currentUser.getProfileImageUrl());
+
+                        Log.d("Username", currentUser.getUsername());
+                        //後で、情報を取得できるように、リスト型の変数に値をストックしておく
+                        groupMembersDTOList = new ArrayList<>();
+                        groupMembersDTOList.add(groupMembersDTO);
+
                         EventManagementMaintenanceMemberAprroval.EventManagementMemberApprovalAdapter eventManagementMemberApprovalAdapter = new EventManagementMaintenanceMemberAprroval.EventManagementMemberApprovalAdapter(groupMembersDTO);
                         adapter.add(eventManagementMemberApprovalAdapter);
 
-                        Log.d("Username", currentUser.getUsername());
+
                         Log.d("Adapter set finish", "---finish---");
                     }
 
@@ -153,8 +183,34 @@ public class EventManagementMaintenanceMemberAprroval extends CustomActivity {
 
         @NonNull
         @Override
-        public EventManagementMaintenanceMemberAprroval.ContentViewHolder createViewHolder(@NonNull View itemView) {
-            return new EventManagementMaintenanceMemberAprroval.ContentViewHolder(itemView);
+        public EventManagementMaintenanceMemberAprroval.ContentViewHolder createViewHolder(@NonNull final View itemView) {
+
+
+            //ViewHolderを作成（GroupAdapterではあるが、ViewHolderの中身をクリックする処理を書きたいので、しっかり定義する。）
+            final ContentViewHolder contentViewHolder = new EventManagementMaintenanceMemberAprroval.ContentViewHolder(itemView);
+
+             final Button approvalButton = itemView.findViewById(R.id.user_approval);
+             approvalButton.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+
+                     int position = contentViewHolder.getAdapterPosition(); // positionを取得
+                     Log.i("position", position + "");
+
+                     GroupMembersDTO groupMembersDTO = groupMembersDTOList.get(position);
+                     Log.i("position", groupMembersDTO.getUsername() + "");
+                     //画像を押下時、ユーザープロフィールへと飛ぶ
+                     FirebaseAprrovalUserProfile();
+                     //承認を押下時、参加予定者から、参加者へFirebaseを変更する
+                     FirebaseAprrovalToJoin();
+                     //拒否を押下時、参加予定者から、名前を消す
+                     FirebaseAprrovalToDeny();
+                 }
+             });
+
+              return contentViewHolder;
+
+//            return new EventManagementMaintenanceMemberAprroval.ContentViewHolder(itemView);
         }
 
         @Override
@@ -174,7 +230,6 @@ public class EventManagementMaintenanceMemberAprroval extends CustomActivity {
 
     }
 
-    //
     public class ContentViewHolder extends ViewHolder {
 
         @NonNull
@@ -189,6 +244,22 @@ public class EventManagementMaintenanceMemberAprroval extends CustomActivity {
 
         }
     }
+
+    //画像を押下時、ユーザープロフィールへと飛ぶ
+    private void FirebaseAprrovalUserProfile(){
+
+    }
+
+    //承認を押下時、参加予定者から、参加者へFirebaseを変更する
+    private void FirebaseAprrovalToJoin(){
+
+    }
+
+    //拒否を押下時、参加予定者から、名前を消す
+    private void FirebaseAprrovalToDeny(){
+
+    }
+
 
 
 
