@@ -163,6 +163,12 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+        <activity android:name=".event_management.EventManagementMaintenanceUserProfileCheck"
+            android:windowSoftInputMode="adjustPan|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
 
 
         <activity android:name=".notification.AddTopicTest"

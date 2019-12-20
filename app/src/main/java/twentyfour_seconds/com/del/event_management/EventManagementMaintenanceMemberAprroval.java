@@ -1,6 +1,7 @@
 package twentyfour_seconds.com.del.event_management;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,12 +28,14 @@ import com.xwray.groupie.OnItemClickListener;
 import com.xwray.groupie.ViewHolder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.chat.ChatActivity;
 import twentyfour_seconds.com.del.chat.UserDTO;
+import twentyfour_seconds.com.del.util.Common;
 import twentyfour_seconds.com.del.util.CustomActivity;
 
 public class EventManagementMaintenanceMemberAprroval extends CustomActivity {
@@ -189,7 +193,14 @@ public class EventManagementMaintenanceMemberAprroval extends CustomActivity {
             //ViewHolderを作成（GroupAdapterではあるが、ViewHolderの中身をクリックする処理を書きたいので、しっかり定義する。）
             final ContentViewHolder contentViewHolder = new EventManagementMaintenanceMemberAprroval.ContentViewHolder(itemView);
 
+            //承認ボタン
              final Button approvalButton = itemView.findViewById(R.id.user_approval);
+            //不承認ボタン
+            final Button notApprovalButton = itemView.findViewById(R.id.user_not_approval);
+            //ユーザー画像
+            final ImageView userImageCheck = itemView.findViewById(R.id.approval_row_user_image);
+
+            //承認ボタンを押下時
              approvalButton.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View v) {
@@ -199,14 +210,44 @@ public class EventManagementMaintenanceMemberAprroval extends CustomActivity {
 
                      GroupMembersDTO groupMembersDTO = groupMembersDTOList.get(position);
                      Log.i("position", groupMembersDTO.getUsername() + "");
-                     //画像を押下時、ユーザープロフィールへと飛ぶ
-                     FirebaseAprrovalUserProfile();
                      //承認を押下時、参加予定者から、参加者へFirebaseを変更する
-                     FirebaseAprrovalToJoin();
-                     //拒否を押下時、参加予定者から、名前を消す
-                     FirebaseAprrovalToDeny();
+                     FirebaseAprrovalToJoin(groupMembersDTO);
                  }
              });
+
+            //不承認ボタンを押下時
+            notApprovalButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    int position = contentViewHolder.getAdapterPosition(); // positionを取得
+                    Log.i("position", position + "");
+
+                    GroupMembersDTO groupMembersDTO = groupMembersDTOList.get(position);
+                    Log.i("position", groupMembersDTO.getUsername() + "");
+                    //不承認を押下時、参加予定者から、名前を消す
+                    FirebaseAprrovalToDeny(groupMembersDTO);
+                }
+            });
+
+            //ユーザー画像を押下時
+            userImageCheck.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    int position = contentViewHolder.getAdapterPosition(); // positionを取得
+                    Log.i("position", position + "");
+
+                    GroupMembersDTO groupMembersDTO = groupMembersDTOList.get(position);
+                    Log.i("position", groupMembersDTO.getUsername() + "");
+                    //画像を押下時、ユーザープロフィールへと飛ぶ
+                    FirebaseAprrovalUserProfile(groupMembersDTO);
+                }
+            });
+
+
+
+
 
               return contentViewHolder;
 
@@ -246,17 +287,60 @@ public class EventManagementMaintenanceMemberAprroval extends CustomActivity {
     }
 
     //画像を押下時、ユーザープロフィールへと飛ぶ
-    private void FirebaseAprrovalUserProfile(){
+    private void FirebaseAprrovalUserProfile(GroupMembersDTO groupMembersDTO){
 
+        // インテントへのインスタンス生成
+        Intent intent = new Intent(EventManagementMaintenanceMemberAprroval.this, EventManagementMaintenanceUserProfileCheck.class);
+        //　インテントに値をセット
+        intent.putExtra("id", groupMembersDTO.getUid());
+        // サブ画面の呼び出し
+        startActivity(intent);
     }
 
     //承認を押下時、参加予定者から、参加者へFirebaseを変更する
-    private void FirebaseAprrovalToJoin(){
+    private void FirebaseAprrovalToJoin(final GroupMembersDTO groupMembersDTO){
+
+        //参加者のほうに登録する
+        DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("/Group/" + 42 + "/GroupMembers");
+
+        GroupMemberJoinDTO groupMemberJoinDTO = new GroupMemberJoinDTO();
+        groupMemberJoinDTO.setUid(groupMembersDTO.getUid());
+
+//        Map<String, Object> insertUserId = new HashMap<>();
+//        insertUserId.put("uid", groupMembersDTO.getUid());
+
+        //addOnSuccessListenerは、帰ってくる引数がないときはVoid、それ以外は決められた変数を指定する？？
+        ref1.setValue(groupMemberJoinDTO).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d("EventManagementMemberApproval", "参加者登録処理完了" + groupMembersDTO.getUid());
+
+                //参加希望者から削除する
+                DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference("/Group/" + 42 + "/eventAttendees").child(groupMembersDTO.getUid());
+                ref2.removeValue(new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        Log.d("EventManagementMemberApproval", "参加者仮登録削除完了" + groupMembersDTO.getUid());
+
+                    }
+                });
+            }
+        });
+
+
+
+
+
+
+
+
+
+
 
     }
 
     //拒否を押下時、参加予定者から、名前を消す
-    private void FirebaseAprrovalToDeny(){
+    private void FirebaseAprrovalToDeny(GroupMembersDTO groupMembersDTO){
 
     }
 
