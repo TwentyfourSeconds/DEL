@@ -24,7 +24,7 @@ import static java.lang.Integer.parseInt;
 
 public class EventCreate1 extends CustomActivity {
 
-    
+
     //未入力チェックエラーフラグ(1の時、エラー）
     int eventNameErrFlg = 0;
     int areaErrFlg = 0;

@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView79" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/Resumed"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -64,7 +64,7 @@
         android:text="●募集を停止する "
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/Resumed" />
 
     <TextView
         android:id="@+id/textView84"
@@ -93,7 +93,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView84" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/Stop"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -113,7 +113,7 @@
         android:text="●グループを解散する "
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/Stop" />
 
     <TextView
         android:id="@+id/textView89"
@@ -151,7 +151,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView90" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/Dissolution"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
