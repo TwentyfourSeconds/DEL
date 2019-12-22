@@ -29,7 +29,21 @@ public class EventManagementMaintenanceEventStatusChange extends CustomActivity 
             public void onClick(View v) {
                 // ボタンが押されたら無効化
                 RecruitmentResumedButton.setEnabled(false);
+            }
+        });
+
+        RecruitmentStopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // ボタンが押されたら無効化
                 RecruitmentStopButton.setEnabled(false);
+            }
+        });
+
+        GroupDissolutionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // ボタンが押されたら無効化
                 GroupDissolutionButton.setEnabled(false);
             }
         });
