@@ -23,6 +23,7 @@ public class EventInfoDTO {
 //    private String member;
 //    private String comment;
     private String eventTag;
+    private String eventStatus;
 
     public String getId() {
         return id;
@@ -167,4 +168,14 @@ public class EventInfoDTO {
     public void setEventTag(String eventTag) {
         this.eventTag = eventTag;
     }
+
+    public String getEventStatus(){
+        return eventStatus;
+    }
+
+    public void setEventStatus(String eventStatus) {
+        this.eventStatus = eventStatus;
+    }
+
+
 }

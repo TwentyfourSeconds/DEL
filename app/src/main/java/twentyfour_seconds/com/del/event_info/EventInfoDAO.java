@@ -48,6 +48,7 @@ public class EventInfoDAO extends AsyncTask<String, String, String> {
             eventInfoDTO.setMember(json.getString("max_persons"));
             eventInfoDTO.setComment(json.getString("comment"));
             eventInfoDTO.setEventTag(json.getString("event_tag"));
+            eventInfoDTO.setEventStatus(json.getString("event_status"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -358,7 +358,7 @@ public class EventManagementMaintenance extends CustomActivity {
         @Override
         public void onClick(View view){
             Intent intent = new Intent(getApplicationContext(), EventManagementMaintenanceMemberAprroval.class);
-            //更新するデータを判別するため、イベントidを添付して送る
+
             intent.putExtra("event_id", event_id);
             startActivity(intent);
         }
@@ -613,13 +613,13 @@ public class EventManagementMaintenance extends CustomActivity {
 //        });
 //    }
 
-    //登録内容の確認ボタンを押下時の動き(eventCreate4に移動)
+    //登録内容の確認ボタンを押下時の動き(EventStatusChangeに移動)
     public class eventStatusChangeButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(getApplicationContext(), EventManagementMaintenanceEventStatusChange.class);
-            //更新するデータを判別するため、イベントidを添付して送る
-            intent.putExtra("event_id", event_id);
+            //取得したイベントステータス表示を引き継ぐ
+            intent.putExtra("event_status", eventInfoDTO.getEventStatus());
             startActivity(intent);
         }
     }

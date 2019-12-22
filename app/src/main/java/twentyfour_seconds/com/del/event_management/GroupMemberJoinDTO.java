@@ -4,7 +4,8 @@ public class GroupMemberJoinDTO {
 
     String uid;
 
-    public GroupMemberJoinDTO(){
+    public GroupMemberJoinDTO(String uid){
+        this.uid = uid;
     }
 
     public String getUid() {

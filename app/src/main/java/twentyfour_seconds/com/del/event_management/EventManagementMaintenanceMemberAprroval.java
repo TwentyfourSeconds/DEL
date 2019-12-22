@@ -20,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.xwray.groupie.GroupAdapter;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.chat.ChatActivity;
@@ -301,10 +303,9 @@ public class EventManagementMaintenanceMemberAprroval extends CustomActivity {
     private void FirebaseAprrovalToJoin(final GroupMembersDTO groupMembersDTO){
 
         //参加者のほうに登録する
-        DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("/Group/" + 42 + "/GroupMembers");
+        final DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("/Group/" + 42 + "/GroupMembers").push();
 
-        GroupMemberJoinDTO groupMemberJoinDTO = new GroupMemberJoinDTO();
-        groupMemberJoinDTO.setUid(groupMembersDTO.getUid());
+        GroupMemberJoinDTO groupMemberJoinDTO = new GroupMemberJoinDTO(groupMembersDTO.getUid());
 
 //        Map<String, Object> insertUserId = new HashMap<>();
 //        insertUserId.put("uid", groupMembersDTO.getUid());
@@ -316,11 +317,20 @@ public class EventManagementMaintenanceMemberAprroval extends CustomActivity {
                 Log.d("EventManagementMemberApproval", "参加者登録処理完了" + groupMembersDTO.getUid());
 
                 //参加希望者から削除する
-                DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference("/Group/" + 42 + "/eventAttendees").child(groupMembersDTO.getUid());
-                ref2.removeValue(new DatabaseReference.CompletionListener() {
+                DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference("/Group/" + 42 + "/eventAttendees");
+                //削除する対象のuidを選択
+                Query getApprovalUserQuery = ref2.orderByChild("uid").equalTo(groupMembersDTO.getUid());
+
+                getApprovalUserQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                        Log.d("EventManagementMemberApproval", "参加者仮登録削除完了" + groupMembersDTO.getUid());
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot approvalDataSnapshot : dataSnapshot.getChildren()){
+                            approvalDataSnapshot.getRef().removeValue();
+                        }
+                        Log.d("EventManagementMemberApproval", "参加者削除処理完了");
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
                 });
