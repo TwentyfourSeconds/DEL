@@ -23,7 +23,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+import com.xwray.groupie.Group;
 import com.xwray.groupie.GroupAdapter;
+import com.xwray.groupie.GroupDataObserver;
 import com.xwray.groupie.Item;
 import com.xwray.groupie.OnItemClickListener;
 import com.xwray.groupie.ViewHolder;
@@ -56,6 +58,8 @@ public class EventManagementMaintenanceMemberAprroval extends CustomActivity {
      */
     private List<GroupMembersDTO> groupMembersDTOList;
 
+    private Group group;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,10 @@ public class EventManagementMaintenanceMemberAprroval extends CustomActivity {
             adapter = new GroupAdapter<ChatActivity.ContentViewHolder>();
 
         //*参加者一覧に必要な情報を取得する
+
+        //ここに、取得したデータを格納
+        groupMembersDTOList = new ArrayList<>();
+
         firebaseDataGet();
 
         //--------------------------------LinearLayout の調整-----------------------------------------------//
@@ -143,7 +151,6 @@ public class EventManagementMaintenanceMemberAprroval extends CustomActivity {
 
                         Log.d("Username", currentUser.getUsername());
                         //後で、情報を取得できるように、リスト型の変数に値をストックしておく
-                        groupMembersDTOList = new ArrayList<>();
                         groupMembersDTOList.add(groupMembersDTO);
 
                         EventManagementMaintenanceMemberAprroval.EventManagementMemberApprovalAdapter eventManagementMemberApprovalAdapter = new EventManagementMaintenanceMemberAprroval.EventManagementMemberApprovalAdapter(groupMembersDTO);
@@ -214,6 +221,16 @@ public class EventManagementMaintenanceMemberAprroval extends CustomActivity {
                      Log.i("position", groupMembersDTO.getUsername() + "");
                      //承認を押下時、参加予定者から、参加者へFirebaseを変更する
                      FirebaseAprrovalToJoin(groupMembersDTO);
+                     //データを削除する
+                     groupMembersDTOList.remove(position);
+//                     notifyItemRemoved(position);
+
+//                     adapter.notifyDataSetChanged();
+                     //画面のアニメーションを起動させる
+                     adapter.removeGroup(position);
+                     adapter.notifyItemChanged(position);
+//                     adapter.removeGroup(adapter.getItemCount()-1);
+//                     adapter.notifyItemRangeRemoved(position, ret);
                  }
              });
 
@@ -233,7 +250,8 @@ public class EventManagementMaintenanceMemberAprroval extends CustomActivity {
             });
 
             //ユーザー画像を押下時
-            userImageCheck.setOnClickListener(new View.OnClickListener() {
+            userImageCheck.setOnClickListener(
+                    new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
@@ -246,10 +264,6 @@ public class EventManagementMaintenanceMemberAprroval extends CustomActivity {
                     FirebaseAprrovalUserProfile(groupMembersDTO);
                 }
             });
-
-
-
-
 
               return contentViewHolder;
 
@@ -271,6 +285,7 @@ public class EventManagementMaintenanceMemberAprroval extends CustomActivity {
             return R.layout.event_management_maintenance_group_member_approval_row;
         }
 
+
     }
 
     public class ContentViewHolder extends ViewHolder {
@@ -287,6 +302,8 @@ public class EventManagementMaintenanceMemberAprroval extends CustomActivity {
 
         }
     }
+
+
 
     //画像を押下時、ユーザープロフィールへと飛ぶ
     private void FirebaseAprrovalUserProfile(GroupMembersDTO groupMembersDTO){
@@ -336,22 +353,10 @@ public class EventManagementMaintenanceMemberAprroval extends CustomActivity {
                 });
             }
         });
-
-
-
-
-
-
-
-
-
-
-
     }
 
     //拒否を押下時、参加予定者から、名前を消す
     private void FirebaseAprrovalToDeny(GroupMembersDTO groupMembersDTO){
-
     }
 
 
