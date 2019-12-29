@@ -618,7 +618,8 @@ public class EventManagementMaintenance extends CustomActivity {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(getApplicationContext(), EventManagementMaintenanceEventStatusChange.class);
-            //取得したイベントステータス表示を引き継ぐ
+            //取得したid、イベントステータス表示を引き継ぐ
+            intent.putExtra("event_uid", eventInfoDTO.getEventId());
             intent.putExtra("event_status", eventInfoDTO.getEventStatus());
             startActivity(intent);
         }

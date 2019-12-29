@@ -32,6 +32,7 @@ public class Common {
     public static final String CREATE_EVENT_URL = STR_MYSQL_URL + ":4050/create_event";
     public static final String UPDATE_EVENT_URL = STR_MYSQL_URL + ":4051/update_event";
     public static final String CREATE_NEW_EVENT_SEARCH_URL = STR_MYSQL_URL + ":4052/search_create_event";
+    public static final String EVENT_STATUS_UPDATE_URL = STR_MYSQL_URL + ":4053/event_status_update";
 
     public static final String[] REGION_ARY = { "北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県",
             "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県", "新潟県", "富山県",
