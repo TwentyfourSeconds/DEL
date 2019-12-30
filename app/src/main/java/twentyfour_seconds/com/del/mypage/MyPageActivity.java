@@ -20,6 +20,7 @@ import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.chat.UserDTO;
 import twentyfour_seconds.com.del.notification.AddTopicTest;
 import twentyfour_seconds.com.del.profile_registration.ProfileRegistrationMainA;
+import twentyfour_seconds.com.del.trash.masujima_test;
 import twentyfour_seconds.com.del.util.Common;
 import twentyfour_seconds.com.del.util.CustomActivity;
 
@@ -122,6 +123,13 @@ public class MyPageActivity extends CustomActivity {
         MyPageActivity.addTopicButtonClickListener addTopicButtonClickListener = new MyPageActivity.addTopicButtonClickListener();
         addbutton.setOnClickListener(addTopicButtonClickListener);
 
+        //終わったら削除すること
+        Button masujibutton = findViewById(R.id.masujibutton);
+        MyPageActivity.masujiButtonClickListener masujiButtonClickListener = new MyPageActivity.masujiButtonClickListener();
+        masujibutton.setOnClickListener(masujiButtonClickListener);
+
+
+
     }
 
     //プロフィールを編集するボタンを押下時の動き
@@ -140,6 +148,17 @@ public class MyPageActivity extends CustomActivity {
             startActivity(AddTopicTest);
         }
     }
+
+
+    public class masujiButtonClickListener implements View.OnClickListener{
+        public void onClick(View view){
+            Intent masujiTest = new Intent(getApplicationContext(), masujima_test.class);
+            startActivity(masujiTest);
+        }
+    }
+
+
+
 
 
 }

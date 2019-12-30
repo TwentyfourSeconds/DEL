@@ -250,4 +250,13 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutA"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/masujibutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="masujiButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/addTopicButton" />
+
 </android.support.constraint.ConstraintLayout>

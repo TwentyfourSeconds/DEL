@@ -46,9 +46,11 @@
         <!--<colorPrimary：actionbarの色。今回は削除している>-->
         <item name="colorPrimary">@color/colorPrimary</item>
         <!--<colorPrimaryDark：ステータスバー（一番上の電源系）の色。黒>-->
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <item name="colorPrimaryDark">@color/like_booking_com2_saiyou</item>
         <!--<colorAccent：入力やタブのバーの色（一番上の電源系）の色。黒>-->
-        <item name="colorAccent">@color/colorAccent</item>
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
+        <item name="colorAccent">@color/like_booking_com2_saiyou</item>
         <!-- ToolBarのタイトルテキスト色 -->
         <!--ここでtoolbarの色を指定すると、すべてのtoolbarの色が変わる-->
         <!--<item name="android:textColorPrimary">@color/white</item>-->

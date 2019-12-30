@@ -4,5 +4,10 @@
     <color name="colorPrimaryDark">#e56200</color>
     <color name="colorAccent">#A50540</color>
     <color name="mian_color">#e56200</color>
+    <color name="dodgerblue">#1e90ff</color>
+    <color name="mediumblue">#0000cd</color>
+    <color name="sample1">#ED0000CD</color>
+    <color name="like_booking_com">#060A8D</color>
+    <color name="like_booking_com2_saiyou">#ED060A8D</color>
     <color name="white">#ffffff</color>
 </resources>
