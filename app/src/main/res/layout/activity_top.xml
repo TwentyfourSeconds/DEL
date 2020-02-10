@@ -10,38 +10,39 @@
     <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/toolbar_activityTop"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/like_booking_com2_saiyou"
+        android:layout_height="56dp"
+        android:background="#0D51FF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Toolbarに表示する文字(例) -->
         <TextView
             android:id="@+id/toolbar_activityTop_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:text="DEL"
             android:textColor="@color/white"
-            android:textSize="18sp"/>
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="16dp" />
 
     </androidx.appcompat.widget.Toolbar>
 
+    <!--android:gravity="center"：中央に寄せる-->
+    <!--https://tamomoru.com/dev_blog/article/44：toolbarの右端に余白ができるわけ-->
 
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView4">
-        <include android:id="@+id/tab1" layout="@layout/menu_bar" />
+        <include android:id="@+id/tab1" layout="@layout/del_template_menubar" />
 
     </LinearLayout>
 
@@ -65,40 +66,36 @@
                 android:id="@+id/textView21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
                 android:fontFamily="casual"
-                android:text="行きたい脱出ゲームから探す"
+                android:text="イベント名から探す"
                 android:textColor="#000000"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/swipeView" />
 
             <Button
                 android:id="@+id/searchbutton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:text="グループを検索"
-                app:layout_constraintStart_toEndOf="@+id/searchword"
+                android:layout_marginEnd="24dp"
+                android:text="検索"
+                app:layout_constraintBottom_toBottomOf="@+id/searchword"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/searchword" />
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="編集部イチオシの脱出ゲーム"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/searchword" />
 
             <EditText
                 android:id="@+id/searchword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/topactivity_searchword_viewflame"
                 android:ems="10"
                 android:inputType="textPersonName"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/searchbutton"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
@@ -106,13 +103,13 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
                 android:text="場所から探す"
                 android:textColor="#000000"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/swipeView" />
+                app:layout_constraintTop_toBottomOf="@+id/searchword" />
 
             <LinearLayout
                 android:id="@+id/linearLayout4"
@@ -324,11 +321,10 @@
             <twentyfour_seconds.com.del.top_page.SwipeView
                 android:id="@+id/swipeView"
                 android:layout_width="wrap_content"
-                android:layout_height="207dp"
-                android:layout_marginTop="8dp"
+                android:layout_height="120dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView12">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
                     android:layout_width="wrap_content"

@@ -9,5 +9,15 @@
     <color name="sample1">#ED0000CD</color>
     <color name="like_booking_com">#060A8D</color>
     <color name="like_booking_com2_saiyou">#ED060A8D</color>
+
+<!--最新の色一覧-->
+    <color name="colorToolbar">#0D51FF</color>
+    <color name="colorPrimaryRed">#B40525</color>
+    <color name="colorPrimaryBlue">#1B17DF</color>
+    <color name="colorPrimaryGray">#878787</color>
+    <color name="colorPrimaryBackground">#F1F1F1</color>
+    <color name="colorPrimaryBlack">#000000</color>
     <color name="white">#ffffff</color>
+    <color name="colorAppBar">#173FD0</color>
+
 </resources>

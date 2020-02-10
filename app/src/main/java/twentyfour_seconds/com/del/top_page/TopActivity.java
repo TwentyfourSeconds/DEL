@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import twentyfour_seconds.com.del.chat.UserDTO;
 import twentyfour_seconds.com.del.create_user.RegisterActivity;
 import twentyfour_seconds.com.del.util.Common;
@@ -86,17 +87,17 @@ public class TopActivity extends CustomActivity {
         img14.setLayoutParams(params14);
 
         //下部メニューボタンを押下したときの処理を記載
-        ImageView menu_bar_home = findViewById(R.id.tab1).findViewById(R.id.menu_bar_home);
-        ImageView menu_bar_event = findViewById(R.id.tab1).findViewById(R.id.menu_bar_event);
-        ImageView menu_bar_chat = findViewById(R.id.tab1).findViewById(R.id.menu_bar_chat);
-        ImageView menu_bar_mypage = findViewById(R.id.tab1).findViewById(R.id.menu_bar_mypage);
+        ConstraintLayout menu_bar_home = findViewById(R.id.menu_bar_home);
+        ConstraintLayout menu_bar_event = findViewById(R.id.menu_bar_event);
+        ConstraintLayout menu_bar_event_join = findViewById(R.id.menu_bar_event_join);
+        ConstraintLayout menu_bar_profile = findViewById(R.id.menu_bar_profile);
 
         menuClickListener menuClickListener = new menuClickListener();
 
         menu_bar_home.setOnClickListener(menuClickListener);
         menu_bar_event.setOnClickListener(menuClickListener);
-        menu_bar_chat.setOnClickListener(menuClickListener);
-        menu_bar_mypage.setOnClickListener(menuClickListener);
+        menu_bar_event_join.setOnClickListener(menuClickListener);
+        menu_bar_profile.setOnClickListener(menuClickListener);
 
         //グループを検索ボタンを押下時、リクルートメントリストに遷移、データベースを読み込み、
         //一覧に候補を出力する

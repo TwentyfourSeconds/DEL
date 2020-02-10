@@ -34,12 +34,12 @@ public class CustomActivity extends AppCompatActivity {
                     Intent intentEvent = new Intent(getApplicationContext(), EventEntry.class);
                     startActivity(intentEvent);
                     break;
-                case R.id.menu_bar_chat:
+                case R.id.menu_bar_event_join:
                     //チャット画面へと飛ぶ処理
                     Intent intentchat = new Intent(getApplicationContext(), EventManagementList.class);
                     startActivity(intentchat);
                     break;
-                case R.id.menu_bar_mypage:
+                case R.id.menu_bar_profile:
                     //マイページ画面へと飛ぶ処理
                     Intent intentMypage = new Intent(getApplicationContext(), MyPageActivity.class);
                     intentMypage.putExtra("id", "1");

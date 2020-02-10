@@ -35,13 +35,13 @@
         <!-- [START fcm_default_channel] -->
 
         <!--テスト-->
-        <activity android:name=".util.DelTemplate"
-            android:windowSoftInputMode="adjustPan|adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <!--<activity android:name=".util.DelTemplate"-->
+            <!--android:windowSoftInputMode="adjustPan|adjustResize">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
         <!--テスト終了-->
 
         <activity android:name=".top_page.TopActivity"
