@@ -74,7 +74,7 @@ public class EventManagementMaintenanceMemberAprroval extends CustomActivity {
         //--------------------------------LinearLayout の調整-----------------------------------------------//
         RecyclerView recyclerView = findViewById(R.id.member_approval_list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL); // ここで縦方向に設定
+        linearLayoutManager.setOrientation(RecyclerView.VERTICAL); // ここで縦方向に設定
         // リサイクラービューにレイアウトマネージャーを設定
         recyclerView.setLayoutManager(linearLayoutManager);
         // アダプターオブジェクトをセット
