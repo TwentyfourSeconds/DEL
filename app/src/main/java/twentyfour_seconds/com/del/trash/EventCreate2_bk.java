@@ -2,8 +2,8 @@ package twentyfour_seconds.com.del.trash;
 
 import android.graphics.Point;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.constraint.ConstraintSet;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;

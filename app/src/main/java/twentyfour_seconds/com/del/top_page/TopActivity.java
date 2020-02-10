@@ -3,8 +3,8 @@ package twentyfour_seconds.com.del.top_page;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
@@ -53,6 +53,11 @@ public class TopActivity extends CustomActivity {
         Toolbar toolbar_activityTop = (Toolbar) findViewById(R.id.toolbar_activityTop);
         toolbar_activityTop.setTitle("");
         setSupportActionBar(toolbar_activityTop);
+        //左にアイコンを設定する（下でリスナーを設定する）
+        toolbar_activityTop.setNavigationIcon(R.drawable.bell3);
+        View.OnClickListener toolbarClickListner = new toolbarClickListner();
+        toolbar_activityTop.setNavigationOnClickListener(toolbarClickListner);
+
 
         //横スクロールに入るimageviewの横幅をプログラムより指定
         WindowManager wm = (WindowManager)getSystemService(WINDOW_SERVICE);
@@ -244,6 +249,16 @@ public class TopActivity extends CustomActivity {
             startActivity(intentMypage);
         }
     }
+
+    //
+    public class toolbarClickListner implements View.OnClickListener{
+        @Override
+        public void onClick(View v) {
+            Log.d("top_activity","start");
+        }
+
+    }
+
 
 
 

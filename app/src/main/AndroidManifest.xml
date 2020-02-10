@@ -11,11 +11,15 @@
 
     <application
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!--usesCleartextTrafficはいつか必ず外す。api28以上はhttp通信ははじくようになっているため、臨時でこれをつけている。-->
+        <!--https://qiita.com/superman9387/items/7441998138a8509537a4-->
+
         <!-- [START fcm_default_icon] -->
         <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
              See README(https://goo.gl/l4GJaQ) for more. -->
@@ -29,6 +33,17 @@
             android:resource="@color/colorAccent" />
         <!-- [END fcm_default_icon] -->
         <!-- [START fcm_default_channel] -->
+
+        <!--テスト-->
+        <activity android:name=".util.DelTemplate"
+            android:windowSoftInputMode="adjustPan|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!--テスト終了-->
+
         <activity android:name=".top_page.TopActivity"
             android:windowSoftInputMode="adjustPan|adjustResize">
             <intent-filter>

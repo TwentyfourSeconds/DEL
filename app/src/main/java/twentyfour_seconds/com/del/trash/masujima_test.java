@@ -1,9 +1,7 @@
 package twentyfour_seconds.com.del.trash;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-
-import com.google.firebase.database.DatabaseReference;
+import androidx.appcompat.app.AppCompatActivity;
 
 import twentyfour_seconds.com.del.R;
 
@@ -14,5 +12,7 @@ public class masujima_test extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.masujima_test);
+
+
     }
 }

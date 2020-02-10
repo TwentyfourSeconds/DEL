@@ -2,12 +2,11 @@ package twentyfour_seconds.com.del.util;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import twentyfour_seconds.com.del.event_entry.EventEntry;
 
-import twentyfour_seconds.com.del.event_management.EventManagementMaintenance;
 import twentyfour_seconds.com.del.event_management.EventManagementList;
 import twentyfour_seconds.com.del.mypage.MyPageActivity;
 import twentyfour_seconds.com.del.R;

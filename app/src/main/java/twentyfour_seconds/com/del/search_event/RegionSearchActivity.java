@@ -1,12 +1,10 @@
 package twentyfour_seconds.com.del.search_event;
 
-import android.app.AppComponentFactory;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.constraint.ConstraintSet;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,7 +23,6 @@ import java.util.Map;
 
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.chat.UserDTO;
-import twentyfour_seconds.com.del.create_user.RegisterActivity;
 import twentyfour_seconds.com.del.top_page.TopActivity;
 import twentyfour_seconds.com.del.util.Common;
 

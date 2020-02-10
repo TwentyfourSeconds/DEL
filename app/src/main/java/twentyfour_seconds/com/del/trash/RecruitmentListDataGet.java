@@ -2,14 +2,13 @@ package twentyfour_seconds.com.del.trash;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.AbsListView;
 
 import java.util.concurrent.CountDownLatch;
 
 import twentyfour_seconds.com.del.R;
-import twentyfour_seconds.com.del.trash.event_info_event_name_search;
 import twentyfour_seconds.com.del.util.Common;
 
 public class RecruitmentListDataGet extends AppCompatActivity implements AbsListView.OnScrollListener {

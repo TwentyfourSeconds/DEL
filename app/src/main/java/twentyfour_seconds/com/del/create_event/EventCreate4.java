@@ -3,11 +3,10 @@ package twentyfour_seconds.com.del.create_event;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.flexbox.FlexDirection;
@@ -23,7 +22,6 @@ import java.util.concurrent.CountDownLatch;
 
 import twentyfour_seconds.com.del.DTO.ViewItemDTO;
 import twentyfour_seconds.com.del.R;
-import twentyfour_seconds.com.del.chat.ChatMessageDTO;
 import twentyfour_seconds.com.del.util.Common;
 import twentyfour_seconds.com.del.util.ViewAdapterReadOnly;
 
