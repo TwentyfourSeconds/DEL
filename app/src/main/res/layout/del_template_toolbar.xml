@@ -30,19 +30,4 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <include
-            android:id="@+id/tab2"
-            layout="@layout/del_template_menubar" />
-
-    </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
