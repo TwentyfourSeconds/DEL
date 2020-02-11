@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,6 +36,7 @@ import twentyfour_seconds.com.del.chat.UserDTO;
 import twentyfour_seconds.com.del.util.Common;
 import twentyfour_seconds.com.del.util.CustomActivity;
 import twentyfour_seconds.com.del.R;
+import twentyfour_seconds.com.del.util.ViewAdapterImageReadOnly;
 import twentyfour_seconds.com.del.util.ViewAdapterReadOnly;
 import twentyfour_seconds.com.del.DTO.ViewItemDTO;
 
@@ -55,7 +57,7 @@ public class RecruitmentDetailActivity extends CustomActivity {
     private TextView date;
     private TextView comment;
     private TextView area;
-    private TextView location;
+    private TextView entryTime;
     private TextView deadline;
     private TextView member;
     private Button entry;
@@ -166,8 +168,8 @@ public class RecruitmentDetailActivity extends CustomActivity {
         date = findViewById(R.id.EventDay);
         comment = findViewById(R.id.comment);
         area = findViewById(R.id.large_area);
-        location = findViewById(R.id.location);
-        member = findViewById(R.id.member);
+        entryTime = findViewById(R.id.entryTime);
+//        member = findViewById(R.id.member);
         deadline = findViewById(R.id.eventstatus);
         String eventTag = eventInfoDTO.getEventTag();
         entry = findViewById(R.id.entry);
@@ -206,6 +208,60 @@ public class RecruitmentDetailActivity extends CustomActivity {
             }
         }
 
+
+        //********************************************* 参加者 start *********************************************
+
+        //*取得してきたデータをタグ形式で出力する*//
+        RecyclerView recyclerView1 = (RecyclerView) findViewById(R.id.member);
+
+        //--------------------------------flexBox Layout の調整-----------------------------------------------//
+        // FlexboxLayoutManangerを定義する（レイアウトマネージャーは、リストデータの見え方を決める。※これがリストビューとは異なるリサイクラービューのいいところ）
+        FlexboxLayoutManager flexboxLayoutManager1 = new FlexboxLayoutManager(getApplicationContext());
+        //どっち側に伸ばすか.
+        flexboxLayoutManager1.setFlexDirection(FlexDirection.ROW);
+        // 子Viewの並び方向へのViewの張り付き位置
+        flexboxLayoutManager1.setJustifyContent(JustifyContent.FLEX_START);
+        // リサイクラービューにレイアウトマネージャーを設定
+        recyclerView1.setLayoutManager(flexboxLayoutManager1);
+
+        //--------------------------------viewAdapter の調整-----------------------------------------------//
+
+        final List<ViewItemDTO> memberList = new ArrayList<ViewItemDTO>();
+
+        ViewItemDTO viewItemDTO1 = new ViewItemDTO();
+        viewItemDTO1.setText("" + R.drawable.business);
+        memberList.add(viewItemDTO1);
+        ViewItemDTO viewItemDTO2 = new ViewItemDTO();
+        viewItemDTO2.setText("" + R.drawable.business);
+        memberList.add(viewItemDTO2);
+//        //Firebaseより、写真を取得し、画面に表示
+//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/users/" + Common.uid);
+//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                UserDTO user = dataSnapshot.getValue(UserDTO.class);
+//
+//                ViewItemDTO viewItemDTO1 = new ViewItemDTO();
+//                viewItemDTO1.setText(user.getProfileImageUrl());
+//                memberList.add(viewItemDTO1);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+
+        // アダプターオブジェクトを生成して、下のメソッドで設定した文字列を追加
+        ViewAdapterImageReadOnly viewAdapterReadOnly1 = new ViewAdapterImageReadOnly(memberList);
+        // アダプターオブジェクトをセット
+        recyclerView1.setAdapter(viewAdapterReadOnly1);
+
+        //********************************************* 参加者 end *********************************************
+
+
+
+        //********************************************* タグ start *********************************************
         //*取得してきたデータをタグ形式で出力する*//
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.event_tag);
 
@@ -226,6 +282,10 @@ public class RecruitmentDetailActivity extends CustomActivity {
         // アダプターオブジェクトをセット
         recyclerView.setAdapter(viewAdapterReadOnly);
 
+        //********************************************* タグ end *********************************************
+
+
+
         Log.d("eventInfo", eventInfoDTO.getEventName());
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("/users/" + eventInfoDTO.getEventerUid());
@@ -234,7 +294,7 @@ public class RecruitmentDetailActivity extends CustomActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d("use_name", dataSnapshot.getKey());
                 UserDTO uid = dataSnapshot.getValue(UserDTO.class);
-                leader.setText("募集者：" + uid.getUsername());
+//                leader.setText("募集者：" + uid.getUsername());
             }
 
             @Override
@@ -243,14 +303,14 @@ public class RecruitmentDetailActivity extends CustomActivity {
             }
         });
 
-        title.setText(eventInfoDTO.getTitle());
-        date.setText("日程：" + eventInfoDTO.getEventDay());
-        comment.setText(eventInfoDTO.getComment());
+        title.setText(eventInfoDTO.getEventName());   //タイトル
+        date.setText(eventInfoDTO.getEventDay()); //日程
+        comment.setText(eventInfoDTO.getComment()); //コメント
         comment.setFocusable(false);
-        area.setText("開催地：" + eventInfoDTO.getLargeArea());
-        location.setText("開催場所：" + eventInfoDTO.getSmallArea());
-        deadline.setText("掲載期限：" + eventInfoDTO.getClosedDay());
-        member.setText("募集人数：" + eventInfoDTO.getMember());
+        area.setText(eventInfoDTO.getLargeArea()); //開催場所
+        entryTime.setText(eventInfoDTO.getSmallArea()); //開催時間
+//        deadline.setText("掲載期限：" + eventInfoDTO.getClosedDay());
+//        member.setText("募集人数：" + eventInfoDTO.getMember());
 
         DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference("/Group/" + id + "/eventAttendees");
         ref2.orderByChild("uid").equalTo(Common.uid).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -298,12 +358,17 @@ public class RecruitmentDetailActivity extends CustomActivity {
             }
         });
 
+//        //下部メニューボタンを押下したときの処理を記載
+//        ImageView menu_bar_home = findViewById(R.id.menu_bar).findViewById(R.id.menu_bar_home);
+//        ImageView menu_bar_event = findViewById(R.id.menu_bar).findViewById(R.id.menu_bar_event);
+//        ImageView menu_bar_chat = findViewById(R.id.menu_bar).findViewById(R.id.menu_bar_chat);
+//        ImageView menu_bar_mypage = findViewById(R.id.menu_bar).findViewById(R.id.menu_bar_mypage);
 
         //下部メニューボタンを押下したときの処理を記載
-        ImageView menu_bar_home = findViewById(R.id.menu_bar).findViewById(R.id.menu_bar_home);
-        ImageView menu_bar_event = findViewById(R.id.menu_bar).findViewById(R.id.menu_bar_event);
-        ImageView menu_bar_chat = findViewById(R.id.menu_bar).findViewById(R.id.menu_bar_chat);
-        ImageView menu_bar_mypage = findViewById(R.id.menu_bar).findViewById(R.id.menu_bar_mypage);
+        ImageView menu_bar_home = findViewById(R.id.menu_bar_home);
+        ImageView menu_bar_event = findViewById(R.id.menu_bar_event);
+        ImageView menu_bar_chat = findViewById(R.id.menu_bar_chat);
+        ImageView menu_bar_mypage = findViewById(R.id.menu_bar_mypage);
 
         menuClickListener menuClickListener = new menuClickListener();
 

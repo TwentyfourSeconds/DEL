@@ -52,7 +52,8 @@ public class ViewAdapter extends RecyclerView.Adapter<RecyclerListViewHolder> { 
         final TextView textItem = (TextView)itemView.findViewById(R.id.inviteTag);
 
         //ビューホルダーオブジェクトを生成（一番下で変数をreturnすることで、ViewHolderに処理が飛ぶ）
-        final RecyclerListViewHolder ret = new RecyclerListViewHolder(itemView);
+        final RecyclerListViewHolder ret = new RecyclerListViewHolder(textItem);
+//        final RecyclerListViewHolder ret = new RecyclerListViewHolder(itemView);
 
         //削除のタッチ処理を記載
         //Activityの呼び出しかた：https://calculus-app.com/blog/develop_android/android_ui/306

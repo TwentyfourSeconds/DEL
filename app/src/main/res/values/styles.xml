@@ -61,4 +61,42 @@
         <!--<item name="android:windowContentOverlay">@null</item>-->
     </style>
 
+    <!-- text1 -->
+    <style name="text_style1">
+        <item name="android:background">@color/colorPrimaryRed</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textSize">9sp</item>
+    </style>
+
+    <!-- text2 -->
+    <style name="text_style2">
+        <item name="android:textColor">@color/colorPrimaryBlack</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <!-- tag1(red) -->
+    <style name="tag_style1" parent="text_style1">
+        <item name="android:background">@drawable/red_corner_radius_6</item>
+    </style>
+
+    <!-- button1(red) -->
+    <style name="button_style1" parent="text_style1">
+        <item name="android:textSize">12sp</item>
+        <item name="android:background">@drawable/red_corner_radius_16</item>
+<!--        <item name="android:textSize">24sp</item>-->
+    </style>
+
+    <!-- image1(circle) -->
+    <style name="image_circle1">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
 </resources>
