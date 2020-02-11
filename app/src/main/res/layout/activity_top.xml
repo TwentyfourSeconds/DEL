@@ -60,13 +60,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryBackground">
 
             <TextView
                 android:id="@+id/textView21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:fontFamily="casual"
                 android:text="イベント名から探す"
@@ -77,11 +78,13 @@
 
             <Button
                 android:id="@+id/searchbutton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
                 android:layout_marginEnd="24dp"
+                android:background="#1474E5"
                 android:text="検索"
-                app:layout_constraintBottom_toBottomOf="@+id/searchword"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/searchword" />
 
@@ -89,11 +92,13 @@
                 android:id="@+id/searchword"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/topactivity_searchword_viewflame"
                 android:ems="10"
+                android:hint=" 行きたいイベントを探す"
                 android:inputType="textPersonName"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toStartOf="@+id/searchbutton"
                 app:layout_constraintStart_toStartOf="parent"
@@ -103,8 +108,8 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
                 android:text="場所から探す"
                 android:textColor="#000000"
                 android:textSize="14sp"
@@ -115,207 +120,377 @@
                 android:id="@+id/linearLayout4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView">
 
-                <ImageView
-                    android:id="@+id/hole_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/hokkaido" />
 
-                <ImageView
-                    android:id="@+id/imageView7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/tohoku" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1">
 
-                <ImageView
-                    android:id="@+id/imageView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/kantou" />
-            </LinearLayout>
+                    <ImageView
+                        android:id="@+id/hole_type"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/frame_3" />
 
-            <LinearLayout
-                android:id="@+id/linearLayout5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+                    <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="初心者歓迎"
+                        app:layout_constraintStart_toStartOf="@+id/hole_type"
+                        app:layout_constraintTop_toBottomOf="@+id/hole_type" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/textView23"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="北海道エリアから探す"
-                    android:textSize="10sp" />
 
-                <TextView
-                    android:id="@+id/textView24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="東北エリアから探す"
-                    android:textSize="10sp" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1">
 
-                <TextView
-                    android:id="@+id/textView25"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="関東エリアから探す"
-                    android:textSize="10sp" />
+                    <ImageView
+                        android:id="@+id/imageView30"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/frame_3" />
+
+                    <TextView
+                        android:id="@+id/textView90"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="初心者歓迎"
+                        app:layout_constraintStart_toStartOf="@+id/imageView30"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView30" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/imageView31"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/frame_3" />
+
+                    <TextView
+                        android:id="@+id/textView91"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="初心者歓迎"
+                        app:layout_constraintStart_toStartOf="@+id/imageView31"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView31" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linearLayout6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="8dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
-                <ImageView
-                    android:id="@+id/imageView17"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/tyuubu" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1">
 
-                <ImageView
-                    android:id="@+id/imageView18"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/kinki" />
+                    <ImageView
+                        android:id="@+id/imageView32"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/frame_3" />
 
-                <ImageView
-                    android:id="@+id/imageView19"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/cyugoku" />
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/textView92"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="初心者歓迎"
+                        app:layout_constraintStart_toStartOf="@+id/imageView32"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView32" />
 
-            <LinearLayout
-                android:id="@+id/linearLayout7"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/textView26"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="中部エリアから探す"
-                    android:textSize="10sp" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1">
 
-                <TextView
-                    android:id="@+id/textView27"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="中部エリアから探す"
-                    android:textSize="10sp" />
+                    <ImageView
+                        android:id="@+id/imageView33"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/frame_3" />
 
-                <TextView
-                    android:id="@+id/textView28"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="中国エリアから探す"
-                    android:textSize="10sp" />
+                    <TextView
+                        android:id="@+id/textView93"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="初心者歓迎"
+                        app:layout_constraintStart_toStartOf="@+id/imageView33"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView33" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/imageView34"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/frame_3" />
+
+                    <TextView
+                        android:id="@+id/textView94"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="初心者歓迎"
+                        app:layout_constraintStart_toStartOf="@+id/imageView34"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView34" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linearLayout9"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="8dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
-                <ImageView
-                    android:id="@+id/imageView20"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/sikoku" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1">
 
-                <ImageView
-                    android:id="@+id/imageView21"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/kyuusyuu" />
+                    <ImageView
+                        android:id="@+id/imageView37"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/frame_3" />
 
-                <ImageView
-                    android:id="@+id/imageView22"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/okinawa" />
+                    <TextView
+                        android:id="@+id/textView97"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="初心者歓迎"
+                        app:layout_constraintStart_toStartOf="@+id/imageView37"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView37" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/imageView35"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/frame_3" />
+
+                    <TextView
+                        android:id="@+id/textView95"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="初心者歓迎"
+                        app:layout_constraintStart_toStartOf="@+id/imageView35"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView35" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/imageView36"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/frame_3" />
+
+                    <TextView
+                        android:id="@+id/textView96"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="初心者歓迎"
+                        app:layout_constraintStart_toStartOf="@+id/imageView36"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView36" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="8dp"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
 
-                <TextView
-                    android:id="@+id/textView29"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="四国エリアから探す"
-                    android:textSize="10sp" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1">
 
-                <TextView
-                    android:id="@+id/textView30"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="九州エリアから探す"
-                    android:textSize="10sp" />
+                    <ImageView
+                        android:id="@+id/imageView38"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/frame_3" />
 
-                <TextView
-                    android:id="@+id/textView31"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="沖縄エリアから探す"
-                    android:textSize="10sp" />
+                    <TextView
+                        android:id="@+id/textView98"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="初心者歓迎"
+                        app:layout_constraintStart_toStartOf="@+id/imageView38"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView38" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/imageView39"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/frame_3" />
+
+                    <TextView
+                        android:id="@+id/textView99"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="初心者歓迎"
+                        app:layout_constraintStart_toStartOf="@+id/imageView39"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView39" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/imageView40"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/frame_3" />
+
+                    <TextView
+                        android:id="@+id/textView100"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="初心者歓迎"
+                        app:layout_constraintStart_toStartOf="@+id/imageView40"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView40" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
             <twentyfour_seconds.com.del.top_page.SwipeView
@@ -360,6 +535,14 @@
 
                 </LinearLayout>
             </twentyfour_seconds.com.del.top_page.SwipeView>
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button"
+                tools:layout_editor_absoluteX="131dp"
+                tools:layout_editor_absoluteY="1258dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
