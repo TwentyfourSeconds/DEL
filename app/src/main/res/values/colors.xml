@@ -17,7 +17,7 @@
     <color name="colorPrimaryGray">#878787</color>
     <color name="colorPrimaryBackground">#F1F1F1</color>
     <color name="colorPrimaryBlack">#000000</color>
-    <color name="white">#ffffff</color>
+    <color name="white">#FFFFFF</color>
     <color name="colorAppBar">#173FD0</color>
 
 </resources>

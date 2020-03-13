@@ -12,13 +12,35 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutA"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_activityMypage">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_activityMypage"
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/mypageConstraint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="#D4D4D4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="#D4D4D4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profileImageView"
@@ -37,42 +59,38 @@
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="16dp"
-                android:text="自己紹介"
-                android:textColor="#100000"
-                android:textSize="26sp"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                android:layout_height="40dp"
+                android:background="#D4D4D4"
+                android:gravity="center_vertical"
+                android:text="　　自己紹介"
+                android:textColor="@color/colorPrimaryBlack"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profileEditButton"
-                app:layout_constraintVertical_chainStyle="spread_inside" />
+                app:layout_constraintTop_toBottomOf="@+id/view5" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="32dp"
-                android:text="基本情報"
-                android:textColor="#100000"
-                android:textSize="26sp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:background="#D4D4D4"
+                android:gravity="center_vertical"
+                android:text="　　基本情報"
+                android:textColor="@color/colorPrimaryBlack"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/profileEditButton" />
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
                 android:layout_marginTop="16dp"
-                android:text="現在地"
-                android:textColor="#100000"
-                android:textSize="14sp"
+                android:text="　　　現在地"
+                android:textColor="@color/colorPrimaryBlack"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toStartOf="@+id/location"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +100,6 @@
                 android:id="@+id/location"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="40dp"
                 android:clickable="true"
                 android:gravity="right"
@@ -90,27 +107,26 @@
                 android:textColor="#100000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView8"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                app:layout_constraintTop_toTopOf="@+id/textView8" />
 
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="8dp"
-                android:text="年齢"
-                android:textColor="#100000"
+                android:layout_marginTop="16dp"
+                android:text="　　　年齢"
+                android:textColor="@color/colorPrimaryBlack"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toStartOf="@+id/age_profile"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                app:layout_constraintTop_toBottomOf="@+id/view3" />
 
             <TextView
                 android:id="@+id/age_profile"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="40dp"
                 android:clickable="true"
                 android:gravity="right"
@@ -119,19 +135,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/textView10"
-                app:layout_constraintTop_toBottomOf="@+id/location" />
+                app:layout_constraintTop_toTopOf="@+id/textView10" />
 
             <TextView
                 android:id="@+id/textView16"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="8dp"
-                android:text="性別"
-                android:textColor="#100000"
-                app:layout_constraintEnd_toStartOf="@+id/gender"
+                android:layout_marginTop="16dp"
+                android:text="　　　性別"
+                android:textColor="@color/colorPrimaryBlack"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                app:layout_constraintTop_toBottomOf="@+id/view4" />
 
             <Button
                 android:id="@+id/profileEditButton"
@@ -140,9 +155,10 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="40dp"
-                android:background="@drawable/outflame_dcdcdc"
+                android:background="@drawable/red_corner_radius_6"
                 android:text="プロフィールを編集する"
-                android:textColor="#100000"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/userName" />
@@ -151,15 +167,15 @@
                 android:id="@+id/gender"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="40dp"
                 android:clickable="true"
                 android:gravity="right"
                 android:text="TextView"
                 android:textColor="#100000"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/textView16"
-                app:layout_constraintTop_toBottomOf="@+id/age_profile" />
+                app:layout_constraintTop_toTopOf="@+id/textView16" />
 
             <TextView
                 android:id="@+id/userName"
@@ -181,9 +197,6 @@
                 android:id="@+id/linearLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="40dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -200,6 +213,581 @@
                     android:textSize="14sp" />
 
             </LinearLayout>
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="#D4D4D4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:background="#D4D4D4"
+                android:gravity="center_vertical"
+                android:text="　　謎解きプロフィール"
+                android:textColor="@color/colorPrimaryBlack"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView24">
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/one_leftside_radius"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+                <Button
+                    android:id="@+id/button7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle" />
+
+                <Button
+                    android:id="@+id/button8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle" />
+
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle"
+                    app:layout_constraintStart_toEndOf="@+id/button3"
+                    app:layout_constraintTop_toTopOf="@+id/button3" />
+
+                <Button
+                    android:id="@+id/button5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle"
+                    app:layout_constraintStart_toEndOf="@+id/button4"
+                    app:layout_constraintTop_toTopOf="@+id/button4" />
+
+                <Button
+                    android:id="@+id/button6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/one_rightside_radius"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/button5"
+                    app:layout_constraintTop_toTopOf="@+id/button5" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="　　リアル脱出ゲーム経験はある？"
+                android:textColor="@color/colorPrimaryBlack"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="　　問題がわからないぞ…"
+                android:textColor="@color/colorPrimaryBlack"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView25">
+
+                <Button
+                    android:id="@+id/button14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/one_leftside_radius"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+                <Button
+                    android:id="@+id/button9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle" />
+
+                <Button
+                    android:id="@+id/button10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle" />
+
+                <Button
+                    android:id="@+id/button11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle"
+                    app:layout_constraintStart_toEndOf="@+id/button3"
+                    app:layout_constraintTop_toTopOf="@+id/button3" />
+
+                <Button
+                    android:id="@+id/button12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle"
+                    app:layout_constraintStart_toEndOf="@+id/button4"
+                    app:layout_constraintTop_toTopOf="@+id/button4" />
+
+                <Button
+                    android:id="@+id/button13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/one_rightside_radius"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/button5"
+                    app:layout_constraintTop_toTopOf="@+id/button5" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="未経験"
+                app:layout_constraintStart_toStartOf="@+id/linearLayout2"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+            <TextView
+                android:id="@+id/textView27"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="自信あり"
+                app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="助けを呼ぶかも"
+                app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="頑張って解きたい"
+                app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+            <TextView
+                android:id="@+id/question3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="　　ゲーム中、自分としては"
+                android:textColor="@color/colorPrimaryBlack"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+
+            <LinearLayout
+                android:id="@+id/question3Answer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/question3">
+
+                <Button
+                    android:id="@+id/question3Button1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/one_leftside_radius"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+                <Button
+                    android:id="@+id/question3Button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle" />
+
+                <Button
+                    android:id="@+id/question3Button3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle" />
+
+                <Button
+                    android:id="@+id/question3Button4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle"
+                    app:layout_constraintStart_toEndOf="@+id/button3"
+                    app:layout_constraintTop_toTopOf="@+id/button3" />
+
+                <Button
+                    android:id="@+id/question3Button5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle"
+                    app:layout_constraintStart_toEndOf="@+id/button4"
+                    app:layout_constraintTop_toTopOf="@+id/button4" />
+
+                <Button
+                    android:id="@+id/question3Button6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/one_rightside_radius"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/button5"
+                    app:layout_constraintTop_toTopOf="@+id/button5" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/question3Answer1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="引っ張ってほしい"
+                app:layout_constraintStart_toStartOf="@+id/question3Answer"
+                app:layout_constraintTop_toBottomOf="@+id/question3Answer" />
+
+            <TextView
+                android:id="@+id/question3Answer2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="引っ張っていくよ！"
+                app:layout_constraintEnd_toEndOf="@+id/question3Answer"
+                app:layout_constraintTop_toBottomOf="@+id/question3Answer" />
+
+
+            <TextView
+                android:id="@+id/question4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="　　自分は会話の時、どちらかというと"
+                android:textColor="@color/colorPrimaryBlack"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/question3Answer" />
+
+            <LinearLayout
+                android:id="@+id/question4Answer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/question4">
+
+                <Button
+                    android:id="@+id/question4Button1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/one_leftside_radius"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+                <Button
+                    android:id="@+id/question4Button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle" />
+
+                <Button
+                    android:id="@+id/question4Button3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle" />
+
+                <Button
+                    android:id="@+id/question4Button4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle"
+                    app:layout_constraintStart_toEndOf="@+id/button3"
+                    app:layout_constraintTop_toTopOf="@+id/button3" />
+
+                <Button
+                    android:id="@+id/question4Button5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle"
+                    app:layout_constraintStart_toEndOf="@+id/button4"
+                    app:layout_constraintTop_toTopOf="@+id/button4" />
+
+                <Button
+                    android:id="@+id/question4Button6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/one_rightside_radius"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/button5"
+                    app:layout_constraintTop_toTopOf="@+id/button5" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/question4Answer1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="話を聞くタイプ"
+                app:layout_constraintStart_toStartOf="@+id/question4Answer"
+                app:layout_constraintTop_toBottomOf="@+id/question4Answer" />
+
+            <TextView
+                android:id="@+id/question4Answer2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="話をするタイプ"
+                app:layout_constraintEnd_toEndOf="@+id/question4Answer"
+                app:layout_constraintTop_toBottomOf="@+id/question4Answer" />
+
+
+            <TextView
+                android:id="@+id/question5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="　　性格は…"
+                android:textColor="@color/colorPrimaryBlack"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/question4Answer" />
+
+            <LinearLayout
+                android:id="@+id/question5Answer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/question5">
+
+                <Button
+                    android:id="@+id/question5Button1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/one_leftside_radius"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+                <Button
+                    android:id="@+id/question5Button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle" />
+
+                <Button
+                    android:id="@+id/question5Button3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle" />
+
+                <Button
+                    android:id="@+id/question5Button4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle"
+                    app:layout_constraintStart_toEndOf="@+id/button3"
+                    app:layout_constraintTop_toTopOf="@+id/button3" />
+
+                <Button
+                    android:id="@+id/question5Button5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle"
+                    app:layout_constraintStart_toEndOf="@+id/button4"
+                    app:layout_constraintTop_toTopOf="@+id/button4" />
+
+                <Button
+                    android:id="@+id/question5Button6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/one_rightside_radius"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/button5"
+                    app:layout_constraintTop_toTopOf="@+id/button5" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/question5Answer1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="落ち着いて喋る "
+                app:layout_constraintStart_toStartOf="@+id/question5Answer"
+                app:layout_constraintTop_toBottomOf="@+id/question5Answer" />
+
+            <TextView
+                android:id="@+id/question5Answer2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="元気に喋る！ "
+                app:layout_constraintEnd_toEndOf="@+id/question5Answer"
+                app:layout_constraintTop_toBottomOf="@+id/question5Answer" />
+
+
+            <TextView
+                android:id="@+id/question6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="　　話す内容は…"
+                android:textColor="@color/colorPrimaryBlack"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/question5Answer" />
+
+            <LinearLayout
+                android:id="@+id/question6Answer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="80dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/question6">
+
+                <Button
+                    android:id="@+id/question6Button1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/one_leftside_radius"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+                <Button
+                    android:id="@+id/question6Button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle" />
+
+                <Button
+                    android:id="@+id/question6Button3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle" />
+
+                <Button
+                    android:id="@+id/question6Button4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle"
+                    app:layout_constraintStart_toEndOf="@+id/button3"
+                    app:layout_constraintTop_toTopOf="@+id/button3" />
+
+                <Button
+                    android:id="@+id/question6Button5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/nazoprofile_button_middle"
+                    app:layout_constraintStart_toEndOf="@+id/button4"
+                    app:layout_constraintTop_toTopOf="@+id/button4" />
+
+                <Button
+                    android:id="@+id/question6Button6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/one_rightside_radius"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/button5"
+                    app:layout_constraintTop_toTopOf="@+id/button5" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/question6Answer1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="冗談が好き"
+                app:layout_constraintStart_toStartOf="@+id/question6Answer"
+                app:layout_constraintTop_toBottomOf="@+id/question6Answer" />
+
+            <TextView
+                android:id="@+id/question6Answer2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="真面目な内容が好き"
+                app:layout_constraintEnd_toEndOf="@+id/question6Answer"
+                app:layout_constraintTop_toBottomOf="@+id/question6Answer" />
+
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
@@ -207,7 +795,8 @@
         android:id="@+id/toolbar_activityMypage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#e56200"
+        android:background="#0D51FF"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -218,9 +807,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
-            android:text="DEL"
+            android:text="プロフィールの設定"
             android:textColor="#ffffff"
-            android:textSize="18sp"
+            android:textSize="20sp"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="18dp" />
 
@@ -236,7 +825,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <include android:id="@+id/mypage_tab" layout="@layout/menu_bar" />
+        <include android:id="@+id/mypage_tab" layout="@layout/del_template_menubar" />
 
     </LinearLayout>
 

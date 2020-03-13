@@ -16,6 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import twentyfour_seconds.com.del.R;
 import twentyfour_seconds.com.del.chat.UserDTO;
 import twentyfour_seconds.com.del.notification.AddTopicTest;
@@ -106,29 +107,22 @@ public class MyPageActivity extends CustomActivity {
 
 
         //下部メニューボタンを押下したときの処理を記載
-        ImageView menu_bar_home = findViewById(R.id.mypage_tab).findViewById(R.id.menu_bar_home);
-        ImageView menu_bar_event = findViewById(R.id.mypage_tab).findViewById(R.id.menu_bar_event);
-        ImageView menu_bar_chat = findViewById(R.id.mypage_tab).findViewById(R.id.menu_bar_chat);
-        ImageView menu_bar_mypage = findViewById(R.id.mypage_tab).findViewById(R.id.menu_bar_mypage);
+        ConstraintLayout menu_bar_home = findViewById(R.id.menu_bar_home);
+        ConstraintLayout menu_bar_event = findViewById(R.id.menu_bar_event);
+        ConstraintLayout menu_bar_event_join = findViewById(R.id.menu_bar_event_join);
+        ConstraintLayout menu_bar_profile = findViewById(R.id.menu_bar_profile);
 
         MyPageActivity.menuClickListener menuClickListener = new MyPageActivity.menuClickListener();
 
         menu_bar_home.setOnClickListener(menuClickListener);
         menu_bar_event.setOnClickListener(menuClickListener);
-        menu_bar_chat.setOnClickListener(menuClickListener);
-        menu_bar_mypage.setOnClickListener(menuClickListener);
+        menu_bar_event_join.setOnClickListener(menuClickListener);
+        menu_bar_profile.setOnClickListener(menuClickListener);
 
         //終わったら削除すること
         Button addbutton = findViewById(R.id.addTopicButton);
         MyPageActivity.addTopicButtonClickListener addTopicButtonClickListener = new MyPageActivity.addTopicButtonClickListener();
         addbutton.setOnClickListener(addTopicButtonClickListener);
-
-        //終わったら削除すること
-        Button masujibutton = findViewById(R.id.masujibutton);
-        MyPageActivity.masujiButtonClickListener masujiButtonClickListener = new MyPageActivity.masujiButtonClickListener();
-        masujibutton.setOnClickListener(masujiButtonClickListener);
-
-
 
     }
 
